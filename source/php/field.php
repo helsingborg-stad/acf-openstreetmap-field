@@ -63,8 +63,21 @@ class Field extends \acf_field
             </div>
         </div> */
         ?>
-            <div class="openstreetmap" data-js-openstreetmap-field id="map-<?php echo $id ?>" data-lng="<?php echo $lng; ?>" style="position: unset; height: 400px; background: #f0f0f0;">
+        <div class="acf-openstreetmap" data-js-openstreetmap-field>
+            <div class="acf-openstreetmap__map openstreetmap" data-js-openstreetmap-map id="map-<?php echo $id ?>" data-lng="<?php echo $lng; ?>" style="position: unset; height: 400px; background: #f0f0f0;">
             </div>
+            <fieldset class="acf-openstreetmap__options">
+                <label>
+                    <div class="acf-openstreetmap__option">Set start position</div>
+                    <input type="radio" name="map_option" value="start_position">
+                </label>
+
+                <label>
+                    <div class="acf-openstreetmap__option">Create marker</div>
+                    <input type="radio" name="map_option" value="create_marker">
+                </label>
+            </fieldset>
+        </div>
         <?php
 
         self::$mapIndex++;
