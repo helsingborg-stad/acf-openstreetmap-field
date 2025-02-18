@@ -16,7 +16,7 @@ module.exports = {
      * Add your entry files here
      */
     entry: {
-        // 'js/init-map': './js/init.ts',
+        'js/init-map': './source/js/init.ts',
         // 'css/openstreetmap': './sass/openstreetmap.scss',
     },
     

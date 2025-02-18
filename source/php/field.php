@@ -38,13 +38,13 @@ class Field extends \acf_field
         //     $this->cacheBust->name('css/openstreetmap.css')
         // );
 
-        // wp_register_script(
-        //     'js-init-map',
-        //     ACFOPENSTREETMAP_URL . '/dist/' .
-        //     $this->cacheBust->name('js/init-map.js')
-        // );
+        wp_register_script(
+            'js-init-map',
+            ACFOPENSTREETMAP_URL . '/dist/' .
+            $this->cacheBust->name('js/init-map.js')
+        );
 
-        // wp_enqueue_script('js-init-map');
+        wp_enqueue_script('js-init-map');
         // wp_enqueue_style('css-openstreetmap');
 
         // wp_enqueue_style('acf-open-street-map', $this->settings['dir'] . 'css/open-street-map.css');
@@ -63,10 +63,8 @@ class Field extends \acf_field
             </div>
         </div> */
         ?>
-            <div class="acf-openstreetmap" style="position: relative; height: 400px;" data-js-openstreetmap="map-<?php echo $id ?>">
             <div class="openstreetmap" id="map-<?php echo $id ?>" data-lng="<?php echo $lng; ?>" style="position: unset; height: 400px; background: #f0f0f0;">
             </div>
-        </div>
         <?php
 
         self::$mapIndex++;
