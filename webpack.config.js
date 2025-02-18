@@ -17,7 +17,7 @@ module.exports = {
      */
     entry: {
         'js/init-map': './source/js/init.ts',
-        // 'css/openstreetmap': './sass/openstreetmap.scss',
+        'css/main-map': './source/sass/main.scss',
     },
     
     /**

@@ -32,11 +32,11 @@ class Field extends \acf_field
      * Enqueue scripts and styles in the admin
      */
     public function input_admin_enqueue_scripts() {
-        // wp_register_style(
-        //     'css-openstreetmap',
-        //     ACFOPENSTREETMAP_URL . '/dist/' .
-        //     $this->cacheBust->name('css/openstreetmap.css')
-        // );
+        wp_register_style(
+            'css-main',
+            ACFOPENSTREETMAP_URL . '/dist/' .
+            $this->cacheBust->name('css/main-map.css')
+        );
 
         wp_register_script(
             'js-init-map',
@@ -45,7 +45,7 @@ class Field extends \acf_field
         );
 
         wp_enqueue_script('js-init-map');
-        // wp_enqueue_style('css-openstreetmap');
+        wp_enqueue_style('css-main');
 
         // wp_enqueue_style('acf-open-street-map', $this->settings['dir'] . 'css/open-street-map.css');
     }
