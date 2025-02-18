@@ -1,3 +1,4 @@
+import Main from "./main";
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-js-openstreetmap-field]').forEach((element) => {
         const id = element.id;
@@ -5,5 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!id) {
             return;
         }
+
+        new Main(id, element as HTMLElement);
     });
 });

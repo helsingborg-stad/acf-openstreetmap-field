@@ -63,7 +63,7 @@ class Field extends \acf_field
             </div>
         </div> */
         ?>
-            <div class="openstreetmap" id="map-<?php echo $id ?>" data-lng="<?php echo $lng; ?>" style="position: unset; height: 400px; background: #f0f0f0;">
+            <div class="openstreetmap" data-js-openstreetmap-field id="map-<?php echo $id ?>" data-lng="<?php echo $lng; ?>" style="position: unset; height: 400px; background: #f0f0f0;">
             </div>
         <?php
 

@@ -49,5 +49,8 @@
             "@babel/plugin-proposal-class-properties"
         ]
     },
-    "version": "0.2.1"
+    "version": "0.2.1",
+    "dependencies": {
+        "@helsingborg-stad/openstreetmap": "^0.3.20"
+    }
 }
