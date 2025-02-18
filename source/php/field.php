@@ -15,7 +15,7 @@ class Field extends \acf_field
     private static $mapIndex = 0;
 
     public function __construct() {
-        $this->name = 'open-street-map';
+        $this->name = 'openstreetmap';
         $this->label = 'OpenStreetMap';
         $this->category = 'basic';
         $this->cacheBust = new CacheBust();
@@ -32,20 +32,20 @@ class Field extends \acf_field
      * Enqueue scripts and styles in the admin
      */
     public function input_admin_enqueue_scripts() {
-        wp_register_style(
-            'css-openstreetmap',
-            ACFOPENSTREETMAP_URL . '/dist/' .
-            $this->cacheBust->name('css/openstreetmap.css')
-        );
+        // wp_register_style(
+        //     'css-openstreetmap',
+        //     ACFOPENSTREETMAP_URL . '/dist/' .
+        //     $this->cacheBust->name('css/openstreetmap.css')
+        // );
 
-        wp_register_script(
-            'js-init-map',
-            ACFOPENSTREETMAP_URL . '/dist/' .
-            $this->cacheBust->name('js/init-map.js')
-        );
+        // wp_register_script(
+        //     'js-init-map',
+        //     ACFOPENSTREETMAP_URL . '/dist/' .
+        //     $this->cacheBust->name('js/init-map.js')
+        // );
 
-        wp_enqueue_script('js-init-map');
-        wp_enqueue_style('css-openstreetmap');
+        // wp_enqueue_script('js-init-map');
+        // wp_enqueue_style('css-openstreetmap');
 
         // wp_enqueue_style('acf-open-street-map', $this->settings['dir'] . 'css/open-street-map.css');
     }
