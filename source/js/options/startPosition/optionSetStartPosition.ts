@@ -1,31 +1,31 @@
-import { CreateMarker } from "../../../OpenStreetMap/js/features/createMarker/createMarker";
-import Marker from "../../../OpenStreetMap/js/features/createMarker/marker";
+
+import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
+import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
 import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
 
 class OptionSetStartPosition implements OptionFeature {
     protected condition: string = 'set_start_position';
-    private marker: undefined|Marker;
-    private markerCssClass: string = 'marker-start-position'
+    private markerCssClass: string = 'marker-start-position';
+    private marker: undefined|MarkerInterface;
 
     constructor(
         private mapInstance: MapInterface,
         private handleSelectedInstance: HandleSelectedInterface,
-        private createMarkerInstance: CreateMarker
+        private createMarkerInstance: CreateMarkerInterface
     ) {
         this.mapInstance.addListener('click', (e: any) => {
             if (
                 this.handleSelectedInstance.getCurrentSelectedValue() !== this.condition ||
-                e.originalEvent.target.classList.contains(this.markerCssClass)
-            ) {
+                e.originalEvent.target.classList.contains(this.markerCssClass)) {
                 return;
             }
+
             if (this.marker) {
                 this.marker.setPosition(e.latlng);
             } else {
                 this.marker = this.createMarkerInstance.create({
                     position: e.latlng,
                     icon: this.getMarkerMarkup(),
-                    className: 'marker'
                 });
             }
         })
