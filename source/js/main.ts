@@ -3,7 +3,8 @@ import { MapInterface } from '../OpenStreetMap/js/mapInterface';
 import { CreateMarker } from '../OpenStreetMap/js/features/createMarker/createMarker';
 
 import HandleSelected from './options/handleSelected';
-import Select from './options/select';
+import OptionCreateMarker from './options/option/optionCreateMarker';
+import OptionSetStartPosition from './options/option/optionSetStartPosition';
 
 class Main {
     mapInstance: MapInterface;
@@ -19,8 +20,25 @@ class Main {
 
         const createMarkerInstance  = new CreateMarker(this.mapInstance);
 
-        const selectInstance = new Select();
-        const handleSelectedInstance = new HandleSelected(this.container, selectInstance)
+        const handleSelectedInstance = new HandleSelected(this.container);
+
+        const OptionCreateMarkerInstance = new OptionCreateMarker(
+            this.mapInstance, 
+            handleSelectedInstance,
+            createMarkerInstance
+        );
+        const OptionSetStartPositionInstance = new OptionSetStartPosition(
+            this.mapInstance,
+            handleSelectedInstance,
+            createMarkerInstance
+        );
+
+        // const selectInstance = new Select(
+        //     [
+        //         new OptionCreateMarker(),
+        //         new OptionSetStartPosition()
+        //     ]
+        // );
 
         // this.mapInstance.getMap().on('click', (e: any) => {
         //     const marker = createMarkerInstance.create({

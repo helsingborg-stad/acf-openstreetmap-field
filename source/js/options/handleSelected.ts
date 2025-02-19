@@ -1,7 +1,8 @@
 class HandleSelected implements HandleSelectedInterface {
     options: HTMLButtonElement[];
+    currentSelected: string|undefined;
 
-    constructor(private container: HTMLElement, private selectInstance: SelectInterface) {
+    constructor(private container: HTMLElement) {
         this.options = [...this.container.querySelectorAll('.acf-openstreetmap__option')] as HTMLButtonElement[];
 
         this.setupClickListeners();
@@ -16,7 +17,7 @@ class HandleSelected implements HandleSelectedInterface {
 
                 this.handleClick();
                 option.classList.add('selected');
-                this.selectInstance.onOptionUpdated(option.value);
+                this.currentSelected = option.dataset.jsValue;
             });
         });
     }
@@ -27,9 +28,8 @@ class HandleSelected implements HandleSelectedInterface {
         });
     }
 
-    public getSelectedOption(): string|undefined {
-        const selected = this.options.find((option) => option.classList.contains('selected'));
-        return selected?.value;
+    public getCurrentSelectedValue(): string|undefined {
+        return this.currentSelected;
     }
 }
 
