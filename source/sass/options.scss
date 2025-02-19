@@ -7,10 +7,15 @@ $color-white: var(--acf-openstreetmap-color-white, #ffffff) !default;
         gap: 1rem;
         margin-top: 1.5rem;
         position: relative;
+        label {
+            position: relative;
+        }
 
         input {
             opacity: 0;
             position: absolute;
+            top: .5rem;
+            left: .5rem;
         }
     }
 
