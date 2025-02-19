@@ -1,3 +1,3 @@
 interface HandleSelectedInterface {
-    getSelectedOption(): string|undefined;
+    getCurrentSelectedValue(): string|undefined;
 }
