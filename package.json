@@ -51,6 +51,6 @@
     },
     "version": "0.6.0",
     "dependencies": {
-        "@helsingborg-stad/openstreetmap": "^0.4.4"
+        "@helsingborg-stad/openstreetmap": "^0.4.5"
     }
 }
