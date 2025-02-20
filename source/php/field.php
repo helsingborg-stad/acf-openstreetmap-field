@@ -56,23 +56,48 @@ class Field extends \acf_field
     public function render_field($field) {
         $lat = isset($field['value']['lat']) ? esc_attr($field['value']['lat']) : '';
         $lng = isset($field['value']['lng']) ? esc_attr($field['value']['lng']) : '';
-        $id = $this->mapId . '-' . self::$mapIndex;
 
         ?>
         <div class="acf-openstreetmap" data-js-openstreetmap-field>
-            <div class="acf-openstreetmap__edit-overlay"></div>
-            <div class="acf-openstreetmap__map openstreetmap" data-js-openstreetmap-map id="map-<?php echo $id ?>" data-lng="<?php echo $lng; ?>" style="position: unset; height: 400px; background: #f0f0f0;">
-            </div>
-            <div class="acf-openstreetmap__options">
-                <div class="acf-openstreetmap__option" data-js-value="set_start_position">Set start position</div>
-                <div class="acf-openstreetmap__option" data-js-value="create_marker">Create marker</div>
-            </div>
+            <?php $this->addEditOverlay() ?>
+            <?php $this->addMap() ?>
+            <?php $this->addOptions() ?>
         </div>
         <?php
 
         self::$mapIndex++;
     }
 
+    private function addMap()
+    {
+        $id = $this->mapId . '-' . self::$mapIndex;
+
+        ?>
+            <div 
+                class="acf-openstreetmap__map openstreetmap" 
+                data-js-openstreetmap-map 
+                id="map-<?php echo esc_attr($id); ?>" 
+                style="position: unset; height: 500px; background: #f0f0f0;">
+            </div>
+        <?php
+    }
+
+    private function addOptions()
+    {
+        ?>
+            <div class="acf-openstreetmap__options">
+                <div class="acf-openstreetmap__option" role="button" data-js-value="set_start_position">Set start position</div>
+                <div class="acf-openstreetmap__option" role="button" data-js-value="create_marker">Create marker</div>
+            </div>
+        <?php
+    }
+
+    private function addEditOverlay()
+    {
+        ?>
+            <div class="acf-openstreetmap__edit-overlay"></div>
+        <?php
+    }
     /**
      * Add custom field settings for latitude and longitude
      */
