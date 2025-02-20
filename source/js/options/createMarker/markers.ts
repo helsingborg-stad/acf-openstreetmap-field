@@ -1,10 +1,11 @@
 import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
 import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
 import MarkerData from "./markerData";
+import { MarkerDataInterface } from "./markerDataInterface";
 
 class Markers implements MarkersInterface {
     private static idCounter = 0;
-    private markers: Record<string, MarkerData> = {};
+    private markers: Record<string, MarkerDataInterface> = {};
 
     constructor(private mapInstance: MapInterface, private container: HTMLElement) {
     }
