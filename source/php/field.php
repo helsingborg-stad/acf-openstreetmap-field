@@ -58,12 +58,9 @@ class Field extends \acf_field
         $lng = isset($field['value']['lng']) ? esc_attr($field['value']['lng']) : '';
         $id = $this->mapId . '-' . self::$mapIndex;
 
-        /* <div class="acf-openstreetmap" style="position: relative; height: 400px; width: 400px;" data-js-openstreetmap="map-<?php echo $id ?>">
-            <div class="acf-openstreetmap__map" id="map-<?php echo $id ?>" data-lat="<?php echo $lat; ?>" data-lng="<?php echo $lng; ?>" style="position: unset; height: 400px; background: #f0f0f0;">
-            </div>
-        </div> */
         ?>
         <div class="acf-openstreetmap" data-js-openstreetmap-field>
+            <div class="acf-openstreetmap__edit-overlay"></div>
             <div class="acf-openstreetmap__map openstreetmap" data-js-openstreetmap-map id="map-<?php echo $id ?>" data-lng="<?php echo $lng; ?>" style="position: unset; height: 400px; background: #f0f0f0;">
             </div>
             <div class="acf-openstreetmap__options">

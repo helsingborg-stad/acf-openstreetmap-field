@@ -1,0 +1,13 @@
+.acf-openstreetmap__edit-overlay {
+    display: none;
+    height: 100vh;
+    width: 360px;
+    position: fixed;
+    top: 0;
+    right: 0;
+
+    &.open {
+        display: block;
+        background-color: white;
+    }
+}
