@@ -32,6 +32,10 @@ class EditMarkerData implements EditMarkerDataInterface {
             this.hideOverlay();
             this.currentMarker = null;
         });
+
+        this.cancelButton?.addEventListener('click', () => {
+            this.hideOverlay();
+        });
     }
 
     public setCurrentMarker(marker: MarkerDataInterface): void {

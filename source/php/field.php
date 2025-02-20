@@ -96,12 +96,18 @@ class Field extends \acf_field
     {
         ?>
             <div class="acf-openstreetmap__marker-edit-overlay" data-js-marker-edit-overlay data-js-marker-id>
-                <label for="marker-text-<?php $id ?>">Title</label>
-                <input type="text" id="marker-text-<?php $id ?>" name="title" data-js-marker-edit-title></input>
-                <label for="marker-url-<?php $id ?>">URL</label>
-                <input type="url" id="marker-url-<?php $id ?>" name="url" data-js-marker-edit-url></input>
-                <label for="marker-description-<?php $id ?>">Description</label>
-                <textarea name="description" id="marker-description-<?php $id ?>" cols="30" rows="10" data-js-marker-edit-description></textarea>
+                <div>
+                    <label for="marker-text-<?php $id ?>">Title</label>
+                    <input type="text" id="marker-text-<?php $id ?>" name="title" data-js-marker-edit-title></input>
+                </div>
+                <div>
+                    <label for="marker-url-<?php $id ?>">URL</label>
+                    <input type="url" id="marker-url-<?php $id ?>" name="url" data-js-marker-edit-url></input>
+                </div>
+                <div>
+                    <label for="marker-description-<?php $id ?>">Description</label>
+                    <textarea name="description" id="marker-description-<?php $id ?>" cols="30" rows="10" data-js-marker-edit-description></textarea>
+                </div>
                 <div class="acf-openstreetmap__marker-edit-buttons">
                     <div class="acf-openstreetmap__button acf-openstreetmap__button--save" data-js-marker-edit-save role="button">Save</div>
                     <div class="acf-openstreetmap__button acf-openstreetmap__button--cancel" data-js-marker-edit-cancel role="button">Cancel</div>

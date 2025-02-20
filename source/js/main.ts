@@ -6,6 +6,7 @@ import HandleSelected from './options/handleSelected';
 import OptionCreateMarker from './options/createMarker/optionCreateMarker';
 import OptionSetStartPosition from './options/startPosition/optionSetStartPosition';
 import EditMarkerData from './options/createMarker/editMarkerData';
+import MarkerFactory from './options/createMarker/markerFactory';
 
 class Main {
     mapInstance: MapInterface;
@@ -24,12 +25,13 @@ class Main {
         const handleSelectedInstance = new HandleSelected(this.container);
 
         const editMarkerDataInstance = new EditMarkerData(this.container);
+        const markerFactoryInstance = new MarkerFactory(editMarkerDataInstance);
 
         const OptionCreateMarkerInstance = new OptionCreateMarker(
             this.mapInstance, 
             handleSelectedInstance,
             createMarkerInstance,
-            editMarkerDataInstance
+            markerFactoryInstance
         );
         const OptionSetStartPositionInstance = new OptionSetStartPosition(
             this.mapInstance,
