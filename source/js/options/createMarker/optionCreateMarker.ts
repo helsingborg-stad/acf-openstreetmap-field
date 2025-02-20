@@ -19,7 +19,8 @@ class OptionCreateMarker implements OptionFeature {
             
             const marker = this.createMarkerInstance.create({
                 position: e.latlng,
-                icon: this.getMarkerMarkup()
+                icon: this.getMarkerMarkup(),
+                draggable: true,
             });
 
             this.markersInstance.addMarker(marker);
