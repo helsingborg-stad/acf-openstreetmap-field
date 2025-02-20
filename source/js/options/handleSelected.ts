@@ -12,6 +12,8 @@ class HandleSelected implements HandleSelectedInterface {
         this.options.forEach((option) => {
             option.addEventListener('click', () => {
                 if (option.classList.contains('selected')) {
+                    option.classList.remove('selected');
+                    this.currentSelected = undefined;
                     return;
                 }
 
