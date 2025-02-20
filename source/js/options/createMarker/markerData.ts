@@ -5,7 +5,18 @@ class MarkerData implements MarkerDataInterface {
     private title: string = '';
     private content: string = '';
     private url: string = '';
-    constructor(private marker: MarkerInterface, private id: string) {
+    constructor(
+        private marker: MarkerInterface,
+        private id: string,
+        private editMarkerInstance: EditMarkerDataInterface
+    ) {
+        this.marker.addListener('click', (e) => {
+            this.editMarkerInstance.setCurrentMarker(this);
+            this.editMarkerInstance.setTitleValue(this.getTitle());
+            this.editMarkerInstance.setUrlValue(this.getUrl());
+            this.editMarkerInstance.setDescriptionValue(this.getDescription());
+            this.editMarkerInstance.showOverlay();
+        });
     }
 
     public setTitle(title: string): void {
@@ -16,11 +27,11 @@ class MarkerData implements MarkerDataInterface {
         return this.title;
     }
 
-    public setContent(content: string): void {
+    public setDescription(content: string): void {
         this.content = content;
     }
 
-    public getContent(): string {
+    public getDescription(): string {
         return this.content
     }
 

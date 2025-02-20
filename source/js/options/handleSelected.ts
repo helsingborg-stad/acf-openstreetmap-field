@@ -3,7 +3,7 @@ class HandleSelected implements HandleSelectedInterface {
     currentSelected: string|undefined;
 
     constructor(private container: HTMLElement) {
-        this.options = [...this.container.querySelectorAll('.acf-openstreetmap__option')] as HTMLButtonElement[];
+        this.options = [...this.container.querySelectorAll('[acf-openstreetmap-option]')] as HTMLButtonElement[];
 
         this.setupClickListeners();
     }

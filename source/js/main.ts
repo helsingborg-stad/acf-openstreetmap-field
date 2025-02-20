@@ -5,8 +5,6 @@ import { CreateMarker } from '../OpenStreetMap/js/features/createMarker/createMa
 import HandleSelected from './options/handleSelected';
 import OptionCreateMarker from './options/createMarker/optionCreateMarker';
 import OptionSetStartPosition from './options/startPosition/optionSetStartPosition';
-import AddCreateMarkerData from './options/createMarker/markers';
-import Markers from './options/createMarker/markers';
 import EditMarkerData from './options/createMarker/editMarkerData';
 
 class Main {
@@ -26,37 +24,18 @@ class Main {
         const handleSelectedInstance = new HandleSelected(this.container);
 
         const editMarkerDataInstance = new EditMarkerData(this.container);
-        const markersInstance = new Markers(this.mapInstance, this.container, editMarkerDataInstance);
 
         const OptionCreateMarkerInstance = new OptionCreateMarker(
             this.mapInstance, 
             handleSelectedInstance,
             createMarkerInstance,
-            markersInstance
+            editMarkerDataInstance
         );
         const OptionSetStartPositionInstance = new OptionSetStartPosition(
             this.mapInstance,
             handleSelectedInstance,
             createMarkerInstance
         );
-
-        // const selectInstance = new Select(
-        //     [
-        //         new OptionCreateMarker(),
-        //         new OptionSetStartPosition()
-        //     ]
-        // );
-
-        // this.mapInstance.getMap().on('click', (e: any) => {
-        //     const marker = createMarkerInstance.create({
-        //         position: e.latlng,
-        //         icon: '<div class="marker">M</div>',
-        //         className: 'marker'
-        //     });
-        //     marker.addTo(this.mapInstance.getMap());
-            
-        //     console.log(e.latlng);
-        // });
     }
 }
 

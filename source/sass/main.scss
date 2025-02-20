@@ -2,6 +2,44 @@
 @import "./options.scss";
 @import "./editOverlay.scss";
 
+$color-primary: var(--acf-openstreetmap-color-primary, #199900) !default;
+$color-danger: var(--acf-openstreetmap-color-danger, #790000) !default;
+$color-white: var(--acf-openstreetmap-color-white, #ffffff) !default;
+
 .acf-openstreetmap {
     position: relative;
+
+    .acf-openstreetmap__button {
+        cursor: pointer;
+        padding: .5rem 1rem;
+        background-color: $color-white;
+        border: 1px solid $color-primary;
+        color: $color-primary;
+        border-radius: 2px;
+        transition: .2s ease-in-out;
+
+        &.selected {
+            background-color: $color-primary;
+            color: $color-white;
+        }
+
+        &.acf-openstreetmap__button--save {
+            background-color: $color-primary;
+            color: $color-white;
+            &:hover {
+                background-color: $color-white;
+                color: $color-primary;
+            }
+        }
+
+        &.acf-openstreetmap__button--cancel {
+            background-color: $color-danger;
+            color: $color-white;
+            border: 1px solid $color-danger;
+            &:hover {
+                background-color: $color-white;
+                color: $color-danger;
+            }
+        }
+    }
 }

@@ -3,8 +3,8 @@ import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker
 interface MarkerDataInterface {
     setTitle(title: string): void;
     getTitle(): string;
-    setContent(content: string): void;
-    getContent(): string;
+    setDescription(content: string): void;
+    getDescription(): string;
     setUrl(url: string): void;
     getUrl(): string;
     getId(): string;

@@ -1,16 +1,44 @@
 import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
 import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
+import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
+import { MarkerDataInterface } from "./markerDataInterface";
+import MarkerData from "./markerData";
 
-class OptionCreateMarker implements OptionFeature {
+class OptionCreateMarker implements OptionFeature, OptionCreateMarkerInterface {
     protected condition: string = 'create_marker';
     private markerCssClass: string = 'marker-create';
+    private static idCounter = 0;
+    private markers: Record<string, MarkerDataInterface> = {};
+
 
     constructor(
         private mapInstance: MapInterface,
         private handleSelectedInstance: HandleSelectedInterface,
         private createMarkerInstance: CreateMarkerInterface,
-        private markersInstance: MarkersInterface
+        private editMarkerInstance: EditMarkerDataInterface
     ) {
+        this.addListener();
+    }
+
+    public addMarker(marker: MarkerInterface) {
+        const id = `marker-${OptionCreateMarker.idCounter++}`;
+        this.markers[id] = new MarkerData(marker, id, this.editMarkerInstance);
+    }
+
+    public removeMarker(id: string): void {
+        if (!this.markers[id]) {
+            return;
+        }
+
+        this.markers[id].getMarker().removeMarker();
+        delete this.markers[id];
+    }
+
+    public getMarkers(): Record<string, MarkerDataInterface> {
+        return this.markers;
+    }
+
+    private addListener(): void {
         this.mapInstance.addListener('click', (e: any) => {
             if (this.handleSelectedInstance.getCurrentSelectedValue() !== this.condition ||
                 e.originalEvent.target.classList.contains(this.markerCssClass)) {
@@ -23,7 +51,7 @@ class OptionCreateMarker implements OptionFeature {
                 draggable: true,
             });
 
-            this.markersInstance.addMarker(marker);
+            this.addMarker(marker);
         });
     }
 
