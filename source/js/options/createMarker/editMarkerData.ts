@@ -15,7 +15,7 @@ class EditMarkerData implements EditMarkerDataInterface {
         this.url = this.overlay?.querySelector('[data-js-marker-edit-url]') ?? null;
         this.description = this.overlay?.querySelector('[data-js-marker-edit-description]') ?? null;
         this.saveButton = this.overlay?.querySelector('[data-js-marker-edit-save]') ?? null;
-        this.cancelButton = this.overlay?.querySelector('[data-js-marker-edit-save]') ?? null;
+        this.cancelButton = this.overlay?.querySelector('[data-js-marker-edit-cancel]') ?? null;
 
         this.setListeners();
     }
@@ -35,6 +35,7 @@ class EditMarkerData implements EditMarkerDataInterface {
 
         this.cancelButton?.addEventListener('click', () => {
             this.hideOverlay();
+            this.currentMarker = null;
         });
     }
 
@@ -80,20 +81,6 @@ class EditMarkerData implements EditMarkerDataInterface {
         }
 
         this.description.value = value;
-    }
-
-    private clearInputs(): void {
-        if (this.title) {
-            this.title.value = '';
-        }
-
-        if (this.url) {
-            this.url.value = '';
-        }
-
-        if (this.description) {
-            this.description.value = '';
-        }
     }
 }
 
