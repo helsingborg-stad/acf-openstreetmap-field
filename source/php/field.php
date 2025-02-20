@@ -57,10 +57,12 @@ class Field extends \acf_field
         $lat = isset($field['value']['lat']) ? esc_attr($field['value']['lat']) : '';
         $lng = isset($field['value']['lng']) ? esc_attr($field['value']['lng']) : '';
 
+        $id = $this->mapId . '-' . self::$mapIndex;
+
         ?>
         <div class="acf-openstreetmap" data-js-openstreetmap-field>
-            <?php $this->addEditOverlay() ?>
-            <?php $this->addMap() ?>
+            <?php $this->addEditOverlay($id) ?>
+            <?php $this->addMap($id) ?>
             <?php $this->addOptions() ?>
         </div>
         <?php
@@ -68,15 +70,13 @@ class Field extends \acf_field
         self::$mapIndex++;
     }
 
-    private function addMap()
+    private function addMap($id = '')
     {
-        $id = $this->mapId . '-' . self::$mapIndex;
-
         ?>
             <div 
                 class="acf-openstreetmap__map openstreetmap" 
                 data-js-openstreetmap-map 
-                id="map-<?php echo esc_attr($id); ?>" 
+                id="map-<?php $id ?>"
                 style="position: unset; height: 500px; background: #f0f0f0;">
             </div>
         <?php
@@ -92,10 +92,17 @@ class Field extends \acf_field
         <?php
     }
 
-    private function addEditOverlay()
+    private function addEditOverlay($id = '')
     {
         ?>
-            <div class="acf-openstreetmap__edit-overlay"></div>
+            <div class="acf-openstreetmap__marker-edit-overlay" data-js-marker-edit-overlay>
+                <label for="marker-text-<?php $id ?>">Title</label>
+                <input type="text" id="marker-text-<?php $id ?>" name="title" data-js-marker-edit-title></input>
+                <label for="marker-url-<?php $id ?>">URL</label>
+                <input type="url" id="marker-url-<?php $id ?>" name="url" data-js-marker-edit-url></input>
+                <label for="marker-description-<?php $id ?>">Description</label>
+                <textarea name="description" id="marker-description-<?php $id ?>" cols="30" rows="10" data-js-marker-edit-description></textarea>
+            </div>
         <?php
     }
     /**
