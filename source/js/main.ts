@@ -26,7 +26,7 @@ class Main {
         const handleSelectedInstance = new HandleSelected(this.container);
 
         const editMarkerDataInstance = new EditMarkerData(this.container);
-        const markersInstance = new Markers(this.mapInstance, this.container);
+        const markersInstance = new Markers(this.mapInstance, this.container, editMarkerDataInstance);
 
         const OptionCreateMarkerInstance = new OptionCreateMarker(
             this.mapInstance, 

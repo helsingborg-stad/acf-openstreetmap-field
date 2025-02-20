@@ -7,7 +7,11 @@ class Markers implements MarkersInterface {
     private static idCounter = 0;
     private markers: Record<string, MarkerDataInterface> = {};
 
-    constructor(private mapInstance: MapInterface, private container: HTMLElement) {
+    constructor(
+        private mapInstance: MapInterface,
+        private container: HTMLElement,
+        private editMarkerInstance: EditMarkerDataInterface
+    ) {
     }
 
     public addMarker(marker: MarkerInterface) {
