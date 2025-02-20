@@ -1,4 +1,4 @@
-interface markersInterface {
+interface MarkersInterface {
     addMarker(marker: MarkerInterface): void;
-    removeMarker(name: string): void;
+    removeMarker(id: string): void;
 }

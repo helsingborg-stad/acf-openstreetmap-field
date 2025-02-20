@@ -1,10 +1,11 @@
 import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
+import { MarkerDataInterface } from "./markerDataInterface";
 
-class MarkerData {
+class MarkerData implements MarkerDataInterface {
     private title: string = '';
     private content: string = '';
     private url: string = '';
-    private constructor(private marker: MarkerInterface, private id: string) {
+    constructor(private marker: MarkerInterface, private id: string) {
     }
 
     public setTitle(title: string): void {

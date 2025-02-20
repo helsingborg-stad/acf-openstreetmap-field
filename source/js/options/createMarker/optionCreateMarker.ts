@@ -9,7 +9,7 @@ class OptionCreateMarker implements OptionFeature {
         private mapInstance: MapInterface,
         private handleSelectedInstance: HandleSelectedInterface,
         private createMarkerInstance: CreateMarkerInterface,
-        private markersInstance: markersInterface
+        private markersInstance: MarkersInterface
     ) {
         this.mapInstance.addListener('click', (e: any) => {
             if (this.handleSelectedInstance.getCurrentSelectedValue() !== this.condition ||

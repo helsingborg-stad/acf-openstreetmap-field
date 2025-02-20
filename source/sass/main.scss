@@ -1,2 +1,7 @@
 @import "~@helsingborg-stad/openstreetmap/dist/main.css";
 @import "./options.scss";
+@import "./editOverlay.scss";
+
+.acf-openstreetmap {
+    position: relative;
+}
