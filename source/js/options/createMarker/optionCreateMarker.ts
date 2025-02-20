@@ -2,7 +2,6 @@ import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
 import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
 import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
 import { MarkerDataInterface } from "./markerDataInterface";
-import MarkerData from "./markerData";
 import { MarkerFactoryInterface } from "./markerFactoryInterface";
 
 class OptionCreateMarker implements OptionFeature, OptionCreateMarkerInterface {
