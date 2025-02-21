@@ -1,14 +1,14 @@
 import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
 import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
 import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
-import { MarkerDataInterface } from "./markerDataInterface";
 import { MarkerFactoryInterface } from "./markerFactoryInterface";
+import { MarkersDataInterface, OptionCreateMarkerInterface } from "./optionCreateMarkerInterface";
 
 class OptionCreateMarker implements OptionFeature, OptionCreateMarkerInterface {
     protected condition: string = 'create_marker';
     private markerCssClass: string = 'marker-create';
     private static idCounter = 0;
-    private markers: Record<string, MarkerDataInterface> = {};
+    private markers: MarkersDataInterface = {};
 
     constructor(
         private mapInstance: MapInterface,
@@ -33,7 +33,7 @@ class OptionCreateMarker implements OptionFeature, OptionCreateMarkerInterface {
         delete this.markers[id];
     }
 
-    public getMarkers(): Record<string, MarkerDataInterface> {
+    public getMarkers(): MarkersDataInterface {
         return this.markers;
     }
 

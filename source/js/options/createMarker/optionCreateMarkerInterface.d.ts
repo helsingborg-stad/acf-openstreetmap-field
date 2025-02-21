@@ -1,5 +1,9 @@
+import { MarkerDataInterface } from "./markerDataInterface";
+
+type MarkersDataInterface = { [id: string]: MarkerDataInterface };
+
 interface OptionCreateMarkerInterface {
-    getMarkers(): Record<string, MarkerDataInterface>;
+    getMarkers(): MarkersDataInterface;
     addMarker(marker: MarkerInterface): void;
     removeMarker(id: string): void;
 }
