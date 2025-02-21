@@ -1,0 +1,3 @@
+interface LoadOptionDataInterface {
+    load(): void;
+}

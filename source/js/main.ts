@@ -11,6 +11,7 @@ import Save from './save';
 import SaveMarkers from './options/createMarker/saveMarkers';
 import SaveStartPostion from './options/startPosition/saveStartPosition';
 import FieldValidator from './options/createMarker/fieldValidator';
+import Load from './load';
 
 declare const acf: any;
 
@@ -53,12 +54,15 @@ class Main {
             createMarkerInstance,
             markerFactoryInstance
         );
+
         const OptionSetStartPositionInstance = new OptionSetStartPosition(
             this.mapInstance,
             handleSelectedInstance,
             createMarkerInstance
         );
 
+        
+        new Load(hiddenField, OptionCreateMarkerInstance, OptionSetStartPositionInstance);
         new Save(hiddenField,  new SaveMarkers(OptionCreateMarkerInstance), new SaveStartPostion(OptionSetStartPositionInstance));
     }
 }
