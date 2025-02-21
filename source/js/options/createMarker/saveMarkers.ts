@@ -1,4 +1,5 @@
 import { SaveMarkerData } from "../../types";
+import { SaveOptionDataInterface } from "../saveOptionData";
 import { OptionCreateMarkerInterface } from "./optionCreateMarkerInterface";
 
 class SaveMarkers implements SaveOptionDataInterface {

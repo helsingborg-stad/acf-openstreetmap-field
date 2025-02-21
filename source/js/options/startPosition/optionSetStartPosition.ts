@@ -2,6 +2,7 @@
 import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
 import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
 import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
+import { LatLngObject } from "../../../OpenStreetMap/js/types";
 import { OptionSetStartPositionInterface } from "./optionSetStartPositionInterface";
 
 class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInterface {
@@ -24,13 +25,17 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
             if (this.marker) {
                 this.marker.setPosition(e.latlng);
             } else {
-                this.marker = this.createMarkerInstance.create({
-                    position: e.latlng,
-                    icon: this.getMarkerMarkup(),
-                    draggable: true,
-                });
+                this.addMarker(e.latlng);
             }
         })
+    }
+
+    public addMarker(latlng: LatLngObject): void {
+        this.marker = this.createMarkerInstance.create({
+            position: latlng,
+            icon: this.getMarkerMarkup(),
+            draggable: true,
+        });
     }
 
     public getStartPosition(): MarkerInterface|undefined {

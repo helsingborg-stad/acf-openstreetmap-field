@@ -4,4 +4,5 @@ import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
 
 interface OptionSetStartPositionInterface {
     getStartPosition(): MarkerInterface|undefined;
+    addMarker(latlng: LatLngObject): void;
 }
