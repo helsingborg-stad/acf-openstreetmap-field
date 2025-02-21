@@ -1,4 +1,5 @@
 import { MarkerDataInterface } from "./options/createMarker/markerDataInterface";
+import { OptionCreateMarkerInterface } from "./options/createMarker/optionCreateMarkerInterface";
 import { OptionSetStartPositionInterface } from "./options/startPosition/optionSetStartPositionInterface";
 
 declare const acf: any;
@@ -12,8 +13,8 @@ class Save {
 
     constructor(
         private container: HTMLElement,
-        private createMarker: OptionCreateMarkerInterface,
-        private setStartPosition: OptionSetStartPositionInterface
+        private optionCreateMarker: OptionCreateMarkerInterface,
+        private optionSetStartPosition: OptionSetStartPositionInterface
     ) {
         this.data = {
             markers: [],
@@ -31,7 +32,7 @@ class Save {
 
     private setSaveListener(): void {
         acf.add_filter('validation_complete', (json: any, form: any) => {
-
+            
             return json;
         });
     }
