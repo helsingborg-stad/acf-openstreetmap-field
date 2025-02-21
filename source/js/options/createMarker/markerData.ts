@@ -13,10 +13,6 @@ class MarkerData implements MarkerDataInterface {
         this.setListener();
     }
 
-    public save(): void {
-        
-    }
-
     private setListener(): void {
         this.marker.addListener('click', (e) => {
             this.editMarkerInstance.setCurrentMarker(this);
