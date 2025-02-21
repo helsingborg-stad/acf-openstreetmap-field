@@ -41,13 +41,12 @@ class Field extends \acf_field
         wp_register_script(
             'js-init-map',
             ACFOPENSTREETMAP_URL . '/dist/' .
-            $this->cacheBust->name('js/init-map.js')
+            $this->cacheBust->name('js/init-map.js'),
+            array('acf-input', 'jquery'),
         );
 
         wp_enqueue_script('js-init-map');
         wp_enqueue_style('css-main');
-
-        // wp_enqueue_style('acf-open-street-map', $this->settings['dir'] . 'css/open-street-map.css');
     }
 
     /**
@@ -61,7 +60,7 @@ class Field extends \acf_field
 
         ?>
         <div class="acf-openstreetmap" data-js-openstreetmap-field>
-            <input type="hidden" name="<?php echo esc_attr($field['name']); ?>" value="<?php echo esc_attr($field['value']); ?>" id="acf-leaflet-map-data"></input>
+            <input type="hidden" name="<?php echo esc_attr($field['name']); ?>" data-js-hidden-field value="<?php echo esc_attr($field['value']); ?>" id="acf-openstreetmap-hidden-<?php echo $id ?>"></input>
             <?php $this->addEditOverlay($id) ?>
             <?php $this->addMap($id) ?>
             <?php $this->addOptions() ?>
