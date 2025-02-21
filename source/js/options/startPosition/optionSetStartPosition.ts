@@ -2,8 +2,9 @@
 import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
 import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
 import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
+import { OptionSetStartPositionInterface } from "./optionSetStartPositionInterface";
 
-class OptionSetStartPosition implements OptionFeature {
+class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInterface {
     protected condition: string = 'set_start_position';
     private markerCssClass: string = 'marker-start-position';
     private marker: undefined|MarkerInterface;
@@ -30,6 +31,10 @@ class OptionSetStartPosition implements OptionFeature {
                 });
             }
         })
+    }
+
+    public getStartPosition(): MarkerInterface|undefined {
+        return this.marker;
     }
 
     // TODO: Make this look nice
