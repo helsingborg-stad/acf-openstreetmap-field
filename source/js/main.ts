@@ -19,6 +19,7 @@ class Main {
         private container: HTMLElement,
         private map: HTMLElement
     ) {
+        
         if (!acf) {
             console.error('ACF not found');
             return;
