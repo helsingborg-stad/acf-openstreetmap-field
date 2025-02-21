@@ -9,7 +9,7 @@ class EditMarkerData implements EditMarkerDataInterface {
     saveButton: HTMLButtonElement|null;
     cancelButton: HTMLButtonElement|null;
 
-    constructor(private container: HTMLElement) {
+    constructor(private container: HTMLElement, private fieldValidatorInstance: FieldValidatorInterface) {
         this.overlay = this.container.querySelector('[ data-js-marker-edit-overlay]');
         this.title = this.overlay?.querySelector('[data-js-marker-edit-title]') ?? null;
         this.url = this.overlay?.querySelector('[data-js-marker-edit-url]') ?? null;
@@ -27,8 +27,7 @@ class EditMarkerData implements EditMarkerDataInterface {
                 return;
             }
 
-            if (!this.isValidUrl()) {
-                alert('Invalid URL, should be in the format of http://example.com');
+            if (!this.fieldValidatorInstance.validateUrl(this.url?.value ?? '')) {
                 return;
             }
 
@@ -87,19 +86,6 @@ class EditMarkerData implements EditMarkerDataInterface {
         }
 
         this.description.value = value;
-    }
-
-    private isValidUrl(): string|false {
-        if (!this.url?.value) {
-            return '';
-        }
-
-        try {
-            new URL(this.url?.value);
-            return this.url?.value;
-        } catch (error) {
-            return false;
-        }
     }
 }
 

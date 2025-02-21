@@ -10,6 +10,7 @@ import MarkerFactory from './options/createMarker/markerFactory';
 import Save from './save';
 import SaveMarkers from './options/createMarker/saveMarkers';
 import SaveStartPostion from './options/startPosition/saveStartPosition';
+import FieldValidator from './options/createMarker/fieldValidator';
 
 declare const acf: any;
 
@@ -36,7 +37,8 @@ class Main {
 
         const handleSelectedInstance = new HandleSelected(this.container);
 
-        const editMarkerDataInstance = new EditMarkerData(this.container);
+        const fieldValidatorInstance = new FieldValidator();
+        const editMarkerDataInstance = new EditMarkerData(this.container, fieldValidatorInstance);
         const markerFactoryInstance = new MarkerFactory(editMarkerDataInstance);
 
         const OptionCreateMarkerInstance = new OptionCreateMarker(
