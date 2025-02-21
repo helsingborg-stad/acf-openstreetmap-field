@@ -22,9 +22,15 @@ class Main {
         private container: HTMLElement,
         private map: HTMLElement
     ) {
-        
+        const hiddenField = this.container.querySelector('[data-js-hidden-field]') as HTMLInputElement;
+    
         if (!acf) {
             console.error('ACF not found');
+            return;
+        }
+
+        if (!hiddenField) {
+            console.error('Hidden field not found');
             return;
         }
 
@@ -53,7 +59,7 @@ class Main {
             createMarkerInstance
         );
 
-        new Save(this.container,  new SaveMarkers(OptionCreateMarkerInstance), new SaveStartPostion(OptionSetStartPositionInstance));
+        new Save(hiddenField,  new SaveMarkers(OptionCreateMarkerInstance), new SaveStartPostion(OptionSetStartPositionInstance));
     }
 }
 
