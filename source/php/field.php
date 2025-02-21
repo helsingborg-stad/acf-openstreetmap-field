@@ -53,9 +53,6 @@ class Field extends \acf_field
      * Render the field input
      */
     public function render_field($field) {
-        $lat = isset($field['value']['lat']) ? esc_attr($field['value']['lat']) : '';
-        $lng = isset($field['value']['lng']) ? esc_attr($field['value']['lng']) : '';
-
         $id = $this->mapId . '-' . self::$mapIndex;
 
         ?>

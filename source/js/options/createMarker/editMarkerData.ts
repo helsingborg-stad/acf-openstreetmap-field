@@ -23,6 +23,12 @@ class EditMarkerData implements EditMarkerDataInterface {
     private setListeners(): void {
         this.saveButton?.addEventListener('click', () => {
             if (!this.currentMarker) {
+                this.hideOverlay();
+                return;
+            }
+
+            if (!this.isValidUrl()) {
+                alert('Invalid URL, should be in the format of http://example.com');
                 return;
             }
 
@@ -81,6 +87,19 @@ class EditMarkerData implements EditMarkerDataInterface {
         }
 
         this.description.value = value;
+    }
+
+    private isValidUrl(): string|false {
+        if (!this.url?.value) {
+            return '';
+        }
+
+        try {
+            new URL(this.url?.value);
+            return this.url?.value;
+        } catch (error) {
+            return false;
+        }
     }
 }
 
