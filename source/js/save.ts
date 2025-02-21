@@ -1,40 +1,35 @@
-import { MarkerDataInterface } from "./options/createMarker/markerDataInterface";
-import { OptionCreateMarkerInterface } from "./options/createMarker/optionCreateMarkerInterface";
-import { OptionSetStartPositionInterface } from "./options/startPosition/optionSetStartPositionInterface";
+import { SaveData } from "./types";
 
 declare const acf: any;
 
 class Save {
     hiddenField: HTMLInputElement|null;
-    data: {
-        markers: Array<any>;
-        startPosition: MarkerDataInterface|null;
+    data: SaveData = {
+        markers: [],
+        startPosition: null
     };
 
     constructor(
         private container: HTMLElement,
-        private optionCreateMarker: OptionCreateMarkerInterface,
-        private optionSetStartPosition: OptionSetStartPositionInterface
+        private saveMarkers: SaveOptionDataInterface,
+        private saveStartPosition: SaveOptionDataInterface
     ) {
-        this.data = {
-            markers: [],
-            startPosition: null
-        };
-
         this.hiddenField = this.container.querySelector('[data-js-hidden-field]');
+        document.querySelector('#publish')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.data.markers = this.saveMarkers.save();
+            console.log("click");
+        });
 
         if (!this.hiddenField) {
             return;
         }
 
-        this.setSaveListener();
-    }
-
-    private setSaveListener(): void {
-        acf.add_filter('validation_complete', (json: any, form: any) => {
-            
-            return json;
-        });
+        // acf.add_filter('validation_complete', (json: any, form: any) => {
+        //     this.data.markers = this.saveMarkers.save();
+        //     this.data.startPosition = this.saveStartPosition.save();
+        //     return json;
+        // });
     }
 }
 

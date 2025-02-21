@@ -8,6 +8,8 @@ import OptionSetStartPosition from './options/startPosition/optionSetStartPositi
 import EditMarkerData from './options/createMarker/editMarkerData';
 import MarkerFactory from './options/createMarker/markerFactory';
 import Save from './save';
+import SaveMarkers from './options/createMarker/saveMarkers';
+import SaveStartPostion from './options/startPosition/saveStartPosition';
 
 declare const acf: any;
 
@@ -49,7 +51,7 @@ class Main {
             createMarkerInstance
         );
 
-        new Save(this.container, OptionCreateMarkerInstance, OptionSetStartPositionInstance);
+        new Save(this.container,  new SaveMarkers(OptionCreateMarkerInstance), new SaveStartPostion(OptionSetStartPositionInstance));
     }
 }
 

@@ -1,3 +1,3 @@
-interface SaveOptionData {
-    save(): array<any>|object;
+interface SaveOptionDataInterface {
+    save(): SaveMarkerData;
 }
