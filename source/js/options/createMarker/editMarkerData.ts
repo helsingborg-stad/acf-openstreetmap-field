@@ -29,6 +29,7 @@ class EditMarkerData implements EditMarkerDataInterface {
             this.currentMarker.setTitle(this.title?.value ?? '');
             this.currentMarker.setUrl(this.url?.value ?? '');
             this.currentMarker.setDescription(this.description?.value ?? '');
+            this.currentMarker.save();
             this.hideOverlay();
             this.currentMarker = null;
         });
