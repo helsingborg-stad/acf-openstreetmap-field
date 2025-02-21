@@ -61,6 +61,7 @@ class Field extends \acf_field
 
         ?>
         <div class="acf-openstreetmap" data-js-openstreetmap-field>
+            <input type="hidden" name="<?php echo esc_attr($field['name']); ?>" value="<?php echo esc_attr($field['value']); ?>" id="acf-leaflet-map-data"></input>
             <?php $this->addEditOverlay($id) ?>
             <?php $this->addMap($id) ?>
             <?php $this->addOptions() ?>
