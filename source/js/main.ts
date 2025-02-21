@@ -7,18 +7,27 @@ import OptionCreateMarker from './options/createMarker/optionCreateMarker';
 import OptionSetStartPosition from './options/startPosition/optionSetStartPosition';
 import EditMarkerData from './options/createMarker/editMarkerData';
 import MarkerFactory from './options/createMarker/markerFactory';
+import Save from './save';
+
+declare const acf: any;
 
 class Main {
-    mapInstance: MapInterface;
+    mapInstance!: MapInterface;
 
     constructor(
         private id: string,
         private container: HTMLElement,
         private map: HTMLElement
     ) {
+        if (!acf) {
+            console.error('ACF not found');
+            return;
+        }
+
         this.mapInstance = createMap({
             id: this.id
         });
+
 
         const createMarkerInstance  = new CreateMarker(this.mapInstance);
 
@@ -38,6 +47,8 @@ class Main {
             handleSelectedInstance,
             createMarkerInstance
         );
+
+        new Save(this.container, OptionCreateMarkerInstance, OptionSetStartPositionInstance);
     }
 }
 
