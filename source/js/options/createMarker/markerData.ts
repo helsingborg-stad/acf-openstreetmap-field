@@ -1,4 +1,5 @@
 import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
+import { EditMarkerDataInterface } from "./edit/editMarkerDataInterface";
 import { MarkerDataInterface } from "./markerDataInterface";
 
 class MarkerData implements MarkerDataInterface {
@@ -10,17 +11,6 @@ class MarkerData implements MarkerDataInterface {
         private id: string,
         private editMarkerInstance: EditMarkerDataInterface
     ) {
-        this.setListener();
-    }
-
-    private setListener(): void {
-        this.marker.addListener('click', (e) => {
-            this.editMarkerInstance.setCurrentMarker(this);
-            this.editMarkerInstance.setTitleValue(this.getTitle());
-            this.editMarkerInstance.setUrlValue(this.getUrl());
-            this.editMarkerInstance.setDescriptionValue(this.getDescription());
-            this.editMarkerInstance.showOverlay();
-        });
     }
 
     public setTitle(title: string): void {
