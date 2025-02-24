@@ -1,12 +1,12 @@
 import { SaveMarkerData } from "../../types";
-import { OptionCreateMarkerInterface } from "./optionCreateMarkerInterface";
+import { MarkersInterface } from "./markersInterface";
 
 class LoadMarkers implements LoadOptionDataInterface {
-    constructor(private optionCreateMarkerInstance: OptionCreateMarkerInterface) {}
+    constructor(private markerInstance: MarkersInterface) {}
 
     public load(savedMarkers: SaveMarkerData): void {
         for (let savedMarker of savedMarkers) {
-            const marker = this.optionCreateMarkerInstance.addMarker(
+            const marker = this.markerInstance.addMarker(
                 savedMarker.position
             );
 
