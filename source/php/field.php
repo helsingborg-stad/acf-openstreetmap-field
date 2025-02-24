@@ -108,6 +108,7 @@ class Field extends \acf_field
                 <div class="acf-openstreetmap__marker-edit-buttons">
                     <div class="acf-openstreetmap__button acf-openstreetmap__button--save" data-js-marker-edit-save role="button">Save</div>
                     <div class="acf-openstreetmap__button acf-openstreetmap__button--cancel" data-js-marker-edit-cancel role="button">Cancel</div>
+                    <div class="acf-openstreetmap__button acf-openstreetmap__button--delete" data-js-marker-edit-cancel role="button">Delete</div>
                 </div>
             </div>
         <?php

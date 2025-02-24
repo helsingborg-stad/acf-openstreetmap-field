@@ -41,5 +41,16 @@ $color-white: var(--acf-openstreetmap-color-white, #ffffff) !default;
                 color: $color-danger;
             }
         }
+
+        &.acf-openstreetmap__button--delete {
+            background-color: $color-white;
+            color: $color-danger;
+            border: 1px solid $color-danger;
+
+            &:hover {
+                background-color: $color-danger;
+                color: $color-white;
+            }
+        }
     }
 }
