@@ -1,5 +1,6 @@
 import { MarkerDataInterface } from "./markerDataInterface";
+import { MarkersInterface } from "./markersInterface";
 
 interface MarkerFactoryInterface {
-    create(marker: MarkerInterface, id: string): MarkerDataInterface;
+    create(id: string, markersInstance: MarkersInterface): MarkerDataInterface;
 }

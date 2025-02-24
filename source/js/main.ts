@@ -94,9 +94,8 @@ class Main {
             descriptionInstance
         );
 
-        const markerFactoryInstance  = new MarkerFactory(editMarkerDataInstance);
-
-        const markersInstance        = new Markers(createMarkerInstance, markerFactoryInstance, editMarkerDataInstance);
+        const markerFactoryInstance  = new MarkerFactory(createMarkerInstance, editMarkerDataInstance);
+        const markersInstance        = new Markers(markerFactoryInstance);
 
         new Save(
             markersInstance,

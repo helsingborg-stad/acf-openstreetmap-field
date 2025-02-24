@@ -11,10 +11,7 @@ class Markers implements MarkersInterface {
     private currentMarker: MarkerDataInterface|null = null;
 
     constructor(
-        private createMarkerInstance: CreateMarkerInterface,
-        private markerFactoryInstance: MarkerFactoryInterface,
-        private editMarkerDataInstance: EditMarkerDataInterface,
-        private markerCssClass: string = 'marker-create',
+        private markerFactoryInstance: MarkerFactoryInterface
     ) {}
 
     public getCurrentMarker(): MarkerDataInterface|null {
@@ -26,20 +23,10 @@ class Markers implements MarkersInterface {
     }
 
     public addMarker(latlng: LatLngObject): MarkerDataInterface {
-        const marker = this.createMarkerInstance.create({
-            position: latlng,
-            icon: this.getMarkerMarkup(),
-            draggable: true,
-        });
-
         const id = `marker-${this.idCounter++}`;
-        const markerData = this.markerFactoryInstance.create(marker, id);
+        const markerData = this.markerFactoryInstance.create(id, this);
         this.markers[id] = markerData;
-
-        marker.addListener('click', (e) => {
-            this.setCurrentMarker(markerData);
-            this.editMarkerDataInstance.edit(markerData);
-        });
+        markerData.createMarker(latlng);
 
         return markerData;
     }
@@ -49,16 +36,12 @@ class Markers implements MarkersInterface {
             return;
         }
 
-        this.markers[id].getMarker().removeMarker();
+        this.markers[id].getMarker()?.removeMarker();
         delete this.markers[id];
     }
 
     public getMarkers(): MarkersDataInterface {
         return this.markers;
-    }
-
-    private getMarkerMarkup(): string {
-        return `<div class="${this.markerCssClass}" style="color: green;">C</div>`;
     }
 }
 
