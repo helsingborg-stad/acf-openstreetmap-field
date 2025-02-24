@@ -1,4 +1,4 @@
-import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
+import { MarkerInterface as Marker } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
 import { EditMarkerDataInterface } from "./edit/editMarkerDataInterface";
 import { MarkerDataInterface } from "./markerDataInterface";
 
@@ -7,9 +7,8 @@ class MarkerData implements MarkerDataInterface {
     private content: string = '';
     private url: string = '';
     constructor(
-        private marker: MarkerInterface,
+        private marker: Marker,
         private id: string,
-        private editMarkerInstance: EditMarkerDataInterface
     ) {
     }
 
@@ -41,7 +40,7 @@ class MarkerData implements MarkerDataInterface {
         return this.id;
     }
 
-    public getMarker(): MarkerInterface {
+    public getMarker(): Marker {
         return this.marker;
     }
 }

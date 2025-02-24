@@ -5,13 +5,13 @@ import { MarkerDataInterface } from "./markerDataInterface";
 import { MarkerFactoryInterface } from "./markerFactoryInterface";
 
 class MarkerFactory implements MarkerFactoryInterface {
-    constructor(private editMarkerDataInstance: EditMarkerDataInterface) {}
+    constructor() {}
 
     public create(
         marker: MarkerInterface,
         id: string,
     ): MarkerDataInterface {
-        return new MarkerData(marker, id, this.editMarkerDataInstance);
+        return new MarkerData(marker, id);
     }
 }
 
