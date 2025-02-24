@@ -7,7 +7,6 @@ class Delete {
         private overlayInstance: OverlayInterface
     ) {
         this.deleteButton = this.overlayInstance.getOverlay()?.querySelector('[data-js-marker-edit-delete]') ?? null;
-        console.log(this.deleteButton);
         this.setupListener();
     }
 
