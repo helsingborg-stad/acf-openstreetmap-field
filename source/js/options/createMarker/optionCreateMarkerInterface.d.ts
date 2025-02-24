@@ -4,6 +4,6 @@ type MarkersDataInterface = { [id: string]: MarkerDataInterface };
 
 interface OptionCreateMarkerInterface {
     getMarkers(): MarkersDataInterface;
-    addMarker(marker: MarkerInterface): void;
+    addMarker(marker: MarkerInterface): MarkerDataInterface;
     removeMarker(id: string): void;
 }

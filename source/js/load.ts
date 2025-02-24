@@ -1,19 +1,21 @@
-import { OptionCreateMarkerInterface } from "./options/createMarker/optionCreateMarkerInterface";
-import { OptionSetStartPositionInterface } from "./options/startPosition/optionSetStartPositionInterface";
+import { SaveData } from "./types";
 
 class Load {
+    data: SaveData|undefined;
+
     constructor(
         private hiddenField: HTMLInputElement,
-        private optionCreateMarkerInstance: OptionCreateMarkerInterface,
-        private optionSetStartPositionInstance: OptionSetStartPositionInterface
+        private loadMarkersInstance: LoadOptionDataInterface,
+        private loadStartPositionInstance: LoadOptionDataInterface
     ) {
         let json = this.hiddenField.value;
-        const data = JSON.parse(json ?? '');
+        this.data = JSON.parse(json ?? '');
         if (!json) {
             return;
         }
+        
+        this.loadMarkersInstance.load(this.data?.markers);
 
-        console.log(data);
     }
 }
 
