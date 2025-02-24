@@ -10,6 +10,8 @@ import MarkerFactory from './options/createMarker/markerFactory';
 import Save from './save';
 import SaveMarkers from './options/createMarker/saveMarkers';
 import SaveStartPostion from './options/startPosition/saveStartPosition';
+import LoadMarkers from './options/createMarker/loadMarkers';
+import LoadStartPosition from './options/startPosition/loadStartPosition';
 import FieldValidator from './options/createMarker/fieldValidator';
 import Load from './load';
 
@@ -39,15 +41,14 @@ class Main {
             id: this.id
         });
 
-
+        // Others
         const createMarkerInstance  = new CreateMarker(this.mapInstance);
-
         const handleSelectedInstance = new HandleSelected(this.container);
-
         const fieldValidatorInstance = new FieldValidator();
         const editMarkerDataInstance = new EditMarkerData(this.container, fieldValidatorInstance);
         const markerFactoryInstance = new MarkerFactory(editMarkerDataInstance);
 
+        // Main
         const OptionCreateMarkerInstance = new OptionCreateMarker(
             this.mapInstance, 
             handleSelectedInstance,
@@ -61,8 +62,8 @@ class Main {
             createMarkerInstance
         );
 
-        
-        new Load(hiddenField, OptionCreateMarkerInstance, OptionSetStartPositionInstance);
+        // Save and Load
+        new Load(hiddenField, new LoadMarkers(OptionCreateMarkerInstance), new LoadStartPosition(OptionSetStartPositionInstance));
         new Save(hiddenField,  new SaveMarkers(OptionCreateMarkerInstance), new SaveStartPostion(OptionSetStartPositionInstance));
     }
 }
