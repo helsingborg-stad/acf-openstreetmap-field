@@ -15,6 +15,7 @@ class Load {
         }
         
         this.loadMarkersInstance.load(this.data?.markers);
+        this.loadStartPositionInstance.load(this.data?.startPosition);
 
     }
 }
