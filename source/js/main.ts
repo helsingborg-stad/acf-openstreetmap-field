@@ -21,6 +21,7 @@ import { MarkersInterface } from './options/createMarker/markersInterface';
 import Overlay from './options/createMarker/edit/overlay';
 import Description from './options/createMarker/edit/fields/description';
 import Cancel from './options/createMarker/edit/actions/cancel';
+import Delete from './options/createMarker/edit/actions/delete';
 
 declare const acf: any;
 
@@ -81,7 +82,7 @@ class Main {
     private setupCreateMarkersFeature(createMarkerInstance: CreateMarker): MarkersInterface {
         const fieldValidatorInstance = new FieldValidator();
         const overlayInstance        = new Overlay(this.container);
-        console.log(overlayInstance);
+
         const titleInstance          = new Title(overlayInstance);
         const urlInstance            = new Url(overlayInstance);
         const descriptionInstance    = new Description(overlayInstance);
@@ -110,6 +111,11 @@ class Main {
             markersInstance,
             overlayInstance
         );
+
+        new Delete(
+            markersInstance,
+            overlayInstance
+        )
 
         return markersInstance;
     }
