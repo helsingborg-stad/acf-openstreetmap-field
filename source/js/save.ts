@@ -3,7 +3,7 @@ import { SaveData } from "./types";
 
 declare const acf: any;
 
-class Save {
+class SaveHiddenField {
     data: SaveData = {
         markers: [],
         startPosition: null
@@ -25,4 +25,4 @@ class Save {
     }
 }
 
-export default Save;
+export default SaveHiddenField;

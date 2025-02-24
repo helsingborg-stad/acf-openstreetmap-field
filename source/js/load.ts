@@ -1,6 +1,6 @@
 import { SaveData } from "./types";
 
-class Load {
+class LoadHiddenField {
     data: SaveData|undefined;
 
     constructor(
@@ -20,4 +20,4 @@ class Load {
     }
 }
 
-export default Load;
+export default LoadHiddenField;
