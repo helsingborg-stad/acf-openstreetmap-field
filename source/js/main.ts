@@ -1,19 +1,26 @@
 import { createMap } from '../OpenStreetMap/js/map';
 import { MapInterface } from '../OpenStreetMap/js/mapInterface';
 import { CreateMarker } from '../OpenStreetMap/js/features/createMarker/createMarker';
-
 import HandleSelected from './options/handleSelected';
 import OptionCreateMarker from './options/createMarker/optionCreateMarker';
 import OptionSetStartPosition from './options/startPosition/optionSetStartPosition';
-import EditMarkerData from './options/createMarker/editMarkerData';
+import EditMarkerData from './options/createMarker/edit/editMarkerData';
 import MarkerFactory from './options/createMarker/markerFactory';
-import Save from './save';
+import SaveHiddenField from './save';
 import SaveMarkers from './options/createMarker/saveMarkers';
 import SaveStartPostion from './options/startPosition/saveStartPosition';
 import LoadMarkers from './options/createMarker/loadMarkers';
 import LoadStartPosition from './options/startPosition/loadStartPosition';
-import FieldValidator from './options/createMarker/fieldValidator';
-import Load from './load';
+import FieldValidator from './options/createMarker/edit/fieldValidator';
+import LoadHiddenField from './load';
+import Markers from './options/createMarker/markers';
+import Title from './options/createMarker/edit/fields/title';
+import Url from './options/createMarker/edit/fields/url';
+import Save from './options/createMarker/edit/actions/save';
+import { MarkersInterface } from './options/createMarker/markersInterface';
+import Overlay from './options/createMarker/edit/overlay';
+import Description from './options/createMarker/edit/fields/description';
+import Cancel from './options/createMarker/edit/actions/cancel';
 
 declare const acf: any;
 
@@ -37,23 +44,18 @@ class Main {
             return;
         }
 
-        this.mapInstance = createMap({
-            id: this.id
-        });
+        this.mapInstance = this.createMap();
 
         // Others
-        const createMarkerInstance  = new CreateMarker(this.mapInstance);
+        const createMarkerInstance   = new CreateMarker(this.mapInstance);
         const handleSelectedInstance = new HandleSelected(this.container);
-        const fieldValidatorInstance = new FieldValidator();
-        const editMarkerDataInstance = new EditMarkerData(this.container, fieldValidatorInstance);
-        const markerFactoryInstance = new MarkerFactory(editMarkerDataInstance);
+        const markersInstance        = this.setupCreateMarkersFeature(createMarkerInstance);
 
         // Main
         const OptionCreateMarkerInstance = new OptionCreateMarker(
             this.mapInstance, 
             handleSelectedInstance,
-            createMarkerInstance,
-            markerFactoryInstance
+            markersInstance
         );
 
         const OptionSetStartPositionInstance = new OptionSetStartPosition(
@@ -63,8 +65,59 @@ class Main {
         );
 
         // Save and Load
-        new Load(hiddenField, new LoadMarkers(OptionCreateMarkerInstance), new LoadStartPosition(OptionSetStartPositionInstance));
-        new Save(hiddenField,  new SaveMarkers(OptionCreateMarkerInstance), new SaveStartPostion(OptionSetStartPositionInstance));
+        new LoadHiddenField(
+            hiddenField,
+            new LoadMarkers(markersInstance),
+            new LoadStartPosition(OptionSetStartPositionInstance)
+        );
+
+        new SaveHiddenField(
+            hiddenField,
+            new SaveMarkers(markersInstance),
+            new SaveStartPostion(OptionSetStartPositionInstance)
+        );
+    }
+
+    private setupCreateMarkersFeature(createMarkerInstance: CreateMarker): MarkersInterface {
+        const fieldValidatorInstance = new FieldValidator();
+        const overlayInstance        = new Overlay(this.container);
+        console.log(overlayInstance);
+        const titleInstance          = new Title(overlayInstance);
+        const urlInstance            = new Url(overlayInstance);
+        const descriptionInstance    = new Description(overlayInstance);
+
+        const editMarkerDataInstance = new EditMarkerData(
+            overlayInstance,
+            titleInstance,
+            urlInstance,
+            descriptionInstance
+        );
+
+        const markerFactoryInstance  = new MarkerFactory(editMarkerDataInstance);
+
+        const markersInstance        = new Markers(createMarkerInstance, markerFactoryInstance, editMarkerDataInstance);
+
+        new Save(
+            markersInstance,
+            fieldValidatorInstance,
+            overlayInstance,
+            titleInstance,
+            urlInstance,
+            descriptionInstance
+        );
+
+        new Cancel(
+            markersInstance,
+            overlayInstance
+        );
+
+        return markersInstance;
+    }
+
+    private createMap(): MapInterface {
+        return createMap({
+            id: this.id
+        });
     }
 }
 
