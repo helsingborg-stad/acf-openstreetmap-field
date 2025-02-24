@@ -14,9 +14,19 @@ class Cancel {
 
     private setupListener() {
         this.cancelButton?.addEventListener('click', () => {
-            this.markersInstance.setCurrentMarker(null);
-            this.overlayInstance.hideOverlay();
+            this.close();
         });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.close();
+            }
+        });
+    }
+
+    private close() {
+        this.markersInstance.setCurrentMarker(null);
+        this.overlayInstance.hideOverlay();
     }
 }
 
