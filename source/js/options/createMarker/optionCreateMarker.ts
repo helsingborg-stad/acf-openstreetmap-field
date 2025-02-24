@@ -1,8 +1,9 @@
 import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
 import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
-import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
 import { MarkerFactoryInterface } from "./markerFactoryInterface";
 import { MarkersDataInterface, OptionCreateMarkerInterface } from "./optionCreateMarkerInterface";
+import { LatLngObject } from "../../../OpenStreetMap/js/types";
+import { MarkerDataInterface } from "./markerDataInterface";
 
 class OptionCreateMarker implements OptionFeature, OptionCreateMarkerInterface {
     protected condition: string = 'create_marker';
@@ -19,9 +20,18 @@ class OptionCreateMarker implements OptionFeature, OptionCreateMarkerInterface {
         this.addListener();
     }
 
-    public addMarker(marker: MarkerInterface) {
+    public addMarker(latlng: LatLngObject): MarkerDataInterface {
+        const marker = this.createMarkerInstance.create({
+            position: latlng,
+            icon: this.getMarkerMarkup(),
+            draggable: true,
+        });
+
         const id = `marker-${OptionCreateMarker.idCounter++}`;
-        this.markers[id] = this.markerFactoryInstance.create(marker, id);
+        const markerData = this.markerFactoryInstance.create(marker, id);
+        this.markers[id] = markerData;
+
+        return markerData;
     }
 
     public removeMarker(id: string): void {
@@ -43,14 +53,8 @@ class OptionCreateMarker implements OptionFeature, OptionCreateMarkerInterface {
                 e.originalEvent.target.classList.contains(this.markerCssClass)) {
                 return;
             }
-            
-            const marker = this.createMarkerInstance.create({
-                position: e.latlng,
-                icon: this.getMarkerMarkup(),
-                draggable: true,
-            });
 
-            this.addMarker(marker);
+            this.addMarker(e.latlng);
         });
     }
 
