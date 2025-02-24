@@ -1,4 +1,5 @@
 import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
+import { EditMarkerDataInterface } from "./edit/editMarkerDataInterface";
 import MarkerData from "./markerData";
 import { MarkerDataInterface } from "./markerDataInterface";
 import { MarkerFactoryInterface } from "./markerFactoryInterface";
