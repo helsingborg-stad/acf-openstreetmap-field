@@ -52,18 +52,18 @@ class Main {
         // Others
         const createMarkerInstance   = new CreateMarker(this.mapInstance);
         const handleSelectedInstance = new HandleSelected(this.container);
-        const [markerStorageInstance, markerFactoryInstance]  = this.setupCreateMarkersFeature(createMarkerInstance, handleSelectedInstance);
 
         // Main
+        const OptionCreateLayerGroupInstance = new OptionCreateLayerGroup(
+            this.container
+        );
+
+        const [markerStorageInstance, markerFactoryInstance]  = this.setupCreateMarkersFeature(createMarkerInstance, handleSelectedInstance);
+
         const OptionSetStartPositionInstance = new OptionSetStartPosition(
             this.mapInstance,
             handleSelectedInstance,
             createMarkerInstance
-        );
-
-        const OptionCreateLayerGroupInstance = new OptionCreateLayerGroup(
-            this.container,
-            handleSelectedInstance
         );
 
         // Save and Load
