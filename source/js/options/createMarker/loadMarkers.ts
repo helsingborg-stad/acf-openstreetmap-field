@@ -4,7 +4,6 @@ import { MarkerStorageInterface } from "./markerStorageInterface";
 
 class LoadMarkers implements LoadOptionDataInterface {
     constructor(
-        private markerStorageInstance: MarkerStorageInterface,
         private markerFactoryInstance: MarkerFactoryInterface
     ) {}
 

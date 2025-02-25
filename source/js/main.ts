@@ -23,6 +23,7 @@ import Delete from './options/createMarker/edit/actions/delete';
 import MarkersList from './options/createMarker/markersList';
 import MarkerStorage from './options/createMarker/markerStorage';
 import { MarkerStorageInterface } from './options/createMarker/markerStorageInterface';
+import OptionCreateLayerGroup from './options/createLayerGroup/optionCreateLayerGroup';
 
 declare const acf: any;
 
@@ -60,10 +61,15 @@ class Main {
             createMarkerInstance
         );
 
+        const OptionCreateLayerGroupInstance = new OptionCreateLayerGroup(
+            this.container,
+            handleSelectedInstance
+        );
+
         // Save and Load
         new LoadHiddenField(
             hiddenField,
-            new LoadMarkers(markerStorageInstance, markerFactoryInstance),
+            new LoadMarkers(markerFactoryInstance),
             new LoadStartPosition(OptionSetStartPositionInstance)
         );
 
@@ -77,7 +83,7 @@ class Main {
     private setupCreateMarkersFeature(createMarkerInstance: CreateMarker, handleSelectedInstance: HandleSelectedInterface): [MarkerStorageInterface, MarkerFactory] {
         const fieldValidatorInstance = new FieldValidator();
         const overlayInstance        = new Overlay(this.container);
-        const markersListInstance    = new MarkersList(this.container);
+        const markersListInstance    = new MarkersList(this.container, this.mapInstance);
         const markerStorageInstance  = new MarkerStorage(markersListInstance);
 
         const titleInstance          = new Title(overlayInstance);
