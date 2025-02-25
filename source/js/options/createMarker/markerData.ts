@@ -33,13 +33,17 @@ class MarkerData implements MarkerDataInterface {
         });
 
         this.marker.addListener('click', (e) => {
-            this.markerStorageInstance.setActiveMarker(this);
-            this.editMarkerDataInstance.edit(this);
+            this.editMarker();
         });
 
         this.markerStorageInstance.addMarker(this);
 
         return this.marker;
+    }
+
+    public editMarker(): void {
+        this.markerStorageInstance.setActiveMarker(this);
+        this.editMarkerDataInstance.edit(this);
     }
 
     public setTitle(title: string): void {

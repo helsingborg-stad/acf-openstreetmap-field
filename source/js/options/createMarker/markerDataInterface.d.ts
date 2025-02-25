@@ -3,6 +3,7 @@ import { LatLngObject } from "../../../OpenStreetMap/js/types";
 
 interface MarkerDataInterface {
     createMarker(latlng: LatLngObject): MarkerInterface;
+    editMarker(): void;
     setTitle(title: string): void;
     getTitle(): string;
     setDescription(content: string): void;
