@@ -12,7 +12,6 @@ class Delete {
 
     private setupListener() {
         this.deleteButton?.addEventListener('click', () => {
-            console.log("click");
             const markerData = this.markerStorageInstance.getActiveMarker();
 
             if (!markerData) {
