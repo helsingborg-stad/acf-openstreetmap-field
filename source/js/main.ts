@@ -13,15 +13,16 @@ import LoadMarkers from './options/createMarker/loadMarkers';
 import LoadStartPosition from './options/startPosition/loadStartPosition';
 import FieldValidator from './options/createMarker/edit/fieldValidator';
 import LoadHiddenField from './load';
-import Markers from './options/createMarker/markers';
 import Title from './options/createMarker/edit/fields/title';
 import Url from './options/createMarker/edit/fields/url';
 import Save from './options/createMarker/edit/actions/save';
-import { MarkersInterface } from './options/createMarker/markersInterface';
 import Overlay from './options/createMarker/edit/overlay';
 import Description from './options/createMarker/edit/fields/description';
 import Cancel from './options/createMarker/edit/actions/cancel';
 import Delete from './options/createMarker/edit/actions/delete';
+import MarkersList from './options/createMarker/markersList';
+import MarkerStorage from './options/createMarker/markerStorage';
+import { MarkerStorageInterface } from './options/createMarker/markerStorageInterface';
 
 declare const acf: any;
 
@@ -50,15 +51,9 @@ class Main {
         // Others
         const createMarkerInstance   = new CreateMarker(this.mapInstance);
         const handleSelectedInstance = new HandleSelected(this.container);
-        const markersInstance        = this.setupCreateMarkersFeature(createMarkerInstance);
+        const [markerStorageInstance, markerFactoryInstance]  = this.setupCreateMarkersFeature(createMarkerInstance, handleSelectedInstance);
 
         // Main
-        const OptionCreateMarkerInstance = new OptionCreateMarker(
-            this.mapInstance, 
-            handleSelectedInstance,
-            markersInstance
-        );
-
         const OptionSetStartPositionInstance = new OptionSetStartPosition(
             this.mapInstance,
             handleSelectedInstance,
@@ -68,20 +63,22 @@ class Main {
         // Save and Load
         new LoadHiddenField(
             hiddenField,
-            new LoadMarkers(markersInstance),
+            new LoadMarkers(markerStorageInstance, markerFactoryInstance),
             new LoadStartPosition(OptionSetStartPositionInstance)
         );
 
         new SaveHiddenField(
             hiddenField,
-            new SaveMarkers(markersInstance),
+            new SaveMarkers(markerStorageInstance),
             new SaveStartPostion(OptionSetStartPositionInstance)
         );
     }
 
-    private setupCreateMarkersFeature(createMarkerInstance: CreateMarker): MarkersInterface {
+    private setupCreateMarkersFeature(createMarkerInstance: CreateMarker, handleSelectedInstance: HandleSelectedInterface): [MarkerStorageInterface, MarkerFactory] {
         const fieldValidatorInstance = new FieldValidator();
         const overlayInstance        = new Overlay(this.container);
+        const markersListInstance    = new MarkersList(this.container);
+        const markerStorageInstance  = new MarkerStorage(markersListInstance);
 
         const titleInstance          = new Title(overlayInstance);
         const urlInstance            = new Url(overlayInstance);
@@ -94,11 +91,11 @@ class Main {
             descriptionInstance
         );
 
-        const markerFactoryInstance  = new MarkerFactory(createMarkerInstance, editMarkerDataInstance);
-        const markersInstance        = new Markers(markerFactoryInstance);
+        const markerFactoryInstance  = new MarkerFactory(createMarkerInstance, editMarkerDataInstance, markerStorageInstance);
 
         new Save(
-            markersInstance,
+            markersListInstance,
+            markerStorageInstance,
             fieldValidatorInstance,
             overlayInstance,
             titleInstance,
@@ -107,16 +104,22 @@ class Main {
         );
 
         new Cancel(
-            markersInstance,
+            markerStorageInstance,
             overlayInstance
         );
 
         new Delete(
-            markersInstance,
+            markerStorageInstance,
             overlayInstance
         )
 
-        return markersInstance;
+        const OptionCreateMarkerInstance = new OptionCreateMarker(
+            this.mapInstance, 
+            handleSelectedInstance,
+            markerFactoryInstance
+        );
+
+        return [markerStorageInstance, markerFactoryInstance];
     }
 
     private createMap(): MapInterface {

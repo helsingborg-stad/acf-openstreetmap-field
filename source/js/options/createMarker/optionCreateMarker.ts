@@ -1,9 +1,9 @@
 import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
 import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
 import { MarkerFactoryInterface } from "./markerFactoryInterface";
-import { MarkersDataInterface, MarkersInterface } from "./markersInterface";
 import { LatLngObject } from "../../../OpenStreetMap/js/types";
 import { MarkerDataInterface } from "./markerDataInterface";
+import { marker } from "leaflet";
 
 class OptionCreateMarker implements OptionFeature {
     protected condition: string = 'create_marker';
@@ -12,7 +12,7 @@ class OptionCreateMarker implements OptionFeature {
     constructor(
         private mapInstance: MapInterface,
         private handleSelectedInstance: HandleSelectedInterface,
-        private markersInstance: MarkersInterface
+        private markerFactoryInstance: MarkerFactoryInterface
 
     ) {
         this.addListener();
@@ -25,7 +25,8 @@ class OptionCreateMarker implements OptionFeature {
                 return;
             }
 
-            this.markersInstance.addMarker(e.latlng);
+            const markerData = this.markerFactoryInstance.create();
+            markerData.createMarker(e.latlng);
         });
     }
 

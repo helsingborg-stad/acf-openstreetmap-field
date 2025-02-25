@@ -1,18 +1,20 @@
-import { SaveMarkerData } from "../../types";
-import { MarkersInterface } from "./markersInterface";
+import { SavedMarkerData } from "../../types";
+import { MarkerFactoryInterface } from "./markerFactoryInterface";
+import { MarkerStorageInterface } from "./markerStorageInterface";
 
 class LoadMarkers implements LoadOptionDataInterface {
-    constructor(private markerInstance: MarkersInterface) {}
+    constructor(
+        private markerStorageInstance: MarkerStorageInterface,
+        private markerFactoryInstance: MarkerFactoryInterface
+    ) {}
 
-    public load(savedMarkers: SaveMarkerData): void {
+    public load(savedMarkers: SavedMarkerData): void {
         for (let savedMarker of savedMarkers) {
-            const marker = this.markerInstance.addMarker(
-                savedMarker.position
-            );
-
-            marker.setTitle(savedMarker.title ?? '');
-            marker.setUrl(savedMarker.url ?? '');
-            marker.setDescription(savedMarker.description ?? '');
+            const markerData = this.markerFactoryInstance.create();
+            markerData.setTitle(savedMarker.title ?? '');
+            markerData.setUrl(savedMarker.url ?? '');
+            markerData.setDescription(savedMarker.description ?? '');
+            markerData.createMarker(savedMarker.position);
         }
     }
 }

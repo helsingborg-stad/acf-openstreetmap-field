@@ -1,9 +1,9 @@
-import { MarkersInterface } from "../../markersInterface";
+import { MarkerStorageInterface } from "../../markerStorageInterface";
 
 class Delete {
     deleteButton: HTMLElement|null;
     constructor(
-        private markersInstance: MarkersInterface,
+        private markerStorageInstance: MarkerStorageInterface,
         private overlayInstance: OverlayInterface
     ) {
         this.deleteButton = this.overlayInstance.getOverlay()?.querySelector('[data-js-marker-edit-delete]') ?? null;
@@ -13,14 +13,14 @@ class Delete {
     private setupListener() {
         this.deleteButton?.addEventListener('click', () => {
             console.log("click");
-            const markerData = this.markersInstance.getCurrentMarker();
+            const markerData = this.markerStorageInstance.getActiveMarker();
 
             if (!markerData) {
                 this.overlayInstance.hideOverlay();
                 return;
             }
 
-            this.markersInstance.removeMarker(markerData.getId());
+            this.markerStorageInstance.deleteActiveMarker();
             this.overlayInstance.hideOverlay();
         });
     }

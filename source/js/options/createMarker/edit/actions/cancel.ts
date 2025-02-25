@@ -1,10 +1,10 @@
-import { MarkersInterface } from "../../markersInterface";
+import { MarkerStorageInterface } from "../../markerStorageInterface";
 
 class Cancel {
     cancelButton: HTMLElement|null;
 
     constructor(
-        private markersInstance: MarkersInterface,
+        private markerStorageInstance: MarkerStorageInterface,
         private overlayInstance: OverlayInterface
     ) {
         this.cancelButton = this.overlayInstance.getOverlay()?.querySelector('[data-js-marker-edit-cancel]') ?? null;
@@ -25,7 +25,7 @@ class Cancel {
     }
 
     private close() {
-        this.markersInstance.setCurrentMarker(null);
+        this.markerStorageInstance.setActiveMarker(null);
         this.overlayInstance.hideOverlay();
     }
 }

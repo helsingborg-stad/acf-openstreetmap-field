@@ -1,9 +1,11 @@
-import { MarkersInterface } from "../../markersInterface";
+import { MarkersListInterface } from "../../markersListInterface";
+import { MarkerStorageInterface } from "../../markerStorageInterface";
 
 class Save {
     saveButton: HTMLElement|null;
     constructor(
-        private markersInstance: MarkersInterface,
+        private markersListInstance: MarkersListInterface,
+        private markerStorageInstance: MarkerStorageInterface,
         private fieldValidatorInstance: FieldValidatorInterface,
         private overlayInstance: OverlayInterface,
         private titleInstance: TitleInterface,
@@ -17,7 +19,7 @@ class Save {
 
     private setupListener() {
         this.saveButton?.addEventListener('click', () => {
-            const markerData = this.markersInstance.getCurrentMarker();
+            const markerData = this.markerStorageInstance.getActiveMarker();
 
             if (!markerData) {
                 this.overlayInstance.hideOverlay();
@@ -31,7 +33,8 @@ class Save {
             markerData.setTitle(this.titleInstance.getTitleValue() ?? '');
             markerData.setUrl(this.urlInstance.getUrlValue() ?? '');
             markerData.setDescription(this.descriptionInstance.getDescriptionValue() ?? '');
-            this.markersInstance.setCurrentMarker(null);
+            this.markersListInstance.updateItem(markerData);
+            this.markerStorageInstance.setActiveMarker(null);
             this.overlayInstance.hideOverlay();
         });
     }

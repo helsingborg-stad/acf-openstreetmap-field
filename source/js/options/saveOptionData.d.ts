@@ -1,5 +1,5 @@
 import { SaveStartPosition } from "../types";
 
 interface SaveOptionDataInterface {
-    save(): SaveMarkerData|SaveStartPosition;
+    save(): SavedMarkerData|SaveStartPosition;
 }
