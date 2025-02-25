@@ -6,9 +6,9 @@ class EditMarkerData implements EditMarkerDataInterface {
 
     constructor(
         private overlayInstance: OverlayInterface,
-        private titleInstance: TitleInterface,
-        private urlInstance: UrlInterface,
-        private descriptionInstance: DescriptionInterface
+        private titleInstance: Field,
+        private urlInstance: Field,
+        private descriptionInstance: Field
     ) {
     }
 
@@ -18,9 +18,9 @@ class EditMarkerData implements EditMarkerDataInterface {
     }
 
     private setDefaultFieldValues(marker: MarkerDataInterface): void {
-        this.titleInstance.setTitleValue(marker.getTitle());
-        this.urlInstance.setUrlValue(marker.getUrl());
-        this.descriptionInstance.setDescriptionValue(marker.getDescription());
+        this.titleInstance.setValue(marker.getTitle());
+        this.urlInstance.setValue(marker.getUrl());
+        this.descriptionInstance.setValue(marker.getDescription());
     }
 }
 

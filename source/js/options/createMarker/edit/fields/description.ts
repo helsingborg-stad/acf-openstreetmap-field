@@ -1,27 +1,43 @@
-class Description implements DescriptionInterface {
+class Description implements Field {
     description: HTMLTextAreaElement|null;
     constructor(private overlayInstance: OverlayInterface) {
         this.description = this.overlayInstance.getOverlay()?.querySelector('[data-js-marker-edit-description]') ?? null;
     }
 
-    getDescriptionField(): HTMLTextAreaElement|null {
+    public getField(): HTMLTextAreaElement|null {
         return this.description;
     }
 
-    setDescriptionValue(value: string): void {
-        if (!this.description) {
+    public setValue(value: string): void {
+        if (!this.getField()) {
             return;
         }
 
-        this.description.value = value;
+        this.getField()!.value = value;
     }
 
-    getDescriptionValue(): string {
-        if (!this.description) {
+    public getValue(): string {
+        if (!this.getField()) {
             return '';
         }
 
-        return this.description.value;
+        return this.getField()!.value;
+    }
+
+    public showField(): void {
+        if (!this.getField()) {
+            return;
+        }
+
+        this.getField()!.style.display = 'block';
+    }
+
+    public hideField(): void {
+        if (!this.getField()) {
+            return;
+        }
+
+        this.getField()!.style.display = 'none';
     }
 }
 

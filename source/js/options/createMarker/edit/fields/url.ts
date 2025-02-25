@@ -1,27 +1,43 @@
-class Url implements UrlInterface {
+class Url implements Field {
     private url: HTMLInputElement|null;
     constructor(private overlayInterface: OverlayInterface) {
         this.url = this.overlayInterface.getOverlay()?.querySelector('[data-js-marker-edit-url]') ?? null;
     }
 
-    public getUrlField(): HTMLInputElement|null {
+    public getField(): HTMLInputElement|null {
         return this.url;
     }
 
-    public setUrlValue(value: string): void {
-        if (!this.url) {
+    public setValue(value: string): void {
+        if (!this.getField()) {
             return;
         }
 
-        this.url.value = value;
+        this.getField()!.value = value;
     }
 
-    public getUrlValue(): string {
-        if (!this.url) {
+    public getValue(): string {
+        if (!this.getField()) {
             return '';
         }
 
-        return this.url.value;
+        return this.getField()!.value;
+    }
+
+    public showField(): void {
+        if (!this.getField()) {
+            return;
+        }
+
+        this.getField()!.style.display = 'block';
+    }
+
+    public hideField(): void {
+        if (!this.getField()) {
+            return;
+        }
+
+        this.getField()!.style.display = 'none';
     }
 }
 

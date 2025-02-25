@@ -8,9 +8,9 @@ class Save {
         private markerStorageInstance: MarkerStorageInterface,
         private fieldValidatorInstance: FieldValidatorInterface,
         private overlayInstance: OverlayInterface,
-        private titleInstance: TitleInterface,
-        private urlInstance: UrlInterface,
-        private descriptionInstance: DescriptionInterface,
+        private titleInstance: Field,
+        private urlInstance: Field,
+        private descriptionInstance: Field,
     ) {
         this.saveButton = this.overlayInstance.getOverlay()?.querySelector('[data-js-marker-edit-save]') ?? null;
 
@@ -26,13 +26,13 @@ class Save {
                 return;
             }
 
-            if (!this.fieldValidatorInstance.validateUrl(this.urlInstance.getUrlValue() ?? '')) {
+            if (!this.fieldValidatorInstance.validateUrl(this.urlInstance.getValue() ?? '')) {
                 return;
             }
 
-            markerData.setTitle(this.titleInstance.getTitleValue() ?? '');
-            markerData.setUrl(this.urlInstance.getUrlValue() ?? '');
-            markerData.setDescription(this.descriptionInstance.getDescriptionValue() ?? '');
+            markerData.setTitle(this.titleInstance.getValue() ?? '');
+            markerData.setUrl(this.urlInstance.getValue() ?? '');
+            markerData.setDescription(this.descriptionInstance.getValue() ?? '');
             this.markersListInstance.updateItem(markerData);
             this.markerStorageInstance.setActiveMarker(null);
             this.overlayInstance.hideOverlay();
