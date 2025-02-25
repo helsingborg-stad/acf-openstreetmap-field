@@ -3,19 +3,18 @@ import { EditMarkerDataInterface } from "./edit/editMarkerDataInterface";
 import MarkerData from "./markerData";
 import { MarkerDataInterface } from "./markerDataInterface";
 import { MarkerFactoryInterface } from "./markerFactoryInterface";
-import { MarkersInterface } from "./markersInterface";
+import { MarkerStorageInterface } from "./markerStorageInterface";
 
 class MarkerFactory implements MarkerFactoryInterface {
+    private idCounter = 0;
     constructor(
         private createMarkersInstance: CreateMarkerInterface,
-        private editMarkerDataInstance: EditMarkerDataInterface
+        private editMarkerDataInstance: EditMarkerDataInterface,
+        private markerStorageInstance: MarkerStorageInterface
     ) {}
 
-    public create(
-        id: string,
-        markersInstance: MarkersInterface
-    ): MarkerDataInterface {
-        return new MarkerData(id, this.createMarkersInstance, markersInstance, this.editMarkerDataInstance);
+    public create(): MarkerDataInterface {
+        return new MarkerData(this.createMarkersInstance, this.editMarkerDataInstance, this.markerStorageInstance);
     }
 }
 

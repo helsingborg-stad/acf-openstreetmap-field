@@ -3,19 +3,21 @@ import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker
 import { LatLngObject } from "../../../OpenStreetMap/js/types";
 import { EditMarkerDataInterface } from "./edit/editMarkerDataInterface";
 import { MarkerDataInterface } from "./markerDataInterface";
-import { MarkersInterface } from "./markersInterface";
+import { MarkerStorageInterface } from "./markerStorageInterface";
 
 class MarkerData implements MarkerDataInterface {
+    private static idCounter = 0;
+    private id = `marker-${MarkerData.idCounter++}`;
     private title: string = '';
     private content: string = '';
     private url: string = '';
     private marker: MarkerInterface|null = null;
     private markerCssClass: string = 'marker-create';
+
     constructor(
-        private id: string,
         private createMarkerInstance: CreateMarkerInterface,
-        private markersInstance: MarkersInterface,
-        private editMarkerDataInstance: EditMarkerDataInterface
+        private editMarkerDataInstance: EditMarkerDataInterface,
+        private markerStorageInstance: MarkerStorageInterface
     ) {
     }
 
@@ -24,18 +26,20 @@ class MarkerData implements MarkerDataInterface {
             return this.marker;
         }
 
-        const marker = this.createMarkerInstance.create({
+        this.marker = this.createMarkerInstance.create({
             position: latlng,
             icon: this.getMarkerMarkup(),
             draggable: true
         });
 
-        marker.addListener('click', (e) => {
-            this.markersInstance.setCurrentMarker(this);
+        this.marker.addListener('click', (e) => {
+            this.markerStorageInstance.setActiveMarker(this);
             this.editMarkerDataInstance.edit(this);
         });
 
-        return marker;
+        this.markerStorageInstance.addMarker(this);
+
+        return this.marker;
     }
 
     public setTitle(title: string): void {
