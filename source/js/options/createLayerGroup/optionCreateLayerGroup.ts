@@ -1,7 +1,8 @@
 class OptionCreateLayerGroup implements OptionFeature {
     protected condition: string = 'create_layer_group';
     constructor(
-        private container: HTMLElement
+        private container: HTMLElement,
+        private handleSelectedInstance: HandleSelectedInterface
     ) {
         this.addListener();
     }
@@ -9,7 +10,7 @@ class OptionCreateLayerGroup implements OptionFeature {
     private addListener() {
         this.container.querySelector('[data-js-value="create_layer_group"]')?.addEventListener('click', (e) => {
             e.preventDefault();
-            console.log("click");
+            
         });
     }
 

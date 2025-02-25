@@ -55,7 +55,8 @@ class Main {
 
         // Main
         const OptionCreateLayerGroupInstance = new OptionCreateLayerGroup(
-            this.container
+            this.container,
+            handleSelectedInstance
         );
 
         const [markerStorageInstance, markerFactoryInstance]  = this.setupCreateMarkersFeature(createMarkerInstance, handleSelectedInstance);
