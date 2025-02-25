@@ -18,39 +18,42 @@ $color-white: var(--acf-openstreetmap-color-white, #ffffff) !default;
         color: $color-primary;
         border-radius: 2px;
         transition: .2s ease-in-out;
+        display: flex;
+        justify-content: center;
 
-        &.selected {
+        &.selected,
+        &:hover {
             background-color: $color-primary;
             color: $color-white;
         }
 
         &.acf-openstreetmap__button--save {
-            background-color: $color-primary;
-            color: $color-white;
+            background-color: $color-white;
+            color: $color-primary;
             &:hover {
-                background-color: $color-white;
-                color: $color-primary;
+                background-color: $color-primary;
+                color: $color-white;
             }
         }
 
         &.acf-openstreetmap__button--cancel {
-            background-color: $color-danger;
-            color: $color-white;
+            background-color: $color-white;
+            color: $color-danger;
             border: 1px solid $color-danger;
             &:hover {
-                background-color: $color-white;
-                color: $color-danger;
+                background-color: $color-danger;
+                color: $color-white;
             }
         }
 
         &.acf-openstreetmap__button--delete {
-            background-color: $color-white;
-            color: $color-danger;
             border: 1px solid $color-danger;
-
+            background-color: $color-danger;
+            color: $color-white;
+            
             &:hover {
-                background-color: $color-danger;
-                color: $color-white;
+                background-color: $color-white;
+                color: $color-danger;
             }
         }
     }
