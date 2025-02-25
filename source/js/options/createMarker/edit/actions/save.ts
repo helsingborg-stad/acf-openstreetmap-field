@@ -22,7 +22,7 @@ class Save {
             const markerData = this.markerStorageInstance.getActiveMarker();
 
             if (!markerData) {
-                this.overlayInstance.hideOverlay();
+                this.hide();
                 return;
             }
 
@@ -35,8 +35,15 @@ class Save {
             markerData.setDescription(this.descriptionInstance.getValue() ?? '');
             this.markersListInstance.updateItem(markerData);
             this.markerStorageInstance.setActiveMarker(null);
-            this.overlayInstance.hideOverlay();
+            this.hide();
         });
+    }
+
+    private hide() {
+        this.overlayInstance.hideOverlay();
+        this.titleInstance.hideField();
+        this.urlInstance.hideField();
+        this.descriptionInstance.hideField();
     }
 }
 

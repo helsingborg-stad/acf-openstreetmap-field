@@ -2,8 +2,6 @@ import { MarkerDataInterface } from "../markerDataInterface";
 import { EditMarkerDataInterface } from "./editMarkerDataInterface";
 
 class EditMarkerData implements EditMarkerDataInterface {
-    currentMarker: MarkerDataInterface|null = null;
-
     constructor(
         private overlayInstance: OverlayInterface,
         private titleInstance: Field,
@@ -14,6 +12,9 @@ class EditMarkerData implements EditMarkerDataInterface {
 
     public edit(marker: MarkerDataInterface): void {
         this.setDefaultFieldValues(marker);
+        this.titleInstance.showField();
+        this.urlInstance.showField();
+        this.descriptionInstance.showField();
         this.overlayInstance.showOverlay();
     }
 

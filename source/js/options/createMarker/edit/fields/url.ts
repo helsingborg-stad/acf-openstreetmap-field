@@ -31,19 +31,19 @@ class Url implements Field {
     }
 
     public showField(): void {
-        if (!this.getField()) {
+        if (!this.getContainer()) {
             return;
         }
 
-        this.getField()!.style.display = 'block';
+        this.getContainer()!.style.display = 'block';
     }
 
     public hideField(): void {
-        if (!this.getField()) {
+        if (!this.getContainer()) {
             return;
         }
 
-        this.getField()!.style.display = 'none';
+        this.getContainer()!.style.display = 'none';
     }
 }
 
