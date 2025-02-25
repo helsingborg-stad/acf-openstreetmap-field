@@ -17,17 +17,19 @@ class HandleSelected implements HandleSelectedInterface {
                     return;
                 }
 
-                this.handleClick();
+                this.clearSelected();
                 option.classList.add('selected');
                 this.currentSelected = option.dataset.jsValue;
             });
         });
     }
 
-    private handleClick(): void {
+    private clearSelected(): void {
         this.options.forEach((option) => {
             option.classList.remove('selected');
         });
+
+        this.currentSelected = undefined;
     }
 
     public getCurrentSelectedValue(): string|undefined {
