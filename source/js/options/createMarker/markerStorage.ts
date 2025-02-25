@@ -33,8 +33,8 @@ class MarkerStorage implements MarkerStorageInterface {
             return;
         }
 
-        delete this.markers[id];
         this.markersListInstance.removeItem(this.markers[id]);
+        delete this.markers[id];
     }
 
     public addMarker(markerData: MarkerDataInterface) {
