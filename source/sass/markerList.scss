@@ -1,0 +1,8 @@
+.acf-openstreetmap__marker-list {
+    li {
+        display: flex;
+        flex-direction: row;
+        gap: .5rem;
+        justify-content: space-between;
+    }
+}
