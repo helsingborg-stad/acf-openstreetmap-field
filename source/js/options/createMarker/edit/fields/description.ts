@@ -1,7 +1,13 @@
 class Description implements Field {
+    descriptionContainer: HTMLElement|null;
     description: HTMLTextAreaElement|null;
     constructor(private overlayInstance: OverlayInterface) {
-        this.description = this.overlayInstance.getOverlay()?.querySelector('[data-js-marker-edit-description]') ?? null;
+        this.descriptionContainer = this.overlayInstance.getOverlay()?.querySelector('[data-js-marker-edit-description]') ?? null;
+        this.description = this.getContainer()?.querySelector('textarea') ?? null;
+    }
+
+    public getContainer(): HTMLElement|null {
+        return this.descriptionContainer;
     }
 
     public getField(): HTMLTextAreaElement|null {

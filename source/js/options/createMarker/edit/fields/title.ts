@@ -1,7 +1,13 @@
 class Title implements Field {
+    private titleContainer: HTMLElement|null;
     private title: HTMLInputElement|null;
     constructor(private overlayInterface: OverlayInterface) {
-        this.title = this.overlayInterface.getOverlay()?.querySelector('[data-js-marker-edit-title]') ?? null;
+        this.titleContainer = this.overlayInterface.getOverlay()?.querySelector('[data-js-marker-edit-title]') ?? null;
+        this.title = this.getContainer()?.querySelector('input') ?? null;
+    }
+
+    public getContainer(): HTMLElement|null {
+        return this.titleContainer;
     }
 
     public getField(): HTMLInputElement|null {
@@ -25,19 +31,19 @@ class Title implements Field {
     }
 
     public showField(): void {
-        if (!this.getField()) {
+        if (!this.getContainer()) {
             return;
         }
 
-        this.getField()!.style.display = 'block';
+        this.getContainer()!.style.display = 'block';
     }
 
     public hideField(): void {
-        if (!this.getField()) {
+        if (!this.getContainer()) {
             return;
         }
 
-        this.getField()!.style.display = 'none';
+        this.getContainer()!.style.display = 'none';
     }
 }
 

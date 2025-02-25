@@ -105,17 +105,17 @@ class Field extends \acf_field
     {
         ?>
             <div class="acf-openstreetmap__marker-edit-overlay" data-js-marker-edit-overlay data-js-marker-id>
-                <div>
+                <div data-js-marker-edit-title>
                     <label for="marker-text-<?php $id ?>">Title</label>
-                    <input type="text" id="marker-text-<?php $id ?>" name="title" data-js-marker-edit-title></input>
+                    <input type="text" id="marker-text-<?php $id ?>" name="title"></input>
                 </div>
-                <div>
+                <div data-js-marker-edit-url>
                     <label for="marker-url-<?php $id ?>">URL</label>
-                    <input type="url" id="marker-url-<?php $id ?>" name="url" data-js-marker-edit-url></input>
+                    <input type="url" id="marker-url-<?php $id ?>" name="url"></input>
                 </div>
-                <div>
+                <div data-js-marker-edit-description>
                     <label for="marker-description-<?php $id ?>">Description</label>
-                    <textarea name="description" id="marker-description-<?php $id ?>" cols="30" rows="10" data-js-marker-edit-description></textarea>
+                    <textarea name="description" id="marker-description-<?php $id ?>" cols="30" rows="10"></textarea>
                 </div>
                 <div class="acf-openstreetmap__marker-edit-buttons">
                     <div class="acf-openstreetmap__button acf-openstreetmap__button--save" data-js-marker-edit-save role="button">Save</div>

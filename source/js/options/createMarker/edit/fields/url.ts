@@ -1,7 +1,13 @@
 class Url implements Field {
+    private urlContainer: HTMLElement|null;
     private url: HTMLInputElement|null;
     constructor(private overlayInterface: OverlayInterface) {
-        this.url = this.overlayInterface.getOverlay()?.querySelector('[data-js-marker-edit-url]') ?? null;
+        this.urlContainer = this.overlayInterface.getOverlay()?.querySelector('[data-js-marker-edit-url]') ?? null;
+        this.url = this.getContainer()?.querySelector('input') ?? null;
+    }
+
+    public getContainer(): HTMLElement|null {
+        return this.urlContainer;
     }
 
     public getField(): HTMLInputElement|null {
