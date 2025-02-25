@@ -59,7 +59,6 @@ class Field extends \acf_field
         <div class="acf-openstreetmap" data-js-openstreetmap-field>
             <input type="hidden" name="<?php echo esc_attr($field['name']); ?>" data-js-hidden-field value="<?php echo esc_attr($field['value']); ?>" id="acf-openstreetmap-hidden-<?php echo $id ?>"></input>
 
-            <?php $this->addLayerGroupList($id) ?>
             <?php $this->addEditOverlay($id) ?>
             <?php $this->addMap($id) ?>
             <?php $this->addOptions() ?>
@@ -67,22 +66,6 @@ class Field extends \acf_field
         <?php
 
         self::$mapIndex++;
-    }
-
-    private function addLayerGroupList($id = '')
-    {
-        ?>
-            <div class="acf-openstreetmap__layer-group-list">
-                <div>
-                    <label for="layers-name-picker-<?php $id ?>">Name</label>
-                    <input type="text" id="layers-name-picker-<?php $id ?>" name="layers-name-picker-<?php $id ?>">
-                </div>
-                <div>
-                    <label for="layers-color-picker-<?php $id ?>">Head</label>
-                    <input type="color" id="layers-color-picker-<?php $id ?>" name="layers-color-picker-<?php $id ?>" value="#e66465">
-                </div>
-            </div>
-        <?php
     }
 
     private function addMap($id = '')
