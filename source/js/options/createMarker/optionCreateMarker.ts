@@ -23,6 +23,7 @@ class OptionCreateMarker implements OptionFeature {
 
             const markerData = this.markerFactoryInstance.create();
             markerData.createMarker(e.latlng);
+            markerData.editMarker();
         });
     }
 
