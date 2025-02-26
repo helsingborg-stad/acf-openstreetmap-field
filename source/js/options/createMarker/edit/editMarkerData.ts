@@ -14,7 +14,6 @@ class EditMarkerData implements EditMarkerDataInterface, Editable {
     }
 
     public edit(): void {
-        this.editInstance.setActiveEditable(this);
         this.setDefaultFieldValues();
         this.show();
     }
@@ -34,22 +33,20 @@ class EditMarkerData implements EditMarkerDataInterface, Editable {
         this.markerData.setUrl(this.urlInstance.getValue() ?? '');
         this.markerData.setDescription(this.descriptionInstance.getValue() ?? '');
         this.markerData.updateMarker();
-        this.editInstance.setActiveEditable(null);
         this.hide();
     }
 
     public cancel() {
-        this.editInstance.setActiveEditable(null);
         this.hide();
     }
 
     public delete() {
         this.markerData.deleteMarker();
-        this.editInstance.setActiveEditable(null);
         this.hide();
     }
 
     private hide() {
+        this.editInstance.setActiveEditable(null);
         this.overlayInstance.hideOverlay();
         this.titleInstance.hideField();
         this.urlInstance.hideField();
@@ -57,6 +54,7 @@ class EditMarkerData implements EditMarkerDataInterface, Editable {
     }
 
     private show() {
+        this.editInstance.setActiveEditable(this);
         this.overlayInstance.showOverlay();
         this.titleInstance.showField();
         this.urlInstance.showField();
