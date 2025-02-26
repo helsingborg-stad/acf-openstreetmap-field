@@ -8,3 +8,28 @@
         width: 12.5rem;
     }
 }
+
+.acf-openstreetmap__option-list {
+    li {
+        display: flex;
+        flex-direction: row;
+        gap: .5rem;
+        justify-content: space-between;
+        cursor: pointer;
+
+        span:not(.dashicons) {
+            max-width: 11.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        > * {
+            transition: .2s ease-in-out;
+        }
+
+        &:hover > * {
+            font-weight: bold;
+        }
+    }
+}
