@@ -89,13 +89,13 @@ class Field extends \acf_field
                 </div>
                 <div>
                     <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="create_marker">Create marker</div>
-                    <ul class="acf-openstreetmap__marker-list" data-js-markers-list>
+                    <ul class="acf-openstreetmap__option-list" data-js-markers-list>
                     </ul>
                 </div>
                 <div>
                     <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="create_layer_group">Create layer</div>
-                    <!-- <ul class="acf-openstreetmap__marker-list" data-js-markers-list>
-                    </ul> -->
+                    <ul class="acf-openstreetmap__option-list" data-js-layer-group-list>
+                    </ul>
                 </div>
             </div>
         <?php
