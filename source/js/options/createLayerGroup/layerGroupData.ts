@@ -13,6 +13,7 @@ class LayerGroupData implements LayerGroupDataInterface {
     private id: number = Date.now() + LayerGroupData.idCounter++;
     private title: string = '';
     private editor: EditLayerGroupDataInterface;
+    private layer: LayerGroupInterface&AddTo&Addable|null = null;
 
     constructor(
         private mapInstance: MapInterface&Addable,
@@ -24,13 +25,17 @@ class LayerGroupData implements LayerGroupDataInterface {
     }
 
     public createLayerGroup(): LayerGroupInterface&AddTo&Addable {
-        const layer = this.createLayerGroupInstance.create();
-        layer.addTo(this.mapInstance);
+        if (this.layer) {
+            return this.layer;
+        }
+
+        this.layer = this.createLayerGroupInstance.create();
+        this.layer.addTo(this.mapInstance);
         
         LayerGroupData.layerGroups[this.getId()] = this;
         this.layerGroupsListInstance.addItem(this);
 
-        return layer;
+        return this.layer;
     }
 
     public editLayerGroup(): void {
@@ -42,6 +47,7 @@ class LayerGroupData implements LayerGroupDataInterface {
             delete LayerGroupData.layerGroups[this.id];
         }
 
+        this.layer?.removeLayerGroup();
         this.layerGroupsListInstance.removeItem(this);
     }
 
@@ -59,6 +65,10 @@ class LayerGroupData implements LayerGroupDataInterface {
 
     public getId(): number {
         return this.id;
+    }
+
+    public getLayerGroup(): LayerGroupInterface&AddTo&Addable|null {
+        return this.layer;
     }
 
     public static getLayerGroups() {
