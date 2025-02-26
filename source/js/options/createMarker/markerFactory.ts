@@ -1,4 +1,5 @@
 import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
+import EditMarkerDataFactory from "./edit/editMarkerDataFactory";
 import { EditMarkerDataInterface } from "./edit/editMarkerDataInterface";
 import MarkerData from "./markerData";
 import { MarkerDataInterface } from "./markerDataInterface";
@@ -9,12 +10,12 @@ class MarkerFactory implements MarkerFactoryInterface {
     private idCounter = 0;
     constructor(
         private createMarkersInstance: CreateMarkerInterface,
-        private editMarkerDataInstance: EditMarkerDataInterface,
+        private editMarkerDataFactoryInstance: EditMarkerDataFactory,
         private markerStorageInstance: MarkerStorageInterface
     ) {}
 
     public create(): MarkerDataInterface {
-        return new MarkerData(this.createMarkersInstance, this.editMarkerDataInstance, this.markerStorageInstance);
+        return new MarkerData(this.createMarkersInstance, this.editMarkerDataFactoryInstance, this.markerStorageInstance);
     }
 }
 

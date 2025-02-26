@@ -1,6 +1,7 @@
 import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
 import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
 import { LatLngObject } from "../../../OpenStreetMap/js/types";
+import EditMarkerDataFactory from "./edit/editMarkerDataFactory";
 import { EditMarkerDataInterface } from "./edit/editMarkerDataInterface";
 import { MarkerDataInterface } from "./markerDataInterface";
 import { MarkerStorageInterface } from "./markerStorageInterface";
@@ -13,12 +14,14 @@ class MarkerData implements MarkerDataInterface {
     private url: string = '';
     private marker: MarkerInterface|null = null;
     private markerCssClass: string = 'marker-create';
+    private editor: EditMarkerDataInterface;
 
     constructor(
         private createMarkerInstance: CreateMarkerInterface,
-        private editMarkerDataInstance: EditMarkerDataInterface,
+        private editMarkerDataFactoryInstance: EditMarkerDataFactory,
         private markerStorageInstance: MarkerStorageInterface
     ) {
+        this.editor = this.editMarkerDataFactoryInstance.create(this);
     }
 
     public createMarker(latlng: LatLngObject): MarkerInterface {
@@ -43,7 +46,7 @@ class MarkerData implements MarkerDataInterface {
 
     public editMarker(): void {
         this.markerStorageInstance.setActiveMarker(this);
-        this.editMarkerDataInstance.edit(this);
+        this.editor.edit();
     }
 
     public setTitle(title: string): void {
