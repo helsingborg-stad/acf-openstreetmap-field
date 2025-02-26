@@ -1,2 +1,3 @@
 interface EditLayerGroupDataInterface {
+    edit(): void;
 }

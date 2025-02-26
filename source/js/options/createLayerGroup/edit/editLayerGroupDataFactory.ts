@@ -1,9 +1,19 @@
+import { LayerGroupDataInterface } from "../layerGroupDataInterface";
 import EditLayerGroupData from "./editLayerGroupData";
 
 class EditLayerGroupDataFactory {
+    constructor(
+        private editInstance: EditInterface,
+        private overlayInstance: OverlayInterface,
+        private titleInstance: Field,
+    ) {}
+
     public create(layerGroupData: LayerGroupDataInterface): EditLayerGroupDataInterface {
         return new EditLayerGroupData(
-            layerGroupData
+            layerGroupData,
+            this.editInstance,
+            this.overlayInstance,
+            this.titleInstance
         );
     }
 }
