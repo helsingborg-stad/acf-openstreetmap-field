@@ -1,13 +1,13 @@
 import { SavedMarkerData } from "../../types";
 import { SaveOptionDataInterface } from "../saveOptionData";
-import { MarkerStorageInterface } from "./markerStorageInterface";
+import MarkerData from "./markerData";
 
 class SaveMarkers implements SaveOptionDataInterface {
-    constructor(private markerStorageInstance: MarkerStorageInterface) {}
+    constructor() {}
 
     public save(): SavedMarkerData {
         let data = [];
-        for (let marker of Object.values(this.markerStorageInstance.getMarkers())) {
+        for (let marker of Object.values(MarkerData.getMarkers())) {
             data.push({
                 title: marker.getTitle(),
                 url: marker.getUrl(),

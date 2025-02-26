@@ -3,8 +3,8 @@ import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker
 import { LatLngObject } from "../../../OpenStreetMap/js/types";
 import EditMarkerDataFactory from "./edit/editMarkerDataFactory";
 import { EditMarkerDataInterface } from "./edit/editMarkerDataInterface";
-import { MarkerDataInterface } from "./markerDataInterface";
-import { MarkerStorageInterface } from "./markerStorageInterface";
+import { MarkerDataInterface, MarkersDataStorage } from "./markerDataInterface";
+import { MarkersListInterface } from "./markersListInterface";
 
 class MarkerData implements MarkerDataInterface {
     private static idCounter = 0;
@@ -15,11 +15,12 @@ class MarkerData implements MarkerDataInterface {
     private marker: MarkerInterface|null = null;
     private markerCssClass: string = 'marker-create';
     private editor: EditMarkerDataInterface;
+    private static markers: MarkersDataStorage = {};
 
     constructor(
         private createMarkerInstance: CreateMarkerInterface,
         private editMarkerDataFactoryInstance: EditMarkerDataFactory,
-        private markerStorageInstance: MarkerStorageInterface
+        private markersListInstance: MarkersListInterface
     ) {
         this.editor = this.editMarkerDataFactoryInstance.create(this);
     }
@@ -39,13 +40,29 @@ class MarkerData implements MarkerDataInterface {
             this.editMarker();
         });
 
-        this.markerStorageInstance.addMarker(this);
+        MarkerData.markers[this.id] = this;
+        this.markersListInstance.addItem(this);
 
         return this.marker;
     }
 
+    public deleteMarker(): void {
+        if (MarkerData.markers[this.id]) {
+            delete MarkerData.markers[this.id];
+        }
+
+        this.markersListInstance.removeItem(this);
+    }
+
+    public updateMarker(): void {
+        this.markersListInstance.updateItem(this);
+    }
+
+    public static getMarkers(): MarkersDataStorage {
+        return MarkerData.markers;
+    }
+
     public editMarker(): void {
-        this.markerStorageInstance.setActiveMarker(this);
         this.editor.edit();
     }
 

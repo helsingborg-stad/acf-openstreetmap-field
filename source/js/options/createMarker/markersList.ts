@@ -17,11 +17,15 @@ class MarkersList implements MarkersListInterface {
     }
     
     public removeItem(markerData: MarkerDataInterface) {
-        this.listedMarkers[markerData.getId()].listItem.remove();
+        this.listedMarkers[markerData.getId()]?.listItem.remove();
         delete this.listedMarkers[markerData.getId()];
     }
 
     public updateItem(markerData: MarkerDataInterface) {
+        if (!this.listedMarkers[markerData.getId()].listItem) {
+            return;
+        }
+
         this.listedMarkers[markerData.getId()].listItem.querySelector('span')!.textContent = this.markerDataTitle(markerData);
     }
 

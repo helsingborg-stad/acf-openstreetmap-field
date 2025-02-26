@@ -5,6 +5,8 @@ import { EditMarkerDataInterface } from "./editMarkerDataInterface";
 class EditMarkerData implements EditMarkerDataInterface, Editable {
     constructor(
         private markerData: MarkerDataInterface,
+        private fieldValidatorInstance: FieldValidatorInterface,
+        private editInstance: EditInterface,
         private overlayInstance: OverlayInterface,
         private titleInstance: Field,
         private urlInstance: Field,
@@ -13,11 +15,9 @@ class EditMarkerData implements EditMarkerDataInterface, Editable {
     }
 
     public edit(): void {
+        this.editInstance.setActiveEditable(this);
         this.setDefaultFieldValues();
-        this.titleInstance.showField();
-        this.urlInstance.showField();
-        this.descriptionInstance.showField();
-        this.overlayInstance.showOverlay();
+        this.show();
     }
 
     private setDefaultFieldValues(): void {
@@ -26,14 +26,42 @@ class EditMarkerData implements EditMarkerDataInterface, Editable {
         this.descriptionInstance.setValue(this.markerData.getDescription());
     }
 
-    public save() {   
+    public save() {
+        if (!this.fieldValidatorInstance.validateUrl(this.urlInstance.getValue() ?? '')) {
+            return;
+        }
+
+        this.markerData.setTitle(this.titleInstance.getValue() ?? '');
+        this.markerData.setUrl(this.urlInstance.getValue() ?? '');
+        this.markerData.setDescription(this.descriptionInstance.getValue() ?? '');
+        this.markerData.updateMarker();
+        this.editInstance.setActiveEditable(null);
+        this.hide();
     }
 
     public cancel() {
+        this.editInstance.setActiveEditable(null);
+        this.hide();
     }
 
     public delete() {
+        this.markerData.deleteMarker();
+        this.editInstance.setActiveEditable(null);
+        this.hide();
+    }
 
+    private hide() {
+        this.overlayInstance.hideOverlay();
+        this.titleInstance.hideField();
+        this.urlInstance.hideField();
+        this.descriptionInstance.hideField();
+    }
+
+    private show() {
+        this.overlayInstance.showOverlay();
+        this.titleInstance.showField();
+        this.urlInstance.showField();
+        this.descriptionInstance.showField();
     }
 }
 

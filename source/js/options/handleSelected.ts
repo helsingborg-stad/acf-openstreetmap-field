@@ -24,7 +24,7 @@ class HandleSelected implements HandleSelectedInterface {
         });
     }
 
-    private clearSelected(): void {
+    public clearSelected(): void {
         this.options.forEach((option) => {
             option.classList.remove('selected');
         });

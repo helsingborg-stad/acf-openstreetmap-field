@@ -1,6 +1,5 @@
 import { SavedMarkerData } from "../../types";
 import { MarkerFactoryInterface } from "./markerFactoryInterface";
-import { MarkerStorageInterface } from "./markerStorageInterface";
 
 class LoadMarkers implements LoadOptionDataInterface {
     constructor(
