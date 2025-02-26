@@ -46,15 +46,15 @@ class MarkerData implements MarkerDataInterface {
             this.editMarker();
         });
 
-        MarkerData.markers[this.id] = this;
+        MarkerData.markers[this.getId()] = this;
         this.markersListInstance.addItem(this);
 
         return this.marker;
     }
 
     public deleteMarker(): void {
-        if (MarkerData.markers[this.id]) {
-            delete MarkerData.markers[this.id];
+        if (MarkerData.markers[this.getId()]) {
+            delete MarkerData.markers[this.getId()];
         }
 
         this.markersListInstance.removeItem(this);

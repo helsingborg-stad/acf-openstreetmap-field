@@ -1,4 +1,3 @@
-import MarkerData from "../markerData";
 import { MarkerDataInterface } from "../markerDataInterface";
 import { EditMarkerDataInterface } from "./editMarkerDataInterface";
 
