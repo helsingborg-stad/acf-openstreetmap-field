@@ -31,11 +31,11 @@ class Main {
     mapInstance!: MapInterface&Addable;
 
     constructor(
-        private id: string,
-        private container: HTMLElement,
-        private map: HTMLElement
+        id: string,
+        container: HTMLElement,
+        map: HTMLElement
     ) {
-        const hiddenField = this.container.querySelector('[data-js-hidden-field]') as HTMLInputElement;
+        const hiddenField = container.querySelector('[data-js-hidden-field]') as HTMLInputElement;
     
         if (!acf) {
             console.error('ACF not found');
@@ -47,20 +47,69 @@ class Main {
             return;
         }
 
-        this.mapInstance = this.createMap();
+        const mapInstance = createMap({
+            id: id
+        });
 
-        // Others
-        const createMarkerInstance   = new CreateMarker(this.mapInstance);
-        const createLayerGroupInstance = new CreateLayerGroup(this.mapInstance);
-        const handleSelectedInstance = new HandleSelected(this.container);
+        // General
+        const createMarkerInstance     = new CreateMarker(mapInstance);
+        const createLayerGroupInstance = new CreateLayerGroup(mapInstance);
+        const handleSelectedInstance   = new HandleSelected(container);
+
+        // Fields and Edit
+        const fieldValidatorInstance = new FieldValidator();
+        const overlayInstance        = new Overlay(container);
+        const titleInstance          = new Title(overlayInstance);
+        const urlInstance            = new Url(overlayInstance);
+        const descriptionInstance    = new Description(overlayInstance);
+        const editInstance           = new Edit(container);
+
+        // Create layer group
+        const editLayerGroupDataFactory = new EditLayerGroupDataFactory(
+            editInstance,
+            overlayInstance,
+            titleInstance
+        );
+
+        const layerGroupFactoryInstance = new LayerGroupFactory(
+            mapInstance,
+            createLayerGroupInstance,
+            editLayerGroupDataFactory
+        );
+
+        // Create marker
+        const markersListInstance    = new MarkersList(container, mapInstance);
+        const editMarkerDataFactoryInstance = new EditMarkerDataFactory(
+            fieldValidatorInstance,
+            editInstance,
+            overlayInstance,
+            titleInstance,
+            urlInstance,
+            descriptionInstance
+        );
+
+        const markerFactoryInstance  = new MarkerFactory(
+            mapInstance,
+            createMarkerInstance,
+            editMarkerDataFactoryInstance,
+            markersListInstance
+        );
 
         // Main
-        const layerGroupFactoryInstance = this.setupCreateLayerGroupsFeature(createLayerGroupInstance, handleSelectedInstance);
+        const OptionCreateLayerGroupInstance = new OptionCreateLayerGroup(
+            container,
+            handleSelectedInstance,
+            layerGroupFactoryInstance
+        );
 
-        const markerFactoryInstance  = this.setupCreateMarkersFeature(createMarkerInstance, handleSelectedInstance);
+        const OptionCreateMarkerInstance = new OptionCreateMarker(
+            mapInstance, 
+            handleSelectedInstance,
+            markerFactoryInstance
+        );
 
         const OptionSetStartPositionInstance = new OptionSetStartPosition(
-            this.mapInstance,
+            mapInstance,
             handleSelectedInstance,
             createMarkerInstance
         );
@@ -77,65 +126,6 @@ class Main {
             new SaveMarkers(),
             new SaveStartPostion(OptionSetStartPositionInstance)
         );
-    }
-
-    private setupCreateLayerGroupsFeature(createLayerGroupInstance: CreateLayerGroup, handleSelectedInstance: HandleSelected): LayerGroupFactory {
-        const editLayerGroupDataFactory = new EditLayerGroupDataFactory();
-        const layerGroupFactoryInstance = new LayerGroupFactory(
-            this.mapInstance,
-            createLayerGroupInstance,
-            editLayerGroupDataFactory
-        );
-
-        const OptionCreateLayerGroupInstance = new OptionCreateLayerGroup(
-            this.container,
-            handleSelectedInstance,
-            layerGroupFactoryInstance
-        );
-
-        return layerGroupFactoryInstance;
-    }
-
-    private setupCreateMarkersFeature(createMarkerInstance: CreateMarker, handleSelectedInstance: HandleSelectedInterface): MarkerFactory {
-        const fieldValidatorInstance = new FieldValidator();
-        const overlayInstance        = new Overlay(this.container);
-        const markersListInstance    = new MarkersList(this.container, this.mapInstance);
-
-        const titleInstance          = new Title(overlayInstance);
-        const urlInstance            = new Url(overlayInstance);
-        const descriptionInstance    = new Description(overlayInstance);
-
-        const editInstance = new Edit(this.container);
-
-        const editMarkerDataFactoryInstance = new EditMarkerDataFactory(
-            fieldValidatorInstance,
-            editInstance,
-            overlayInstance,
-            titleInstance,
-            urlInstance,
-            descriptionInstance
-        );
-
-        const markerFactoryInstance  = new MarkerFactory(
-            this.mapInstance,
-            createMarkerInstance,
-            editMarkerDataFactoryInstance,
-            markersListInstance
-        );
-
-        const OptionCreateMarkerInstance = new OptionCreateMarker(
-            this.mapInstance, 
-            handleSelectedInstance,
-            markerFactoryInstance
-        );
-
-        return markerFactoryInstance;
-    }
-
-    private createMap(): MapInterface&Addable {
-        return createMap({
-            id: this.id
-        });
     }
 }
 
