@@ -2,6 +2,7 @@ import { createMap } from '../OpenStreetMap/js/map';
 import { MapInterface } from '../OpenStreetMap/js/mapInterface';
 import { CreateMarker } from '../OpenStreetMap/js/features/createMarker/createMarker';
 import { CreateLayerGroup } from '../OpenStreetMap/js/features/createLayerGroup/createLayerGroup';
+import { Addable } from '../OpenStreetMap/js/addableInterface';
 import HandleSelected from './options/handleSelected';
 import OptionCreateMarker from './options/createMarker/optionCreateMarker';
 import OptionSetStartPosition from './options/startPosition/optionSetStartPosition';
@@ -23,7 +24,6 @@ import EditMarkerDataFactory from './options/createMarker/edit/editMarkerDataFac
 import Edit from './edit/actions/edit';
 import LayerGroupFactory from './options/createLayerGroup/layerGroupFactory';
 import EditLayerGroupDataFactory from './options/createLayerGroup/edit/editLayerGroupDataFactory';
-import { Addable } from '../OpenStreetMap/js/addableInterface';
 import LayerGroupsList from './options/createLayerGroup/layerGroupsList';
 
 declare const acf: any;
@@ -76,11 +76,10 @@ class Main {
             mapInstance,
             createLayerGroupInstance,
             editLayerGroupDataFactory,
-            new LayerGroupsList()
+            new LayerGroupsList(container)
         );
 
         // Create marker
-        const markersListInstance    = new MarkersList(container, mapInstance);
         const editMarkerDataFactoryInstance = new EditMarkerDataFactory(
             fieldValidatorInstance,
             editInstance,
@@ -94,7 +93,7 @@ class Main {
             mapInstance,
             createMarkerInstance,
             editMarkerDataFactoryInstance,
-            markersListInstance
+            new MarkersList(container, mapInstance)
         );
 
         // Main
