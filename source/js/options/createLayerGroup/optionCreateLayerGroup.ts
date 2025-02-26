@@ -1,3 +1,5 @@
+import { LayerGroupFactoryInterface } from "./layerGroupFactoryInterface";
+
 class OptionCreateLayerGroup implements OptionFeature {
     protected condition: string = 'create_layer_group';
     constructor(

@@ -5,6 +5,7 @@ class LoadHiddenField {
 
     constructor(
         private hiddenField: HTMLInputElement,
+        private loadLayerGroupsInstance: LoadOptionDataInterface,
         private loadMarkersInstance: LoadOptionDataInterface,
         private loadStartPositionInstance: LoadOptionDataInterface
     ) {
@@ -14,6 +15,7 @@ class LoadHiddenField {
             return;
         }
         
+        this.loadLayerGroupsInstance.load(this.data?.layerGroups);
         this.loadMarkersInstance.load(this.data?.markers);
         this.loadStartPositionInstance.load(this.data?.startPosition);
 

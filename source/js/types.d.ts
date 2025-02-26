@@ -1,4 +1,9 @@
-import { LatLngObject } from "../OpenStreetMap/js/types"
+import { LatLngObject } from "../OpenStreetMap/js/types";
+
+type SavedLayerGroup = {
+    title: string;
+    id: number;
+}[];
 
 type SavedMarkerData = {
     title: string;
@@ -10,6 +15,7 @@ type SavedMarkerData = {
 type SaveStartPosition = LatLngObject|null;
 
 type SaveData = {
+    layerGroups: SavedLayerGroup;
     markers: SavedMarkerData;
     startPosition: SaveStartPosition;
 }

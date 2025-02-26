@@ -25,6 +25,8 @@ import Edit from './edit/actions/edit';
 import LayerGroupFactory from './options/createLayerGroup/layerGroupFactory';
 import EditLayerGroupDataFactory from './options/createLayerGroup/edit/editLayerGroupDataFactory';
 import LayerGroupsList from './options/createLayerGroup/layerGroupsList';
+import LoadLayerGroups from './options/createLayerGroup/loadLayerGroups';
+import SaveLayerGroups from './options/createLayerGroup/saveLayerGroups';
 
 declare const acf: any;
 
@@ -118,12 +120,14 @@ class Main {
         // Save and Load
         new LoadHiddenField(
             hiddenField,
+            new LoadLayerGroups(layerGroupFactoryInstance),
             new LoadMarkers(markerFactoryInstance),
             new LoadStartPosition(OptionSetStartPositionInstance)
         );
 
         new SaveHiddenField(
             hiddenField,
+            new SaveLayerGroups(),
             new SaveMarkers(),
             new SaveStartPostion(OptionSetStartPositionInstance)
         );

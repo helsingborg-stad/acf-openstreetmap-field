@@ -1,0 +1,21 @@
+import { SavedLayerGroup } from "../../types";
+import { SaveOptionDataInterface } from "../saveOptionData";
+import LayerGroupData from "./layerGroupData";
+
+class SaveLayerGroups implements SaveOptionDataInterface {
+    constructor() {}
+
+    public save(): SavedLayerGroup {
+        let data = [];
+        for (let layerGroup of Object.values(LayerGroupData.getLayerGroups())) {
+            data.push({
+                title: layerGroup.getTitle(),
+                id: layerGroup.getId()
+            });
+        }
+
+        return data;
+    }
+}
+
+export default SaveLayerGroups;
