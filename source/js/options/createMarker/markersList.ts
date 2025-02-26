@@ -11,7 +11,7 @@ class MarkersList implements MarkersListInterface {
     }
 
     public addItem(markerData: MarkerDataInterface): void {
-        const listItem = createListItem(this.markerDataTitle(markerData));
+        const listItem = createListItem(this.getMarkerDataTitle(markerData));
         this.markersList?.appendChild(listItem);
         this.listedMarkers[markerData.getId()] = {marker: markerData, listItem: listItem};
         this.setClickListener(listItem, markerData);
@@ -27,7 +27,7 @@ class MarkersList implements MarkersListInterface {
             return;
         }
 
-        this.listedMarkers[markerData.getId()].listItem.querySelector('span')!.textContent = this.markerDataTitle(markerData);
+        this.listedMarkers[markerData.getId()].listItem.querySelector('span')!.textContent = this.getMarkerDataTitle(markerData);
     }
 
     private setClickListener(listItem: HTMLLIElement, markerData: MarkerDataInterface): void {
@@ -41,8 +41,8 @@ class MarkersList implements MarkersListInterface {
         });
     }
 
-    private markerDataTitle(markerData: MarkerDataInterface): string {
-        return markerData.getTitle() ? markerData.getTitle() : 'No title';
+    private getMarkerDataTitle(markerData: MarkerDataInterface): string {
+        return markerData.getTitle() ? markerData.getTitle() : 'Untitled Marker';
     }
 }
 

@@ -57,6 +57,7 @@ class MarkerData implements MarkerDataInterface {
             delete MarkerData.markers[this.getId()];
         }
 
+        this.getMarker()?.removeMarker();
         this.markersListInstance.removeItem(this);
     }
 
