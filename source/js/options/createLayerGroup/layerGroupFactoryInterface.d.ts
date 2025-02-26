@@ -1,0 +1,3 @@
+interface LayerGroupFactoryInterface {
+    create(): LayerGroupDataInterface;
+}

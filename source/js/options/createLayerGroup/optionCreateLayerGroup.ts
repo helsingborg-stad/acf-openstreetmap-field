@@ -2,7 +2,9 @@ class OptionCreateLayerGroup implements OptionFeature {
     protected condition: string = 'create_layer_group';
     constructor(
         private container: HTMLElement,
-        private handleSelectedInstance: HandleSelectedInterface
+        private handleSelectedInstance: HandleSelectedInterface,
+        private layerGroupFactoryInstance: LayerGroupFactoryInterface
+
     ) {
         this.addListener();
     }
