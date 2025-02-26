@@ -12,8 +12,6 @@ class LayerGroupsList implements LayerGroupsListInterface {
     public addItem(layerGroupData: LayerGroupDataInterface): void {
         const listItem = createListItem(this.getLayerGroupTitle(layerGroupData));
         this.layerGroupsList?.appendChild(listItem);
-        console.log(layerGroupData.getId());
-        console.log(this.layerGroupsList);
         this.listedLayerGroups[layerGroupData.getId()] = {layerGroup: layerGroupData, listItem: listItem};
         this.setClickListener(listItem, layerGroupData);
     }
