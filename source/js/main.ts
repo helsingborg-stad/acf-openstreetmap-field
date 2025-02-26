@@ -1,6 +1,7 @@
 import { createMap } from '../OpenStreetMap/js/map';
 import { MapInterface } from '../OpenStreetMap/js/mapInterface';
 import { CreateMarker } from '../OpenStreetMap/js/features/createMarker/createMarker';
+import { CreateLayerGroup } from '../OpenStreetMap/js/features/createLayerGroup/createLayerGroup';
 import HandleSelected from './options/handleSelected';
 import OptionCreateMarker from './options/createMarker/optionCreateMarker';
 import OptionSetStartPosition from './options/startPosition/optionSetStartPosition';
@@ -20,11 +21,14 @@ import MarkersList from './options/createMarker/markersList';
 import OptionCreateLayerGroup from './options/createLayerGroup/optionCreateLayerGroup';
 import EditMarkerDataFactory from './options/createMarker/edit/editMarkerDataFactory';
 import Edit from './edit/actions/edit';
+import LayerGroupFactory from './options/createLayerGroup/layerGroupFactory';
+import EditLayerGroupDataFactory from './options/createLayerGroup/edit/editLayerGroupDataFactory';
+import { Addable } from '../OpenStreetMap/js/addableInterface';
 
 declare const acf: any;
 
 class Main {
-    mapInstance!: MapInterface;
+    mapInstance!: MapInterface&Addable;
 
     constructor(
         private id: string,
@@ -47,13 +51,11 @@ class Main {
 
         // Others
         const createMarkerInstance   = new CreateMarker(this.mapInstance);
+        const createLayerGroupInstance = new CreateLayerGroup(this.mapInstance);
         const handleSelectedInstance = new HandleSelected(this.container);
 
         // Main
-        const OptionCreateLayerGroupInstance = new OptionCreateLayerGroup(
-            this.container,
-            handleSelectedInstance
-        );
+        const layerGroupFactoryInstance = this.setupCreateLayerGroupsFeature(createLayerGroupInstance, handleSelectedInstance);
 
         const markerFactoryInstance  = this.setupCreateMarkersFeature(createMarkerInstance, handleSelectedInstance);
 
@@ -77,6 +79,23 @@ class Main {
         );
     }
 
+    private setupCreateLayerGroupsFeature(createLayerGroupInstance: CreateLayerGroup, handleSelectedInstance: HandleSelected): LayerGroupFactory {
+        const editLayerGroupDataFactory = new EditLayerGroupDataFactory();
+        const layerGroupFactoryInstance = new LayerGroupFactory(
+            this.mapInstance,
+            createLayerGroupInstance,
+            editLayerGroupDataFactory
+        );
+
+        const OptionCreateLayerGroupInstance = new OptionCreateLayerGroup(
+            this.container,
+            handleSelectedInstance,
+            layerGroupFactoryInstance
+        );
+
+        return layerGroupFactoryInstance;
+    }
+
     private setupCreateMarkersFeature(createMarkerInstance: CreateMarker, handleSelectedInstance: HandleSelectedInterface): MarkerFactory {
         const fieldValidatorInstance = new FieldValidator();
         const overlayInstance        = new Overlay(this.container);
@@ -97,7 +116,12 @@ class Main {
             descriptionInstance
         );
 
-        const markerFactoryInstance  = new MarkerFactory(createMarkerInstance, editMarkerDataFactoryInstance, markersListInstance);
+        const markerFactoryInstance  = new MarkerFactory(
+            this.mapInstance,
+            createMarkerInstance,
+            editMarkerDataFactoryInstance,
+            markersListInstance
+        );
 
         const OptionCreateMarkerInstance = new OptionCreateMarker(
             this.mapInstance, 
@@ -108,7 +132,7 @@ class Main {
         return markerFactoryInstance;
     }
 
-    private createMap(): MapInterface {
+    private createMap(): MapInterface&Addable {
         return createMap({
             id: this.id
         });

@@ -1,5 +1,8 @@
+import { Addable } from "../../../OpenStreetMap/js/addableInterface";
+import { AddTo } from "../../../OpenStreetMap/js/addToInterface";
 import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
 import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
+import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
 import { LatLngObject } from "../../../OpenStreetMap/js/types";
 import EditMarkerDataFactory from "./edit/editMarkerDataFactory";
 import { EditMarkerDataInterface } from "./edit/editMarkerDataInterface";
@@ -12,12 +15,13 @@ class MarkerData implements MarkerDataInterface {
     private title: string = '';
     private content: string = '';
     private url: string = '';
-    private marker: MarkerInterface|null = null;
+    private marker: MarkerInterface&AddTo|null = null;
     private markerCssClass: string = 'marker-create';
     private editor: EditMarkerDataInterface;
     private static markers: MarkersDataStorage = {};
 
     constructor(
+        private mapInstance: MapInterface&Addable,
         private createMarkerInstance: CreateMarkerInterface,
         private editMarkerDataFactoryInstance: EditMarkerDataFactory,
         private markersListInstance: MarkersListInterface
@@ -25,7 +29,7 @@ class MarkerData implements MarkerDataInterface {
         this.editor = this.editMarkerDataFactoryInstance.create(this);
     }
 
-    public createMarker(latlng: LatLngObject): MarkerInterface {
+    public createMarker(latlng: LatLngObject): AddTo&MarkerInterface {
         if (this.marker) {
             return this.marker;
         }
@@ -36,6 +40,8 @@ class MarkerData implements MarkerDataInterface {
             draggable: true
         });
 
+        this.marker.addTo(this.mapInstance);
+    
         this.marker.addListener('click', (e) => {
             this.editMarker();
         });

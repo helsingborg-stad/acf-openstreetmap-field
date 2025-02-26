@@ -1,4 +1,6 @@
 
+import { Addable } from "../../../OpenStreetMap/js/addableInterface";
+import { AddTo } from "../../../OpenStreetMap/js/addToInterface";
 import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
 import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
 import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
@@ -8,10 +10,10 @@ import { OptionSetStartPositionInterface } from "./optionSetStartPositionInterfa
 class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInterface {
     protected condition: string = 'set_start_position';
     private markerCssClass: string = 'marker-start-position';
-    private marker: undefined|MarkerInterface;
+    private marker: undefined|MarkerInterface&AddTo;
 
     constructor(
-        private mapInstance: MapInterface,
+        private mapInstance: MapInterface&Addable,
         private handleSelectedInstance: HandleSelectedInterface,
         private createMarkerInstance: CreateMarkerInterface
     ) {
@@ -36,6 +38,8 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
             icon: this.getMarkerMarkup(),
             draggable: true,
         });
+
+        this.marker.addTo(this.mapInstance);
     }
 
     public getStartPosition(): MarkerInterface|undefined {
