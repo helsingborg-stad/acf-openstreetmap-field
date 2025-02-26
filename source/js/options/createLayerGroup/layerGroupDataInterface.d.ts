@@ -5,9 +5,9 @@ type LayerGroupsDataStorage = { [id: string]: LayerGroupDataInterface };
 
 interface LayerGroupDataInterface {
     createLayerGroup(): LayerGroupInterface&AddTo&Addable;
-    deleteLayer(): void;
-    editLayer(): void;
-    updateLayer(): void;
+    deleteLayerGroup(): void;
+    editLayerGroup(): void;
+    updateLayerGroup(): void;
     setTitle(title: string): void;
     getTitle(): string;
     getId(): number;

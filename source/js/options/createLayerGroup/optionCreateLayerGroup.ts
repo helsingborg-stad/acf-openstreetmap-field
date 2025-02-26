@@ -14,7 +14,9 @@ class OptionCreateLayerGroup implements OptionFeature {
             e.preventDefault();
             
             const layerGroupDataInstance = this.layerGroupFactoryInstance.create();
-            layerGroupDataInstance.editLayer();
+            layerGroupDataInstance.createLayerGroup();
+            layerGroupDataInstance.editLayerGroup();
+            this.handleSelectedInstance.clearSelected();
         });
     }
 

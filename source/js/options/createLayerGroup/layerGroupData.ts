@@ -5,6 +5,7 @@ import { LayerGroupInterface } from "../../../OpenStreetMap/js/features/createLa
 import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
 import EditLayerGroupDataFactory from "./edit/editLayerGroupDataFactory";
 import { LayerGroupDataInterface, LayerGroupsDataStorage } from "./layerGroupDataInterface";
+import { LayerGroupsListInterface } from "./layerGroupsListInterface";
 
 class LayerGroupData implements LayerGroupDataInterface {
     private static layerGroups: LayerGroupsDataStorage = {};
@@ -32,20 +33,20 @@ class LayerGroupData implements LayerGroupDataInterface {
         return layer;
     }
 
-    public editLayer(): void {
+    public editLayerGroup(): void {
         this.editor.edit();
     }
 
-    public deleteLayer(): void {
+    public deleteLayerGroup(): void {
         if (LayerGroupData.layerGroups[this.id]) {
             delete LayerGroupData.layerGroups[this.id];
         }
 
-        // this.markersListInstance.removeItem(this);
+        this.layerGroupsListInstance.removeItem(this);
     }
 
-    public updateLayer(): void {
-        // this.markersListInstance.updateItem(this);
+    public updateLayerGroup(): void {
+        this.layerGroupsListInstance.updateItem(this);
     }
 
     public setTitle(title: string) {

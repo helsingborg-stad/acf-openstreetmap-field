@@ -4,6 +4,7 @@ import { CreateLayerGroupInterface } from "../../../OpenStreetMap/js/features/cr
 import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
 import EditLayerGroupDataFactory from "./edit/editLayerGroupDataFactory";
 import LayerGroupData from "./layerGroupData";
+import { LayerGroupsListInterface } from "./layerGroupsListInterface";
 
 class LayerGroupFactory {
     constructor(

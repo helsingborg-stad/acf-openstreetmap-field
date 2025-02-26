@@ -10,7 +10,6 @@ class EditLayerGroupData implements EditLayerGroupDataInterface, Editable {
     }
 
     public edit(): void {
-        this.editInstance.setActiveEditable(this);
         this.setDefaultFieldValues();
         this.show();
     }
@@ -20,15 +19,28 @@ class EditLayerGroupData implements EditLayerGroupDataInterface, Editable {
     }
 
     public save() {
+        this.layerGroupData.setTitle(this.titleInstance.getValue());
+        this.layerGroupData.updateLayerGroup();
+        this.hide();
     }
 
     public cancel() {
+        this.hide();
     }
 
     public delete() {
+        this.layerGroupData.deleteLayerGroup();
+        this.hide();
+    }
+
+    private hide() {
+        this.editInstance.setActiveEditable(null);
+        this.titleInstance.hideField();
+        this.overlayInstance.hideOverlay();
     }
 
     private show() {
+        this.editInstance.setActiveEditable(this);
         this.titleInstance.showField();
         this.overlayInstance.showOverlay();
     }
