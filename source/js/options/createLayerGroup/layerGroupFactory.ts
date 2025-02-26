@@ -9,7 +9,8 @@ class LayerGroupFactory {
     constructor(
         private mapInstance: MapInterface&Addable,
         private createLayerGroupInstance: CreateLayerGroupInterface,
-        private editLayerGroupDataFactoryInstance: EditLayerGroupDataFactory
+        private editLayerGroupDataFactoryInstance: EditLayerGroupDataFactory,
+        private layerGroupsListInstance: LayerGroupsListInterface
     ) {
         
     }
@@ -18,7 +19,8 @@ class LayerGroupFactory {
         return new LayerGroupData(
             this.mapInstance,
             this.createLayerGroupInstance,
-            this.editLayerGroupDataFactoryInstance
+            this.editLayerGroupDataFactoryInstance,
+            this.layerGroupsListInstance
         );
     }
 }

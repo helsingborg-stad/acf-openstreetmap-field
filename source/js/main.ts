@@ -24,6 +24,7 @@ import Edit from './edit/actions/edit';
 import LayerGroupFactory from './options/createLayerGroup/layerGroupFactory';
 import EditLayerGroupDataFactory from './options/createLayerGroup/edit/editLayerGroupDataFactory';
 import { Addable } from '../OpenStreetMap/js/addableInterface';
+import LayerGroupsList from './options/createLayerGroup/layerGroupsList';
 
 declare const acf: any;
 
@@ -74,7 +75,8 @@ class Main {
         const layerGroupFactoryInstance = new LayerGroupFactory(
             mapInstance,
             createLayerGroupInstance,
-            editLayerGroupDataFactory
+            editLayerGroupDataFactory,
+            new LayerGroupsList()
         );
 
         // Create marker

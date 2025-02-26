@@ -16,7 +16,8 @@ class LayerGroupData implements LayerGroupDataInterface {
     constructor(
         private mapInstance: MapInterface&Addable,
         private createLayerGroupInstance: CreateLayerGroupInterface,
-        private editLayerGroupDataFactoryInstance: EditLayerGroupDataFactory
+        private editLayerGroupDataFactoryInstance: EditLayerGroupDataFactory,
+        private layerGroupsListInstance: LayerGroupsListInterface
     ) {
         this.editor = this.editLayerGroupDataFactoryInstance.create(this);
     }
@@ -26,6 +27,7 @@ class LayerGroupData implements LayerGroupDataInterface {
         layer.addTo(this.mapInstance);
         
         LayerGroupData.layerGroups[this.getId()] = this;
+        this.layerGroupsListInstance.addItem(this);
 
         return layer;
     }
