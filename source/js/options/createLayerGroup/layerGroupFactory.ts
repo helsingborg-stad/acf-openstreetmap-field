@@ -1,5 +1,3 @@
-
-import { Addable } from "../../../OpenStreetMap/js/addableInterface";
 import { CreateLayerGroupInterface } from "../../../OpenStreetMap/js/features/createLayerGroup/createLayerGroupInterface";
 import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
 import EditLayerGroupDataFactory from "./edit/editLayerGroupDataFactory";
@@ -8,7 +6,7 @@ import { LayerGroupsListInterface } from "./layerGroupsListInterface";
 
 class LayerGroupFactory {
     constructor(
-        private mapInstance: MapInterface&Addable,
+        private mapInstance: MapInterface,
         private createLayerGroupInstance: CreateLayerGroupInterface,
         private editLayerGroupDataFactoryInstance: EditLayerGroupDataFactory,
         private layerGroupsListInstance: LayerGroupsListInterface
