@@ -7,6 +7,10 @@ class LoadLayerGroups implements LoadOptionDataInterface {
     ) {}
 
     public load(savedLayerGroups: SavedLayerGroup): void {
+        if (!savedLayerGroups) {
+            return;
+        }
+
         for (let savedLayerGroup of savedLayerGroups) {
             const layerGroupData = this.layerGroupFactory.create();
             layerGroupData.setTitle(savedLayerGroup.title ?? '');

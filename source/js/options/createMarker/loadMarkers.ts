@@ -7,6 +7,10 @@ class LoadMarkers implements LoadOptionDataInterface {
     ) {}
 
     public load(savedMarkers: SavedMarkerData): void {
+        if (!savedMarkers) {
+            return;
+        }
+
         for (let savedMarker of savedMarkers) {
             const markerData = this.markerFactoryInstance.create();
             markerData.setTitle(savedMarker.title ?? '');
