@@ -2,7 +2,6 @@ import { createMap } from '../OpenStreetMap/js/map';
 import { MapInterface } from '../OpenStreetMap/js/mapInterface';
 import { CreateMarker } from '../OpenStreetMap/js/features/createMarker/createMarker';
 import { CreateLayerGroup } from '../OpenStreetMap/js/features/createLayerGroup/createLayerGroup';
-import { Addable } from '../OpenStreetMap/js/addableInterface';
 import HandleSelected from './options/handleSelected';
 import OptionCreateMarker from './options/createMarker/optionCreateMarker';
 import OptionSetStartPosition from './options/startPosition/optionSetStartPosition';
@@ -27,11 +26,12 @@ import EditLayerGroupDataFactory from './options/createLayerGroup/edit/editLayer
 import LayerGroupsList from './options/createLayerGroup/layerGroupsList';
 import LoadLayerGroups from './options/createLayerGroup/loadLayerGroups';
 import SaveLayerGroups from './options/createLayerGroup/saveLayerGroups';
+import Color from './edit/fields/color';
 
 declare const acf: any;
 
 class Main {
-    mapInstance!: MapInterface&Addable;
+    mapInstance!: MapInterface;
 
     constructor(
         id: string,
@@ -65,13 +65,15 @@ class Main {
         const titleInstance          = new Title(overlayInstance);
         const urlInstance            = new Url(overlayInstance);
         const descriptionInstance    = new Description(overlayInstance);
+        const colorInstance          = new Color(overlayInstance);
         const editInstance           = new Edit(container);
 
         // Create layer group
         const editLayerGroupDataFactory = new EditLayerGroupDataFactory(
             editInstance,
             overlayInstance,
-            titleInstance
+            titleInstance,
+            colorInstance
         );
 
         const layerGroupFactoryInstance = new LayerGroupFactory(
