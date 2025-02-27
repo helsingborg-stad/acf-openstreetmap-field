@@ -7,7 +7,7 @@ class Edit implements EditInterface {
     }
 
     private setupDelete() {
-        this.container.querySelector('[data-js-marker-edit-delete]')?.addEventListener('click', () => {
+        this.container.querySelector('[data-js-field-edit-delete]')?.addEventListener('click', () => {
             if (this.getActiveEditable()) {
                 this.getActiveEditable()!.delete();
             }
@@ -15,7 +15,7 @@ class Edit implements EditInterface {
     }
 
     private setupSave() {
-        this.container.querySelector('[data-js-marker-edit-save]')?.addEventListener('click', () => {
+        this.container.querySelector('[data-js-field-edit-save]')?.addEventListener('click', () => {
             if (this.getActiveEditable()) {
                 this.getActiveEditable()!.save();
             }
@@ -23,7 +23,7 @@ class Edit implements EditInterface {
     }
 
     private setupCancel() {
-        this.container.querySelector('[data-js-marker-edit-cancel]')?.addEventListener('click', () => {
+        this.container.querySelector('[data-js-field-edit-cancel]')?.addEventListener('click', () => {
             if (this.getActiveEditable()) {
                 this.getActiveEditable()!.cancel();
             }
@@ -31,6 +31,10 @@ class Edit implements EditInterface {
     }
 
     public setActiveEditable(editable: Editable|null) {
+        if (this.getActiveEditable()) {
+            this.getActiveEditable()!.hideFields();
+        }
+
         this.activeEditable = editable;
     }
 

@@ -2,7 +2,7 @@ class Title implements Field {
     private titleContainer: HTMLElement|null;
     private title: HTMLInputElement|null;
     constructor(private overlayInterface: OverlayInterface) {
-        this.titleContainer = this.overlayInterface.getOverlay()?.querySelector('[data-js-marker-edit-title]') ?? null;
+        this.titleContainer = this.overlayInterface.getOverlay()?.querySelector('[data-js-field-edit-title]') ?? null;
         this.title = this.getContainer()?.querySelector('input') ?? null;
     }
 
@@ -35,7 +35,7 @@ class Title implements Field {
             return;
         }
 
-        this.getContainer()!.style.display = 'block';
+        this.getContainer()!.classList.add('is-visible');
     }
 
     public hideField(): void {
@@ -43,7 +43,7 @@ class Title implements Field {
             return;
         }
 
-        this.getContainer()!.style.display = 'none';
+        this.getContainer()!.classList.remove('is-visible');
     }
 }
 

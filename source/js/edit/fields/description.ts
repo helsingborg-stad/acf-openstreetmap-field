@@ -2,7 +2,7 @@ class Description implements Field {
     descriptionContainer: HTMLElement|null;
     description: HTMLTextAreaElement|null;
     constructor(private overlayInstance: OverlayInterface) {
-        this.descriptionContainer = this.overlayInstance.getOverlay()?.querySelector('[data-js-marker-edit-description]') ?? null;
+        this.descriptionContainer = this.overlayInstance.getOverlay()?.querySelector('[data-js-field-edit-description]') ?? null;
         this.description = this.getContainer()?.querySelector('textarea') ?? null;
     }
 
@@ -35,7 +35,7 @@ class Description implements Field {
             return;
         }
 
-        this.getContainer()!.style.display = 'block';
+        this.getContainer()!.classList.add('is-visible');
     }
 
     public hideField(): void {
@@ -43,7 +43,7 @@ class Description implements Field {
             return;
         }
 
-        this.getContainer()!.style.display = 'none';
+        this.getContainer()!.classList.remove('is-visible');
     }
 }
 

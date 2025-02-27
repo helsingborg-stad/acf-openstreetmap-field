@@ -2,7 +2,7 @@ class Url implements Field {
     private urlContainer: HTMLElement|null;
     private url: HTMLInputElement|null;
     constructor(private overlayInterface: OverlayInterface) {
-        this.urlContainer = this.overlayInterface.getOverlay()?.querySelector('[data-js-marker-edit-url]') ?? null;
+        this.urlContainer = this.overlayInterface.getOverlay()?.querySelector('[data-js-field-edit-url]') ?? null;
         this.url = this.getContainer()?.querySelector('input') ?? null;
     }
 
@@ -35,7 +35,7 @@ class Url implements Field {
             return;
         }
 
-        this.getContainer()!.style.display = 'block';
+        this.getContainer()!.classList.add('is-visible');
     }
 
     public hideField(): void {
@@ -43,7 +43,7 @@ class Url implements Field {
             return;
         }
 
-        this.getContainer()!.style.display = 'none';
+        this.getContainer()!.classList.remove('is-visible');
     }
 }
 

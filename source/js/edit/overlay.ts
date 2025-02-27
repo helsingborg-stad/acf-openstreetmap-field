@@ -1,7 +1,7 @@
 class Overlay implements OverlayInterface {
     private overlay: HTMLElement|null;
     constructor(private container: HTMLElement) {
-        this.overlay = this.container.querySelector('[ data-js-marker-edit-overlay]');
+        this.overlay = this.container.querySelector('[ data-js-field-edit-overlay]');
     }
 
     public getOverlay(): HTMLElement|null {
