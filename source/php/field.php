@@ -122,7 +122,7 @@ class Field extends \acf_field
                     <input type="color" id="field-color-<?php $id ?>" name="url"></input>
                 </div>
                 <div class="acf-openstreetmap__field" data-js-field-edit-layer>
-                    <label for="field-layer-<?php $id ?>">Color</label>
+                    <label for="field-layer-<?php $id ?>">Layer</label>
                     <select id="field-layer-<?php $id ?>" name="layer">
                         <option value="">Default (on the map)</option>
                     </select>

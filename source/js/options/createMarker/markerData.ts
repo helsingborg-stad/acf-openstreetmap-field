@@ -13,6 +13,7 @@ class MarkerData implements MarkerDataInterface {
     private title: string = '';
     private content: string = '';
     private url: string = '';
+    private layerGroup: string = '';
     private marker: MarkerInterface|null = null;
     private markerCssClass: string = 'marker-create';
     private editor: EditMarkerDataInterface;
@@ -85,6 +86,14 @@ class MarkerData implements MarkerDataInterface {
 
     public getDescription(): string {
         return this.content
+    }
+
+    public setLayerGroup(layerGroup: string): void {
+        this.layerGroup = layerGroup;
+    }
+
+    public getLayerGroup(): string {
+        return this.layerGroup;
     }
 
     public setUrl(url: string): void {

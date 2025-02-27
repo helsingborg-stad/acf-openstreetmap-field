@@ -9,7 +9,8 @@ class EditMarkerData implements EditMarkerDataInterface, Editable {
         private overlayInstance: OverlayInterface,
         private titleInstance: Field,
         private urlInstance: Field,
-        private descriptionInstance: Field
+        private descriptionInstance: Field,
+        private layerInstance: Field
     ) {
     }
 
@@ -23,6 +24,7 @@ class EditMarkerData implements EditMarkerDataInterface, Editable {
         this.titleInstance.setValue(this.markerData.getTitle());
         this.urlInstance.setValue(this.markerData.getUrl());
         this.descriptionInstance.setValue(this.markerData.getDescription());
+        this.layerInstance.setValue(this.markerData.getLayerGroup());
     }
 
     public save() {
@@ -33,6 +35,7 @@ class EditMarkerData implements EditMarkerDataInterface, Editable {
         this.markerData.setTitle(this.titleInstance.getValue() ?? '');
         this.markerData.setUrl(this.urlInstance.getValue() ?? '');
         this.markerData.setDescription(this.descriptionInstance.getValue() ?? '');
+        this.markerData.setLayerGroup(this.layerInstance.getValue() ?? '');
         this.markerData.updateMarker();
         this.editInstance.setActiveEditable(null);
         this.hideFields();
@@ -50,6 +53,7 @@ class EditMarkerData implements EditMarkerDataInterface, Editable {
     }
 
     public hideFields() {
+        this.layerInstance.hideField();
         this.titleInstance.hideField();
         this.urlInstance.hideField();
         this.descriptionInstance.hideField();
@@ -57,6 +61,7 @@ class EditMarkerData implements EditMarkerDataInterface, Editable {
     }
 
     public showFields() {
+        this.layerInstance.showField();
         this.titleInstance.showField();
         this.urlInstance.showField();
         this.descriptionInstance.showField();

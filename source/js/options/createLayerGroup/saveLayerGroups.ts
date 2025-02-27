@@ -10,6 +10,7 @@ class SaveLayerGroups implements SaveOptionDataInterface {
         for (let layerGroup of Object.values(LayerGroupData.getLayerGroups())) {
             data.push({
                 title: layerGroup.getTitle(),
+                color: layerGroup.getColor(),
                 id: layerGroup.getId()
             });
         }

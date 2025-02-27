@@ -7,17 +7,17 @@ import { LayerGroupsListInterface } from "./layerGroupsListInterface";
 
 class LayerGroupData implements LayerGroupDataInterface {
     private static layerGroups: LayerGroupsDataStorage = {};
-    private static idCounter: number = 0;
-    private id: number = Date.now() + LayerGroupData.idCounter++;
     private title: string = '';
+    private color: string = '#000000';
     private editor: EditLayerGroupDataInterface;
     private layer: LayerGroupInterface|null = null;
 
     constructor(
+        private id: string,
         private mapInstance: MapInterface,
         private createLayerGroupInstance: CreateLayerGroupInterface,
         private editLayerGroupDataFactoryInstance: EditLayerGroupDataFactory,
-        private layerGroupsListInstance: LayerGroupsListInterface
+        private layerGroupsListInstance: LayerGroupsListInterface,
     ) {
         this.editor = this.editLayerGroupDataFactoryInstance.create(this);
     }
@@ -55,13 +55,22 @@ class LayerGroupData implements LayerGroupDataInterface {
 
     public setTitle(title: string) {
         this.title = title;
+        this.editor.setOptionTitle(title);
     }
 
     public getTitle() {
         return this.title;
     }
 
-    public getId(): number {
+    public setColor(color: string) {
+        this.color = color;
+    }
+
+    public getColor() {
+        return this.color;
+    }
+
+    public getId(): string {
         return this.id;
     }
 

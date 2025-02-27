@@ -1,4 +1,4 @@
-class Layer implements SelectField {
+class Layer implements Field {
     layerContainer: HTMLElement|null;
     layer: HTMLSelectElement|null;
     constructor(private overlayInstance: OverlayInterface) {
@@ -12,10 +12,6 @@ class Layer implements SelectField {
 
     public getField(): HTMLSelectElement|null {
         return this.layer;
-    }
-
-    public changeOptionText(optionValue: string, text: string): void {
-        
     }
 
     public setValue(value: string): void {

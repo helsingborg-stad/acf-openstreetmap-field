@@ -2,7 +2,8 @@ import { LatLngObject } from "../OpenStreetMap/js/types";
 
 type SavedLayerGroup = {
     title: string;
-    id: number;
+    color: string;
+    id: string;
 }[];
 
 type SavedMarkerData = {
@@ -10,6 +11,7 @@ type SavedMarkerData = {
     description: string;
     url: string;
     position: LatLngObject;
+    layerGroup: string;
 }[];
 
 type SaveStartPosition = LatLngObject|null;

@@ -12,6 +12,8 @@ interface MarkerDataInterface {
     getTitle(): string;
     setDescription(content: string): void;
     getDescription(): string;
+    setLayerGroup(layerGroup: string): void;
+    getLayerGroup(): string;
     setUrl(url: string): void;
     getUrl(): string;
     getId(): string;

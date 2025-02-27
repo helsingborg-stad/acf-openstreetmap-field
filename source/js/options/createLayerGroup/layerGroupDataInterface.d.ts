@@ -9,5 +9,7 @@ interface LayerGroupDataInterface {
     updateLayerGroup(): void;
     setTitle(title: string): void;
     getTitle(): string;
-    getId(): number;
+    setColor(color: string): void;
+    getColor(): string;
+    getId(): string;
 }

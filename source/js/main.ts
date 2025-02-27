@@ -27,6 +27,7 @@ import LayerGroupsList from './options/createLayerGroup/layerGroupsList';
 import LoadLayerGroups from './options/createLayerGroup/loadLayerGroups';
 import SaveLayerGroups from './options/createLayerGroup/saveLayerGroups';
 import Color from './edit/fields/color';
+import Layer from './edit/fields/layer';
 
 declare const acf: any;
 
@@ -67,13 +68,15 @@ class Main {
         const descriptionInstance    = new Description(overlayInstance);
         const colorInstance          = new Color(overlayInstance);
         const editInstance           = new Edit(container);
+        const layerInstance          = new Layer(overlayInstance);
 
         // Create layer group
         const editLayerGroupDataFactory = new EditLayerGroupDataFactory(
             editInstance,
             overlayInstance,
             titleInstance,
-            colorInstance
+            colorInstance,
+            layerInstance
         );
 
         const layerGroupFactoryInstance = new LayerGroupFactory(
@@ -90,7 +93,8 @@ class Main {
             overlayInstance,
             titleInstance,
             urlInstance,
-            descriptionInstance
+            descriptionInstance,
+            layerInstance
         );
 
         const markerFactoryInstance  = new MarkerFactory(

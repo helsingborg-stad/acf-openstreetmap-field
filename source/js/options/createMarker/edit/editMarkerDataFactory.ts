@@ -9,7 +9,8 @@ class EditMarkerDataFactory {
         private overlayInstance: OverlayInterface,
         private titleInstance: Field,
         private urlInstance: Field,
-        private descriptionInstance: Field
+        private descriptionInstance: Field,
+        private layerInstance: Field
     ) {}
     public create(markerData: MarkerDataInterface): EditMarkerDataInterface {
         return new EditMarkerData(
@@ -19,7 +20,8 @@ class EditMarkerDataFactory {
             this.overlayInstance,
             this.titleInstance,
             this.urlInstance,
-            this.descriptionInstance
+            this.descriptionInstance,
+            this.layerInstance
         );
     }
 }
