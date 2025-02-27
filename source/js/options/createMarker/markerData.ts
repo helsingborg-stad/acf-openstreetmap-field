@@ -6,6 +6,7 @@ import EditMarkerDataFactory from "./edit/editMarkerDataFactory";
 import { EditMarkerDataInterface } from "./edit/editMarkerDataInterface";
 import { MarkerDataInterface, MarkersDataStorage } from "./markerDataInterface";
 import { MarkersListInterface } from "./markersListInterface";
+import LayerGroupData from "../createLayerGroup/layerGroupData";
 
 class MarkerData implements MarkerDataInterface {
     private static idCounter = 0;
@@ -90,6 +91,7 @@ class MarkerData implements MarkerDataInterface {
 
     public setLayerGroup(layerGroup: string): void {
         this.layerGroup = layerGroup;
+        this.getMarker()?.setIcon(this.getMarkerMarkup());
     }
 
     public getLayerGroup(): string {
@@ -113,7 +115,15 @@ class MarkerData implements MarkerDataInterface {
     }
 
     private getMarkerMarkup(): string {
-        return `<div class="${this.markerCssClass}" style="color: green;">C</div>`;
+        const layerGroups = LayerGroupData.getLayerGroups();
+        let color = '#E04A39';
+        let icon = 'C';
+        if (layerGroups[this.getLayerGroup()]) {
+            color = layerGroups[this.getLayerGroup()].getColor();
+            icon = "B";
+        }
+
+        return `<div class="${this.markerCssClass}" style="color: ${color};">${icon}</div>`;
     }
 }
 
