@@ -9,6 +9,8 @@ class LayerGroupData implements LayerGroupDataInterface {
     private static layerGroups: LayerGroupsDataStorage = {};
     private title: string = '';
     private color: string = '#000000';
+    private icon: string = '';
+    private layerGroup: string = '';
     private editor: EditLayerGroupDataInterface;
     private layer: LayerGroupInterface|null = null;
 
@@ -62,6 +64,22 @@ class LayerGroupData implements LayerGroupDataInterface {
         return this.title;
     }
 
+    public setLayerGroup(layerGroup: string) {
+        this.layerGroup = layerGroup;
+    }
+
+    public getLayerGroup(): string {
+        return this.layerGroup;
+    }
+
+    public setIcon(icon: string) {
+        this.icon = icon;
+    }
+
+    public getIcon(): string {
+        return this.icon;
+    }
+
     public setColor(color: string) {
         this.color = color;
     }
@@ -72,10 +90,6 @@ class LayerGroupData implements LayerGroupDataInterface {
 
     public getId(): string {
         return this.id;
-    }
-
-    public getLayerGroup(): LayerGroupInterface|null {
-        return this.layer;
     }
 
     public static getLayerGroups() {

@@ -75,7 +75,7 @@ class Field extends \acf_field
                 class="acf-openstreetmap__map openstreetmap" 
                 data-js-openstreetmap-map 
                 id="map-<?php $id ?>"
-                style="position: unset; height: 500px; background: #f0f0f0;">
+                style="position: unset; height: 700px; background: #f0f0f0;">
             </div>
         <?php
     }
@@ -120,6 +120,10 @@ class Field extends \acf_field
                 <div class="acf-openstreetmap__field" data-js-field-edit-color>
                     <label for="field-color-<?php $id ?>">Color</label>
                     <input type="color" id="field-color-<?php $id ?>" name="url"></input>
+                </div>
+                <div class="acf-openstreetmap__field" data-js-field-edit-icon>
+                    <label for="field-icon-<?php $id ?>">Color</label>
+                    <input type="text" id="field-icon-<?php $id ?>" name="icon"></input>
                 </div>
                 <div class="acf-openstreetmap__field" data-js-field-edit-layer>
                     <label for="field-layer-<?php $id ?>">Layer</label>

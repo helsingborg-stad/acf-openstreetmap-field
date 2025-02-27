@@ -28,6 +28,7 @@ import LoadLayerGroups from './options/createLayerGroup/loadLayerGroups';
 import SaveLayerGroups from './options/createLayerGroup/saveLayerGroups';
 import Color from './edit/fields/color';
 import Layer from './edit/fields/layer';
+import Icon from './edit/fields/icon';
 
 declare const acf: any;
 
@@ -69,6 +70,7 @@ class Main {
         const colorInstance          = new Color(overlayInstance);
         const editInstance           = new Edit(container);
         const layerInstance          = new Layer(overlayInstance);
+        const iconInstance           = new Icon(overlayInstance);
 
         // Create layer group
         const editLayerGroupDataFactory = new EditLayerGroupDataFactory(
@@ -76,6 +78,7 @@ class Main {
             overlayInstance,
             titleInstance,
             colorInstance,
+            iconInstance,
             layerInstance
         );
 

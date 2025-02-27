@@ -117,13 +117,12 @@ class MarkerData implements MarkerDataInterface {
     private getMarkerMarkup(): string {
         const layerGroups = LayerGroupData.getLayerGroups();
         let color = '#E04A39';
-        let icon = 'C';
+
         if (layerGroups[this.getLayerGroup()]) {
             color = layerGroups[this.getLayerGroup()].getColor();
-            icon = "B";
         }
 
-        return `<div class="${this.markerCssClass}" style="color: ${color};">${icon}</div>`;
+        return `<span style="color: ${color}; font-size: 32px;" class="${this.markerCssClass} dashicons dashicons-location"></span>`;
     }
 }
 

@@ -3,6 +3,7 @@ import { LatLngObject } from "../OpenStreetMap/js/types";
 type SavedLayerGroup = {
     title: string;
     color: string;
+    layerGroup: string;
     id: string;
 }[];
 

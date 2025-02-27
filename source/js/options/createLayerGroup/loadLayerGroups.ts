@@ -15,6 +15,7 @@ class LoadLayerGroups implements LoadOptionDataInterface {
             const layerGroupData = this.layerGroupFactory.create(savedLayerGroup.id);
             layerGroupData.setTitle(savedLayerGroup.title ?? '');
             layerGroupData.setColor(savedLayerGroup.color ?? '#000000');
+            layerGroupData.setLayerGroup(savedLayerGroup.layerGroup ?? '');
             layerGroupData.createLayerGroup();
         }
     }

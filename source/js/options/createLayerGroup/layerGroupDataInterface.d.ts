@@ -11,5 +11,9 @@ interface LayerGroupDataInterface {
     getTitle(): string;
     setColor(color: string): void;
     getColor(): string;
+    setLayerGroup(layerGroup: string): void;
+    getLayerGroup(): string;
+    setIcon(icon: string): void;
+    getIcon(): string;
     getId(): string;
 }

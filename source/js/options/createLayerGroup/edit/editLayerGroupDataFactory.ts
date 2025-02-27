@@ -7,6 +7,7 @@ class EditLayerGroupDataFactory {
         private overlayInstance: OverlayInterface,
         private titleInstance: Field,
         private colorInstance: Field,
+        private iconInstance: Field,
         private layerInstance: Field
     ) {}
 
@@ -17,6 +18,7 @@ class EditLayerGroupDataFactory {
             this.overlayInstance,
             this.titleInstance,
             this.colorInstance,
+            this.iconInstance,
             this.layerInstance
         );
     }
