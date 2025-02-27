@@ -1,4 +1,4 @@
-.acf-openstreetmap__marker-edit-overlay {
+.acf-openstreetmap__field-edit-overlay {
     opacity: 0;
     display: flex;
     height: 100vh;
@@ -18,8 +18,18 @@
         opacity: 1;
     }
 
-    .acf-openstreetmap__marker-edit-buttons {
+    .acf-openstreetmap__field-edit-buttons {
+        margin-top: 2rem;
         display: flex;
         gap: 1rem;
+    }
+
+    .acf-openstreetmap__field {
+        display: none;
+        flex-direction: column;
+
+        &.is-visible {
+            display: flex;
+        }
     }
 }
