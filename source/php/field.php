@@ -104,23 +104,33 @@ class Field extends \acf_field
     private function addEditOverlay($id = '')
     {
         ?>
-            <div class="acf-openstreetmap__marker-edit-overlay" data-js-marker-edit-overlay data-js-marker-id>
-                <div style="display: none;" data-js-marker-edit-title>
-                    <label for="marker-text-<?php $id ?>">Title</label>
-                    <input type="text" id="marker-text-<?php $id ?>" name="title"></input>
+            <div class="acf-openstreetmap__field-edit-overlay" data-js-field-edit-overlay>
+                <div class="acf-openstreetmap__field" data-js-field-edit-title>
+                    <label for="field-text-<?php $id ?>">Title</label>
+                    <input type="text" id="field-text-<?php $id ?>" name="title"></input>
                 </div>
-                <div style="display: none;" data-js-marker-edit-url>
-                    <label for="marker-url-<?php $id ?>">URL</label>
-                    <input type="url" id="marker-url-<?php $id ?>" name="url"></input>
+                <div class="acf-openstreetmap__field" data-js-field-edit-url>
+                    <label for="field-url-<?php $id ?>">URL</label>
+                    <input type="url" id="field-url-<?php $id ?>" name="url"></input>
                 </div>
-                <div style="display: none;" data-js-marker-edit-description>
-                    <label for="marker-description-<?php $id ?>">Description</label>
-                    <textarea name="description" id="marker-description-<?php $id ?>" cols="30" rows="10"></textarea>
+                <div class="acf-openstreetmap__field" data-js-field-edit-description>
+                    <label for="field-description-<?php $id ?>">Description</label>
+                    <textarea name="description" id="field-description-<?php $id ?>" cols="30" rows="10"></textarea>
                 </div>
-                <div class="acf-openstreetmap__marker-edit-buttons">
-                    <div class="acf-openstreetmap__button acf-openstreetmap__button--save" data-js-marker-edit-save role="button">Save</div>
-                    <div class="acf-openstreetmap__button acf-openstreetmap__button--cancel" data-js-marker-edit-cancel role="button">Cancel</div>
-                    <div class="acf-openstreetmap__button acf-openstreetmap__button--delete" data-js-marker-edit-delete role="button">Delete</div>
+                <div class="acf-openstreetmap__field" data-js-field-edit-color>
+                    <label for="field-color-<?php $id ?>">Color</label>
+                    <input type="color" id="field-color-<?php $id ?>" name="url"></input>
+                </div>
+                <div class="acf-openstreetmap__field" data-js-field-edit-layer>
+                    <label for="field-layer-<?php $id ?>">Color</label>
+                    <select id="field-layer-<?php $id ?>" name="layer">
+                        <option value="">Default (on the map)</option>
+                    </select>
+                </div>
+                <div class="acf-openstreetmap__field-edit-buttons">
+                    <div class="acf-openstreetmap__button acf-openstreetmap__button--save" data-js-field-edit-save role="button">Save</div>
+                    <div class="acf-openstreetmap__button acf-openstreetmap__button--cancel" data-js-field-edit-cancel role="button">Cancel</div>
+                    <div class="acf-openstreetmap__button acf-openstreetmap__button--delete" data-js-field-edit-delete role="button">Delete</div>
                 </div>
             </div>
         <?php
