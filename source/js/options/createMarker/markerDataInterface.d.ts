@@ -1,11 +1,10 @@
-import { AddTo } from "../../../OpenStreetMap/js/addToInterface";
 import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
 import { LatLngObject } from "../../../OpenStreetMap/js/types";
 
 type MarkersDataStorage = { [id: string]: MarkerDataInterface };
 
 interface MarkerDataInterface {
-    createMarker(latlng: LatLngObject): MarkerInterface&AddTo;
+    createMarker(latlng: LatLngObject): MarkerInterface;
     editMarker(): void;
     deleteMarker(): void;
     updateMarker(): void;

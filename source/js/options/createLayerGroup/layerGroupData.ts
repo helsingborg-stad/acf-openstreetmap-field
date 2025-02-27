@@ -1,5 +1,3 @@
-import { Addable } from "../../../OpenStreetMap/js/addableInterface";
-import { AddTo } from "../../../OpenStreetMap/js/addToInterface";
 import { CreateLayerGroupInterface } from "../../../OpenStreetMap/js/features/createLayerGroup/createLayerGroupInterface";
 import { LayerGroupInterface } from "../../../OpenStreetMap/js/features/createLayerGroup/layerGroupInterface";
 import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
@@ -13,10 +11,10 @@ class LayerGroupData implements LayerGroupDataInterface {
     private id: number = Date.now() + LayerGroupData.idCounter++;
     private title: string = '';
     private editor: EditLayerGroupDataInterface;
-    private layer: LayerGroupInterface&AddTo&Addable|null = null;
+    private layer: LayerGroupInterface|null = null;
 
     constructor(
-        private mapInstance: MapInterface&Addable,
+        private mapInstance: MapInterface,
         private createLayerGroupInstance: CreateLayerGroupInterface,
         private editLayerGroupDataFactoryInstance: EditLayerGroupDataFactory,
         private layerGroupsListInstance: LayerGroupsListInterface
@@ -24,7 +22,7 @@ class LayerGroupData implements LayerGroupDataInterface {
         this.editor = this.editLayerGroupDataFactoryInstance.create(this);
     }
 
-    public createLayerGroup(): LayerGroupInterface&AddTo&Addable {
+    public createLayerGroup(): LayerGroupInterface {
         if (this.layer) {
             return this.layer;
         }
@@ -67,7 +65,7 @@ class LayerGroupData implements LayerGroupDataInterface {
         return this.id;
     }
 
-    public getLayerGroup(): LayerGroupInterface&AddTo&Addable|null {
+    public getLayerGroup(): LayerGroupInterface|null {
         return this.layer;
     }
 

@@ -6,6 +6,7 @@ class EditLayerGroupDataFactory {
         private editInstance: EditInterface,
         private overlayInstance: OverlayInterface,
         private titleInstance: Field,
+        private colorInstance: Field
     ) {}
 
     public create(layerGroupData: LayerGroupDataInterface): EditLayerGroupDataInterface {
@@ -13,7 +14,8 @@ class EditLayerGroupDataFactory {
             layerGroupData,
             this.editInstance,
             this.overlayInstance,
-            this.titleInstance
+            this.titleInstance,
+            this.colorInstance
         );
     }
 }

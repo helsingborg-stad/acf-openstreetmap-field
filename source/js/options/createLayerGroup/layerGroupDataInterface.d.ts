@@ -1,10 +1,9 @@
-import { Addable } from "../../../OpenStreetMap/js/addableInterface";
-import { AddTo } from "../../../OpenStreetMap/js/addToInterface";
+import { LayerGroupInterface } from "../../../OpenStreetMap/js/features/createLayerGroup/layerGroupInterface";
 
 type LayerGroupsDataStorage = { [id: string]: LayerGroupDataInterface };
 
 interface LayerGroupDataInterface {
-    createLayerGroup(): LayerGroupInterface&AddTo&Addable;
+    createLayerGroup(): LayerGroupInterface;
     deleteLayerGroup(): void;
     editLayerGroup(): void;
     updateLayerGroup(): void;
