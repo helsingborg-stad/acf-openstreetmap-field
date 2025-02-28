@@ -22,18 +22,12 @@ class EditImageOverlayData implements EditImageOverlayDataInterface, Editable {
     }
 
     public save() {
-        // if (this.imageOverlayData.getId() === this.layerInstance.getValue()) {
-        //     alert('Cannot set the layer group to itself');
-        //     return;
-        // }
-
-        // this.imageOverlayData.setTitle(this.titleInstance.getValue());
-        // this.imageOverlayData.setColor(this.colorInstance.getValue());
-        // this.imageOverlayData.setLayerGroup(this.layerInstance.getValue());
-        // this.imageOverlayData.setIcon(this.iconInstance.getValue());
-        // this.imageOverlayData.updateLayerGroup();
-        // this.editInstance.setActiveEditable(null);
-        // this.hideFields();
+        this.imageOverlayData.setTitle(this.titleInstance.getValue());
+        this.imageOverlayData.setLayerGroup(this.layerInstance.getValue());
+        this.imageOverlayData.setImage(this.imageInstance.getValue());
+        this.imageOverlayData.updateImageOverlay();
+        this.editInstance.setActiveEditable(null);
+        this.hideFields();
     }
 
     public cancel() {
