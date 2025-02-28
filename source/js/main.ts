@@ -2,6 +2,8 @@ import { createMap } from '../OpenStreetMap/js/map';
 import { MapInterface } from '../OpenStreetMap/js/mapInterface';
 import { CreateMarker } from '../OpenStreetMap/js/features/createMarker/createMarker';
 import { CreateLayerGroup } from '../OpenStreetMap/js/features/createLayerGroup/createLayerGroup';
+import { CreateImageOverlay } from '../OpenStreetMap/js/features/createImageOverlay/createImageOverlay';
+import { CreateRectangle } from '../OpenStreetMap/js/features/createRectangle/createRectangle';
 import HandleSelected from './options/handleSelected';
 import OptionCreateMarker from './options/createMarker/optionCreateMarker';
 import OptionSetStartPosition from './options/startPosition/optionSetStartPosition';
@@ -29,6 +31,10 @@ import SaveLayerGroups from './options/createLayerGroup/saveLayerGroups';
 import Color from './edit/fields/color';
 import Layer from './edit/fields/layer';
 import Icon from './edit/fields/icon';
+import OptionCreateImageOverlay from './options/createImageOverlay/optionCreateImageOverlay';
+import ImageOverlayFactory from './options/createImageOverlay/imageOverlayFactory';
+import EditImageOverlayFactory from './options/createImageOverlay/edit/editImageOverlayDataFactory';
+import Image from './edit/fields/image';
 
 declare const acf: any;
 
@@ -59,18 +65,21 @@ class Main {
         // General
         const createMarkerInstance     = new CreateMarker();
         const createLayerGroupInstance = new CreateLayerGroup();
+        const createImageOverlayInstance = new CreateImageOverlay();
+        const createRectangleInstance  = new CreateRectangle();
         const handleSelectedInstance   = new HandleSelected(container);
 
         // Fields and Edit
         const fieldValidatorInstance = new FieldValidator();
         const overlayInstance        = new Overlay(container);
+        const editInstance           = new Edit(container);
         const titleInstance          = new Title(overlayInstance);
         const urlInstance            = new Url(overlayInstance);
         const descriptionInstance    = new Description(overlayInstance);
         const colorInstance          = new Color(overlayInstance);
-        const editInstance           = new Edit(container);
         const layerInstance          = new Layer(overlayInstance);
         const iconInstance           = new Icon(overlayInstance);
+        const imageInstance          = new Image(overlayInstance);
 
         // Create layer group
         const editLayerGroupDataFactory = new EditLayerGroupDataFactory(
@@ -107,11 +116,34 @@ class Main {
             new MarkersList(container, mapInstance)
         );
 
+        // Create image overlay
+        const editImageOverlayFactoryInstance = new EditImageOverlayFactory(
+            editInstance,
+            overlayInstance,
+            titleInstance,
+            layerInstance,
+            imageInstance
+        );
+
+        const imageOverlayFactoryInstance = new ImageOverlayFactory(
+            mapInstance,
+            createImageOverlayInstance,
+            createRectangleInstance,
+            editImageOverlayFactoryInstance
+        );
+        console.log(editImageOverlayFactoryInstance);
+
         // Main
         const OptionCreateLayerGroupInstance = new OptionCreateLayerGroup(
             container,
             handleSelectedInstance,
             layerGroupFactoryInstance
+        );
+
+        const OptionCreateImageOverlayInstance = new OptionCreateImageOverlay(
+            container,
+            handleSelectedInstance,
+            imageOverlayFactoryInstance
         );
 
         const OptionCreateMarkerInstance = new OptionCreateMarker(

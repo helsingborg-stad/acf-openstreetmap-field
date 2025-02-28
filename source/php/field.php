@@ -93,6 +93,11 @@ class Field extends \acf_field
                     </ul>
                 </div>
                 <div>
+                    <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="create_image_overlay">Create Image Overlay</div>
+                    <ul class="acf-openstreetmap__option-list" data-js-image-overlay-list>
+                    </ul>
+                </div>
+                <div>
                     <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="create_layer_group">Create layer</div>
                     <ul class="acf-openstreetmap__option-list" data-js-layer-group-list>
                     </ul>
@@ -124,6 +129,13 @@ class Field extends \acf_field
                 <div class="acf-openstreetmap__field" data-js-field-edit-icon>
                     <label for="field-icon-<?php $id ?>">Color</label>
                     <input type="text" id="field-icon-<?php $id ?>" name="icon"></input>
+                </div>
+                <div class="acf-openstreetmap__field" data-js-field-edit-image>
+                    <label for="field-icon-<?php $id ?>">Image</label>
+                    <div class="acf-openstreetmap__button acf-openstreetmap__button--save" data-js-field-edit-image-button role="button" id="field-icon-<?php $id ?>">Set image</div>
+                    <div data-js-field-edit-image-preview></div>
+
+                    <input style="display: none;" type="url" name="icon"></input>
                 </div>
                 <div class="acf-openstreetmap__field" data-js-field-edit-layer>
                     <label for="field-layer-<?php $id ?>">Layer</label>
