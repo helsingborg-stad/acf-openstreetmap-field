@@ -12,7 +12,7 @@ class OptionCreateLayerGroup implements OptionFeature {
     }
 
     private addListener() {
-        this.container.querySelector('[data-js-value="create_layer_group"]')?.addEventListener('click', (e) => {
+        this.container.querySelector(`[data-js-value="${this.condition}"]`)?.addEventListener('click', (e) => {
             e.preventDefault();
             
             const layerGroupDataInstance = this.layerGroupFactoryInstance.create();
