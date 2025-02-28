@@ -133,7 +133,6 @@ class Main {
             editImageOverlayFactoryInstance,
             new ImageOverlaysList(container)
         );
-        console.log(editImageOverlayFactoryInstance);
 
         // Main
         const OptionCreateLayerGroupInstance = new OptionCreateLayerGroup(
