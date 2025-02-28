@@ -1,11 +1,15 @@
+type ImageOverlaysDataStorage = { [id: string]: ImageOverlayDataInterface };
+
 interface ImageOverlayDataInterface {
     createImageOverlay(): void;
     editImageOverlay(): void;
-    getId(): string;
     setTitle(title: string): void;
     getTitle(): string;
-    getLayerGroup(): string;
     setLayerGroup(layerGroup: string): void;
+    getLayerGroup(): string;
+    setImage(image: string): void;
+    getImage(): string;
     updateImageOverlay(): void;
     deleteImageOverlay(): void;
+    getId(): string;
 }

@@ -10,6 +10,7 @@ class ImageOverlayFactory implements ImageOverlayFactoryInterface {
         private createImageOverlayInstance: CreateImageOverlayInterface,
         private createRectangle: CreateRectangleInterface,
         private editImageOverlayFactoryInstance: EditImageOverlayFactory,
+        private imageOverlaysListInstance: ImageOverlaysListInterface,
     ) {
 
     }
@@ -19,6 +20,7 @@ class ImageOverlayFactory implements ImageOverlayFactoryInterface {
             this.createImageOverlayInstance,
             this.createRectangle,
             this.editImageOverlayFactoryInstance,
+            this.imageOverlaysListInstance
         );
     }
 }

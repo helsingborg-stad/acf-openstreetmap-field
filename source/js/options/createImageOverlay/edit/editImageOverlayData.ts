@@ -7,21 +7,18 @@ class EditImageOverlayData implements EditImageOverlayDataInterface, Editable {
         private layerInstance: Field,
         private imageInstance: Field
     ) {
-        // this.option = document.createElement('option');
-        // this.option.value = this.imageOverlayData.getId();
-        // this.layerInstance.getField()?.appendChild(this.option);
     }
 
     public edit(): void {
+        this.setDefaultFieldValues();
         this.editInstance.setActiveEditable(this);
         this.showFields();
     }
 
     private setDefaultFieldValues(): void {
-        // this.titleInstance.setValue(this.imageOverlayData.getTitle());
-        // this.colorInstance.setValue(this.imageOverlayData.getColor());
-        // this.layerInstance.setValue(this.imageOverlayData.getLayerGroup());
-        // this.iconInstance.setValue(this.imageOverlayData.getIcon());
+        this.titleInstance.setValue(this.imageOverlayData.getTitle());
+        this.layerInstance.setValue(this.imageOverlayData.getLayerGroup());
+        this.imageInstance.setValue(this.imageOverlayData.getImage());
     }
 
     public save() {
@@ -38,21 +35,16 @@ class EditImageOverlayData implements EditImageOverlayDataInterface, Editable {
         // this.editInstance.setActiveEditable(null);
         // this.hideFields();
     }
-    
-    public setOptionTitle(title: string) {
-        // this.option.text = this.imageOverlayData.getTitle();
-    }
 
     public cancel() {
-        // this.editInstance.setActiveEditable(null);
-        // this.hideFields();
+        this.editInstance.setActiveEditable(null);
+        this.hideFields();
     }
 
     public delete() {
-        // this.imageOverlayData.deleteLayerGroup();
-        // this.editInstance.setActiveEditable(null);
-        // this.option.remove();
-        // this.hideFields();
+        this.imageOverlayData.deleteImageOverlay();
+        this.editInstance.setActiveEditable(null);
+        this.hideFields();
     }
 
     public showFields() {

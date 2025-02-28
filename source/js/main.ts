@@ -35,6 +35,7 @@ import OptionCreateImageOverlay from './options/createImageOverlay/optionCreateI
 import ImageOverlayFactory from './options/createImageOverlay/imageOverlayFactory';
 import EditImageOverlayFactory from './options/createImageOverlay/edit/editImageOverlayDataFactory';
 import Image from './edit/fields/image';
+import ImageOverlaysList from './options/createImageOverlay/imageOverlaysList';
 
 declare const acf: any;
 
@@ -129,7 +130,8 @@ class Main {
             mapInstance,
             createImageOverlayInstance,
             createRectangleInstance,
-            editImageOverlayFactoryInstance
+            editImageOverlayFactoryInstance,
+            new ImageOverlaysList(container)
         );
         console.log(editImageOverlayFactoryInstance);
 
