@@ -57,8 +57,8 @@ class Main {
         });
 
         // General
-        const createMarkerInstance     = new CreateMarker(mapInstance);
-        const createLayerGroupInstance = new CreateLayerGroup(mapInstance);
+        const createMarkerInstance     = new CreateMarker();
+        const createLayerGroupInstance = new CreateLayerGroup();
         const handleSelectedInstance   = new HandleSelected(container);
 
         // Fields and Edit
