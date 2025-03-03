@@ -14,17 +14,18 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
         private handleSelectedInstance: HandleSelectedInterface,
         private createMarkerInstance: CreateMarkerInterface
     ) {
-        this.mapInstance.addListener('click', (e: any) => {
+        this.mapInstance.addListener('click', (e) => {
             if (
                 this.handleSelectedInstance.getCurrentSelectedValue() !== this.condition ||
-                e.originalEvent.target.classList.contains(this.markerCssClass)) {
+                e.originalEvent?.target.classList.contains(this.markerCssClass) ||
+                !e.latLng) {
                 return;
             }
 
             if (this.marker) {
-                this.marker.setPosition(e.latlng);
+                this.marker.setPosition(e.latLng);
             } else {
-                this.addMarker(e.latlng);
+                this.addMarker(e.latLng);
             }
         })
     }

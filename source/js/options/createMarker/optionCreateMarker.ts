@@ -15,15 +15,17 @@ class OptionCreateMarker implements OptionFeature {
     }
 
     private addListener(): void {
-        this.mapInstance.addListener('click', (e: any) => {
+        this.mapInstance.addListener('click', (e) => {
             if (this.handleSelectedInstance.getCurrentSelectedValue() !== this.condition ||
                 e.originalEvent.target.classList.contains(this.markerCssClass)) {
                 return;
             }
 
-            const markerData = this.markerFactoryInstance.create();
-            markerData.createMarker(e.latlng);
-            markerData.editMarker();
+            if (e.latLng) {
+                const markerData = this.markerFactoryInstance.create();
+                markerData.createMarker(e.latLng);
+                markerData.editMarker();
+            }
         });
     }
 
