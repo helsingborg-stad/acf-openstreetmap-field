@@ -1,7 +1,7 @@
 type ImageOverlaysDataStorage = { [id: string]: ImageOverlayDataInterface };
 
 interface ImageOverlayDataInterface {
-    createImageOverlay(): void;
+    
     editImageOverlay(): void;
     setTitle(title: string): void;
     getTitle(): string;
