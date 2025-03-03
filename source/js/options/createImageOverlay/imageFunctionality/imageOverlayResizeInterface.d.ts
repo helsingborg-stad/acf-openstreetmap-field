@@ -1,0 +1,7 @@
+import { ImageOverlayInterface } from "../../../../OpenStreetMap/js/features/createImageOverlay/imageOverlayInterface";
+import { RectangleInterface } from "../../../../OpenStreetMap/js/features/createRectangle/rectangleInterface";
+import { LatLngObject } from "../../../../OpenStreetMap/js/types";
+
+interface ImageOverlayResizeInterface {
+    createResize(imageOverlay: ImageOverlayInterface, position: LatLngObject, aspectRatio: number): void;
+}
