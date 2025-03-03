@@ -36,6 +36,8 @@ import ImageOverlayFactory from './options/createImageOverlay/imageOverlayFactor
 import EditImageOverlayFactory from './options/createImageOverlay/edit/editImageOverlayDataFactory';
 import Image from './edit/fields/image';
 import ImageOverlaysList from './options/createImageOverlay/imageOverlaysList';
+import ImageOverlayResize from './options/createImageOverlay/imageFunctionality/imageOverlayResize';
+import ImageOverlayBoundsAndRatioCalculator from './options/createImageOverlay/helper/imageOverlayBoundsAndRatioCalculator';
 
 declare const acf: any;
 
@@ -130,8 +132,11 @@ class Main {
             mapInstance,
             createImageOverlayInstance,
             createRectangleInstance,
+            createMarkerInstance,
             editImageOverlayFactoryInstance,
-            new ImageOverlaysList(container)
+            new ImageOverlaysList(container),
+            new ImageOverlayBoundsAndRatioCalculator(),
+            new ImageOverlayResize(mapInstance, createMarkerInstance)
         );
 
         // Main
