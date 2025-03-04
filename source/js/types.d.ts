@@ -1,4 +1,4 @@
-import { LatLngBoundsObject, LatLngObject } from "../OpenStreetMap/js/types";
+import { LatLngObject, LatLngBoundsObject } from "@helsingborg-stad/openstreetmap";
 
 type SavedLayerGroup = {
     title: string;
