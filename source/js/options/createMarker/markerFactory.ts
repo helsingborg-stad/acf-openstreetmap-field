@@ -1,5 +1,4 @@
-import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
-import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
+import { MapInterface, CreateMarkerInterface } from "@helsingborg-stad/openstreetmap";
 import EditMarkerDataFactory from "./edit/editMarkerDataFactory";
 import MarkerData from "./markerData";
 import { MarkerDataInterface } from "./markerDataInterface";
