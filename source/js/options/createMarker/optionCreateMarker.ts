@@ -1,4 +1,4 @@
-import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
+import { MapInterface } from "@helsingborg-stad/openstreetmap";
 import { MarkerFactoryInterface } from "./markerFactoryInterface";
 
 class OptionCreateMarker implements OptionFeature {
