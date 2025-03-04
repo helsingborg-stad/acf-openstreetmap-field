@@ -1,8 +1,4 @@
-import { ImageOverlayInterface } from "../../../../OpenStreetMap/js/features/createImageOverlay/imageOverlayInterface";
-import { CreateMarkerInterface } from "../../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
-import { MarkerInterface } from "../../../../OpenStreetMap/js/features/createMarker/markerInterface";
-import { MapInterface } from "../../../../OpenStreetMap/js/mapInterface";
-import { LatLngBoundsObject, LatLngObject } from "../../../../OpenStreetMap/js/types";
+import { ImageOverlayInterface, CreateMarkerInterface, MarkerInterface, MapInterface, LatLngBoundsObject, LatLngObject } from "@helsingborg-stad/openstreetmap";
 import { ImageOverlayMoveInterface } from "./imageOverlayMoveInterface";
 
 class ImageOverlayMove implements ImageOverlayMoveInterface {
