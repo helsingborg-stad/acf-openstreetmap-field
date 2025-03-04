@@ -1,5 +1,4 @@
-import { ImageOverlayInterface } from "../../../OpenStreetMap/js/features/createImageOverlay/imageOverlayInterface";
-import { LatLngBoundsObject } from "../../../OpenStreetMap/js/types";
+import { LatLngBoundsObject, ImageOverlayInterface } from "@helsingborg-stad/openstreetmap";
 
 type ImageOverlaysDataStorage = { [id: string]: ImageOverlayDataInterface };
 
