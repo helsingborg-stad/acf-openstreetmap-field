@@ -1,6 +1,4 @@
-import { CreateLayerGroupInterface } from "../../../OpenStreetMap/js/features/createLayerGroup/createLayerGroupInterface";
-import { LayerGroupInterface } from "../../../OpenStreetMap/js/features/createLayerGroup/layerGroupInterface";
-import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
+import { MapInterface, LayerGroupInterface, CreateLayerGroupInterface } from "@helsingborg-stad/openstreetmap";
 import EditLayerGroupDataFactory from "./edit/editLayerGroupDataFactory";
 import { LayerGroupDataInterface, LayerGroupsDataStorage } from "./layerGroupDataInterface";
 import { LayerGroupsListInterface } from "./layerGroupsListInterface";
