@@ -1,7 +1,4 @@
-import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
-import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
-import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
-import { LatLngObject } from "../../../OpenStreetMap/js/types";
+import { MapInterface, MarkerInterface, LatLngObject, CreateMarkerInterface } from "@helsingborg-stad/openstreetmap";
 import EditMarkerDataFactory from "./edit/editMarkerDataFactory";
 import { EditMarkerDataInterface } from "./edit/editMarkerDataInterface";
 import { MarkerDataInterface, MarkersDataStorage } from "./markerDataInterface";
