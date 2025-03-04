@@ -1,4 +1,4 @@
-import { LayerGroupInterface } from "../../../OpenStreetMap/js/features/createLayerGroup/layerGroupInterface";
+import { LayerGroupInterface } from "@helsingborg-stad/openstreetmap";
 
 type LayerGroupsDataStorage = { [id: string]: LayerGroupDataInterface };
 
