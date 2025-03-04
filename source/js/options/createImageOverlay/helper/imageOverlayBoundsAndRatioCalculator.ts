@@ -1,8 +1,11 @@
+import { MapInterface } from "../../../../OpenStreetMap/js/mapInterface";
 import { LatLngBoundsObject, LatLngObject } from "../../../../OpenStreetMap/js/types";
 import { ImageOverlayBoundsAndRatioCalculatorInterface } from "./imageOverlayBoundsAndRatioCalculatorInterface";
 
 class ImageOverlayBoundsAndRatioCalculator implements ImageOverlayBoundsAndRatioCalculatorInterface {
-    constructor() {}
+    constructor(
+        private mapInstance: MapInterface
+    ) {}
 
     public calculateBounds(imageUrl: string, center: LatLngObject): Promise<[LatLngBoundsObject, number]> {
         return new Promise((resolve, reject) => {
@@ -11,7 +14,7 @@ class ImageOverlayBoundsAndRatioCalculator implements ImageOverlayBoundsAndRatio
     
             img.onload = () => {
                 const aspectRatio = img.naturalWidth / img.naturalHeight;
-                const width = 0.1;
+                const width = this.getScaledWidth(this.mapInstance.getZoom());
                 const height = width / aspectRatio;
                 const lngOffset = (width / 2) / Math.cos(center.lat * (Math.PI / 180));
 
@@ -32,6 +35,12 @@ class ImageOverlayBoundsAndRatioCalculator implements ImageOverlayBoundsAndRatio
                 reject(new Error("Failed to load image"))
             };
         });
+    }
+
+    private getScaledWidth(zoom: number): number {
+        const baseWidth = 0.1;
+
+        return baseWidth / Math.pow(2, zoom - 10);
     }
 }
 
