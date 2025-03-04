@@ -69,7 +69,6 @@ class Main {
         const createMarkerInstance     = new CreateMarker();
         const createLayerGroupInstance = new CreateLayerGroup();
         const createImageOverlayInstance = new CreateImageOverlay();
-        const createRectangleInstance  = new CreateRectangle();
         const handleSelectedInstance   = new HandleSelected(container);
 
         // Fields and Edit
