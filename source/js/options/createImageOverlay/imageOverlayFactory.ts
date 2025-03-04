@@ -1,9 +1,6 @@
 import { CreateImageOverlayInterface } from "../../../OpenStreetMap/js/features/createImageOverlay/createImageOverlayInterface";
-import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
-import { CreateRectangleInterface } from "../../../OpenStreetMap/js/features/createRectangle/createRectangleInterface";
 import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
 import EditImageOverlayFactory from "./edit/editImageOverlayDataFactory";
-import ImageOverlayCalculator from "./helper/imageOverlayBoundsAndRatioCalculator";
 import { ImageOverlayBoundsAndRatioCalculatorInterface } from "./helper/imageOverlayBoundsAndRatioCalculatorInterface";
 import ImageOverlayData from "./imageOverlayData";
 import { ImageOverlayResizeInterface } from "./imageFunctionality/imageOverlayResizeInterface";

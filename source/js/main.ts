@@ -136,7 +136,7 @@ class Main {
             mapInstance,
             createImageOverlayInstance,
             editImageOverlayFactoryInstance,
-            new ImageOverlaysList(container),
+            new ImageOverlaysList(container, mapInstance),
             new ImageOverlayBoundsAndRatioCalculator(mapInstance),
             new ImageOverlayResize(mapInstance, createMarkerInstance),
             new ImageOverlayMove(mapInstance, createMarkerInstance)

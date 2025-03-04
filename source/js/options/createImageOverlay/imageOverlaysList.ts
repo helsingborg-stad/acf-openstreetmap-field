@@ -1,10 +1,11 @@
+import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
 import { createListItem } from "../../helper/createListItem";
 import { ImageOverlayDataInterface } from "./imageOverlayDataInterface";
 
 class ImageOverlaysList implements ImageOverlaysListInterface {
     imageOverlaysList: HTMLElement|null;
     listedImageOverlays: ImageOverlaysStorage = {};
-    constructor(private container: HTMLElement) {
+    constructor(private container: HTMLElement, private mapInstance: MapInterface) {
         this.imageOverlaysList = this.container.querySelector('[data-js-image-overlay-list]');
     }
 
@@ -31,6 +32,10 @@ class ImageOverlaysList implements ImageOverlaysListInterface {
     private setClickListener(listItem: HTMLLIElement, imageOverlayData: ImageOverlayDataInterface): void {
         listItem.addEventListener('click', () => {
             imageOverlayData.editImageOverlay();
+
+            if (imageOverlayData.getImageOverlay()) {
+                this.mapInstance.flyTo(imageOverlayData.getImageOverlay()!.getCenter());
+            }
         });
     }
 
