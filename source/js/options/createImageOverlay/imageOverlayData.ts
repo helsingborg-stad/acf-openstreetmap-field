@@ -1,8 +1,4 @@
-import { CreateImageOverlayInterface } from "../../../OpenStreetMap/js/features/createImageOverlay/createImageOverlayInterface";
-import { ImageOverlayInterface } from "../../../OpenStreetMap/js/features/createImageOverlay/imageOverlayInterface";
-import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
-import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
-import { LatLngBoundsObject } from "../../../OpenStreetMap/js/types";
+import { CreateImageOverlayInterface, ImageOverlayInterface, MapInterface, MarkerInterface, LatLngBoundsObject } from "@helsingborg-stad/openstreetmap";
 import EditImageOverlayFactory from "./edit/editImageOverlayDataFactory";
 import { ImageOverlayBoundsAndRatioCalculatorInterface } from "./helper/imageOverlayBoundsAndRatioCalculatorInterface";
 import { ImageOverlayMoveInterface } from "./imageFunctionality/imageOverlayMoveInterface";
