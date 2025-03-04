@@ -1,9 +1,4 @@
-import { createMap } from '../OpenStreetMap/js/map';
-import { MapInterface } from '../OpenStreetMap/js/mapInterface';
-import { CreateMarker } from '../OpenStreetMap/js/features/createMarker/createMarker';
-import { CreateLayerGroup } from '../OpenStreetMap/js/features/createLayerGroup/createLayerGroup';
-import { CreateImageOverlay } from '../OpenStreetMap/js/features/createImageOverlay/createImageOverlay';
-import { CreateRectangle } from '../OpenStreetMap/js/features/createRectangle/createRectangle';
+import { CreateMarker, MapInterface, CreateLayerGroup, CreateImageOverlay, createMap } from '@helsingborg-stad/openstreetmap';
 import HandleSelected from './options/handleSelected';
 import OptionCreateMarker from './options/createMarker/optionCreateMarker';
 import OptionSetStartPosition from './options/startPosition/optionSetStartPosition';
@@ -41,6 +36,7 @@ import ImageOverlayBoundsAndRatioCalculator from './options/createImageOverlay/h
 import ImageOverlayMove from './options/createImageOverlay/imageFunctionality/imageOverlayMove';
 import LoadImageOverlays from './options/createImageOverlay/loadImageOverlays';
 import SaveImageOverlays from './options/createImageOverlay/saveImageOverlays';
+
 
 declare const acf: any;
 
