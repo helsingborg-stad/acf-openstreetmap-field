@@ -1,11 +1,10 @@
 import { CreateImageOverlayInterface } from "../../../OpenStreetMap/js/features/createImageOverlay/createImageOverlayInterface";
 import { ImageOverlayInterface } from "../../../OpenStreetMap/js/features/createImageOverlay/imageOverlayInterface";
-import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
-import { CreateRectangleInterface } from "../../../OpenStreetMap/js/features/createRectangle/createRectangleInterface";
+import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
 import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
-import { LatLngBoundsObject } from "../../../OpenStreetMap/js/types";
 import EditImageOverlayFactory from "./edit/editImageOverlayDataFactory";
 import { ImageOverlayBoundsAndRatioCalculatorInterface } from "./helper/imageOverlayBoundsAndRatioCalculatorInterface";
+import { ImageOverlayMoveInterface } from "./imageFunctionality/imageOverlayMoveInterface";
 import { ImageOverlayResizeInterface } from "./imageFunctionality/imageOverlayResizeInterface";
 
 class ImageOverlayData implements ImageOverlayDataInterface {
@@ -17,26 +16,38 @@ class ImageOverlayData implements ImageOverlayDataInterface {
     private image: string = '';
     private layerGroup: string = '';
     private currentImageOverlay: null|ImageOverlayInterface = null;
+    private currentMove: null|MarkerInterface = null;
+    private currentResize: null|MarkerInterface = null;
     constructor(
         private mapInstance: MapInterface,
         private createImageOverlayInstance: CreateImageOverlayInterface,
-        private createRectangle: CreateRectangleInterface,
-        private createMarkerInstance: CreateMarkerInterface,
         private editImageOverlayFactoryInstance: EditImageOverlayFactory,
         private imageOverlaysListInstance: ImageOverlaysListInterface,
         private imageOverlayBoundsAndRatioCalculatorInstance: ImageOverlayBoundsAndRatioCalculatorInterface,
-        private imageOverlayResizeInstance: ImageOverlayResizeInterface
+        private imageOverlayResizeInstance: ImageOverlayResizeInterface,
+        private imageOverlayMoveInstance: ImageOverlayMoveInterface
     ) {
         this.editor = this.editImageOverlayFactoryInstance.create(this);
-        // TODO: Remove when testing is done
         this.imageOverlaysListInstance.addItem(this);
-        this.addImageToMap();
     }
 
     public removeImageFromMap() {
         if (this.currentImageOverlay) {
             this.currentImageOverlay.removeImageOverlay();
+            this.currentImageOverlay = null;
         }
+
+        if (this.currentMove) {
+            this.currentMove.removeMarker();
+            this.currentMove = null;
+        }
+
+        if (this.currentResize) {
+            this.currentResize.removeMarker();
+            this.currentResize = null;
+        }
+
+        delete ImageOverlayData.getImageOverlays()[this.getId()];
     }
 
     public addImageToMap() {
@@ -44,12 +55,13 @@ class ImageOverlayData implements ImageOverlayDataInterface {
             ImageOverlayData.getImageOverlays()[this.getId()] = this;
         }
 
-        this.imageOverlayBoundsAndRatioCalculatorInstance.calculateBounds("https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg", this.mapInstance.getCenter()).then(([bounds, aspectRatio]) => {
-            const overlay = this.createImageOverlayInstance.create("https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg", bounds);
+        this.imageOverlayBoundsAndRatioCalculatorInstance.calculateBounds(this.getImage(), this.mapInstance.getCenter()).then(([bounds, aspectRatio]) => {
+            const overlay = this.createImageOverlayInstance.create(this.getImage(), bounds);
 
             overlay.addTo(this.mapInstance);
             this.currentImageOverlay = overlay;
-            this.imageOverlayResizeInstance.createResize(overlay, bounds.northEast, aspectRatio);
+            this.currentResize = this.imageOverlayResizeInstance.createResize(overlay, bounds.northEast, aspectRatio);
+            this.currentMove = this.imageOverlayMoveInstance.createMove(overlay, bounds.southWest, this.currentResize);
         });
     }
 
@@ -97,11 +109,8 @@ class ImageOverlayData implements ImageOverlayDataInterface {
     }
 
     public deleteImageOverlay(): void {
-        if (ImageOverlayData.getImageOverlays()[this.getId()]) {
-            delete ImageOverlayData.getImageOverlays()[this.getId()];
-        }
-
-        // Remove image overlay from map
+        this.imageOverlaysListInstance.removeItem(this);
+        this.removeImageFromMap();
     }
 
     public getId(): string {

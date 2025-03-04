@@ -7,17 +7,17 @@ import ImageOverlayCalculator from "./helper/imageOverlayBoundsAndRatioCalculato
 import { ImageOverlayBoundsAndRatioCalculatorInterface } from "./helper/imageOverlayBoundsAndRatioCalculatorInterface";
 import ImageOverlayData from "./imageOverlayData";
 import { ImageOverlayResizeInterface } from "./imageFunctionality/imageOverlayResizeInterface";
+import { ImageOverlayMoveInterface } from "./imageFunctionality/imageOverlayMoveInterface";
 
 class ImageOverlayFactory implements ImageOverlayFactoryInterface {
     constructor(
         private mapInstance: MapInterface,
         private createImageOverlayInstance: CreateImageOverlayInterface,
-        private createRectangle: CreateRectangleInterface,
-        private createMarkerInstance: CreateMarkerInterface,
         private editImageOverlayFactoryInstance: EditImageOverlayFactory,
         private imageOverlaysListInstance: ImageOverlaysListInterface,
         private ImageOverlayBoundsAndRatioCalculatorInstance: ImageOverlayBoundsAndRatioCalculatorInterface,
-        private imageOverlayResizeInstance: ImageOverlayResizeInterface
+        private imageOverlayResizeInstance: ImageOverlayResizeInterface,
+        private imageOverlayMoveInstance: ImageOverlayMoveInterface
     ) {
 
     }
@@ -25,12 +25,11 @@ class ImageOverlayFactory implements ImageOverlayFactoryInterface {
         return new ImageOverlayData(
             this.mapInstance,
             this.createImageOverlayInstance,
-            this.createRectangle,
-            this.createMarkerInstance,
             this.editImageOverlayFactoryInstance,
             this.imageOverlaysListInstance,
             this.ImageOverlayBoundsAndRatioCalculatorInstance,
-            this.imageOverlayResizeInstance
+            this.imageOverlayResizeInstance,
+            this.imageOverlayMoveInstance
         );
     }
 }
