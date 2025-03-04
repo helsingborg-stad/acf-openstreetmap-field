@@ -1,7 +1,6 @@
 import { ImageOverlayInterface } from "../../../../OpenStreetMap/js/features/createImageOverlay/imageOverlayInterface";
 import { CreateMarkerInterface } from "../../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
 import { MarkerInterface } from "../../../../OpenStreetMap/js/features/createMarker/markerInterface";
-import { RectangleInterface } from "../../../../OpenStreetMap/js/features/createRectangle/rectangleInterface";
 import { MapInterface } from "../../../../OpenStreetMap/js/mapInterface";
 import { LatLngObject } from "../../../../OpenStreetMap/js/types";
 import { ImageOverlayResizeInterface } from "./imageOverlayResizeInterface";
@@ -12,11 +11,11 @@ class ImageOverlayResize implements ImageOverlayResizeInterface {
         private createMarkerInstance: CreateMarkerInterface
     ) {}
 
-    public createResize(imageOverlay: ImageOverlayInterface, position: LatLngObject, aspectRatio: number): void {
+    public createResize(imageOverlay: ImageOverlayInterface, position: LatLngObject, aspectRatio: number): MarkerInterface {
         const resizeHandle = this.createMarkerInstance.create({
             draggable: true,
             position: position,
-            icon: '<div class="resize-handle-inner">HEJ</div>',
+            icon: '<span style="font-size: 1rem; padding: .25rem; display: flex; justify-content: center; align-items: center; background-color: var(--acf-openstreetmap-color-primary,#199900); border-radius: 50%; color: white;" class="dashicons dashicons-leftright"></span>',
         });
 
         resizeHandle.addTo(this.mapInstance);
@@ -42,9 +41,11 @@ class ImageOverlayResize implements ImageOverlayResizeInterface {
                 southWest: fixedCorner,
                 northEast: newTopRight
             });
-        
+
             resizeHandle.setPosition(newTopRight);
         });
+
+        return resizeHandle;
     }
 }
 
