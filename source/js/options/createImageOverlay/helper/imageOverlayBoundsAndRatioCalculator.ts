@@ -1,5 +1,4 @@
-import { MapInterface } from "../../../../OpenStreetMap/js/mapInterface";
-import { LatLngBoundsObject, LatLngObject } from "../../../../OpenStreetMap/js/types";
+import { MapInterface, LatLngBoundsObject, LatLngObject } from "@helsingborg-stad/openstreetmap";
 import { ImageOverlayBoundsAndRatioCalculatorInterface } from "./imageOverlayBoundsAndRatioCalculatorInterface";
 
 class ImageOverlayBoundsAndRatioCalculator implements ImageOverlayBoundsAndRatioCalculatorInterface {
