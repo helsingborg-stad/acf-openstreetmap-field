@@ -1,5 +1,4 @@
-import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
-import { LatLngObject } from "../../../OpenStreetMap/js/types";
+import { MarkerInterface, LatLngObject } from "@helsingborg-stad/openstreetmap";
 
 type MarkersDataStorage = { [id: string]: MarkerDataInterface };
 
