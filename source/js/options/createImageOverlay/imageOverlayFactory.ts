@@ -1,5 +1,4 @@
-import { CreateImageOverlayInterface } from "../../../OpenStreetMap/js/features/createImageOverlay/createImageOverlayInterface";
-import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
+import { MapInterface, CreateImageOverlayInterface } from "@helsingborg-stad/openstreetmap";
 import EditImageOverlayFactory from "./edit/editImageOverlayDataFactory";
 import { ImageOverlayBoundsAndRatioCalculatorInterface } from "./helper/imageOverlayBoundsAndRatioCalculatorInterface";
 import ImageOverlayData from "./imageOverlayData";
