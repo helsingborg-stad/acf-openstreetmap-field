@@ -1,7 +1,4 @@
-import { ImageOverlayInterface } from "../../../../OpenStreetMap/js/features/createImageOverlay/imageOverlayInterface";
-import { MarkerInterface } from "../../../../OpenStreetMap/js/features/createMarker/markerInterface";
-import { RectangleInterface } from "../../../../OpenStreetMap/js/features/createRectangle/rectangleInterface";
-import { LatLngObject } from "../../../../OpenStreetMap/js/types";
+import { ImageOverlayInterface, MarkerInterface, LatLngObject } from "@helsingborg-stad/openstreetmap";
 
 interface ImageOverlayResizeInterface {
     createResize(
