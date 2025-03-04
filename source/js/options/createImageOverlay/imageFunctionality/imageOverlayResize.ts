@@ -9,7 +9,7 @@ import { ImageOverlayResizeInterface } from "./imageOverlayResizeInterface";
 class ImageOverlayResize implements ImageOverlayResizeInterface {
     constructor(
         private mapInstance: MapInterface,
-        private createMarkerInstance: CreateMarkerInterface,
+        private createMarkerInstance: CreateMarkerInterface
     ) {}
 
     public createResize(imageOverlay: ImageOverlayInterface, position: LatLngObject, aspectRatio: number): void {
@@ -20,7 +20,6 @@ class ImageOverlayResize implements ImageOverlayResizeInterface {
         });
 
         resizeHandle.addTo(this.mapInstance);
-        console.log(resizeHandle);
         resizeHandle.addListener("drag", (event) => {
             if (!event.latLng) {
                 return;

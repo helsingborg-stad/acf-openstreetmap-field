@@ -43,17 +43,11 @@ class ImageOverlayData implements ImageOverlayDataInterface {
         if (!ImageOverlayData.getImageOverlays()[this.getId()]) {
             ImageOverlayData.getImageOverlays()[this.getId()] = this;
         }
-        // TODO: Move calculations to a separate file
+
         this.imageOverlayBoundsAndRatioCalculatorInstance.calculateBounds("https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg", this.mapInstance.getCenter()).then(([bounds, aspectRatio]) => {
             const overlay = this.createImageOverlayInstance.create("https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg", bounds);
-            const draggableRect = this.createRectangle.create(bounds, {
-                weight: 1,
-                fillOpacity: 0,
-                interactive: true,
-            });
 
             overlay.addTo(this.mapInstance);
-            draggableRect.addTo(this.mapInstance);
             this.currentImageOverlay = overlay;
             this.imageOverlayResizeInstance.createResize(overlay, bounds.northEast, aspectRatio);
         });
