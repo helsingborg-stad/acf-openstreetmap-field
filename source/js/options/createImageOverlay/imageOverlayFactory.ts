@@ -8,6 +8,7 @@ import { ImageOverlayBoundsAndRatioCalculatorInterface } from "./helper/imageOve
 import ImageOverlayData from "./imageOverlayData";
 import { ImageOverlayResizeInterface } from "./imageFunctionality/imageOverlayResizeInterface";
 import { ImageOverlayMoveInterface } from "./imageFunctionality/imageOverlayMoveInterface";
+import { ImageOverlayDataInterface } from "./imageOverlayDataInterface";
 
 class ImageOverlayFactory implements ImageOverlayFactoryInterface {
     constructor(

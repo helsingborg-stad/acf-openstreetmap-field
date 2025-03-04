@@ -7,6 +7,7 @@ class LoadHiddenField {
         private hiddenField: HTMLInputElement,
         private loadLayerGroupsInstance: LoadOptionDataInterface,
         private loadMarkersInstance: LoadOptionDataInterface,
+        private loadImageOverlaysInstance: LoadOptionDataInterface,
         private loadStartPositionInstance: LoadOptionDataInterface
     ) {
         let json = this.hiddenField.value;
@@ -17,6 +18,7 @@ class LoadHiddenField {
         
         this.loadLayerGroupsInstance.load(this.data?.layerGroups);
         this.loadMarkersInstance.load(this.data?.markers);
+        this.loadImageOverlaysInstance.load(this.data?.imageOverlays);
         this.loadStartPositionInstance.load(this.data?.startPosition);
 
     }

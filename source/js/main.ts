@@ -38,6 +38,9 @@ import Image from './edit/fields/image';
 import ImageOverlaysList from './options/createImageOverlay/imageOverlaysList';
 import ImageOverlayResize from './options/createImageOverlay/imageFunctionality/imageOverlayResize';
 import ImageOverlayBoundsAndRatioCalculator from './options/createImageOverlay/helper/imageOverlayBoundsAndRatioCalculator';
+import ImageOverlayMove from './options/createImageOverlay/imageFunctionality/imageOverlayMove';
+import LoadImageOverlays from './options/createImageOverlay/loadImageOverlays';
+import SaveImageOverlays from './options/createImageOverlay/saveImageOverlays';
 
 declare const acf: any;
 
@@ -62,7 +65,8 @@ class Main {
         }
 
         const mapInstance = createMap({
-            id: id
+            id: id,
+            zoom: 12
         });
 
         // General
@@ -131,12 +135,11 @@ class Main {
         const imageOverlayFactoryInstance = new ImageOverlayFactory(
             mapInstance,
             createImageOverlayInstance,
-            createRectangleInstance,
-            createMarkerInstance,
             editImageOverlayFactoryInstance,
             new ImageOverlaysList(container),
-            new ImageOverlayBoundsAndRatioCalculator(),
-            new ImageOverlayResize(mapInstance, createMarkerInstance)
+            new ImageOverlayBoundsAndRatioCalculator(mapInstance),
+            new ImageOverlayResize(mapInstance, createMarkerInstance),
+            new ImageOverlayMove(mapInstance, createMarkerInstance)
         );
 
         // Main
@@ -169,6 +172,7 @@ class Main {
             hiddenField,
             new LoadLayerGroups(layerGroupFactoryInstance),
             new LoadMarkers(markerFactoryInstance),
+            new LoadImageOverlays(imageOverlayFactoryInstance),
             new LoadStartPosition(OptionSetStartPositionInstance)
         );
 
@@ -176,6 +180,7 @@ class Main {
             hiddenField,
             new SaveLayerGroups(),
             new SaveMarkers(),
+            new SaveImageOverlays(),
             new SaveStartPostion(OptionSetStartPositionInstance)
         );
     }

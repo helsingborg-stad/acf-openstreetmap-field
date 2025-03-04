@@ -1,4 +1,5 @@
 import { createListItem } from "../../helper/createListItem";
+import { ImageOverlayDataInterface } from "./imageOverlayDataInterface";
 
 class ImageOverlaysList implements ImageOverlaysListInterface {
     imageOverlaysList: HTMLElement|null;

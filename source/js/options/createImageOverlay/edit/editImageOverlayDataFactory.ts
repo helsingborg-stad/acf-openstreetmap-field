@@ -1,3 +1,4 @@
+import { ImageOverlayDataInterface } from "../imageOverlayDataInterface";
 import EditImageOverlayData from "./editImageOverlayData";
 
 class EditImageOverlayFactory {

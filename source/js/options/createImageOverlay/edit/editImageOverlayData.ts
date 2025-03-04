@@ -1,3 +1,5 @@
+import { ImageOverlayDataInterface } from "../imageOverlayDataInterface";
+
 class EditImageOverlayData implements EditImageOverlayDataInterface, Editable {
     constructor(
         private imageOverlayData: ImageOverlayDataInterface,
