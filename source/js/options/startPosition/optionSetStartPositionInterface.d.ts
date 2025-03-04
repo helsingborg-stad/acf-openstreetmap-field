@@ -1,6 +1,4 @@
-import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
-import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
-import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
+import { MapInterface, CreateMarkerInterface, MarkerInterface } from "@helsingborg-stad/openstreetmap";
 
 interface OptionSetStartPositionInterface {
     getStartPosition(): MarkerInterface|undefined;
