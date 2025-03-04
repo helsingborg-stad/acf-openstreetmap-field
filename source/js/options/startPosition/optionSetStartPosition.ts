@@ -1,7 +1,4 @@
-import { CreateMarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/createMarkerInterface";
-import { MarkerInterface } from "../../../OpenStreetMap/js/features/createMarker/markerInterface";
-import { MapInterface } from "../../../OpenStreetMap/js/mapInterface";
-import { LatLngObject } from "../../../OpenStreetMap/js/types";
+import { MapInterface, CreateMarkerInterface, MarkerInterface, LatLngObject } from "@helsingborg-stad/openstreetmap";
 import { OptionSetStartPositionInterface } from "./optionSetStartPositionInterface";
 
 class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInterface {
@@ -46,7 +43,7 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
 
     // TODO: Make this look nice
     private getMarkerMarkup(): string {
-        return `<span style="color: #00B6FF; font-size: 40px;" class="${this.markerCssClass} dashicons dashicons-location"></span>`;
+        return `<span style="color: #00B6FF; font-size: 40px;" class="${this.markerCssClass} dashicons dashicons-flag"></span>`;
     }
 
     public checkCondition(value: string): boolean {
