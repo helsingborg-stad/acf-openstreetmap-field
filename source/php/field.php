@@ -56,7 +56,7 @@ class Field extends \acf_field
         $id = $this->mapId . '-' . self::$mapIndex;
 
         ?>
-        <div class="acf-openstreetmap" data-js-openstreetmap-field>
+        <div class="acf-openstreetmap openstreetmap" data-js-openstreetmap-field>
             <input type="hidden" name="<?php echo esc_attr($field['name']); ?>" data-js-hidden-field value="<?php echo esc_attr($field['value']); ?>" id="acf-openstreetmap-hidden-<?php echo $id ?>"></input>
 
             <?php $this->addEditOverlay($id) ?>
@@ -72,7 +72,7 @@ class Field extends \acf_field
     {
         ?>
             <div 
-                class="acf-openstreetmap__map openstreetmap" 
+                class="acf-openstreetmap__map" 
                 data-js-openstreetmap-map 
                 id="map-<?php $id ?>"
                 style="position: unset; height: 700px; background: #f0f0f0;">
