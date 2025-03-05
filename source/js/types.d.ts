@@ -5,6 +5,7 @@ type SavedLayerGroup = {
     color: string;
     layerGroup: string;
     id: string;
+    icon: string;
 }[];
 
 type SavedMarkerData = {

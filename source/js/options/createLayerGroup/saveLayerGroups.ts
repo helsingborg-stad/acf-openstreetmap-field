@@ -12,7 +12,8 @@ class SaveLayerGroups implements SaveOptionDataInterface {
                 title: layerGroup.getTitle(),
                 color: layerGroup.getColor(),
                 layerGroup: layerGroup.getLayerGroup(),
-                id: layerGroup.getId()
+                id: layerGroup.getId(),
+                icon: layerGroup.getIcon()
             });
         }
 
