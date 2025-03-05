@@ -127,7 +127,8 @@ class Field extends \acf_field
                     <input type="color" id="field-color-<?php $id ?>" name="url"></input>
                 </div>
                 <div class="acf-openstreetmap__field" data-js-field-edit-icon>
-                    <label for="field-icon-<?php $id ?>">Color</label>
+                    <label for="field-icon-<?php $id ?>">Icon</label>
+                    <span>Add an icon name from your library. ex. (<a target="_blank" href="https://fonts.google.com/icons">Material Symbols</a>)</span>
                     <input type="text" id="field-icon-<?php $id ?>" name="icon"></input>
                 </div>
                 <div class="acf-openstreetmap__field" data-js-field-edit-layer>
