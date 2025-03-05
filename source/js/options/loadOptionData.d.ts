@@ -1,3 +1,3 @@
 interface LoadOptionDataInterface {
-    load(data: SavedMarkerData|SaveStartPosition): void;
+    load(data: SavedMarkerData|SavedStartPosition): void;
 }

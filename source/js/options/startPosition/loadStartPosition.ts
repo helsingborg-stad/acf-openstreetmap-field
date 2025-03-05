@@ -1,10 +1,10 @@
-import { SaveStartPosition } from "../../types";
+import { SavedStartPosition } from "../../types";
 import { OptionSetStartPositionInterface } from "./optionSetStartPositionInterface";
 
 class LoadStartPosition implements LoadOptionDataInterface {
     constructor(private optionSetStartPositionInstance: OptionSetStartPositionInterface) {}
 
-    public load(startPosition: SaveStartPosition): void {
+    public load(startPosition: SavedStartPosition): void {
         if (startPosition) {
             this.optionSetStartPositionInstance.addMarker(startPosition);
         }

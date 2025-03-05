@@ -43,7 +43,7 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
 
     // TODO: Make this look nice
     private getMarkerMarkup(): string {
-        return `<span style="color: #00B6FF; font-size: 40px;" class="${this.markerCssClass} dashicons dashicons-flag"></span>`;
+        return `<span style="background-color: #199900; font-size: 24px; padding: 4px; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;" class="${this.markerCssClass} dashicons dashicons-location"></span>`;
     }
 
     public checkCondition(value: string): boolean {

@@ -1,5 +1,6 @@
-import { SaveStartPosition } from "../types";
+import { SavedImageOverlayData, SavedLayerGroup, SavedMarkerData, SavedStartPosition } from "../types";
+import SaveLayerGroups from "./createLayerGroup/saveLayerGroups";
 
 interface SaveOptionDataInterface {
-    save(): SavedMarkerData|SaveStartPosition;
+    save(): SavedMarkerData|SavedStartPosition|SavedImageOverlayData|SavedLayerGroup;
 }

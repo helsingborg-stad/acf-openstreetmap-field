@@ -1,11 +1,11 @@
-import { SaveStartPosition } from "../../types";
+import { SavedStartPosition } from "../../types";
 import { SaveOptionDataInterface } from "../saveOptionData";
 import { OptionSetStartPositionInterface } from "./optionSetStartPositionInterface";
 
 class SaveStartPostion implements SaveOptionDataInterface {
     constructor(private optionSetStartPositionInstance: OptionSetStartPositionInterface) {}
 
-    public save(): SaveStartPosition {
+    public save(): SavedStartPosition {
         return this.optionSetStartPositionInstance.getStartPosition()?.getPosition() ?? null;
     }
 }

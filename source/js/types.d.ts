@@ -23,11 +23,11 @@ type SavedImageOverlayData = {
     aspectRatio: number;
 }[];
 
-type SaveStartPosition = LatLngObject|null;
+type SavedStartPosition = LatLngObject|null;
 
 type SaveData = {
     layerGroups: SavedLayerGroup;
     markers: SavedMarkerData;
     imageOverlays: SavedImageOverlayData;
-    startPosition: SaveStartPosition;
+    startPosition: SavedStartPosition;
 }
