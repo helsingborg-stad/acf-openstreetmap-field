@@ -1,4 +1,5 @@
 import { SavedMarkerData } from "../../types";
+import { LoadOptionDataInterface } from "../optionFeature";
 import { MarkerFactoryInterface } from "./markerFactoryInterface";
 
 class LoadMarkers implements LoadOptionDataInterface {

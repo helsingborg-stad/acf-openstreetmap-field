@@ -1,4 +1,5 @@
 import { SavedImageOverlayData } from "../../types";
+import { LoadOptionDataInterface } from "../optionFeature";
 
 class LoadImageOverlays implements LoadOptionDataInterface {
     constructor(

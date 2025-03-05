@@ -1,5 +1,6 @@
 import { MapInterface } from "@helsingborg-stad/openstreetmap";
 import { MarkerFactoryInterface } from "./markerFactoryInterface";
+import { OptionFeature } from "../optionFeature";
 
 class OptionCreateMarker implements OptionFeature {
     protected condition: string = 'create_marker';

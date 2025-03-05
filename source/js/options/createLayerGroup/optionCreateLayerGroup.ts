@@ -1,3 +1,4 @@
+import { OptionFeature } from "../optionFeature";
 import { LayerGroupFactoryInterface } from "./layerGroupFactoryInterface";
 
 class OptionCreateLayerGroup implements OptionFeature {

@@ -1,3 +1,5 @@
+import { OptionFeature } from "../optionFeature";
+
 class OptionCreateImageOverlay implements OptionFeature {
     protected condition: string = 'create_image_overlay';
 

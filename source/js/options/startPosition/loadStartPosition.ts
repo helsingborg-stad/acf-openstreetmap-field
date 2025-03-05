@@ -1,4 +1,5 @@
 import { SavedStartPosition } from "../../types";
+import { LoadOptionDataInterface } from "../optionFeature";
 import { OptionSetStartPositionInterface } from "./optionSetStartPositionInterface";
 
 class LoadStartPosition implements LoadOptionDataInterface {

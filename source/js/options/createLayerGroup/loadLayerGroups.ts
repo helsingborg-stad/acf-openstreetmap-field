@@ -1,4 +1,5 @@
 import { SavedLayerGroup } from "../../types";
+import { LoadOptionDataInterface } from "../optionFeature";
 import { LayerGroupFactoryInterface } from "./layerGroupFactoryInterface";
 
 class LoadLayerGroups implements LoadOptionDataInterface {

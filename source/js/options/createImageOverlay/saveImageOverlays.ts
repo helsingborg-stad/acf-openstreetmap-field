@@ -1,5 +1,5 @@
 import { SavedImageOverlayData } from "../../types";
-import { SaveOptionDataInterface } from "../saveOptionData";
+import { SaveOptionDataInterface } from "../optionFeature";
 import ImageOverlayData from "./imageOverlayData";
 
 class SaveImageOverlays implements SaveOptionDataInterface {

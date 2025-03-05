@@ -1,5 +1,6 @@
 import { MapInterface, CreateMarkerInterface, MarkerInterface, LatLngObject } from "@helsingborg-stad/openstreetmap";
 import { OptionSetStartPositionInterface } from "./optionSetStartPositionInterface";
+import { OptionFeature } from "../optionFeature";
 
 class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInterface {
     protected condition: string = 'set_start_position';

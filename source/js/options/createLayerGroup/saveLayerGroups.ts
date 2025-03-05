@@ -1,5 +1,5 @@
 import { SavedLayerGroup } from "../../types";
-import { SaveOptionDataInterface } from "../saveOptionData";
+import { SaveOptionDataInterface } from "../optionFeature";
 import LayerGroupData from "./layerGroupData";
 
 class SaveLayerGroups implements SaveOptionDataInterface {

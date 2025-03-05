@@ -1,5 +1,5 @@
 import { SavedStartPosition } from "../../types";
-import { SaveOptionDataInterface } from "../saveOptionData";
+import { SaveOptionDataInterface } from "../optionFeature";
 import { OptionSetStartPositionInterface } from "./optionSetStartPositionInterface";
 
 class SaveStartPostion implements SaveOptionDataInterface {
