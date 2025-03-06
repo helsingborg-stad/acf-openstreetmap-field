@@ -36,13 +36,12 @@ import ImageOverlayBoundsAndRatioCalculator from './options/createImageOverlay/h
 import ImageOverlayMove from './options/createImageOverlay/imageFunctionality/imageOverlayMove';
 import LoadImageOverlays from './options/createImageOverlay/loadImageOverlays';
 import SaveImageOverlays from './options/createImageOverlay/saveImageOverlays';
+import Zoom from './options/settings/zoom';
 
 
 declare const acf: any;
 
 class Main {
-    mapInstance!: MapInterface;
-
     constructor(
         id: string,
         container: HTMLElement,
@@ -62,8 +61,10 @@ class Main {
 
         const mapInstance = createMap({
             id: id,
-            zoom: 12
         });
+        
+        // Settings
+        const zoomInstance = new Zoom(mapInstance, container);
 
         // General
         const createMarkerInstance     = new CreateMarker();
@@ -158,6 +159,8 @@ class Main {
 
         const OptionSetStartPositionInstance = new OptionSetStartPosition(
             mapInstance,
+            container,
+            zoomInstance,
             handleSelectedInstance,
             createMarkerInstance
         );
@@ -168,7 +171,8 @@ class Main {
             new LoadLayerGroups(layerGroupFactoryInstance),
             new LoadMarkers(markerFactoryInstance),
             new LoadImageOverlays(imageOverlayFactoryInstance),
-            new LoadStartPosition(OptionSetStartPositionInstance)
+            new LoadStartPosition(OptionSetStartPositionInstance),
+            zoomInstance
         );
 
         new SaveHiddenField(
@@ -176,8 +180,12 @@ class Main {
             new SaveLayerGroups(),
             new SaveMarkers(),
             new SaveImageOverlays(),
-            new SaveStartPostion(OptionSetStartPositionInstance)
+            new SaveStartPostion(OptionSetStartPositionInstance),
+            zoomInstance
         );
+
+        // After data loaded
+        mapInstance.setZoom(parseInt(zoomInstance.getValue()));
     }
 }
 

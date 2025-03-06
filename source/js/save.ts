@@ -8,7 +8,8 @@ class SaveHiddenField {
         markers: [],
         layerGroups: [],
         imageOverlays: [],
-        startPosition: null
+        startPosition: null,
+        zoom: "16"
     };
 
     constructor(
@@ -16,13 +17,15 @@ class SaveHiddenField {
         private saveLayerGroups: SaveOptionDataInterface,
         private saveMarkers: SaveOptionDataInterface,
         private saveImageOverlays: SaveOptionDataInterface,
-        private saveStartPosition: SaveOptionDataInterface
+        private saveStartPosition: SaveOptionDataInterface,
+        private zoomInstance: Setting
     ) {
         acf.add_filter('validation_complete', (values: any, form: any) => {
             this.data.layerGroups = this.saveLayerGroups.save() as SavedLayerGroup;
             this.data.markers = this.saveMarkers.save() as SavedMarkerData;
             this.data.imageOverlays = this.saveImageOverlays.save() as SavedImageOverlayData;
             this.data.startPosition = this.saveStartPosition.save() as SavedStartPosition;
+            this.data.zoom = this.zoomInstance.save();
             const json = JSON.stringify(this.data);
             this.hiddenField.value = json;
 

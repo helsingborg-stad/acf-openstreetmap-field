@@ -31,4 +31,5 @@ type SaveData = {
     markers: SavedMarkerData;
     imageOverlays: SavedImageOverlayData;
     startPosition: SavedStartPosition;
+    zoom: string;
 }

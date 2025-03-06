@@ -9,7 +9,8 @@ class LoadHiddenField {
         private loadLayerGroupsInstance: LoadOptionDataInterface,
         private loadMarkersInstance: LoadOptionDataInterface,
         private loadImageOverlaysInstance: LoadOptionDataInterface,
-        private loadStartPositionInstance: LoadOptionDataInterface
+        private loadStartPositionInstance: LoadOptionDataInterface,
+        private zoomInstance: Setting
     ) {
         let json = this.hiddenField.value;
         this.data = JSON.parse(json ?? '');
@@ -21,6 +22,7 @@ class LoadHiddenField {
         this.loadMarkersInstance.load(this.data.markers as SavedMarkerData);
         this.loadImageOverlaysInstance.load(this.data.imageOverlays as SavedImageOverlayData);
         this.loadStartPositionInstance.load(this.data.startPosition as SavedStartPosition);
+        this.zoomInstance.load(this.data.zoom);
     }
 }
 
