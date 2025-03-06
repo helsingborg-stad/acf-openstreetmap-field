@@ -31,7 +31,7 @@ class Zoom implements Setting {
         if (!this.setting || !this.setting.value) {
             return "16";
         }
-        console.log(this.setting.value);
+
         return this.setting.value;
     }
 
