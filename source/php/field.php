@@ -98,6 +98,15 @@ class Field extends \acf_field
                     <label for="setting-zoom-<?php echo $id; ?>">Initial Zoom</label>
                     <input style="max-width: 12rem;" type="range" step="1" min="0" max="19" id="setting-zoom-<?php echo $id; ?>" name="zoom"></input>
                 </div>
+                <div class="acf-openstreetmap__setting" data-js-setting-map-style>
+                    <label for="setting-map-style-<?php echo $id; ?>">Map style</label>
+                    <select style="max-width: 12rem;" id="setting-map-style-<?php echo $id; ?>" name="map-style">
+                        <option value="default">Default</option>
+                        <option value="dark">Dark</option>
+                        <option value="pale">Pale</option>
+                        <option value="color">Color</option>
+                    </select>
+                </div>
             </div>
         <?php
     }
