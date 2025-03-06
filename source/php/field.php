@@ -11,7 +11,7 @@ class Field extends \acf_field
     public $category;
     public $settings;
     private $cacheBust;
-    private $mapId;
+    private $mapId = null;
     private static $mapIndex = 0;
 
     public function __construct() {
@@ -23,7 +23,6 @@ class Field extends \acf_field
             'path' => plugin_dir_path(__FILE__),
             'dir' => plugin_dir_url(__FILE__),
         );
-        $this->mapId = uniqid();
 
         parent::__construct();
     }
@@ -53,11 +52,12 @@ class Field extends \acf_field
      * Render the field input
      */
     public function render_field($field) {
-        $id = $this->mapId . '-' . self::$mapIndex;
+        $id = $this->getMapId() . '-' . self::$mapIndex++;
 
         ?>
         <div class="acf-openstreetmap openstreetmap" data-js-openstreetmap-field>
-            <input type="hidden" name="<?php echo esc_attr($field['name']); ?>" data-js-hidden-field value="<?php echo esc_attr($field['value']); ?>" id="acf-openstreetmap-hidden-<?php echo $id ?>"></input>
+            <?php $this->addSettings($id) ?>
+            <input type="hidden" name="<?php echo esc_attr($field['name']); ?>" data-js-hidden-field value="<?php echo esc_attr($field['value']); ?>" id="acf-openstreetmap-hidden-<?php echo $id; ?>"></input>
 
             <?php $this->addEditOverlay($id) ?>
             <?php $this->addMap($id) ?>
@@ -68,14 +68,36 @@ class Field extends \acf_field
         self::$mapIndex++;
     }
 
+    private function getMapId() {
+        if ($this->mapId) {
+            return $this->mapId;
+        }
+
+        $this->mapId = uniqid();
+        return $this->mapId;
+    }
+
     private function addMap($id = '')
     {
         ?>
             <div 
                 class="acf-openstreetmap__map" 
                 data-js-openstreetmap-map 
-                id="map-<?php $id ?>"
+                id="map-<?php echo $id; ?>"
                 style="position: unset; height: 700px; background: #f0f0f0;">
+            </div>
+        <?php
+    }
+
+    private function addSettings($id = '') 
+    {
+        ?>
+        <h2 style="padding: .5rem 0; font-weight: bold;">Settings</h2>
+            <div class="acf-openstreetmap__settings">
+                <div class="acf-openstreetmap__setting" data-js-setting-zoom>
+                    <label for="setting-zoom-<?php echo $id; ?>">Initial Zoom</label>
+                    <input style="max-width: 12rem;" type="range" step="1" min="0" max="19" id="setting-zoom-<?php echo $id; ?>" name="zoom"></input>
+                </div>
             </div>
         <?php
     }
@@ -86,6 +108,8 @@ class Field extends \acf_field
             <div class="acf-openstreetmap__options">
                 <div>
                     <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="set_start_position">Set start position</div>
+                    <ul class="acf-openstreetmap__option-list" data-js-start-position-list>
+                    </ul>
                 </div>
                 <div>
                     <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="create_marker">Create marker</div>
@@ -111,35 +135,39 @@ class Field extends \acf_field
         ?>
             <div class="acf-openstreetmap__field-edit-overlay" data-js-field-edit-overlay>
                 <div class="acf-openstreetmap__field" data-js-field-edit-title>
-                    <label for="field-text-<?php $id ?>">Title</label>
-                    <input type="text" id="field-text-<?php $id ?>" name="title"></input>
+                    <label for="field-text-<?php echo $id; ?>">Title</label>
+                    <input type="text" id="field-text-<?php echo $id; ?>" name="title"></input>
                 </div>
                 <div class="acf-openstreetmap__field" data-js-field-edit-url>
-                    <label for="field-url-<?php $id ?>">URL</label>
-                    <input type="url" id="field-url-<?php $id ?>" name="url"></input>
+                    <label for="field-url-<?php echo $id; ?>">URL</label>
+                    <input type="url" id="field-url-<?php echo $id; ?>" name="url"></input>
                 </div>
                 <div class="acf-openstreetmap__field" data-js-field-edit-description>
-                    <label for="field-description-<?php $id ?>">Description</label>
-                    <textarea name="description" id="field-description-<?php $id ?>" cols="30" rows="10"></textarea>
+                    <label for="field-description-<?php echo $id; ?>">Description</label>
+                    <textarea name="description" id="field-description-<?php echo $id; ?>" cols="30" rows="10"></textarea>
                 </div>
                 <div class="acf-openstreetmap__field" data-js-field-edit-color>
-                    <label for="field-color-<?php $id ?>">Color</label>
-                    <input type="color" id="field-color-<?php $id ?>" name="url"></input>
+                    <label for="field-color-<?php echo $id; ?>">Color</label>
+                    <input type="color" id="field-color-<?php echo $id; ?>" name="url"></input>
+                </div>
+                <div class="acf-openstreetmap__field" data-js-field-edit-zoom>
+                    <label for="field-zoom-<?php echo $id; ?>">Zoom</label>
+                    <input type="number" min="0" max="19" id="field-zoom-<?php echo $id; ?>" name="url"></input>
                 </div>
                 <div class="acf-openstreetmap__field" data-js-field-edit-icon>
-                    <label for="field-icon-<?php $id ?>">Icon</label>
+                    <label for="field-icon-<?php echo $id; ?>">Icon</label>
                     <span>Add an icon name from your library. ex. (<a target="_blank" href="https://fonts.google.com/icons">Material Symbols</a>)</span>
-                    <input type="text" id="field-icon-<?php $id ?>" name="icon"></input>
+                    <input type="text" id="field-icon-<?php echo $id; ?>" name="icon"></input>
                 </div>
                 <div class="acf-openstreetmap__field" data-js-field-edit-layer>
-                    <label for="field-layer-<?php $id ?>">Layer</label>
-                    <select id="field-layer-<?php $id ?>" name="layer">
+                    <label for="field-layer-<?php echo $id; ?>">Layer</label>
+                    <select id="field-layer-<?php echo $id; ?>" name="layer">
                         <option value="">Default (on the map)</option>
                     </select>
                 </div>
                 <div class="acf-openstreetmap__field" data-js-field-edit-image>
-                    <label for="field-icon-<?php $id ?>">Image</label>
-                    <div class="acf-openstreetmap__button acf-openstreetmap__button--save" data-js-field-edit-image-button role="button" id="field-icon-<?php $id ?>">Set image</div>
+                    <label for="field-icon-<?php echo $id; ?>">Image</label>
+                    <div class="acf-openstreetmap__button acf-openstreetmap__button--save" data-js-field-edit-image-button role="button" id="field-icon-<?php echo $id; ?>">Set image</div>
                     <div data-js-field-edit-image-preview></div>
                     <input style="display: none;" type="url" name="icon"></input>
                 </div>
