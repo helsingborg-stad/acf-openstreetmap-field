@@ -1,4 +1,5 @@
-import { MapInterface } from "@helsingborg-stad/openstreetmap";
+import { MapInterface, MapStyle as Style } from "@helsingborg-stad/openstreetmap";
+
 
 class MapStyle implements Setting {
     container: HTMLElement|null;
@@ -12,18 +13,22 @@ class MapStyle implements Setting {
     }
 
     public getValue(): string {
-        console.log(this.setting?.value);
-        return this.setting?.value ?? "16";
+        const allowedValues: Style[] = ["default", "dark", "pale", "color"];
+    
+        if (!this.setting || !allowedValues.includes(this.setting.value as Style)) {
+            return "default";
+        }
+    
+        return this.setting.value ?? "default";
     }
 
     private setListener(): void {
-        console.log(this.setting);
         if (!this.setting) {
             return;
         }
 
         this.setting.addEventListener('input', (e) => {
-            this.mapInstance.setZoom(parseInt(this.setting?.value ?? "16"));
+            // this.mapInstance.setZoom(parseInt(this.setting?.value ?? "16"));
         });
     }
 
