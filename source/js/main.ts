@@ -1,4 +1,4 @@
-import { CreateMarker, MapInterface, CreateLayerGroup, CreateImageOverlay, createMap } from '@helsingborg-stad/openstreetmap';
+import { CreateMarker, CreateLayerGroup, CreateImageOverlay, createMap } from '@helsingborg-stad/openstreetmap';
 import HandleSelected from './options/handleSelected';
 import OptionCreateMarker from './options/createMarker/optionCreateMarker';
 import OptionSetStartPosition from './options/startPosition/optionSetStartPosition';
@@ -60,7 +60,7 @@ class Main {
         }
 
         const mapInstance = createMap({
-            id: id,
+            id: id
         });
         
         // Settings
@@ -185,7 +185,8 @@ class Main {
         );
 
         // After data loaded
-        mapInstance.setZoom(parseInt(zoomInstance.getValue()));
+        mapInstance.setView(OptionSetStartPositionInstance.getStartPositionMarker()?.getPosition() ?? { lat: 59.32932, lng: 18.06858 }, parseInt(zoomInstance.getValue()));
+        console.log(parseInt(zoomInstance.getValue()));
     }
 }
 
