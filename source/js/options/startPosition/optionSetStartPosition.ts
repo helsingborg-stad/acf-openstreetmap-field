@@ -1,17 +1,23 @@
 import { MapInterface, CreateMarkerInterface, MarkerInterface, LatLngObject } from "@helsingborg-stad/openstreetmap";
 import { OptionSetStartPositionInterface } from "./optionSetStartPositionInterface";
 import { OptionFeature } from "../optionFeature";
+import { createListItem } from "../../helper/createListItem";
 
 class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInterface {
     protected condition: string = 'set_start_position';
     private markerCssClass: string = 'marker-start-position';
     private marker: undefined|MarkerInterface;
+    private list: HTMLUListElement|null;
 
     constructor(
         private mapInstance: MapInterface,
+        private container: HTMLElement,
+        private zoomInstance: Setting,
         private handleSelectedInstance: HandleSelectedInterface,
         private createMarkerInstance: CreateMarkerInterface
     ) {
+        this.list = this.container.querySelector('[data-js-start-position-list]');
+
         this.mapInstance.addListener('click', (e) => {
             if (
                 this.handleSelectedInstance.getCurrentSelectedValue() !== this.condition ||
@@ -29,16 +35,36 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
     }
 
     public addMarker(latlng: LatLngObject): void {
+        if (this.marker) {
+            return;
+        }
+
         this.marker = this.createMarkerInstance.create({
             position: latlng,
             icon: this.getMarkerMarkup(),
             draggable: true,
         });
 
+        this.addListItem();
         this.marker.addTo(this.mapInstance);
     }
 
-    public getStartPosition(): MarkerInterface|undefined {
+    private addListItem(): void {
+        if (!this.list) {
+            return;
+        }
+
+        const listItem = createListItem('Start position');
+        this.list.appendChild(listItem);
+
+        listItem.addEventListener('click', () => {
+            if (this.marker) {
+                this.mapInstance.flyTo(this.marker.getPosition(), parseInt(this.zoomInstance.getValue()));
+            }
+        });
+    }
+
+    public getStartPositionMarker(): MarkerInterface|undefined {
         return this.marker;
     }
 

@@ -6,7 +6,7 @@ class SaveStartPostion implements SaveOptionDataInterface {
     constructor(private optionSetStartPositionInstance: OptionSetStartPositionInterface) {}
 
     public save(): SavedStartPosition {
-        return this.optionSetStartPositionInstance.getStartPosition()?.getPosition() ?? null;
+        return this.optionSetStartPositionInstance.getStartPositionMarker()?.getPosition() ?? null;
     }
 }
 
