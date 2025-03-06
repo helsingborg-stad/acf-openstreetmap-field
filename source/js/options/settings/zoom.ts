@@ -16,7 +16,6 @@ class Zoom implements Setting {
     }
 
     private setListener(): void {
-        console.log(this.setting);
         if (!this.setting) {
             return;
         }
