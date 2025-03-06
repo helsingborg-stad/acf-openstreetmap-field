@@ -65,7 +65,12 @@ class ImageOverlayData implements ImageOverlayDataInterface {
             ImageOverlayData.getImageOverlays()[this.getId()] = this;
         }
 
-        const overlay = this.createImageOverlayInstance.create(this.getImage(), bounds, {interactive: true});
+        // const overlay = this.createImageOverlayInstance.create(this.getImage(), bounds, {interactive: true});
+        const overlay = this.createImageOverlayInstance.create({
+            url: this.getImage(),
+            bounds: bounds,
+            interactive: true
+        });
         overlay.addTo(this.mapInstance);
         overlay.addListener('click', (e) => {
             this.mapInstance.flyTo(overlay.getCenter());

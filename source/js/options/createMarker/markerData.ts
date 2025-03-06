@@ -34,7 +34,9 @@ class MarkerData implements MarkerDataInterface {
         this.marker = this.createMarkerInstance.create({
             position: latlng,
             icon: this.getMarkerMarkup(),
-            draggable: true
+            draggable: true,
+            iconSize: [32, 32],
+            iconAnchor: [16, 4]
         });
 
         this.marker.addTo(this.mapInstance);
@@ -88,7 +90,11 @@ class MarkerData implements MarkerDataInterface {
 
     public setLayerGroup(layerGroup: string): void {
         this.layerGroup = layerGroup;
-        this.getMarker()?.setIcon(this.getMarkerMarkup());
+        this.getMarker()?.setIcon({
+            icon: this.getMarkerMarkup(),
+            iconSize: [32, 32],
+            iconAnchor: [16, 4]
+        });
     }
 
     public getLayerGroup(): string {
