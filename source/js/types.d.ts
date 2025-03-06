@@ -1,4 +1,5 @@
 import { LatLngObject, LatLngBoundsObject } from "@helsingborg-stad/openstreetmap";
+import MapStyle from "./options/settings/mapStyle";
 
 type SavedLayerGroup = {
     title: string;
@@ -32,4 +33,5 @@ type SaveData = {
     imageOverlays: SavedImageOverlayData;
     startPosition: SavedStartPosition;
     zoom: string;
+    mapStyle: string;
 }

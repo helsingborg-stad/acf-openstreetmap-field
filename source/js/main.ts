@@ -37,6 +37,7 @@ import ImageOverlayMove from './options/createImageOverlay/imageFunctionality/im
 import LoadImageOverlays from './options/createImageOverlay/loadImageOverlays';
 import SaveImageOverlays from './options/createImageOverlay/saveImageOverlays';
 import Zoom from './options/settings/zoom';
+import MapStyle from './options/settings/mapStyle';
 
 
 declare const acf: any;
@@ -64,7 +65,8 @@ class Main {
         });
         
         // Settings
-        const zoomInstance = new Zoom(mapInstance, container);
+        const zoomInstance     = new Zoom(mapInstance, container);
+        const mapStyleInstance = new MapStyle(mapInstance, container);
 
         // General
         const createMarkerInstance     = new CreateMarker();
@@ -172,7 +174,8 @@ class Main {
             new LoadMarkers(markerFactoryInstance),
             new LoadImageOverlays(imageOverlayFactoryInstance),
             new LoadStartPosition(OptionSetStartPositionInstance),
-            zoomInstance
+            zoomInstance,
+            mapStyleInstance
         );
 
         new SaveHiddenField(
@@ -181,12 +184,13 @@ class Main {
             new SaveMarkers(),
             new SaveImageOverlays(),
             new SaveStartPostion(OptionSetStartPositionInstance),
-            zoomInstance
+            zoomInstance,
+            mapStyleInstance
         );
 
         // After data loaded
         mapInstance.setView(OptionSetStartPositionInstance.getStartPositionMarker()?.getPosition() ?? { lat: 59.32932, lng: 18.06858 }, parseInt(zoomInstance.getValue()));
-        console.log(parseInt(zoomInstance.getValue()));
+
     }
 }
 

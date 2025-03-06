@@ -1,4 +1,5 @@
 import { MapInterface, MapStyle as Style } from "@helsingborg-stad/openstreetmap";
+import { Setting } from "./setting";
 
 
 class MapStyle implements Setting {
@@ -12,14 +13,8 @@ class MapStyle implements Setting {
         this.setListener();
     }
 
-    public getValue(): string {
-        const allowedValues: Style[] = ["default", "dark", "pale", "color"];
-    
-        if (!this.setting || !allowedValues.includes(this.setting.value as Style)) {
-            return "default";
-        }
-    
-        return this.setting.value ?? "default";
+    public getValue(): string {    
+        return this.getSanitizedValue(this.setting?.value);
     }
 
     private setListener(): void {
@@ -28,16 +23,12 @@ class MapStyle implements Setting {
         }
 
         this.setting.addEventListener('input', (e) => {
-            // this.mapInstance.setZoom(parseInt(this.setting?.value ?? "16"));
+            console.log(e);
         });
     }
 
     public save(): string {
-        if (!this.setting || !this.setting.value) {
-            return "16";
-        }
-
-        return this.setting.value;
+        return this.getSanitizedValue(this.setting?.value);
     }
 
     public load(value: string): void {
@@ -45,7 +36,17 @@ class MapStyle implements Setting {
             return;
         }
 
-        this.setting.value = value;
+        this.setting.value = this.getSanitizedValue(value);
+    }
+
+    private getSanitizedValue(value: string|undefined|null): Style {
+        const allowedValues: Style[] = ["default", "dark", "pale", "color"];
+
+        if (!value || !allowedValues.includes(value as Style)) {
+            return "default";
+        }
+
+        return value as Style;
     }
 }
 

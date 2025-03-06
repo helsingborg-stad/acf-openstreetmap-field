@@ -2,6 +2,7 @@ import { MapInterface, CreateMarkerInterface, MarkerInterface, LatLngObject } fr
 import { OptionSetStartPositionInterface } from "./optionSetStartPositionInterface";
 import { OptionFeature } from "../optionFeature";
 import { createListItem } from "../../helper/createListItem";
+import { Setting } from "../settings/setting";
 
 class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInterface {
     protected condition: string = 'set_start_position';

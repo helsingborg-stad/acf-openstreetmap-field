@@ -1,4 +1,5 @@
 import { MapInterface } from "@helsingborg-stad/openstreetmap";
+import { Setting } from "./setting";
 
 class Zoom implements Setting {
     container: HTMLElement|null;

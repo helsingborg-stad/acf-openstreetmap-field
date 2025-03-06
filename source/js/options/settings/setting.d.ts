@@ -1,3 +1,5 @@
+import MapStyle from "./mapStyle";
+
 interface Setting {
     getValue(): string;
     save(): string;
