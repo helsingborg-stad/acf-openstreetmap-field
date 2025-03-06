@@ -12,7 +12,6 @@ class Zoom implements Setting {
     }
 
     public getValue(): string {
-        console.log(this.setting?.value);
         return this.setting?.value ?? "16";
     }
 
