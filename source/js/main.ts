@@ -1,4 +1,4 @@
-import { CreateMarker, CreateLayerGroup, CreateImageOverlay, createMap } from '@helsingborg-stad/openstreetmap';
+import { CreateMarker, CreateLayerGroup, CreateImageOverlay, CreateMap, CreateTileLayer, TilesHelper, CreateAttribution } from '@helsingborg-stad/openstreetmap';
 import HandleSelected from './options/handleSelected';
 import OptionCreateMarker from './options/createMarker/optionCreateMarker';
 import OptionSetStartPosition from './options/startPosition/optionSetStartPosition';
@@ -60,19 +60,26 @@ class Main {
             return;
         }
 
-        const mapInstance = createMap({
+        const mapInstance = new CreateMap({
             id: id
-        });
-        
+        }).create();
+
+        // Helpers
+        const tilesHelperInstance = new TilesHelper();
+
+        // MapTiles
+        const tileLayerInstance          = new CreateTileLayer().create();
+        const attributionInstance        = new CreateAttribution().create();
+
         // Settings
-        const zoomInstance     = new Zoom(mapInstance, container);
-        const mapStyleInstance = new MapStyle(mapInstance, container);
+        const zoomInstance        = new Zoom(mapInstance, container);
+        const mapStyleInstance    = new MapStyle(tileLayerInstance, attributionInstance, tilesHelperInstance, container);
 
         // General
-        const createMarkerInstance     = new CreateMarker();
-        const createLayerGroupInstance = new CreateLayerGroup();
+        const createMarkerInstance       = new CreateMarker();
+        const createLayerGroupInstance   = new CreateLayerGroup();
         const createImageOverlayInstance = new CreateImageOverlay();
-        const handleSelectedInstance   = new HandleSelected(container);
+        const handleSelectedInstance     = new HandleSelected(container);
 
         // Fields and Edit
         const fieldValidatorInstance = new FieldValidator();
@@ -189,6 +196,9 @@ class Main {
         );
 
         // After data loaded
+        const currentTiles = tilesHelperInstance.getDefaultTiles(mapStyleInstance.getValue());
+        tileLayerInstance.setUrl(currentTiles.url).addTo(mapInstance);
+        attributionInstance.setPrefix(currentTiles.attribution).addTo(mapInstance);
         mapInstance.setView(OptionSetStartPositionInstance.getStartPositionMarker()?.getPosition() ?? { lat: 59.32932, lng: 18.06858 }, parseInt(zoomInstance.getValue()));
 
     }

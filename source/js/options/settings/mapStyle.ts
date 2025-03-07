@@ -1,19 +1,23 @@
-import { MapInterface, MapStyle as Style } from "@helsingborg-stad/openstreetmap";
+import { AttributionInterface, MapStyle as Style, TileLayerInterface, TilesHelperInterface } from "@helsingborg-stad/openstreetmap";
 import { Setting } from "./setting";
-
 
 class MapStyle implements Setting {
     container: HTMLElement|null;
     setting: HTMLSelectElement|undefined|null;
 
-    constructor(private mapInstance: MapInterface, container: HTMLElement) {
+    constructor(
+        private tileLayerInstance: TileLayerInterface,
+        private attributionInstance: AttributionInterface,
+        private tilesHelperInstance: TilesHelperInterface,
+        container: HTMLElement
+    ) {
         this.container = container.querySelector('[data-js-setting-map-style]');
         this.setting = this.container?.querySelector('select');
 
         this.setListener();
     }
 
-    public getValue(): string {    
+    public getValue(): Style {    
         return this.getSanitizedValue(this.setting?.value);
     }
 
@@ -23,7 +27,9 @@ class MapStyle implements Setting {
         }
 
         this.setting.addEventListener('input', (e) => {
-            console.log(e);
+            const tiles = this.tilesHelperInstance.getDefaultTiles(this.getValue());
+            this.tileLayerInstance.setUrl(tiles.url);
+            this.attributionInstance.setPrefix(tiles.attribution);
         });
     }
 
