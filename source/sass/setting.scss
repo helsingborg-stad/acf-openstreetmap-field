@@ -1,4 +1,14 @@
+
+.acf-openstreetmap__settings {
+    display: flex;
+    row-gap: 1rem;
+    column-gap: 2rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
 .acf-openstreetmap__setting {
     display: flex;
     flex-direction: column;
+    flex: 0 0 12rem;
 }
