@@ -12,7 +12,8 @@ class SaveHiddenField {
         imageOverlays: [],
         startPosition: null,
         zoom: "16",
-        mapStyle: "default"
+        mapStyle: "default",
+        layerFilter: "false"
     };
 
     constructor(
@@ -22,7 +23,8 @@ class SaveHiddenField {
         private saveImageOverlays: SaveOptionDataInterface,
         private saveStartPosition: SaveOptionDataInterface,
         private zoomInstance: Setting,
-        private mapStyleInstance: Setting
+        private mapStyleInstance: Setting,
+        private layerFilterInstance: Setting
     ) {
         acf.add_filter('validation_complete', (values: any, form: any) => {
             this.data.layerGroups = this.saveLayerGroups.save() as SavedLayerGroup;
@@ -31,6 +33,7 @@ class SaveHiddenField {
             this.data.startPosition = this.saveStartPosition.save() as SavedStartPosition;
             this.data.zoom = this.zoomInstance.save() as string;
             this.data.mapStyle = this.mapStyleInstance.save() as MapStyle;
+            this.data.layerFilter = this.layerFilterInstance.save() as "true"|"false";
             const json = JSON.stringify(this.data);
             this.hiddenField.value = json;
 

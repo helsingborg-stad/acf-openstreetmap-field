@@ -38,6 +38,7 @@ import LoadImageOverlays from './options/createImageOverlay/loadImageOverlays';
 import SaveImageOverlays from './options/createImageOverlay/saveImageOverlays';
 import Zoom from './options/settings/zoom';
 import MapStyle from './options/settings/mapStyle';
+import LayerFilter from './options/settings/layerFilter';
 
 
 declare const acf: any;
@@ -74,6 +75,7 @@ class Main {
         // Settings
         const zoomInstance        = new Zoom(mapInstance, container);
         const mapStyleInstance    = new MapStyle(tileLayerInstance, attributionInstance, tilesHelperInstance, container);
+        const layerFilterInstance = new LayerFilter(container);
 
         // General
         const createMarkerInstance       = new CreateMarker();
@@ -182,7 +184,8 @@ class Main {
             new LoadImageOverlays(imageOverlayFactoryInstance),
             new LoadStartPosition(OptionSetStartPositionInstance),
             zoomInstance,
-            mapStyleInstance
+            mapStyleInstance,
+            layerFilterInstance
         );
 
         new SaveHiddenField(
@@ -192,7 +195,8 @@ class Main {
             new SaveImageOverlays(),
             new SaveStartPostion(OptionSetStartPositionInstance),
             zoomInstance,
-            mapStyleInstance
+            mapStyleInstance,
+            layerFilterInstance
         );
 
         // After data loaded
