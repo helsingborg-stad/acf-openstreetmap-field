@@ -1,6 +1,7 @@
 import { LayerGroupDataInterface } from "./layerGroupDataInterface";
 import { createListItem } from "../../helper/createListItem";
 import { LayerGroupsListInterface, LayerGroupsStorage } from "./layerGroupsListInterface";
+import LayerGroupData from "./layerGroupData";
 
 class LayerGroupsList implements LayerGroupsListInterface {
     layerGroupsList: HTMLElement|null;
@@ -31,13 +32,20 @@ class LayerGroupsList implements LayerGroupsListInterface {
 
     private setClickListener(listItem: HTMLLIElement, layerGroupData: LayerGroupDataInterface): void {
         listItem.querySelector('.dashicons-edit')?.addEventListener('click', () => {
+            listItem.classList.remove('is-active');
             layerGroupData.editLayerGroup();
         });
 
         listItem.addEventListener('click', () => {
+            const alreadyActive = listItem.classList.contains('is-active');
             this.removeIsActiveClass();
-            listItem.classList.add('is-active');
-            layerGroupData.setActiveLayerGroup();
+
+            if (alreadyActive) {
+                LayerGroupData.setActiveLayerGroup(null);
+            } else {
+                listItem.classList.add('is-active');
+                LayerGroupData.setActiveLayerGroup(layerGroupData);
+            }
         });
     }
 
