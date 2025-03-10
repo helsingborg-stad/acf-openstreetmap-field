@@ -1,6 +1,7 @@
 import { MapInterface } from "@helsingborg-stad/openstreetmap";
 import { MarkerFactoryInterface } from "./markerFactoryInterface";
 import { OptionFeature } from "../optionFeature";
+import LayerGroupData from "../createLayerGroup/layerGroupData";
 
 class OptionCreateMarker implements OptionFeature {
     protected condition: string = 'create_marker';
@@ -24,6 +25,9 @@ class OptionCreateMarker implements OptionFeature {
 
             if (e.latLng) {
                 const markerData = this.markerFactoryInstance.create();
+                if (LayerGroupData.getActiveLayerGroup()?.getId()) {
+                    markerData.setLayerGroup(LayerGroupData.getActiveLayerGroup()!.getId());
+                }
                 markerData.createMarker(e.latLng);
                 markerData.editMarker();
             }
