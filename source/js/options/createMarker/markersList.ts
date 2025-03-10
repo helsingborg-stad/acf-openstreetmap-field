@@ -6,12 +6,18 @@ import { createListItem } from "../../helper/createListItem";
 class MarkersList implements MarkersListInterface {
     markersList: HTMLElement|null;
     listedMarkers: MarkersListDataStorage = {};
+    layerAttribute: string = 'data-js-layer-group';
     constructor(private container: HTMLElement, private mapInstance: MapInterface) {
         this.markersList = this.container.querySelector('[data-js-markers-list]');
     }
 
     public addItem(markerData: MarkerDataInterface): void {
         const listItem = createListItem(this.getMarkerDataTitle(markerData));
+        if (markerData.getLayerGroup()) {
+            listItem.setAttribute(this.layerAttribute, markerData.getLayerGroup());
+            listItem.style.order = '2';
+        }
+
         this.markersList?.appendChild(listItem);
         this.listedMarkers[markerData.getId()] = {marker: markerData, listItem: listItem};
         this.setClickListener(listItem, markerData);
@@ -28,6 +34,14 @@ class MarkersList implements MarkersListInterface {
         }
 
         this.listedMarkers[markerData.getId()].listItem.querySelector('span')!.textContent = this.getMarkerDataTitle(markerData);
+
+        if (markerData.getLayerGroup()) {
+            this.listedMarkers[markerData.getId()].listItem.setAttribute(this.layerAttribute, markerData.getLayerGroup());
+            this.listedMarkers[markerData.getId()].listItem.style.order = '2';
+        } else {
+            this.listedMarkers[markerData.getId()].listItem.removeAttribute(this.layerAttribute);
+            this.listedMarkers[markerData.getId()].listItem.style.order = '';
+        }
     }
 
     private setClickListener(listItem: HTMLLIElement, markerData: MarkerDataInterface): void {
