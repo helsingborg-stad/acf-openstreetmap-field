@@ -5,8 +5,12 @@ import LayerGroupData from "./layerGroupData";
 
 class LayerGroupsList implements LayerGroupsListInterface {
     layerGroupsList: HTMLElement|null;
+    styleElement: HTMLStyleElement|null;
     listedLayerGroups: LayerGroupsStorage = {};
+    layerAttribute: string = 'data-js-layer-group';
+
     constructor(private container: HTMLElement) {
+        this.styleElement = this.container.querySelector('[data-js-style]');
         this.layerGroupsList = this.container.querySelector('[data-js-layer-group-list]');
     }
 
@@ -41,8 +45,16 @@ class LayerGroupsList implements LayerGroupsListInterface {
             this.removeIsActiveClass();
 
             if (alreadyActive) {
+                if (this.styleElement) {
+                    this.styleElement.innerHTML = '';
+                }
+
                 LayerGroupData.setActiveLayerGroup(null);
             } else {
+                if (this.styleElement) {
+                    this.styleElement.innerHTML = `[${this.layerAttribute}]:not([${this.layerAttribute}="${layerGroupData.getId()}"]) { display: none; }`;
+                }
+
                 listItem.classList.add('is-active');
                 LayerGroupData.setActiveLayerGroup(layerGroupData);
             }
