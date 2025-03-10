@@ -17,6 +17,11 @@
         justify-content: space-between;
         cursor: pointer;
 
+        &.is-active {
+            border-top: 1px solid $color-primary;
+            border-bottom: 1px solid $color-primary;
+        }
+
         span:not(.dashicons) {
             max-width: 11.5rem;
             white-space: nowrap;
@@ -28,7 +33,13 @@
             transition: .2s ease-in-out;
         }
 
-        &:hover > * {
+        &:hover {
+            span:not(.dashicons-edit) {
+                font-weight: bold;
+            }
+        }
+
+        .dashicons-edit:hover {
             font-weight: bold;
         }
     }
