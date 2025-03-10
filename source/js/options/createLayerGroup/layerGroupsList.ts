@@ -30,12 +30,23 @@ class LayerGroupsList implements LayerGroupsListInterface {
     }
 
     private setClickListener(listItem: HTMLLIElement, layerGroupData: LayerGroupDataInterface): void {
-        listItem.addEventListener('click', () => {
+        listItem.querySelector('.dashicons-edit')?.addEventListener('click', () => {
             layerGroupData.editLayerGroup();
+        });
+
+        listItem.addEventListener('click', () => {
+            this.removeIsActiveClass();
+            listItem.classList.add('is-active');
+            layerGroupData.setActiveLayerGroup();
         });
     }
 
-    // TODO: Add translation
+    private removeIsActiveClass(): void {
+        for (const key in this.listedLayerGroups) {
+            this.listedLayerGroups[key].listItem.classList.remove('is-active');
+        }
+    }
+
     private getLayerGroupTitle(layerGroupData: LayerGroupDataInterface): string {
         return layerGroupData.getTitle() ? layerGroupData.getTitle() : 'Untitled Layer';
     }
