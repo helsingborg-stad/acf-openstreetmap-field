@@ -1,11 +1,11 @@
+$color-primary: var(--acf-openstreetmap-color-primary, #199900) !default;
+$color-danger: var(--acf-openstreetmap-color-danger, #790000) !default;
+$color-white: var(--acf-openstreetmap-color-white, #ffffff) !default;
+
 @import "~@helsingborg-stad/openstreetmap/dist/main.css";
 @import "./options.scss";
 @import "./editOverlay.scss";
 @import "./setting.scss";
-
-$color-primary: var(--acf-openstreetmap-color-primary, #199900) !default;
-$color-danger: var(--acf-openstreetmap-color-danger, #790000) !default;
-$color-white: var(--acf-openstreetmap-color-white, #ffffff) !default;
 
 .acf-openstreetmap {
     position: relative;
