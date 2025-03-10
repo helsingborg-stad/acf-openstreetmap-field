@@ -42,7 +42,7 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
 
         this.marker = this.createMarkerInstance.create({
             position: latlng,
-            icon: this.getMarkerMarkup(),
+            html: this.getMarkerMarkup(),
             draggable: true,
         });
 
