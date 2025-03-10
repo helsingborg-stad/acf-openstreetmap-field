@@ -127,7 +127,7 @@ class LayerGroupData implements LayerGroupDataInterface {
             }
         } else {
             for (let layer of Object.values(LayerGroupData.getLayerGroups())) {
-                if (layer !== layerGroup) {
+                if (layer.getId() !== layerGroup.getId()) {
                     layer.hideLayerGroup();
                 } else {
                     layer.showLayerGroup();
