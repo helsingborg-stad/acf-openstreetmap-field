@@ -16,8 +16,11 @@ interface LayerGroupDataInterface {
     getLayerGroup(): string;
     setIcon(icon: string): void;
     getLayer(): LayerGroupInterface|null;
+    showLayerGroup(): void;
+    hideLayerGroup(): void;
     // static setActiveLayerGroup(layerGroup: LayerGroupDataInterface|null): void;
     // static getActiveLayerGroup(): LayerGroupDataInterface|null;
+    // static getLayerGroups(): LayerGroupsDataStorage;
     getIcon(): string;
     getId(): string;
 }

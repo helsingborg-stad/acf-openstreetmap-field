@@ -12,6 +12,7 @@ class LayerGroupData implements LayerGroupDataInterface {
     private layerGroup: string = '';
     private editor: EditLayerGroupDataInterface;
     private layer: LayerGroupInterface|null = null;
+    private layerIsVisible: boolean = true;
 
     constructor(
         private id: string,
@@ -30,7 +31,6 @@ class LayerGroupData implements LayerGroupDataInterface {
 
         this.layer = this.createLayerGroupInstance.create();
         this.layer.addTo(this.mapInstance);
-        
         LayerGroupData.layerGroups[this.getId()] = this;
         this.layerGroupsListInstance.addItem(this);
 
@@ -41,12 +41,8 @@ class LayerGroupData implements LayerGroupDataInterface {
         this.editor.edit();
     }
 
-    public setActiveLayerGroup(): void {
-      LayerGroupData.activeLayerGroup = this;  
-    }
-
-    public static getActiveLayerGroup(): LayerGroupDataInterface|null {
-        return LayerGroupData.activeLayerGroup;
+    public getLayer(): LayerGroupInterface|null {
+        return this.layer;
     }
 
     public deleteLayerGroup(): void {
@@ -97,6 +93,51 @@ class LayerGroupData implements LayerGroupDataInterface {
 
     public getId(): string {
         return this.id;
+    }
+
+    public hideLayerGroup(): void {
+
+        if (!this.layerIsVisible || !this.getLayer()) {
+            return;
+        }
+
+        this.getLayer()!.removeLayerGroup();
+        this.layerIsVisible = false;
+    }
+
+    public showLayerGroup(): void {
+        if (this.layerIsVisible || !this.getLayer()) {
+            return;
+        }
+
+        this.getLayer()!.addTo(this.mapInstance);
+        this.layerIsVisible = true;
+    }
+
+    public static setActiveLayerGroup(layerGroup: LayerGroupDataInterface|null): void {
+        if (layerGroup === LayerGroupData.activeLayerGroup) {
+            return;
+        }
+
+        LayerGroupData.activeLayerGroup = layerGroup;
+        
+        if (layerGroup === null) {
+            for (let layer of Object.values(LayerGroupData.getLayerGroups())) {
+                layer.showLayerGroup();
+            }
+        } else {
+            for (let layer of Object.values(LayerGroupData.getLayerGroups())) {
+                if (layer !== layerGroup) {
+                    layer.hideLayerGroup();
+                } else {
+                    layer.showLayerGroup();
+                }
+            }
+        }
+    }
+
+    public static getActiveLayerGroup(): LayerGroupDataInterface|null {
+        return LayerGroupData.activeLayerGroup;
     }
 
     public static getLayerGroups() {
