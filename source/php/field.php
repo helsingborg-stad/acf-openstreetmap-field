@@ -128,6 +128,11 @@ class Field extends \acf_field
                     </ul>
                 </div>
                 <div>
+                    <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="create_layer_group">Create layer</div>
+                    <ul class="acf-openstreetmap__option-list" data-js-layer-group-list>
+                    </ul>
+                </div>
+                <div>
                     <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="create_marker">Create marker</div>
                     <ul class="acf-openstreetmap__option-list" data-js-markers-list>
                     </ul>
@@ -135,11 +140,6 @@ class Field extends \acf_field
                 <div>
                     <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="create_image_overlay">Create Image Overlay</div>
                     <ul class="acf-openstreetmap__option-list" data-js-image-overlay-list>
-                    </ul>
-                </div>
-                <div>
-                    <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="create_layer_group">Create layer</div>
-                    <ul class="acf-openstreetmap__option-list" data-js-layer-group-list>
                     </ul>
                 </div>
             </div>
