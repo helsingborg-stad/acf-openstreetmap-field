@@ -10,14 +10,19 @@
 }
 
 .acf-openstreetmap__option-list {
+    display: flex;
+    flex-direction: column;
+
     li {
         display: flex;
         flex-direction: row;
+        align-items: center;
         gap: .5rem;
         justify-content: space-between;
         cursor: pointer;
 
         &.is-active {
+            font-size: 1.25rem;
             border-top: 1px solid $color-primary;
             border-bottom: 1px solid $color-primary;
         }
