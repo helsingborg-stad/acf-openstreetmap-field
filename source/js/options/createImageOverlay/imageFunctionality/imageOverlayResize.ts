@@ -11,7 +11,7 @@ class ImageOverlayResize implements ImageOverlayResizeInterface {
         const resizeHandle = this.createMarkerInstance.create({
             draggable: true,
             position: position,
-            icon: '<span style="font-size: 1rem; padding: .25rem; display: flex; justify-content: center; align-items: center; background-color: var(--acf-openstreetmap-color-primary,#199900); border-radius: 50%; color: white;" class="dashicons dashicons-leftright"></span>',
+            html: '<span style="font-size: 1rem; padding: .25rem; display: flex; justify-content: center; align-items: center; background-color: var(--acf-openstreetmap-color-primary,#199900); border-radius: 50%; color: white;" class="dashicons dashicons-leftright"></span>',
         });
 
         resizeHandle.addTo(this.mapInstance);
