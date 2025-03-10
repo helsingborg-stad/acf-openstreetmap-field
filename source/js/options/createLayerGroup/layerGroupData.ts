@@ -5,6 +5,7 @@ import { LayerGroupsListInterface } from "./layerGroupsListInterface";
 
 class LayerGroupData implements LayerGroupDataInterface {
     private static layerGroups: LayerGroupsDataStorage = {};
+    private static activeLayerGroup: LayerGroupDataInterface|null = null;
     private title: string = '';
     private color: string = '#000000';
     private icon: string = '';
@@ -38,6 +39,14 @@ class LayerGroupData implements LayerGroupDataInterface {
 
     public editLayerGroup(): void {
         this.editor.edit();
+    }
+
+    public setActiveLayerGroup(): void {
+      LayerGroupData.activeLayerGroup = this;  
+    }
+
+    public static getActiveLayerGroup(): LayerGroupDataInterface|null {
+        return LayerGroupData.activeLayerGroup;
     }
 
     public deleteLayerGroup(): void {

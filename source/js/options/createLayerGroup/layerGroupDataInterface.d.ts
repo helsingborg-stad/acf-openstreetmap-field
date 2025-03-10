@@ -14,6 +14,8 @@ interface LayerGroupDataInterface {
     setLayerGroup(layerGroup: string): void;
     getLayerGroup(): string;
     setIcon(icon: string): void;
+    setActiveLayerGroup(): void;
+    // static getActiveLayerGroup(): LayerGroupDataInterface|null;
     getIcon(): string;
     getId(): string;
 }
