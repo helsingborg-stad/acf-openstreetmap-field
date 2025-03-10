@@ -1,4 +1,4 @@
-import { MapInterface, MarkerInterface, LatLngObject, CreateMarkerInterface } from "@helsingborg-stad/openstreetmap";
+import { MapInterface, MarkerInterface, LatLngObject, CreateMarkerInterface, LayerGroupInterface } from "@helsingborg-stad/openstreetmap";
 import EditMarkerDataFactory from "./edit/editMarkerDataFactory";
 import { EditMarkerDataInterface } from "./edit/editMarkerDataInterface";
 import { MarkerDataInterface, MarkersDataStorage } from "./markerDataInterface";
@@ -33,13 +33,13 @@ class MarkerData implements MarkerDataInterface {
 
         this.marker = this.createMarkerInstance.create({
             position: latlng,
-            icon: this.getMarkerMarkup(),
+            html: this.getMarkerMarkup(),
             draggable: true,
             iconSize: [32, 32],
             iconAnchor: [16, 4]
         });
 
-        this.marker.addTo(this.mapInstance);
+        this.addMarkerToMap();
     
         this.marker.addListener('click', (e) => {
             this.editMarker();
@@ -89,12 +89,30 @@ class MarkerData implements MarkerDataInterface {
     }
 
     public setLayerGroup(layerGroup: string): void {
+        if (this.getLayerGroup() === layerGroup) {
+            return;
+        }
+
         this.layerGroup = layerGroup;
         this.getMarker()?.setIcon({
-            icon: this.getMarkerMarkup(),
+            html: this.getMarkerMarkup(),
             iconSize: [32, 32],
             iconAnchor: [16, 4]
         });
+
+        this.addMarkerToMap();
+    }
+
+    private addMarkerToMap(): void {
+        if (!this.marker) {
+            return;
+        }
+
+        if (LayerGroupData.getLayerGroups()[this.getLayerGroup()]?.getLayer()) {
+            return this.marker.addTo(LayerGroupData.getLayerGroups()[this.getLayerGroup()].getLayer() as LayerGroupInterface);
+        }
+
+        return this.marker.addTo(this.mapInstance);
     }
 
     public getLayerGroup(): string {
