@@ -177,7 +177,8 @@ class Main {
             container,
             zoomInstance,
             handleSelectedInstance,
-            createMarkerInstance
+            createMarkerInstance,
+            iconFactoryInstance
         );
 
         // Save and Load

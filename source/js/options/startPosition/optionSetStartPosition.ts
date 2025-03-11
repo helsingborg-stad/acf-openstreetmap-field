@@ -15,7 +15,8 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
         private container: HTMLElement,
         private zoomInstance: Setting,
         private handleSelectedInstance: HandleSelectedInterface,
-        private createMarkerInstance: CreateMarkerInterface
+        private createMarkerInstance: CreateMarkerInterface,
+        private iconFactoryInstance: IconFactoryInterface
     ) {
         this.list = this.container.querySelector('[data-js-start-position-list]');
 
@@ -44,6 +45,9 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
             position: latlng,
             html: this.getMarkerMarkup(),
             draggable: true,
+            iconSize: [32, 32],
+            iconAnchor: [32, 32],
+            className: this.markerCssClass
         });
 
         this.addListItem();
@@ -69,9 +73,8 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
         return this.marker;
     }
 
-    // TODO: Make this look nice
     private getMarkerMarkup(): string {
-        return `<span style="background-color: #199900; font-size: 24px; padding: 4px; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center;" class="${this.markerCssClass} dashicons dashicons-location"></span>`;
+        return this.iconFactoryInstance.create('location', '#199900', 24);
     }
 
     public checkCondition(value: string): boolean {
