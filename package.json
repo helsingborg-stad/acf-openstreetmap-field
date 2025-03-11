@@ -13,7 +13,7 @@
         "dist/"
     ],
     "devDependencies": {
-        "@helsingborg-stad/openstreetmap": "^0.40.13",
+        "@helsingborg-stad/openstreetmap": "^0.41.0",
         "autoprefixer": "^10.4.2",
         "clean-webpack-plugin": "^4.0.0",
         "cross-env": "^7.0.3",
