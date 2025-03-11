@@ -8,12 +8,12 @@ import LayerGroupData from "../createLayerGroup/layerGroupData";
 class MarkerData implements MarkerDataInterface {
     private static idCounter = 0;
     private id = `marker-${MarkerData.idCounter++}`;
+    private markerCssClass: string = 'marker-create';
     private title: string = '';
     private content: string = '';
     private url: string = '';
     private layerGroup: string = '';
     private marker: MarkerInterface|null = null;
-    private markerCssClass: string = 'marker-create';
     private editor: EditMarkerDataInterface;
     private static markers: MarkersDataStorage = {};
 
@@ -35,6 +35,7 @@ class MarkerData implements MarkerDataInterface {
         this.marker = this.createMarkerInstance.create({
             position: latlng,
             html: this.getMarkerMarkup(),
+            className: this.markerCssClass,
             draggable: true,
             iconSize: [32, 32],
             iconAnchor: [16, 4]
