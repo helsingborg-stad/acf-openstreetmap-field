@@ -5,7 +5,8 @@ class ImageOverlayMove implements ImageOverlayMoveInterface {
     private moveHandle: MarkerInterface|null = null;
     constructor(        
         private mapInstance: MapInterface,
-        private createMarkerInstance: CreateMarkerInterface
+        private createMarkerInstance: CreateMarkerInterface,
+        private iconFactoryInstance: IconFactoryInterface
     ) {}
 
     public createMove(
@@ -17,7 +18,7 @@ class ImageOverlayMove implements ImageOverlayMoveInterface {
         this.moveHandle = this.createMarkerInstance.create({
             draggable: true,
             position: position,
-            html: '<span style="font-size: 1rem; padding: .25rem; display: flex; justify-content: center; align-items: center; background-color: var(--acf-openstreetmap-color-primary,#199900); border-radius: 50%; color: white;" class="dashicons dashicons-move"></span>',
+            html: this.getMoveIcon(),
         });
 
         this.addMarkerToMap(layerGroup);
@@ -68,6 +69,10 @@ class ImageOverlayMove implements ImageOverlayMoveInterface {
 
     public addMarkerToMap(layerGroup: LayerGroupInterface|null = null): void {
         this.moveHandle?.addTo(layerGroup ?? this.mapInstance);
+    }
+
+    private getMoveIcon(): string {
+        return this.iconFactoryInstance.create('move', '#199900', 16);
     }
 }
 

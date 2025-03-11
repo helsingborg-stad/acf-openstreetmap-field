@@ -150,6 +150,7 @@ class Main {
             new ImageOverlaysList(container, mapInstance),
             new ImageOverlayBoundsAndRatioCalculator(mapInstance),
             new ImageOverlayResize(mapInstance, createMarkerInstance, iconFactoryInstance),
+            new ImageOverlayMove(mapInstance, createMarkerInstance, iconFactoryInstance)
         );
 
         // Main
