@@ -3,7 +3,6 @@ import { LatLngBoundsObject, ImageOverlayInterface, LayerGroupInterface } from "
 type ImageOverlaysDataStorage = { [id: string]: ImageOverlayDataInterface };
 
 interface ImageOverlayDataInterface {
-    
     editImageOverlay(): void;
     setTitle(title: string): void;
     getTitle(): string;

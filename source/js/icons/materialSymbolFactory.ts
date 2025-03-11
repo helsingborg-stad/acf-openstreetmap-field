@@ -10,10 +10,10 @@ class MaterialSymbolFactory implements IconFactoryInterface {
         return map[icon as keyof IconMap] ?? icon;
     }
 
-    public create(icon: string, color: string, size: number|null = null): string {
+    public create(icon: string, color: string, size: number = 20): string {
         const iconName = this.mapIconNameMap(icon);
 
-        return `<span style="color: ${color}; font-size: ${size ?? 32}px;" data-material-symbol="${iconName}" class="material-symbols material-symbols-rounded material-symbols-sharp material-symbols-outlined material-symbols--filled">${iconName}</span>`;
+        return `<span style="background-color: ${color}; color: white; font-size: ${size}px; padding: 4px; border-radius: 50%;" data-material-symbol="${iconName}" class="material-symbols material-symbols-rounded material-symbols-sharp material-symbols-outlined material-symbols--filled">${iconName}</span>`;
     }
 }
 

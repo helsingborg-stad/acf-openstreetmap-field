@@ -72,8 +72,8 @@ class Main {
         const tilesHelperInstance = new TilesHelper();
 
         // MapTiles
-        const tileLayerInstance          = new CreateTileLayer().create();
-        const attributionInstance        = new CreateAttribution().create();
+        const tileLayerInstance    = new CreateTileLayer().create();
+        const attributionInstance  = new CreateAttribution().create();
 
         // Settings
         const zoomInstance        = new Zoom(mapInstance, container);
@@ -149,8 +149,7 @@ class Main {
             editImageOverlayFactoryInstance,
             new ImageOverlaysList(container, mapInstance),
             new ImageOverlayBoundsAndRatioCalculator(mapInstance),
-            new ImageOverlayResize(mapInstance, createMarkerInstance),
-            new ImageOverlayMove(mapInstance, createMarkerInstance)
+            new ImageOverlayResize(mapInstance, createMarkerInstance, iconFactoryInstance),
         );
 
         // Main

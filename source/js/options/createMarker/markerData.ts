@@ -145,7 +145,7 @@ class MarkerData implements MarkerDataInterface {
             color = layerGroups[this.getLayerGroup()].getColor();
             icon  = layerGroups[this.getLayerGroup()].getIcon();
         }
-        return this.iconFactoryInstance.create(icon ? icon : 'location', color, 32);
+        return this.iconFactoryInstance.create(icon ? icon : 'location', color, 20);
     }
 }
 

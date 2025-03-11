@@ -5,7 +5,8 @@ class ImageOverlayResize implements ImageOverlayResizeInterface {
     private resizeHandle: MarkerInterface|null = null;
     constructor(
         private mapInstance: MapInterface,
-        private createMarkerInstance: CreateMarkerInterface
+        private createMarkerInstance: CreateMarkerInterface,
+        private iconFactoryInstance: IconFactoryInterface
     ) {}
 
     public createResize(
@@ -17,7 +18,7 @@ class ImageOverlayResize implements ImageOverlayResizeInterface {
         this.resizeHandle = this.createMarkerInstance.create({
             draggable: true,
             position: position,
-            html: '<span style="font-size: 1rem; padding: .25rem; display: flex; justify-content: center; align-items: center; background-color: var(--acf-openstreetmap-color-primary,#199900); border-radius: 50%; color: white;" class="dashicons dashicons-leftright"></span>',
+            html: this.getResizeIcon(),
         });
 
         this.resizeHandle.addTo(this.mapInstance);
@@ -63,6 +64,10 @@ class ImageOverlayResize implements ImageOverlayResizeInterface {
 
     public addMarkerToMap(layerGroup: LayerGroupInterface|null = null): void {
         this.resizeHandle?.addTo(layerGroup ?? this.mapInstance);
+    }
+
+    private getResizeIcon(): string {
+        return this.iconFactoryInstance.create('resize', '#199900', 16);
     }
 }
 
