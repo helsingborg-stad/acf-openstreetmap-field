@@ -1,9 +1,10 @@
-import { CreateImageOverlayInterface, ImageOverlayInterface, MapInterface, MarkerInterface, LatLngBoundsObject } from "@helsingborg-stad/openstreetmap";
+import { CreateImageOverlayInterface, ImageOverlayInterface, MapInterface, MarkerInterface, LatLngBoundsObject, LayerGroupInterface } from "@helsingborg-stad/openstreetmap";
 import EditImageOverlayFactory from "./edit/editImageOverlayDataFactory";
 import { ImageOverlayBoundsAndRatioCalculatorInterface } from "./helper/imageOverlayBoundsAndRatioCalculatorInterface";
 import { ImageOverlayMoveInterface } from "./imageFunctionality/imageOverlayMoveInterface";
 import { ImageOverlayResizeInterface } from "./imageFunctionality/imageOverlayResizeInterface";
 import { ImageOverlayDataInterface, ImageOverlaysDataStorage } from "./imageOverlayDataInterface";
+import LayerGroupData from "../createLayerGroup/layerGroupData";
 
 class ImageOverlayData implements ImageOverlayDataInterface {
     private editor: EditImageOverlayDataInterface;
@@ -30,7 +31,7 @@ class ImageOverlayData implements ImageOverlayDataInterface {
         this.imageOverlaysListInstance.addItem(this);
     }
 
-    public removeImageFromMap() {
+    public removePlacedImageOverlay() {
         if (this.currentImageOverlay) {
             this.currentImageOverlay.removeImageOverlay();
             this.currentImageOverlay = null;
@@ -49,7 +50,7 @@ class ImageOverlayData implements ImageOverlayDataInterface {
         delete ImageOverlayData.getImageOverlays()[this.getId()];
     }
 
-    public addImageToMap(bounds: null|LatLngBoundsObject = null): void {
+    public updatePlacedImageOverlay(bounds: null|LatLngBoundsObject = null): void {
         if (bounds && this.getImageAspectRatio()) {
             this.addImage(bounds, this.getImageAspectRatio()!);
             return;
@@ -70,15 +71,28 @@ class ImageOverlayData implements ImageOverlayDataInterface {
             bounds: bounds,
             interactive: true
         });
-        overlay.addTo(this.mapInstance);
+
         overlay.addListener('click', (e) => {
             this.mapInstance.flyTo(overlay.getCenter());
             this.editImageOverlay();
         });
         this.currentImageOverlay = overlay;
+        this.addImageOverlayToMap();
         this.setImageAspectRatio(aspectRatio);
         this.currentResize = this.imageOverlayResizeInstance.createResize(overlay, bounds.northEast, aspectRatio);
         this.currentMove = this.imageOverlayMoveInstance.createMove(overlay, bounds.southWest, this.currentResize);
+    }
+
+    public addImageOverlayToMap(): void {
+        if (!this.getImageOverlay()) {
+            return;
+        }
+
+        if (LayerGroupData.getLayerGroups()[this.getLayerGroup()]?.getLayer()) {
+            return this.getImageOverlay()!.addTo(LayerGroupData.getLayerGroups()[this.getLayerGroup()]!.getLayer() as LayerGroupInterface);
+        }
+
+        return this.getImageOverlay()!.addTo(this.mapInstance);
     }
 
     public editImageOverlay(): void {
@@ -94,7 +108,12 @@ class ImageOverlayData implements ImageOverlayDataInterface {
     }
 
     public setLayerGroup(layerGroup: string): void {
+        if (this.getLayerGroup() === layerGroup) {
+            return;
+        }
+
         this.layerGroup = layerGroup;
+        this.addImageOverlayToMap();
     }
 
     public getLayerGroup(): string {
@@ -107,12 +126,12 @@ class ImageOverlayData implements ImageOverlayDataInterface {
 
         if (image === originalImage) {
         } else if (!image && originalImage) {
-            this.removeImageFromMap();
+            this.removePlacedImageOverlay();
         } else if (image && !originalImage) {
-            this.addImageToMap(bounds);
+            this.updatePlacedImageOverlay(bounds);
         } else if (image !== originalImage) {
-            this.removeImageFromMap();
-            this.addImageToMap(bounds);
+            this.removePlacedImageOverlay();
+            this.updatePlacedImageOverlay(bounds);
         }
     }
 
@@ -126,7 +145,7 @@ class ImageOverlayData implements ImageOverlayDataInterface {
 
     public deleteImageOverlay(): void {
         this.imageOverlaysListInstance.removeItem(this);
-        this.removeImageFromMap();
+        this.removePlacedImageOverlay();
     }
 
     public getImageOverlay(): ImageOverlayInterface|null {
