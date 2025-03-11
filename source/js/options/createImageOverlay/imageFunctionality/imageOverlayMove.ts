@@ -32,6 +32,7 @@ class ImageOverlayMove implements ImageOverlayMoveInterface {
 
             startLatLng = event.latLng;
             startBounds = imageOverlay.getPosition();
+            imageOverlay.setOpacity(0.5);
         });
 
         this.moveHandle.addListener("drag", (event) => {
@@ -56,6 +57,10 @@ class ImageOverlayMove implements ImageOverlayMoveInterface {
             this.moveHandle!.setPosition(newBounds.southWest);
             resizeHandle.setPosition(newBounds.northEast);
             imageOverlay.setPosition(newBounds);
+        });
+
+        this.moveHandle.addListener("dragend", (event) => {
+            imageOverlay.setOpacity(1);
         });
 
         return this.moveHandle;
