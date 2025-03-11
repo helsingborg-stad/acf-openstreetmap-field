@@ -39,6 +39,7 @@ import SaveImageOverlays from './options/createImageOverlay/saveImageOverlays';
 import Zoom from './options/settings/zoom';
 import MapStyle from './options/settings/mapStyle';
 import LayerFilter from './options/settings/layerFilter';
+import IconFactoryResolver from './icons/iconFactoryResolver';
 
 
 declare const acf: any;
@@ -64,6 +65,8 @@ class Main {
         const mapInstance = new CreateMap({
             id: id
         }).create();
+
+        const iconFactoryInstance = new IconFactoryResolver().resolve();
 
         // Helpers
         const tilesHelperInstance = new TilesHelper();
