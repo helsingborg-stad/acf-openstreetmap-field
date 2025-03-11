@@ -40,6 +40,7 @@ import Zoom from './options/settings/zoom';
 import MapStyle from './options/settings/mapStyle';
 import LayerFilter from './options/settings/layerFilter';
 import IconFactoryResolver from './icons/iconFactoryResolver';
+import ListItemHelper from './helper/createListItem';
 
 
 declare const acf: any;
@@ -66,10 +67,12 @@ class Main {
             id: id
         }).create();
 
+        // Icons
         const iconFactoryInstance = new IconFactoryResolver().resolve();
 
         // Helpers
         const tilesHelperInstance = new TilesHelper();
+        const listItemHelper      = new ListItemHelper(iconFactoryInstance);
 
         // MapTiles
         const tileLayerInstance    = new CreateTileLayer().create();
@@ -112,7 +115,7 @@ class Main {
             mapInstance,
             createLayerGroupInstance,
             editLayerGroupDataFactory,
-            new LayerGroupsList(container)
+            new LayerGroupsList(container, listItemHelper)
         );
 
         // Create marker
@@ -130,7 +133,7 @@ class Main {
             mapInstance,
             createMarkerInstance,
             editMarkerDataFactoryInstance,
-            new MarkersList(container, mapInstance),
+            new MarkersList(container, mapInstance, listItemHelper),
             iconFactoryInstance
         );
 
@@ -147,7 +150,7 @@ class Main {
             mapInstance,
             createImageOverlayInstance,
             editImageOverlayFactoryInstance,
-            new ImageOverlaysList(container, mapInstance),
+            new ImageOverlaysList(container, mapInstance, listItemHelper),
             new ImageOverlayBoundsAndRatioCalculator(mapInstance),
             new ImageOverlayResize(mapInstance, createMarkerInstance, iconFactoryInstance),
             new ImageOverlayMove(mapInstance, createMarkerInstance, iconFactoryInstance)
@@ -178,7 +181,8 @@ class Main {
             zoomInstance,
             handleSelectedInstance,
             createMarkerInstance,
-            iconFactoryInstance
+            iconFactoryInstance,
+            listItemHelper
         );
 
         // Save and Load

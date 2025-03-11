@@ -1,7 +1,7 @@
 import { MapInterface, CreateMarkerInterface, MarkerInterface, LatLngObject } from "@helsingborg-stad/openstreetmap";
 import { OptionSetStartPositionInterface } from "./optionSetStartPositionInterface";
 import { OptionFeature } from "../optionFeature";
-import { createListItem } from "../../helper/createListItem";
+import ListItemHelper from "../../helper/createListItem";
 import { Setting } from "../settings/setting";
 
 class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInterface {
@@ -16,7 +16,8 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
         private zoomInstance: Setting,
         private handleSelectedInstance: HandleSelectedInterface,
         private createMarkerInstance: CreateMarkerInterface,
-        private iconFactoryInstance: IconFactoryInterface
+        private iconFactoryInstance: IconFactoryInterface,
+        private listItemHelper: ListItemHelper
     ) {
         this.list = this.container.querySelector('[data-js-start-position-list]');
 
@@ -59,7 +60,7 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
             return;
         }
 
-        const listItem = createListItem('Start position');
+        const listItem = this.listItemHelper.createListItem('Start position');
         this.list.appendChild(listItem);
 
         listItem.addEventListener('click', () => {

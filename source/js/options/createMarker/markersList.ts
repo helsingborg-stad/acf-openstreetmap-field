@@ -1,18 +1,22 @@
 import { MapInterface } from "@helsingborg-stad/openstreetmap";
 import { MarkerDataInterface } from "./markerDataInterface";
 import { MarkersListDataStorage, MarkersListInterface } from "./markersListInterface";
-import { createListItem } from "../../helper/createListItem";
+import ListItemHelper from "../../helper/createListItem";
 
 class MarkersList implements MarkersListInterface {
     markersList: HTMLElement|null;
     listedMarkers: MarkersListDataStorage = {};
     layerAttribute: string = 'data-js-layer-group';
-    constructor(private container: HTMLElement, private mapInstance: MapInterface) {
+    constructor(
+        private container: HTMLElement,
+        private mapInstance: MapInterface,
+        private listItemHelper: ListItemHelper
+    ) {
         this.markersList = this.container.querySelector('[data-js-markers-list]');
     }
 
     public addItem(markerData: MarkerDataInterface): void {
-        const listItem = createListItem(this.getMarkerDataTitle(markerData));
+        const listItem = this.listItemHelper.createListItem(this.getMarkerDataTitle(markerData));
         if (markerData.getLayerGroup()) {
             listItem.setAttribute(this.layerAttribute, markerData.getLayerGroup());
             listItem.style.order = '2';

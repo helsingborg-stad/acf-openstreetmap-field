@@ -1,16 +1,20 @@
 import { MapInterface } from "@helsingborg-stad/openstreetmap";
-import { createListItem } from "../../helper/createListItem";
+import ListItemHelper from "../../helper/createListItem";
 import { ImageOverlayDataInterface } from "./imageOverlayDataInterface";
 
 class ImageOverlaysList implements ImageOverlaysListInterface {
     imageOverlaysList: HTMLElement|null;
     listedImageOverlays: ImageOverlaysStorage = {};
-    constructor(private container: HTMLElement, private mapInstance: MapInterface) {
+    constructor(
+        private container: HTMLElement,
+        private mapInstance: MapInterface,
+        private listItemHelper: ListItemHelper
+    ) {
         this.imageOverlaysList = this.container.querySelector('[data-js-image-overlay-list]');
     }
 
     public addItem(imageOverlayData: ImageOverlayDataInterface): void {
-        const listItem = createListItem(this.getLayerGroupTitle(imageOverlayData));
+        const listItem = this.listItemHelper.createListItem(this.getLayerGroupTitle(imageOverlayData));
         this.imageOverlaysList?.appendChild(listItem);
         this.listedImageOverlays[imageOverlayData.getId()] = {imageOverlay: imageOverlayData, listItem: listItem};
         this.setClickListener(listItem, imageOverlayData);

@@ -1,14 +1,23 @@
-export function createListItem(title: string): HTMLLIElement {
-    const li = document.createElement('li');
+class ListItemHelper {
+    constructor(private iconFactoryInstance: IconFactoryInterface) {}
 
-    const titleSpan = document.createElement('span');
-    titleSpan.textContent = title;
+    createListItem(title: string): HTMLLIElement {
+        const li = document.createElement('li');
 
-    const editIconSpan = document.createElement('span');
-    editIconSpan.className = 'dashicons dashicons-edit';
+        const titleSpan = document.createElement('span');
+        titleSpan.textContent = title;
 
-    li.appendChild(titleSpan);
-    li.appendChild(editIconSpan);
+        
+        const editIconSpan = document.createElement('span');
+        editIconSpan.className = 'edit-icon';
+        editIconSpan.style.display = 'inline-flex';
+        editIconSpan.innerHTML = this.iconFactoryInstance.create('edit', '#000', 20, false);
 
-    return li;
+        li.appendChild(titleSpan);
+        li.appendChild(editIconSpan);
+
+        return li;
+    }
 }
+
+export default ListItemHelper;

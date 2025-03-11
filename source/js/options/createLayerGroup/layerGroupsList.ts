@@ -1,5 +1,5 @@
 import { LayerGroupDataInterface } from "./layerGroupDataInterface";
-import { createListItem } from "../../helper/createListItem";
+import ListItemHelper from "../../helper/createListItem";
 import { LayerGroupsListInterface, LayerGroupsStorage } from "./layerGroupsListInterface";
 import LayerGroupData from "./layerGroupData";
 
@@ -9,13 +9,13 @@ class LayerGroupsList implements LayerGroupsListInterface {
     listedLayerGroups: LayerGroupsStorage = {};
     layerAttribute: string = 'data-js-layer-group';
 
-    constructor(private container: HTMLElement) {
+    constructor(private container: HTMLElement, private listItemHelper: ListItemHelper) {
         this.styleElement = this.container.querySelector('[data-js-style]');
         this.layerGroupsList = this.container.querySelector('[data-js-layer-group-list]');
     }
 
     public addItem(layerGroupData: LayerGroupDataInterface): void {
-        const listItem = createListItem(this.getLayerGroupTitle(layerGroupData));
+        const listItem = this.listItemHelper.createListItem(this.getLayerGroupTitle(layerGroupData));
         this.layerGroupsList?.appendChild(listItem);
         this.listedLayerGroups[layerGroupData.getId()] = {layerGroup: layerGroupData, listItem: listItem};
         this.setClickListener(listItem, layerGroupData);
@@ -35,7 +35,7 @@ class LayerGroupsList implements LayerGroupsListInterface {
     }
 
     private setClickListener(listItem: HTMLLIElement, layerGroupData: LayerGroupDataInterface): void {
-        listItem.querySelector('.dashicons-edit')?.addEventListener('click', () => {
+        listItem.querySelector('.edit-icon')?.addEventListener('click', () => {
             listItem.classList.remove('is-active');
             layerGroupData.editLayerGroup();
         });

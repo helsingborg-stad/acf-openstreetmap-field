@@ -6,5 +6,5 @@ type IconMap = {
 }
 
 interface IconFactoryInterface {
-    create(icon: string, color: string, size?: number): string;
+    create(icon: string, color: string, size?: number, background?: boolean): string;
 }
