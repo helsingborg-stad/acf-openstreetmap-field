@@ -1,8 +1,8 @@
 <?php return array(
     'root' => array(
         'name' => 'helsingborg-stad/acf-openstreetmap-field',
-        'pretty_version' => '0.57.2',
-        'version' => '0.57.2.0',
+        'pretty_version' => '0.59.0',
+        'version' => '0.59.0.0',
         'reference' => null,
         'type' => 'wordpress-muplugin',
         'install_path' => __DIR__ . '/../../',
@@ -11,8 +11,8 @@
     ),
     'versions' => array(
         'helsingborg-stad/acf-openstreetmap-field' => array(
-            'pretty_version' => '0.57.2',
-            'version' => '0.57.2.0',
+            'pretty_version' => '0.59.0',
+            'version' => '0.59.0.0',
             'reference' => null,
             'type' => 'wordpress-muplugin',
             'install_path' => __DIR__ . '/../../',
