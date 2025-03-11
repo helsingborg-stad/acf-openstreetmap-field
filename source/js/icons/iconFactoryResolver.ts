@@ -9,7 +9,6 @@ class IconFactoryResolver implements IconFactoryResolverInterface {
         }
 
         if (this.dashiconsAvailable()) {
-            console.log('dashiconsAvailable');
             return new DashIconFactory();
         }
 
