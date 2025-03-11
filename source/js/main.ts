@@ -130,7 +130,8 @@ class Main {
             mapInstance,
             createMarkerInstance,
             editMarkerDataFactoryInstance,
-            new MarkersList(container, mapInstance)
+            new MarkersList(container, mapInstance),
+            iconFactoryInstance
         );
 
         // Create image overlay

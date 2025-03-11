@@ -10,7 +10,8 @@ class MarkerFactory implements MarkerFactoryInterface {
         private mapInstance: MapInterface,
         private createMarkersInstance: CreateMarkerInterface,
         private editMarkerDataFactoryInstance: EditMarkerDataFactory,
-        private markersListInstance: MarkersListInterface
+        private markersListInstance: MarkersListInterface,
+        private iconFactoryInstance: IconFactoryInterface
     ) {}
 
     public create(): MarkerDataInterface {
@@ -18,7 +19,8 @@ class MarkerFactory implements MarkerFactoryInterface {
             this.mapInstance,
             this.createMarkersInstance,
             this.editMarkerDataFactoryInstance,
-            this.markersListInstance
+            this.markersListInstance,
+            this.iconFactoryInstance
         );
     }
 }

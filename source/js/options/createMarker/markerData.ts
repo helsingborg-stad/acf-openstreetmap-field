@@ -21,7 +21,8 @@ class MarkerData implements MarkerDataInterface {
         private mapInstance: MapInterface,
         private createMarkerInstance: CreateMarkerInterface,
         private editMarkerDataFactoryInstance: EditMarkerDataFactory,
-        private markersListInstance: MarkersListInterface
+        private markersListInstance: MarkersListInterface,
+        private iconFactoryInstance: IconFactoryInterface
     ) {
         this.editor = this.editMarkerDataFactoryInstance.create(this);
     }
@@ -138,12 +139,13 @@ class MarkerData implements MarkerDataInterface {
     private getMarkerMarkup(): string {
         const layerGroups = LayerGroupData.getLayerGroups();
         let color = '#E04A39';
+        let icon  = null;
 
         if (layerGroups[this.getLayerGroup()]) {
             color = layerGroups[this.getLayerGroup()].getColor();
+            icon  = layerGroups[this.getLayerGroup()].getIcon();
         }
-
-        return `<span style="color: ${color}; font-size: 32px;" class="${this.markerCssClass} dashicons dashicons-location"></span>`;
+        return this.iconFactoryInstance.create(icon ? icon : 'location', color, 32);
     }
 }
 
