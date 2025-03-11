@@ -103,18 +103,6 @@ class MarkerData implements MarkerDataInterface {
         this.addMarkerToMap();
     }
 
-    private addMarkerToMap(): void {
-        if (!this.marker) {
-            return;
-        }
-
-        if (LayerGroupData.getLayerGroups()[this.getLayerGroup()]?.getLayer()) {
-            return this.marker.addTo(LayerGroupData.getLayerGroups()[this.getLayerGroup()].getLayer() as LayerGroupInterface);
-        }
-
-        return this.marker.addTo(this.mapInstance);
-    }
-
     public getLayerGroup(): string {
         return this.layerGroup;
     }
@@ -133,6 +121,18 @@ class MarkerData implements MarkerDataInterface {
 
     public getMarker(): MarkerInterface|null {
         return this.marker ?? null;
+    }
+
+    private addMarkerToMap(): void {
+        if (!this.marker) {
+            return;
+        }
+
+        if (LayerGroupData.getLayerGroups()[this.getLayerGroup()]?.getLayer()) {
+            return this.marker.addTo(LayerGroupData.getLayerGroups()[this.getLayerGroup()].getLayer() as LayerGroupInterface);
+        }
+
+        return this.marker.addTo(this.mapInstance);
     }
 
     private getMarkerMarkup(): string {
