@@ -1,4 +1,4 @@
-import { LatLngBoundsObject, ImageOverlayInterface } from "@helsingborg-stad/openstreetmap";
+import { LatLngBoundsObject, ImageOverlayInterface, LayerGroupInterface } from "@helsingborg-stad/openstreetmap";
 
 type ImageOverlaysDataStorage = { [id: string]: ImageOverlayDataInterface };
 
@@ -13,6 +13,7 @@ interface ImageOverlayDataInterface {
     getImage(): string;
     updateImageOverlay(): void;
     deleteImageOverlay(): void;
+    addImageOverlayToMap(layerGroup?: LayerGroupInterface|null): void;
     getId(): string;
     getImageOverlay(): ImageOverlayInterface|null;
     getImageAspectRatio(): number|null;

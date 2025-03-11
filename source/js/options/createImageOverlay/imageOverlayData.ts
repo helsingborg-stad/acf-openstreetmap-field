@@ -77,22 +77,22 @@ class ImageOverlayData implements ImageOverlayDataInterface {
             this.editImageOverlay();
         });
         this.currentImageOverlay = overlay;
-        this.addImageOverlayToMap();
+
+        const layerGroup = LayerGroupData.getLayerGroups()[this.getLayerGroup()]?.getLayer() as LayerGroupInterface;
+
+        this.addImageOverlayToMap(layerGroup);
         this.setImageAspectRatio(aspectRatio);
-        this.currentResize = this.imageOverlayResizeInstance.createResize(overlay, bounds.northEast, aspectRatio);
-        this.currentMove = this.imageOverlayMoveInstance.createMove(overlay, bounds.southWest, this.currentResize);
+
+        this.currentResize = this.imageOverlayResizeInstance.createResize(overlay, bounds.northEast, aspectRatio, layerGroup);
+        this.currentMove = this.imageOverlayMoveInstance.createMove(overlay, bounds.southWest, this.currentResize, layerGroup);
     }
 
-    public addImageOverlayToMap(): void {
+    public addImageOverlayToMap(layerGroup: LayerGroupInterface|null = null): void {
         if (!this.getImageOverlay()) {
             return;
         }
 
-        if (LayerGroupData.getLayerGroups()[this.getLayerGroup()]?.getLayer()) {
-            return this.getImageOverlay()!.addTo(LayerGroupData.getLayerGroups()[this.getLayerGroup()]!.getLayer() as LayerGroupInterface);
-        }
-
-        return this.getImageOverlay()!.addTo(this.mapInstance);
+        return this.getImageOverlay()!.addTo(layerGroup ?? this.mapInstance);
     }
 
     public editImageOverlay(): void {
@@ -107,13 +107,16 @@ class ImageOverlayData implements ImageOverlayDataInterface {
         return this.title;
     }
 
-    public setLayerGroup(layerGroup: string): void {
-        if (this.getLayerGroup() === layerGroup) {
+    public setLayerGroup(layerGroupId: string): void {
+        if (this.getLayerGroup() === layerGroupId) {
             return;
         }
+        this.layerGroup = layerGroupId;
+        const layerGroup = LayerGroupData.getLayerGroups()[this.getLayerGroup()]?.getLayer() as LayerGroupInterface;
 
-        this.layerGroup = layerGroup;
-        this.addImageOverlayToMap();
+        this.imageOverlayResizeInstance.addMarkerToMap(layerGroup);
+        this.imageOverlayMoveInstance.addMarkerToMap(layerGroup);
+        this.addImageOverlayToMap(layerGroup);
     }
 
     public getLayerGroup(): string {
