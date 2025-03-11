@@ -24,6 +24,10 @@ class ImageOverlayResize implements ImageOverlayResizeInterface {
 
         this.addMarkerToMap(layerGroup);
 
+        this.resizeHandle.addListener("dragstart", (event) => {
+            imageOverlay.setOpacity(0.5);
+        });
+
         this.resizeHandle.addListener("drag", (event) => {
             if (!event.latLng) {
                 return;
@@ -48,6 +52,10 @@ class ImageOverlayResize implements ImageOverlayResizeInterface {
             });
 
             this.resizeHandle!.setPosition(newTopRight);
+        });
+
+        this.resizeHandle.addListener("dragend", (event) => {
+            imageOverlay.setOpacity(1);
         });
 
         return this.resizeHandle;
