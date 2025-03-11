@@ -4,6 +4,8 @@ interface ImageOverlayMoveInterface {
     createMove(
         imageOverlay: ImageOverlayInterface,
         position: LatLngObject,
-        resizeHandle: MarkerInterface
+        resizeHandle: MarkerInterface,
+        layerGroup?: LayerGroupInterface|null
     ): MarkerInterface;
+    addMarkerToMap(layerGroup?: LayerGroupInterface|null): void;
 }
