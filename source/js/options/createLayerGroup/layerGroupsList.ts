@@ -35,7 +35,7 @@ class LayerGroupsList implements LayerGroupsListInterface {
     }
 
     private setClickListener(listItem: HTMLLIElement, layerGroupData: LayerGroupDataInterface): void {
-        listItem.querySelector('.edit-icon')?.addEventListener('click', () => {
+        listItem.querySelector('[data-js-edit-icon]')?.addEventListener('click', () => {
             listItem.classList.remove('is-active');
             layerGroupData.editLayerGroup();
         });

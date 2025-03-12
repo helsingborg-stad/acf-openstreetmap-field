@@ -1,4 +1,5 @@
 class DashIconFactory implements IconFactoryInterface {
+    private className: string = 'edit-icon';
     private mapIconNameMap(icon: string) {
         const map: IconMap = {
             'location': 'location',
@@ -18,11 +19,11 @@ class DashIconFactory implements IconFactoryInterface {
     }
 
     private withoutBackground(iconName: string, color: string, size: number): string {
-        return `<span style="font-size: ${size}px; color: ${color};" class="dashicons dashicons-${iconName}"></span>`;
+        return `<span style="font-size: ${size}px; color: ${color};" class="${this.className} dashicons dashicons-${iconName}"></span>`;
     }
 
     private withBackground(iconName: string, color: string, size: number): string {
-        return `<span style="font-size: ${size}px; padding: 4px; display: flex; justify-content: center; align-items: center; background-color: ${color}; border-radius: 50%; color: white;" class="dashicons dashicons-${iconName}"></span>`;
+        return `<span style="font-size: ${size}px; padding: 4px; display: flex; justify-content: center; align-items: center; background-color: ${color}; border-radius: 50%; color: white;" class="${this.className} dashicons dashicons-${iconName}"></span>`;
     }
 }
 

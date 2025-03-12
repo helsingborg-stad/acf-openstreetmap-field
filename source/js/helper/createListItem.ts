@@ -9,7 +9,7 @@ class ListItemHelper {
 
         
         const editIconSpan = document.createElement('span');
-        editIconSpan.className = 'edit-icon';
+        editIconSpan.setAttribute('data-js-edit-icon', '');
         editIconSpan.style.display = 'inline-flex';
         editIconSpan.innerHTML = this.iconFactoryInstance.create('edit', '#000', 20, false);
 

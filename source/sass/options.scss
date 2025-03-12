@@ -28,7 +28,7 @@
             align-items: center;
         }
 
-        span:not(.dashicons) {
+        span:not(.edit-icon) {
             max-width: 11.5rem;
             white-space: nowrap;
             overflow: hidden;
@@ -39,14 +39,14 @@
             transition: .2s ease-in-out;
         }
 
-        &:hover {
-            span:not(.dashicons-edit) {
-                font-weight: bold;
-            }
+        .edit-icon:hover {
+            font-weight: bold;
         }
 
-        .dashicons-edit:hover {
-            font-weight: bold;
+        &:hover {
+            span:not(.edit-icon) {
+                font-weight: bold;
+            }
         }
     }
 }
