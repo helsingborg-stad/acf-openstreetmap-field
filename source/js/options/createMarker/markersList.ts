@@ -49,13 +49,14 @@ class MarkersList implements MarkersListInterface {
     }
 
     private setClickListener(listItem: HTMLLIElement, markerData: MarkerDataInterface): void {
-        listItem.addEventListener('click', () => {
+        listItem.querySelector('[data-js-edit-icon]')?.addEventListener('click', () => {
             markerData.editMarker();
-            if (!markerData.getMarker()) {
-                return;
-            }
+        });
 
-            this.mapInstance.flyTo(markerData.getMarker()!.getPosition(), 17);
+        listItem.addEventListener('click', () => {
+            if (markerData.getMarker()) {
+                this.mapInstance.flyTo(markerData.getMarker()!.getPosition(), 17);
+            }
         });
     }
 

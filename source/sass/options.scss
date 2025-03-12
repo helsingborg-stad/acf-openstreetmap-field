@@ -13,6 +13,12 @@
     display: flex;
     flex-direction: column;
 
+    &.acf-openstreetmap__option-list-start-position {
+        .edit-icon {
+            display: none;
+        }
+    }
+
     li {
         display: flex;
         flex-direction: row;

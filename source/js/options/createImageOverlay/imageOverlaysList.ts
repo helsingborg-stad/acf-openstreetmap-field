@@ -34,9 +34,11 @@ class ImageOverlaysList implements ImageOverlaysListInterface {
     }
 
     private setClickListener(listItem: HTMLLIElement, imageOverlayData: ImageOverlayDataInterface): void {
-        listItem.addEventListener('click', () => {
+        listItem.querySelector('[data-js-edit-icon]')?.addEventListener('click', () => {
             imageOverlayData.editImageOverlay();
+        });
 
+        listItem.addEventListener('click', () => {
             if (imageOverlayData.getImageOverlay()) {
                 this.mapInstance.flyTo(imageOverlayData.getImageOverlay()!.getCenter());
             }
