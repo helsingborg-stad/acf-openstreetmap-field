@@ -5,6 +5,7 @@ import { ImageOverlayDataInterface } from "./imageOverlayDataInterface";
 class ImageOverlaysList implements ImageOverlaysListInterface {
     imageOverlaysList: HTMLElement|null;
     listedImageOverlays: ImageOverlaysStorage = {};
+    layerAttribute: string = 'data-js-layer-group';
     constructor(
         private container: HTMLElement,
         private mapInstance: MapInterface,
@@ -15,6 +16,12 @@ class ImageOverlaysList implements ImageOverlaysListInterface {
 
     public addItem(imageOverlayData: ImageOverlayDataInterface): void {
         const listItem = this.listItemHelper.createListItem(this.getLayerGroupTitle(imageOverlayData));
+    
+        if (imageOverlayData.getLayerGroup()) {
+            listItem.setAttribute(this.layerAttribute, imageOverlayData.getLayerGroup());
+            listItem.style.order = '2';
+        }
+
         this.imageOverlaysList?.appendChild(listItem);
         this.listedImageOverlays[imageOverlayData.getId()] = {imageOverlay: imageOverlayData, listItem: listItem};
         this.setClickListener(listItem, imageOverlayData);
@@ -31,6 +38,14 @@ class ImageOverlaysList implements ImageOverlaysListInterface {
         }
 
         this.listedImageOverlays[imageOverlayData.getId()].listItem.querySelector('span')!.textContent = this.getLayerGroupTitle(imageOverlayData);
+
+        if (imageOverlayData.getLayerGroup()) {
+            this.listedImageOverlays[imageOverlayData.getId()].listItem.setAttribute(this.layerAttribute, imageOverlayData.getLayerGroup());
+            this.listedImageOverlays[imageOverlayData.getId()].listItem.style.order = '2';
+        } else {
+            this.listedImageOverlays[imageOverlayData.getId()].listItem.removeAttribute(this.layerAttribute);
+            this.listedImageOverlays[imageOverlayData.getId()].listItem.style.order = '';
+        }
     }
 
     private setClickListener(listItem: HTMLLIElement, imageOverlayData: ImageOverlayDataInterface): void {
