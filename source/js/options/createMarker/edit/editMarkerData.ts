@@ -28,14 +28,14 @@ class EditMarkerData implements EditMarkerDataInterface, Editable {
     }
 
     public save() {
-        if (!this.fieldValidatorInstance.validateUrl(this.urlInstance.getValue() ?? '')) {
+        if (!this.fieldValidatorInstance.validateUrl((this.urlInstance.getValue() ?? '') as string)) {
             return;
         }
 
-        this.markerData.setTitle(this.titleInstance.getValue() ?? '');
-        this.markerData.setUrl(this.urlInstance.getValue() ?? '');
-        this.markerData.setDescription(this.descriptionInstance.getValue() ?? '');
-        this.markerData.setLayerGroup(this.layerInstance.getValue() ?? '');
+        this.markerData.setTitle(this.titleInstance.getValue() as string);
+        this.markerData.setUrl(this.urlInstance.getValue() as string);
+        this.markerData.setDescription(this.descriptionInstance.getValue() as string);
+        this.markerData.setLayerGroup(this.layerInstance.getValue() as string);
         this.markerData.updateMarker();
         this.editInstance.setActiveEditable(null);
         this.hideFields();

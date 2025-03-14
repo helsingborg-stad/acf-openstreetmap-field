@@ -24,9 +24,9 @@ class EditImageOverlayData implements EditImageOverlayDataInterface, Editable {
     }
 
     public save() {
-        this.imageOverlayData.setTitle(this.titleInstance.getValue());
-        this.imageOverlayData.setLayerGroup(this.layerInstance.getValue());
-        this.imageOverlayData.setImage(this.imageInstance.getValue());
+        this.imageOverlayData.setTitle(this.titleInstance.getValue() as string);
+        this.imageOverlayData.setLayerGroup(this.layerInstance.getValue() as string);
+        this.imageOverlayData.setImage(this.imageInstance.getValue() as string);
         this.imageOverlayData.updateImageOverlay();
         this.editInstance.setActiveEditable(null);
         this.hideFields();
