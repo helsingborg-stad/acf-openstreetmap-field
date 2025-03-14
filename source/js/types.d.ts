@@ -7,6 +7,7 @@ type SavedLayerGroup = {
     layerGroup: string;
     id: string;
     icon: string;
+    preselected: boolean;
 }[];
 
 type SavedMarkerData = {
