@@ -23,4 +23,6 @@ interface LayerGroupDataInterface {
     // static getLayerGroups(): LayerGroupsDataStorage;
     getIcon(): string;
     getId(): string;
+    getPreselected(): boolean;
+    setPreselected(preselected: boolean): void;
 }

@@ -182,6 +182,10 @@ class Field extends \acf_field
                         <option value="">Default (on the map)</option>
                     </select>
                 </div>
+                <div class="acf-openstreetmap__field" data-js-field-edit-preselected>
+                    <label for="field-preselected-<?php echo $id; ?>">Show as default when filtering</label>
+                    <input type="checkbox" id="field-preselected-<?php echo $id; ?>" name="preselected"></input>
+                </div>
                 <div class="acf-openstreetmap__field" data-js-field-edit-image>
                     <label for="field-icon-<?php echo $id; ?>">Image</label>
                     <div class="acf-openstreetmap__button acf-openstreetmap__button--save" data-js-field-edit-image-button role="button" id="field-icon-<?php echo $id; ?>">Set image</div>

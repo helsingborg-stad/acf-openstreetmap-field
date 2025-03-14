@@ -9,6 +9,7 @@ class LayerGroupData implements LayerGroupDataInterface {
     private title: string = '';
     private color: string = '#000000';
     private icon: string = '';
+    private preselected: boolean = false;
     private layerGroup: string = '';
     private editor: EditLayerGroupDataInterface;
     private layer: LayerGroupInterface|null = null;
@@ -93,6 +94,14 @@ class LayerGroupData implements LayerGroupDataInterface {
 
     public getId(): string {
         return this.id;
+    }
+
+    public setPreselected(preselected: boolean) {
+        this.preselected = preselected;
+    }
+
+    public getPreselected(): boolean {
+        return this.preselected;
     }
 
     public hideLayerGroup(): void {

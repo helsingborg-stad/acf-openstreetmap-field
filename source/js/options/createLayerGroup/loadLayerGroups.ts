@@ -18,6 +18,7 @@ class LoadLayerGroups implements LoadOptionDataInterface {
             layerGroupData.setColor(savedLayerGroup.color ?? '');
             layerGroupData.setLayerGroup(savedLayerGroup.layerGroup ?? '');
             layerGroupData.setIcon(savedLayerGroup.icon ?? '');
+            layerGroupData.setPreselected(savedLayerGroup.preselected ?? false);
             layerGroupData.createLayerGroup();
         }
     }

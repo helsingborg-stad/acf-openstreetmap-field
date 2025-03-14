@@ -8,7 +8,8 @@ class EditLayerGroupDataFactory {
         private titleInstance: Field,
         private colorInstance: Field,
         private iconInstance: Field,
-        private layerInstance: Field
+        private layerInstance: Field,
+        private preselectedInstance: Field
     ) {}
 
     public create(layerGroupData: LayerGroupDataInterface): EditLayerGroupDataInterface {
@@ -19,7 +20,8 @@ class EditLayerGroupDataFactory {
             this.titleInstance,
             this.colorInstance,
             this.iconInstance,
-            this.layerInstance
+            this.layerInstance,
+            this.preselectedInstance
         );
     }
 }
