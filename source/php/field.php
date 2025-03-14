@@ -165,7 +165,7 @@ class Field extends \acf_field
                 </div>
                 <div class="acf-openstreetmap__field" data-js-field-edit-color>
                     <label for="field-color-<?php echo $id; ?>">Color</label>
-                    <input type="color" id="field-color-<?php echo $id; ?>" name="url"></input>
+                    <input type="color" id="field-color-<?php echo $id; ?>" name="color"></input>
                 </div>
                 <div class="acf-openstreetmap__field" data-js-field-edit-zoom>
                     <label for="field-zoom-<?php echo $id; ?>">Zoom</label>
