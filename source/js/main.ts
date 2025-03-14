@@ -41,6 +41,7 @@ import MapStyle from './options/settings/mapStyle';
 import LayerFilter from './options/settings/layerFilter';
 import IconFactoryResolver from './icons/iconFactoryResolver';
 import ListItemHelper from './helper/createListItem';
+import Preselected from './edit/fields/preselected';
 
 
 declare const acf: any;
@@ -100,6 +101,7 @@ class Main {
         const layerInstance          = new Layer(overlayInstance);
         const iconInstance           = new Icon(overlayInstance);
         const imageInstance          = new Image(overlayInstance);
+        const preselectedInstance    = new Preselected(overlayInstance);
 
         // Create layer group
         const editLayerGroupDataFactory = new EditLayerGroupDataFactory(
@@ -108,7 +110,8 @@ class Main {
             titleInstance,
             colorInstance,
             iconInstance,
-            layerInstance
+            layerInstance,
+            preselectedInstance
         );
 
         const layerGroupFactoryInstance = new LayerGroupFactory(
