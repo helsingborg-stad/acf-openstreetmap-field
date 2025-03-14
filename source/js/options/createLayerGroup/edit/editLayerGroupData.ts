@@ -9,12 +9,12 @@ class EditLayerGroupData implements EditLayerGroupDataInterface, Editable {
         private titleInstance: Field,
         private colorInstance: Field,
         private iconInstance: Field,
-        private layerInstance: Field
+        private layerInstance: Field,
+        private preselectedInstance: Field
     ) {
         this.option = document.createElement('option');
         this.option.value = this.layerGroupData.getId();
         this.layerInstance.getField()?.appendChild(this.option);
-
     }
 
     public edit(): void {
@@ -28,6 +28,7 @@ class EditLayerGroupData implements EditLayerGroupDataInterface, Editable {
         this.colorInstance.setValue(this.layerGroupData.getColor());
         this.layerInstance.setValue(this.layerGroupData.getLayerGroup());
         this.iconInstance.setValue(this.layerGroupData.getIcon());
+        this.preselectedInstance.setValue(this.layerGroupData.getPreselected());
     }
 
     public save() {
@@ -36,10 +37,11 @@ class EditLayerGroupData implements EditLayerGroupDataInterface, Editable {
             return;
         }
 
-        this.layerGroupData.setTitle(this.titleInstance.getValue());
-        this.layerGroupData.setColor(this.colorInstance.getValue());
-        this.layerGroupData.setLayerGroup(this.layerInstance.getValue());
-        this.layerGroupData.setIcon(this.iconInstance.getValue());
+        this.layerGroupData.setTitle(this.titleInstance.getValue() as string);
+        this.layerGroupData.setColor(this.colorInstance.getValue() as string);
+        this.layerGroupData.setLayerGroup(this.layerInstance.getValue() as string);
+        this.layerGroupData.setIcon(this.iconInstance.getValue() as string);
+        this.layerGroupData.setPreselected(this.preselectedInstance.getValue() as boolean);
         this.layerGroupData.updateLayerGroup();
         this.editInstance.setActiveEditable(null);
         this.hideFields();
@@ -66,6 +68,7 @@ class EditLayerGroupData implements EditLayerGroupDataInterface, Editable {
         this.colorInstance.hideField();
         this.layerInstance.hideField();
         this.iconInstance.hideField();
+        this.preselectedInstance.hideField();
         this.overlayInstance.hideOverlay();
     }
 
@@ -74,6 +77,7 @@ class EditLayerGroupData implements EditLayerGroupDataInterface, Editable {
         this.colorInstance.showField();
         this.layerInstance.showField();
         this.iconInstance.showField();
+        this.preselectedInstance.showField();
         this.overlayInstance.showOverlay();
     }
 }
