@@ -1,8 +1,8 @@
 
 .acf-openstreetmap__settings {
     display: flex;
-    row-gap: 1rem;
-    column-gap: 2rem;
+    flex-direction: column;
+    gap: 2rem;
     margin-bottom: 1.5rem;
     flex-wrap: wrap;
 }
@@ -10,7 +10,7 @@
 .acf-openstreetmap__setting {
     display: flex;
     flex-direction: column;
-    flex: 0 0 12rem;
+    width: 15rem;
 
     .title {
         margin-bottom: .25rem;
