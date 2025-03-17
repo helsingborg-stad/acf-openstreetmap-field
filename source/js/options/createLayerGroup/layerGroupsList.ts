@@ -6,12 +6,29 @@ import LayerGroupData from "./layerGroupData";
 class LayerGroupsList implements LayerGroupsListInterface {
     layerGroupsList: HTMLElement|null;
     styleElement: HTMLStyleElement|null;
+    defaultLayerGroup: HTMLElement|null;
     listedLayerGroups: LayerGroupsStorage = {};
     layerAttribute: string = 'data-js-layer-group';
+    activeClass: string = 'is-active';
 
     constructor(private container: HTMLElement, private listItemHelper: ListItemHelper) {
         this.styleElement = this.container.querySelector('[data-js-style]');
         this.layerGroupsList = this.container.querySelector('[data-js-layer-group-list]');
+        this.defaultLayerGroup = this.container.querySelector('[default-layer-group]');
+
+        this.handleDefaultLayerGroup();
+    }
+
+    private handleDefaultLayerGroup(): void {
+        if (!this.defaultLayerGroup) {
+            return;
+        }
+
+        this.defaultLayerGroup.addEventListener('click', () => {
+            this.removeIsActiveClass();
+            this.defaultLayerGroup?.classList.add(this.activeClass);
+            LayerGroupData.setActiveLayerGroup(null);
+        });
     }
 
     public addItem(layerGroupData: LayerGroupDataInterface): void {
@@ -36,34 +53,27 @@ class LayerGroupsList implements LayerGroupsListInterface {
 
     private setClickListener(listItem: HTMLLIElement, layerGroupData: LayerGroupDataInterface): void {
         listItem.querySelector('[data-js-edit-icon]')?.addEventListener('click', () => {
-            listItem.classList.remove('is-active');
+            listItem.classList.remove(this.activeClass);
             layerGroupData.editLayerGroup();
         });
 
         listItem.addEventListener('click', () => {
-            const alreadyActive = listItem.classList.contains('is-active');
             this.removeIsActiveClass();
 
-            if (alreadyActive) {
-                if (this.styleElement) {
-                    this.styleElement.innerHTML = '';
-                }
-
-                LayerGroupData.setActiveLayerGroup(null);
-            } else {
-                if (this.styleElement) {
-                    this.styleElement.innerHTML = `[${this.layerAttribute}]:not([${this.layerAttribute}="${layerGroupData.getId()}"]) { display: none; }`;
-                }
-
-                listItem.classList.add('is-active');
-                LayerGroupData.setActiveLayerGroup(layerGroupData);
+            if (this.styleElement) {
+                this.styleElement.innerHTML = `[${this.layerAttribute}]:not([${this.layerAttribute}="${layerGroupData.getId()}"]) { display: none; }`;
             }
+
+            listItem.classList.add(this.activeClass);
+            LayerGroupData.setActiveLayerGroup(layerGroupData);
         });
     }
 
     private removeIsActiveClass(): void {
+        this.defaultLayerGroup?.classList.remove(this.activeClass);
+
         for (const key in this.listedLayerGroups) {
-            this.listedLayerGroups[key].listItem.classList.remove('is-active');
+            this.listedLayerGroups[key].listItem.classList.remove(this.activeClass);
         }
     }
 

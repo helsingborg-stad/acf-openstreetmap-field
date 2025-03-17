@@ -18,6 +18,13 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
         private iconFactoryInstance: IconFactoryInterface,
         private listItemHelper: ListItemHelper
     ) {
+        this.container.querySelector('[acf-openstreetmap-set-start-position]')?.addEventListener('click', () => {
+            if (this.marker) {
+                this.marker.setPosition(this.mapInstance.getCenter());
+            } else {
+                this.addMarker(this.mapInstance.getCenter());
+            }
+        });
         this.mapInstance.addListener('click', (e) => {
             if (
                 this.handleSelectedInstance.getCurrentSelectedValue() !== this.condition ||

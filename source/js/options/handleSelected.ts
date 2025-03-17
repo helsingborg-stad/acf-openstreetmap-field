@@ -10,6 +10,7 @@ class HandleSelected implements HandleSelectedInterface {
 
     private setupClickListeners(): void {
         this.options.forEach((option) => {
+            console.log(option);
             option.addEventListener('click', () => {
                 if (option.classList.contains('selected')) {
                     option.classList.remove('selected');
