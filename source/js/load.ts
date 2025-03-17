@@ -16,8 +16,9 @@ class LoadHiddenField {
         private mapStyleInstance: Setting,
         private layerFilterInstance: Setting
     ) {
-        let json = this.hiddenField.value;
-        this.data = JSON.parse(json ?? '');
+        let json = this.hiddenField.value || '{}';
+        this.data = JSON.parse(json);
+        console.log(json);
         if (!json) {
             return;
         }
