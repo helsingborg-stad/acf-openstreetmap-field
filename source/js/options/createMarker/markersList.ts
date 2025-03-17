@@ -2,6 +2,7 @@ import { MapInterface } from "@helsingborg-stad/openstreetmap";
 import { MarkerDataInterface } from "./markerDataInterface";
 import { MarkersListDataStorage, MarkersListInterface } from "./markersListInterface";
 import ListItemHelper from "../../helper/createListItem";
+import LayerGroupData from "../createLayerGroup/layerGroupData";
 
 class MarkersList implements MarkersListInterface {
     markersList: HTMLElement|null;
@@ -16,7 +17,9 @@ class MarkersList implements MarkersListInterface {
     }
 
     public addItem(markerData: MarkerDataInterface): void {
-        const listItem = this.listItemHelper.createListItem(this.getMarkerDataTitle(markerData));
+        const color = markerData.getColorFromLayerGroup(LayerGroupData.getLayerGroups());
+
+        const listItem = this.listItemHelper.createMarkerListItem(this.getMarkerDataTitle(markerData), color);
         if (markerData.getLayerGroup()) {
             listItem.setAttribute(this.layerAttribute, markerData.getLayerGroup());
             listItem.style.order = '2';
@@ -49,7 +52,7 @@ class MarkersList implements MarkersListInterface {
     }
 
     private setClickListener(listItem: HTMLLIElement, markerData: MarkerDataInterface): void {
-        listItem.querySelector('[data-js-edit-icon]')?.addEventListener('click', () => {
+        listItem.querySelector('[data-js-edit]')?.addEventListener('click', () => {
             markerData.editMarker();
         });
 
