@@ -6,12 +6,15 @@ import LayerGroupData from "./layerGroupData";
 class LayerGroupsList implements LayerGroupsListInterface {
     layerGroupsList: HTMLElement|null;
     styleElement: HTMLStyleElement|null;
+    currentEditHeading: HTMLElement|null;
     listedLayerGroups: LayerGroupsStorage = {};
     layerAttribute: string = 'data-js-layer-group';
 
     constructor(private container: HTMLElement, private listItemHelper: ListItemHelper) {
         this.styleElement = this.container.querySelector('[data-js-style]');
         this.layerGroupsList = this.container.querySelector('[data-js-layer-group-list]');
+        this.currentEditHeading = this.container.querySelector('[data-js-current-edit-heading]');
+        this.setEditHeading();
     }
 
     public addItem(layerGroupData: LayerGroupDataInterface): void {
@@ -49,6 +52,7 @@ class LayerGroupsList implements LayerGroupsListInterface {
                     this.styleElement.innerHTML = '';
                 }
 
+                this.setEditHeading();
                 LayerGroupData.setActiveLayerGroup(null);
             } else {
                 if (this.styleElement) {
@@ -56,9 +60,20 @@ class LayerGroupsList implements LayerGroupsListInterface {
                 }
 
                 listItem.classList.add('is-active');
+                this.setEditHeading(this.getLayerGroupTitle(layerGroupData));
                 LayerGroupData.setActiveLayerGroup(layerGroupData);
             }
         });
+    }
+
+    private setEditHeading(heading: string|null = null): void {
+        if (!this.currentEditHeading) {
+            return;
+        }
+
+        const item = heading ? heading : 'Map';
+        const text = `You are currently editing: <b>${item}</b>`;
+        this.currentEditHeading.innerHTML = text;
     }
 
     private removeIsActiveClass(): void {
