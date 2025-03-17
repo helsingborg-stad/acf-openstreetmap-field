@@ -1,7 +1,7 @@
 class ListItemHelper {
     constructor(private iconFactoryInstance: IconFactoryInterface) {}
 
-    createListItem(title: string, editText: string|null = null): HTMLLIElement {
+    public createListItem(title: string, editText: string|null = null): HTMLLIElement {
         const li = document.createElement('li');
 
         const titleSpan = document.createElement('span');
@@ -15,12 +15,19 @@ class ListItemHelper {
         return li;
     }
 
+    public createMarkerListItem(title: string, color: string): HTMLLIElement {
+        const li = document.createElement('li');
+        li.innerHTML = `<span style="display: flex; align-items: center; gap: .25rem;"><span style="border-radius: 50%; width: .25rem; height: .25rem; background-color:${color};"></span>${title}</span>`;
+
+        return li;
+    }
+
     private createEditIcon(editText: string|null = null): HTMLSpanElement {
         const span = document.createElement('span');
         if (editText) {
-            span.innerHTML = editText;
+            span.innerHTML = `<span data-js-edit>${editText}</span>`;
         } else {
-            span.setAttribute('data-js-edit-icon', '');
+            span.setAttribute('data-js-edit', '');
             span.style.display = 'inline-flex';
             span.innerHTML = this.iconFactoryInstance.create('edit', '#000', 20, false);
         }
