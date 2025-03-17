@@ -18,7 +18,7 @@ class LoadHiddenField {
     ) {
         let json = this.hiddenField.value || '{}';
         this.data = JSON.parse(json);
-        console.log(json);
+
         if (!json) {
             return;
         }
