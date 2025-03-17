@@ -1,11 +1,9 @@
 import { MapInterface, CreateMarkerInterface, MarkerInterface, LatLngObject } from "@helsingborg-stad/openstreetmap";
 import { OptionSetStartPositionInterface } from "./optionSetStartPositionInterface";
-import { OptionFeature } from "../optionFeature";
 import ListItemHelper from "../../helper/createListItem";
 import { Setting } from "../settings/setting";
 
-class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInterface {
-    protected condition: string = 'set_start_position';
+class OptionSetStartPosition implements OptionSetStartPositionInterface {
     private markerCssClass: string = 'marker-start-position';
     private marker: undefined|MarkerInterface;
 
@@ -25,20 +23,6 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
                 this.addMarker(this.mapInstance.getCenter());
             }
         });
-        this.mapInstance.addListener('click', (e) => {
-            if (
-                this.handleSelectedInstance.getCurrentSelectedValue() !== this.condition ||
-                e.originalEvent?.target.classList.contains(this.markerCssClass) ||
-                !e.latLng) {
-                return;
-            }
-
-            if (this.marker) {
-                this.marker.setPosition(e.latLng);
-            } else {
-                this.addMarker(e.latLng);
-            }
-        })
     }
 
     public addMarker(latlng: LatLngObject): void {
@@ -64,10 +48,6 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
 
     private getMarkerMarkup(): string {
         return this.iconFactoryInstance.create('location', '#199900', 24);
-    }
-
-    public checkCondition(value: string): boolean {
-        return value === this.condition;
     }
 }
 
