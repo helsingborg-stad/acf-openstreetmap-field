@@ -49,7 +49,7 @@ class ImageOverlaysList implements ImageOverlaysListInterface {
     }
 
     private setClickListener(listItem: HTMLLIElement, imageOverlayData: ImageOverlayDataInterface): void {
-        listItem.querySelector('[data-js-edit-icon]')?.addEventListener('click', () => {
+        listItem.querySelector('[data-js-edit]')?.addEventListener('click', () => {
             imageOverlayData.editImageOverlay();
         });
 
