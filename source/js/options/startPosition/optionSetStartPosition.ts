@@ -8,7 +8,6 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
     protected condition: string = 'set_start_position';
     private markerCssClass: string = 'marker-start-position';
     private marker: undefined|MarkerInterface;
-    private list: HTMLUListElement|null;
 
     constructor(
         private mapInstance: MapInterface,
@@ -19,8 +18,6 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
         private iconFactoryInstance: IconFactoryInterface,
         private listItemHelper: ListItemHelper
     ) {
-        this.list = this.container.querySelector('[data-js-start-position-list]');
-
         this.mapInstance.addListener('click', (e) => {
             if (
                 this.handleSelectedInstance.getCurrentSelectedValue() !== this.condition ||
@@ -51,23 +48,7 @@ class OptionSetStartPosition implements OptionFeature, OptionSetStartPositionInt
             className: this.markerCssClass
         });
 
-        this.addListItem();
         this.marker.addTo(this.mapInstance);
-    }
-
-    private addListItem(): void {
-        if (!this.list) {
-            return;
-        }
-
-        const listItem = this.listItemHelper.createListItem('Start position');
-        this.list.appendChild(listItem);
-
-        listItem.addEventListener('click', () => {
-            if (this.marker) {
-                this.mapInstance.flyTo(this.marker.getPosition(), parseInt(this.zoomInstance.getValue()));
-            }
-        });
     }
 
     public getStartPositionMarker(): MarkerInterface|undefined {
