@@ -1,7 +1,6 @@
-import { OptionFeature } from "../optionFeature";
 import { LayerGroupFactoryInterface } from "./layerGroupFactoryInterface";
 
-class OptionCreateLayerGroup implements OptionFeature {
+class OptionCreateLayerGroup {
     protected condition: string = 'create_layer_group';
     constructor(
         private container: HTMLElement,
@@ -21,10 +20,6 @@ class OptionCreateLayerGroup implements OptionFeature {
             layerGroupDataInstance.editLayerGroup();
             this.handleSelectedInstance.clearSelected();
         });
-    }
-
-    public checkCondition(value: string): boolean {
-        return value === this.condition;
     }
 }
 
