@@ -131,10 +131,10 @@ class Field extends \acf_field
                     <ul class="acf-openstreetmap__option-list acf-openstreetmap__option-list-layer-group" data-js-layer-group-list>
                         <li class="is-active" default-layer-group>Default layer</li>
                     </ul>
-                    <span acf-openstreetmap-option role="button" data-js-value="create_layer_group">Add layer [+]</span>
+                    <span style="margin-top: .5rem;" acf-openstreetmap-option role="button" data-js-value="create_layer_group">Add layer [+]</span>
                 </div>
                 <div class="acf-openstreetmap__option acf-openstreetmap__option-marker">
-                    <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="create_marker">Create marker</div>
+                    <h2 style="padding: 0; font-size: 16px; font-weight: bold;">Markers</h2>
                     <ul class="acf-openstreetmap__option-list acf-openstreetmap__option-list-marker" data-js-markers-list>
                     </ul>
                 </div>
