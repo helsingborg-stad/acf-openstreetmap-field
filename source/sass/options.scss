@@ -31,8 +31,6 @@
 }
 
 .acf-openstreetmap__option-list {
-    display: flex;
-    flex-direction: column;
     margin-top: 0;
     margin-bottom: 0;
 
@@ -44,11 +42,11 @@
 
     li {
         display: flex;
-        flex-direction: row;
         align-items: center;
         gap: .5rem;
         justify-content: space-between;
         cursor: pointer;
+        padding: .25rem .5rem;
 
         &.is-active {
             font-size: 1.1rem;
