@@ -95,10 +95,6 @@ class Field extends \acf_field
         ?>
         <h2 style="padding: .5rem 0; font-weight: bold;">Settings</h2>
             <div class="acf-openstreetmap__settings">
-                <div class="acf-openstreetmap__setting" data-js-setting-zoom>
-                    <label class="title" for="setting-zoom-<?php echo $id; ?>">Initial Zoom</label>
-                    <input type="range" step="1" min="0" max="19" id="setting-zoom-<?php echo $id; ?>" name="zoom"></input>
-                </div>
                 <div class="acf-openstreetmap__setting" data-js-setting-map-style>
                     <label class="title" for="setting-map-style-<?php echo $id; ?>">Map style</label>
                     <select id="setting-map-style-<?php echo $id; ?>" name="map-style">
@@ -107,6 +103,14 @@ class Field extends \acf_field
                         <option value="pale">Pale</option>
                         <option value="color">Color</option>
                     </select>
+                </div>
+                <div class="acf-openstreetmap__setting" data-js-setting-zoom>
+                    <label class="title" for="setting-zoom-<?php echo $id; ?>">Initial Zoom</label>
+                    <input type="range" step="1" min="0" max="18" id="setting-zoom-<?php echo $id; ?>" name="zoom"></input>
+                </div>
+                <div class="acf-openstreetmap__setting acf-openstreetmap__option acf-openstreetmap__option-start-position">
+                    <label>Set start location</label>
+                    <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="set_start_position">Set start position</div>
                 </div>
                 <div class="acf-openstreetmap__setting" data-js-setting-layer-filter>
                     <span class="title">Allow layer filter</span>
@@ -123,22 +127,18 @@ class Field extends \acf_field
     {
         ?>
             <div class="acf-openstreetmap__options">
-                <div>
-                    <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="set_start_position">Set start position</div>
-                    <ul class="acf-openstreetmap__option-list acf-openstreetmap__option-list-start-position" data-js-start-position-list>
-                    </ul>
-                </div>
-                <div>
-                    <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="create_layer_group">Create layer</div>
+            <h2 class="acf-openstreetmap__option-edit-title" data-js-current-edit-heading="true"></h2>
+                <div class="acf-openstreetmap__option acf-openstreetmap__option-layer-group">
+                    <div acf-openstreetmap-option role="button" data-js-value="create_layer_group">Create layer <span class="dashicons dashicons-plus"></span></div>
                     <ul class="acf-openstreetmap__option-list acf-openstreetmap__option-list-layer-group" data-js-layer-group-list>
                     </ul>
                 </div>
-                <div>
+                <div class="acf-openstreetmap__option acf-openstreetmap__option-marker">
                     <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="create_marker">Create marker</div>
                     <ul class="acf-openstreetmap__option-list acf-openstreetmap__option-list-marker" data-js-markers-list>
                     </ul>
                 </div>
-                <div>
+                <div class="acf-openstreetmap__option acf-openstreetmap__option-image-overlay">
                     <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="create_image_overlay">Create Image Overlay</div>
                     <ul class="acf-openstreetmap__option-list acf-openstreetmap__option-list-image-overlay" data-js-image-overlay-list>
                     </ul>
@@ -182,10 +182,14 @@ class Field extends \acf_field
                         <option value="">Default (on the map)</option>
                     </select>
                 </div>
-                <div class="acf-openstreetmap__field" data-js-field-edit-preselected>
-                    <label for="field-preselected-<?php echo $id; ?>">Show as default when filtering</label>
-                    <input type="checkbox" id="field-preselected-<?php echo $id; ?>" name="preselected"></input>
+                <div class="acf-openstreetmap__field acf-openstreetmap__setting" style="flex: unset;"  data-js-field-edit-preselected>
+                    <span class="title">Show as default when filtering</span>
+                    <label class="switch" for="field-preselected-<?php echo $id; ?>">
+                        <input type="checkbox" id="field-preselected-<?php echo $id; ?>" name="preselected">
+                        <span class="slider round"></span>
+                    </label>
                 </div>
+                
                 <div class="acf-openstreetmap__field" data-js-field-edit-image>
                     <label for="field-icon-<?php echo $id; ?>">Image</label>
                     <div class="acf-openstreetmap__button acf-openstreetmap__button--save" data-js-field-edit-image-button role="button" id="field-icon-<?php echo $id; ?>">Set image</div>
