@@ -1,6 +1,4 @@
-import { OptionFeature } from "../optionFeature";
-
-class OptionCreateImageOverlay implements OptionFeature {
+class OptionCreateImageOverlay {
     protected condition: string = 'create_image_overlay';
 
     constructor(
