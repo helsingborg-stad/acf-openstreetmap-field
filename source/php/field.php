@@ -127,7 +127,6 @@ class Field extends \acf_field
     {
         ?>
             <div class="acf-openstreetmap__options">
-            <h2 class="acf-openstreetmap__option-edit-title" data-js-current-edit-heading="true"></h2>
                 <div class="acf-openstreetmap__option acf-openstreetmap__option-layer-group">
                     <div acf-openstreetmap-option role="button" data-js-value="create_layer_group">Create layer <span class="dashicons dashicons-plus"></span></div>
                     <ul class="acf-openstreetmap__option-list acf-openstreetmap__option-list-layer-group" data-js-layer-group-list>
