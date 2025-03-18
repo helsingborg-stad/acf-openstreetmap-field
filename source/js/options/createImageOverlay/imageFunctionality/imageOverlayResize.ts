@@ -72,7 +72,6 @@ class ImageOverlayResize implements ImageOverlayResizeInterface {
     }
 
     public isDragging(): boolean {
-        console.log(this.dragging)
         return this.dragging;
     }
 
