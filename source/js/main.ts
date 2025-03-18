@@ -72,7 +72,7 @@ class Main {
 
         // Helpers
         const tilesHelperInstance = new TilesHelper();
-        const listItemHelper      = new ListItemHelper(iconFactoryInstance);
+        const listItemHelper      = new ListItemHelper();
 
         // MapTiles
         const tileLayerInstance    = new CreateTileLayer().create();

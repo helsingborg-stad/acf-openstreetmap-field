@@ -1,5 +1,5 @@
 class ListItemHelper {
-    constructor(private iconFactoryInstance: IconFactoryInterface) {}
+    constructor() {}
 
     public createLayerGroupListItem(title: string): HTMLLIElement {
         const li = document.createElement('li');
