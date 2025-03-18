@@ -54,6 +54,14 @@
     flex-wrap: wrap;
 }
 
+.acf-openstreetmap__option-list-image-overlay {
+    padding: 0rem;
+
+    &:not(:empty) {
+        padding: 1rem;
+    }
+}
+
 .acf-openstreetmap__option-layer-group {
     display: flex;
     flex-direction: column;
