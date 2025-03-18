@@ -6,6 +6,7 @@
 .acf-openstreetmap__options {
     display: flex;
     flex-wrap: wrap;
+    align-items: flex-start;
     gap: 3rem;
     margin-top: 1.5rem;
     position: relative;
@@ -15,10 +16,22 @@
     display: flex;
     flex-direction: column;
     border: 1px solid #2271b1;
-    padding: 1rem;
     gap: 1rem;
     border-radius: .5rem;
     flex: 1 0 18rem;
+
+    .acf-openstreetmap__option-marker {
+        padding: 1rem;
+    }
+
+    .acf-openstreetmap__option-image-overlay-button {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 0;
+        border-left: 0;
+        border-right: 0;
+        border-radius: .5rem;
+    }
 
     ul {
         margin-bottom: 0;
