@@ -131,18 +131,17 @@ class Field extends \acf_field
                     <ul class="acf-openstreetmap__option-list acf-openstreetmap__option-list-layer-group" data-js-layer-group-list>
                         <li class="is-active button button-primary" default-layer-group>Default layer</li>
                     </ul>
-                    <span style="margin-top: .5rem;" acf-openstreetmap-option role="button" data-js-value="create_layer_group">Add layer [+]</span>
+                    <span class="acf-openstreetmap__button-add" acf-openstreetmap-option role="button" data-js-value="create_layer_group">Add layer [+]</span>
                 </div>
                 <div class="acf-openstreetmap__markers-and-image-overlay-container">
                     <div class="acf-openstreetmap__option acf-openstreetmap__option-marker">
-                        <h2 style="padding: 0; font-size: 16px; font-weight: bold;">Markers</h2>
                         <ul class="acf-openstreetmap__option-list acf-openstreetmap__option-list-marker" data-js-markers-list>
                         </ul>
                     </div>
                     <div class="acf-openstreetmap__option acf-openstreetmap__option-image-overlay">
-                        <div class="acf-openstreetmap__button" acf-openstreetmap-option role="button" data-js-value="create_image_overlay">Create Image Overlay</div>
                         <ul class="acf-openstreetmap__option-list acf-openstreetmap__option-list-image-overlay" data-js-image-overlay-list>
                         </ul>
+                        <span class="acf-openstreetmap__button-add" acf-openstreetmap-option role="button" data-js-value="create_image_overlay">Add image overlay [+]</span>
                     </div>
                 </div>
             </div>
