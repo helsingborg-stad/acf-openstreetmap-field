@@ -3,6 +3,7 @@ import { ImageOverlayMoveInterface } from "./imageOverlayMoveInterface";
 
 class ImageOverlayMove implements ImageOverlayMoveInterface {
     private moveHandle: MarkerInterface|null = null;
+    private dragging: boolean = false;
     constructor(        
         private mapInstance: MapInterface,
         private createMarkerInstance: CreateMarkerInterface,
@@ -30,7 +31,7 @@ class ImageOverlayMove implements ImageOverlayMoveInterface {
             if (!event.latLng) {
                 return;
             }
-
+            this.dragging = true;
             startLatLng = event.latLng;
             startBounds = imageOverlay.getPosition();
             imageOverlay.setOpacity(0.5);
@@ -61,10 +62,17 @@ class ImageOverlayMove implements ImageOverlayMoveInterface {
         });
 
         this.moveHandle.addListener("dragend", (event) => {
+            setTimeout(() => {
+                this.dragging = false;
+            }, 100);
             imageOverlay.setOpacity(1);
         });
 
         return this.moveHandle;
+    }
+
+    public isDragging(): boolean {
+        return this.dragging;
     }
 
     public addMarkerToMap(layerGroup: LayerGroupInterface|null = null): void {
