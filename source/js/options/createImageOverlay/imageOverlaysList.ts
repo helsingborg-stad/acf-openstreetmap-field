@@ -15,7 +15,7 @@ class ImageOverlaysList implements ImageOverlaysListInterface {
     }
 
     public addItem(imageOverlayData: ImageOverlayDataInterface): void {
-        const listItem = this.listItemHelper.createListItem(this.getLayerGroupTitle(imageOverlayData));
+        const listItem = this.listItemHelper.createImageOverlayListItem(this.getLayerGroupTitle(imageOverlayData));
     
         if (imageOverlayData.getLayerGroup()) {
             listItem.setAttribute(this.layerAttribute, imageOverlayData.getLayerGroup());
@@ -48,19 +48,15 @@ class ImageOverlaysList implements ImageOverlaysListInterface {
         }
     }
 
-    private setClickListener(listItem: HTMLLIElement, imageOverlayData: ImageOverlayDataInterface): void {
-        listItem.querySelector('[data-js-edit]')?.addEventListener('click', () => {
-            imageOverlayData.editImageOverlay();
-        });
-
+    private setClickListener(listItem: HTMLLIElement, imageOverlayData: ImageOverlayDataInterface): void {        
         listItem.addEventListener('click', () => {
             if (imageOverlayData.getImageOverlay()) {
                 this.mapInstance.flyTo(imageOverlayData.getImageOverlay()!.getCenter());
+                imageOverlayData.editImageOverlay();
             }
         });
     }
 
-    // TODO: Add translation
     private getLayerGroupTitle(imageOverlayData: ImageOverlayDataInterface): string {
         return imageOverlayData.getTitle() ? imageOverlayData.getTitle() : 'Unnamed image overlay';
     }
