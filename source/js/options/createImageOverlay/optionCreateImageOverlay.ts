@@ -5,7 +5,6 @@ class OptionCreateImageOverlay {
 
     constructor(
         private container: HTMLElement,
-        private handleSelectedInstance: HandleSelectedInterface,
         private imageOverlayFactoryInstance: ImageOverlayFactoryInterface
     ) {
         this.addListener();
@@ -23,10 +22,6 @@ class OptionCreateImageOverlay {
 
             imageOverlayData.editImageOverlay();
         });
-    }
-
-    public checkCondition(value: string): boolean {
-        return value === this.condition;
     }
 }
 

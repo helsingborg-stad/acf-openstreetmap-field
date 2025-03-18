@@ -11,7 +11,6 @@ class OptionSetStartPosition implements OptionSetStartPositionInterface {
         private mapInstance: MapInterface,
         private container: HTMLElement,
         private zoomInstance: Setting,
-        private handleSelectedInstance: HandleSelectedInterface,
         private createMarkerInstance: CreateMarkerInterface,
         private iconFactoryInstance: IconFactoryInterface,
         private listItemHelper: ListItemHelper

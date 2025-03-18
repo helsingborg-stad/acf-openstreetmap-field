@@ -1,5 +1,4 @@
 import { CreateMarker, CreateLayerGroup, CreateImageOverlay, CreateMap, CreateTileLayer, TilesHelper, CreateAttribution } from '@helsingborg-stad/openstreetmap';
-import HandleSelected from './options/handleSelected';
 import OptionCreateMarker from './options/createMarker/optionCreateMarker';
 import OptionSetStartPosition from './options/startPosition/optionSetStartPosition';
 import MarkerFactory from './options/createMarker/markerFactory';
@@ -88,7 +87,6 @@ class Main {
         const createMarkerInstance       = new CreateMarker();
         const createLayerGroupInstance   = new CreateLayerGroup();
         const createImageOverlayInstance = new CreateImageOverlay();
-        const handleSelectedInstance     = new HandleSelected(container);
 
         // Fields and Edit
         const fieldValidatorInstance = new FieldValidator();
@@ -170,13 +168,11 @@ class Main {
 
         const OptionCreateImageOverlayInstance = new OptionCreateImageOverlay(
             container,
-            handleSelectedInstance,
             imageOverlayFactoryInstance
         );
 
         const OptionCreateMarkerInstance = new OptionCreateMarker(
             mapInstance, 
-            handleSelectedInstance,
             markerFactoryInstance
         );
 
@@ -184,7 +180,6 @@ class Main {
             mapInstance,
             container,
             zoomInstance,
-            handleSelectedInstance,
             createMarkerInstance,
             iconFactoryInstance,
             listItemHelper

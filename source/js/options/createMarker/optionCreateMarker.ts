@@ -8,7 +8,6 @@ class OptionCreateMarker {
 
     constructor(
         private mapInstance: MapInterface,
-        private handleSelectedInstance: HandleSelectedInterface,
         private markerFactoryInstance: MarkerFactoryInterface
 
     ) {
@@ -30,10 +29,6 @@ class OptionCreateMarker {
                 markerData.editMarker();
             }
         });
-    }
-
-    public checkCondition(value: string): boolean {
-        return value === this.condition;
     }
 }
 
