@@ -14,6 +14,7 @@
 .acf-openstreetmap__markers-and-image-overlay-container {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     border: 1px solid #2271b1;
     gap: 1rem;
     border-radius: .5rem;
@@ -26,9 +27,7 @@
     .acf-openstreetmap__option-image-overlay-button {
         display: flex;
         justify-content: space-between;
-        border-bottom: 0;
-        border-left: 0;
-        border-right: 0;
+        margin: 0 -1px -1px;
         border-radius: .5rem;
     }
 
