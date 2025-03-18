@@ -1,10 +1,12 @@
 import { LayerGroupFactoryInterface } from "./layerGroupFactoryInterface";
+import LayerGroupsList from "./layerGroupsList";
+import { LayerGroupsListInterface } from "./layerGroupsListInterface";
 
 class OptionCreateLayerGroup {
     protected condition: string = 'create_layer_group';
     constructor(
         private container: HTMLElement,
-        private handleSelectedInstance: HandleSelectedInterface,
+        private layerGroupsList: LayerGroupsListInterface,
         private layerGroupFactoryInstance: LayerGroupFactoryInterface
 
     ) {
@@ -18,7 +20,8 @@ class OptionCreateLayerGroup {
             const layerGroupDataInstance = this.layerGroupFactoryInstance.create();
             layerGroupDataInstance.createLayerGroup();
             layerGroupDataInstance.editLayerGroup();
-            this.handleSelectedInstance.clearSelected();
+            this.layerGroupsList.setStyleHtml(layerGroupDataInstance);
+            this.layerGroupsList.updateItem(layerGroupDataInstance);
         });
     }
 }

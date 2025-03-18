@@ -114,11 +114,13 @@ class Main {
             preselectedInstance
         );
 
+        const layerGroupsList = new LayerGroupsList(container, listItemHelper);
+
         const layerGroupFactoryInstance = new LayerGroupFactory(
             mapInstance,
             createLayerGroupInstance,
             editLayerGroupDataFactory,
-            new LayerGroupsList(container, listItemHelper)
+            layerGroupsList
         );
 
         // Create marker
@@ -162,7 +164,7 @@ class Main {
         // Main
         const OptionCreateLayerGroupInstance = new OptionCreateLayerGroup(
             container,
-            handleSelectedInstance,
+            layerGroupsList,
             layerGroupFactoryInstance
         );
 

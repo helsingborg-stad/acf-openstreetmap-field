@@ -58,6 +58,12 @@ class LayerGroupsList implements LayerGroupsListInterface {
         this.listedLayerGroups[layerGroupData.getId()].listItem.querySelector('[data-js-title]')!.textContent = this.getLayerGroupTitle(layerGroupData);
     }
 
+    public setStyleHtml(layerGroupData: LayerGroupDataInterface): void {
+        if (this.styleElement) {
+            this.styleElement.innerHTML = `[${this.layerAttribute}]:not([${this.layerAttribute}="${layerGroupData.getId()}"]) { display: none; }`;
+        }
+    }
+
     private setClickListener(listItem: HTMLLIElement, layerGroupData: LayerGroupDataInterface): void {
         listItem.querySelector('[data-js-edit]')?.addEventListener('click', () => {
             listItem.classList.remove(this.activeClass);
@@ -66,11 +72,7 @@ class LayerGroupsList implements LayerGroupsListInterface {
 
         listItem.addEventListener('click', () => {
             this.removeIsActiveClass();
-
-            if (this.styleElement) {
-                this.styleElement.innerHTML = `[${this.layerAttribute}]:not([${this.layerAttribute}="${layerGroupData.getId()}"]) { display: none; }`;
-            }
-
+            this.setStyleHtml(layerGroupData);
             listItem.classList.add(this.activeClass);
             LayerGroupData.setActiveLayerGroup(layerGroupData);
         });

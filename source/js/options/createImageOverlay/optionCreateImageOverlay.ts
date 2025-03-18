@@ -22,8 +22,6 @@ class OptionCreateImageOverlay {
             }
 
             imageOverlayData.editImageOverlay();
-
-            this.handleSelectedInstance.clearSelected();
         });
     }
 
