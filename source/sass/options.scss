@@ -98,5 +98,51 @@
         gap: .5rem;
         justify-content: space-between;
         cursor: pointer;
+        position: relative;
+        
+        span {
+            z-index: 2;
+        }
+
+        .line-horizontal {
+            z-index: 1;
+            position: absolute;
+            top: 50%;
+            transform: translate(0px, -50%);
+            right: 0;
+            background-color: #2271b1;
+            height: 2px;
+            width: 45px;
+            transition: unset;
+            visibility: hidden;
+        }
+
+        .arrow-right:before {
+            content: "";
+            position: absolute;
+            width: 0px;
+            height: 0px;
+            border: 5px solid transparent;
+            top: -4px;
+            right: -15px;
+            border-left: 15px solid #2271b1;
+        }
+
+        &.button-primary {
+            .line-horizontal {
+                transform: translate(40px, -50%);
+                visibility: visible;
+                transition: .2s ease-out;
+            }
+
+            &:hover {
+                .line-horizontal {
+                    background-color: #135e96;
+                }
+                .arrow-right:before {
+                    border-left: 15px solid #135e96;
+                }
+            }
+        }
     }
 }

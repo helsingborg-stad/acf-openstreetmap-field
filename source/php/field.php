@@ -129,7 +129,8 @@ class Field extends \acf_field
             <div class="acf-openstreetmap__options">
                 <div class="acf-openstreetmap__option acf-openstreetmap__option-layer-group">
                     <ul class="acf-openstreetmap__option-list acf-openstreetmap__option-list-layer-group" data-js-layer-group-list>
-                        <li class="button button-primary" default-layer-group>Default layer</li>
+                        <li class="button button-primary" default-layer-group>Default layer<div class="line-horizontal arrow-right"></div>
+                        </li>
                     </ul>
                     <span class="acf-openstreetmap__button-add" acf-openstreetmap-option role="button" data-js-value="create_layer_group">Add layer [+]</span>
                 </div>
