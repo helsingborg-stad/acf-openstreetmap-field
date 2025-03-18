@@ -21,6 +21,7 @@ class ListItemHelper {
     public createImageOverlayListItem(title: string): HTMLLIElement {
         const li = document.createElement('li');
         li.classList.add('button');
+        li.style.borderRadius = '20px';
         li.innerHTML = `<span style="border-radius: 50%; width: .25rem; height: .25rem;">${title}</span>`;
 
         return li;
