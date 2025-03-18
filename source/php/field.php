@@ -139,7 +139,7 @@ class Field extends \acf_field
                         </ul>
                     </div>
                     <div class="acf-openstreetmap__option acf-openstreetmap__option-image-overlay">
-                        <span class="button acf-openstreetmap__option-image-overlay-button" acf-openstreetmap-option role="button" data-js-value="create_image_overlay">Add image overlay <span>[+]</span></span>
+                        <span class="button button-large acf-openstreetmap__option-image-overlay-button" acf-openstreetmap-option role="button" data-js-value="create_image_overlay">Add image overlay <span>[+]</span></span>
                         <ul class="acf-openstreetmap__option-list acf-openstreetmap__option-list-image-overlay" data-js-image-overlay-list>
                         </ul>
                     </div>
