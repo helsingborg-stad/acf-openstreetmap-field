@@ -109,8 +109,8 @@ class Field extends \acf_field
                     <input type="range" step="1" min="0" max="18" id="setting-zoom-<?php echo $id; ?>" name="zoom"></input>
                 </div>
                 <div class="acf-openstreetmap__setting acf-openstreetmap__option-start-position">
-                    <label>Set start position</label>
-                    <div style="text-align: center;" class="button button-primary" acf-openstreetmap-set-start-position role="button" data-js-value="set_start_position">Set start position</div>
+                    <label>Add start position</label>
+                    <div style="text-align: center" class="button button-primary" acf-openstreetmap-set-start-position role="button" data-js-value="set_start_position">Set position</div>
                 </div>
                 <div class="acf-openstreetmap__setting" data-js-setting-layer-filter>
                     <span class="title">Allow layer filter</span>
