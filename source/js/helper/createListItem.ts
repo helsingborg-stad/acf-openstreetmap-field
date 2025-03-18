@@ -11,6 +11,8 @@ class ListItemHelper {
 
     public createMarkerListItem(title: string, color: string): HTMLLIElement {
         const li = document.createElement('li');
+        li.classList.add('button');
+        li.style.borderRadius = '20px';
         li.innerHTML = `<span style="display: flex; align-items: center; gap: .25rem;"><span style="border-radius: 50%; width: .25rem; height: .25rem; background-color:${color};"></span>${title}</span>`;
 
         return li;
