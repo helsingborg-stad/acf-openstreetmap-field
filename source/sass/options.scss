@@ -4,12 +4,26 @@
     gap: 1rem;
     margin-top: 1.5rem;
     position: relative;
+}
 
+.acf-openstreetmap__markers-and-image-overlay-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
 
-    .acf-openstreetmap__option {
-        display: flex;
-        flex-direction: column;
-        width: 20rem;
+.acf-openstreetmap__option-list-marker {
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+
+    li {
+        background-color: #f1f1f1;
+        padding: .25rem .5rem;
+        border-radius: .4rem;
+        cursor: pointer;
+        margin-bottom: 0;
+        filter: drop-shadow(1px 1px 3px #d2d2d2);
     }
 }
 
@@ -29,7 +43,7 @@
     }
 }
 
-.acf-openstreetmap__option-list {
+.acf-openstreetmap__option-list-layer-group {
     margin-top: 0;
     margin-bottom: 0;
     display: flex;
