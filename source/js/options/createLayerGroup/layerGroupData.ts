@@ -1,4 +1,4 @@
-import { MapInterface, LayerGroupInterface, CreateLayerGroupInterface } from "@helsingborg-stad/openstreetmap";
+import { MapInterface, LayerGroupInterface, CreateLayerGroupInterface, LayerGroup } from "@helsingborg-stad/openstreetmap";
 import EditLayerGroupDataFactory from "./edit/editLayerGroupDataFactory";
 import { LayerGroupDataInterface, LayerGroupsDataStorage } from "./layerGroupDataInterface";
 import { LayerGroupsListInterface } from "./layerGroupsListInterface";

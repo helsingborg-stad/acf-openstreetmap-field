@@ -9,7 +9,7 @@ class LayerGroupsList implements LayerGroupsListInterface {
     defaultLayerGroup: HTMLElement|null;
     listedLayerGroups: LayerGroupsStorage = {};
     layerAttribute: string = 'data-js-layer-group';
-    activeClass: string = 'is-active';
+    activeClass: string = 'button-primary';
 
     constructor(private container: HTMLElement, private listItemHelper: ListItemHelper) {
         this.styleElement = this.container.querySelector('[data-js-style]');
@@ -27,12 +27,16 @@ class LayerGroupsList implements LayerGroupsListInterface {
         this.defaultLayerGroup.addEventListener('click', () => {
             this.removeIsActiveClass();
             this.defaultLayerGroup?.classList.add(this.activeClass);
+            if (this.styleElement) {
+                this.styleElement.innerHTML = '';
+            }
+
             LayerGroupData.setActiveLayerGroup(null);
         });
     }
 
     public addItem(layerGroupData: LayerGroupDataInterface): void {
-        const listItem = this.listItemHelper.createListItem(this.getLayerGroupTitle(layerGroupData), 'edit');
+        const listItem = this.listItemHelper.createLayerGroupListItem(this.getLayerGroupTitle(layerGroupData));
         this.layerGroupsList?.appendChild(listItem);
         this.listedLayerGroups[layerGroupData.getId()] = {layerGroup: layerGroupData, listItem: listItem};
         this.setClickListener(listItem, layerGroupData);
@@ -48,7 +52,10 @@ class LayerGroupsList implements LayerGroupsListInterface {
             return;
         }
 
-        this.listedLayerGroups[layerGroupData.getId()].listItem.querySelector('span')!.textContent = this.getLayerGroupTitle(layerGroupData);
+        this.removeIsActiveClass();
+        this.listedLayerGroups[layerGroupData.getId()].listItem.classList.add(this.activeClass);
+        LayerGroupData.setActiveLayerGroup(layerGroupData);
+        this.listedLayerGroups[layerGroupData.getId()].listItem.querySelector('[data-js-title]')!.textContent = this.getLayerGroupTitle(layerGroupData);
     }
 
     private setClickListener(listItem: HTMLLIElement, layerGroupData: LayerGroupDataInterface): void {
