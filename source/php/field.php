@@ -110,7 +110,7 @@ class Field extends \acf_field
                 </div>
                 <div class="acf-openstreetmap__setting acf-openstreetmap__option-start-position">
                     <label>Set start position</label>
-                    <div class="acf-openstreetmap__button" acf-openstreetmap-set-start-position role="button" data-js-value="set_start_position">Set start position</div>
+                    <div style="text-align: center;" class="button button-primary" acf-openstreetmap-set-start-position role="button" data-js-value="set_start_position">Set start position</div>
                 </div>
                 <div class="acf-openstreetmap__setting" data-js-setting-layer-filter>
                     <span class="title">Allow layer filter</span>
