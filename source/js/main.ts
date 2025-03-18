@@ -149,13 +149,15 @@ class Main {
             imageInstance
         );
 
+        const imageOverlayResize = new ImageOverlayResize(mapInstance, createMarkerInstance, iconFactoryInstance);
+
         const imageOverlayFactoryInstance = new ImageOverlayFactory(
             mapInstance,
             createImageOverlayInstance,
             editImageOverlayFactoryInstance,
             new ImageOverlaysList(container, mapInstance, listItemHelper),
             new ImageOverlayBoundsAndRatioCalculator(mapInstance),
-            new ImageOverlayResize(mapInstance, createMarkerInstance, iconFactoryInstance),
+            imageOverlayResize,
             new ImageOverlayMove(mapInstance, createMarkerInstance, iconFactoryInstance)
         );
 
@@ -172,8 +174,9 @@ class Main {
         );
 
         const OptionCreateMarkerInstance = new OptionCreateMarker(
-            mapInstance, 
-            markerFactoryInstance
+            mapInstance,
+            markerFactoryInstance,
+            imageOverlayResize
         );
 
         const OptionSetStartPositionInstance = new OptionSetStartPosition(

@@ -1,6 +1,7 @@
 import { MapInterface } from "@helsingborg-stad/openstreetmap";
 import { MarkerFactoryInterface } from "./markerFactoryInterface";
 import LayerGroupData from "../createLayerGroup/layerGroupData";
+import { ImageOverlayResizeInterface } from "../createImageOverlay/imageFunctionality/imageOverlayResizeInterface";
 
 class OptionCreateMarker {
     protected condition: string = 'create_marker';
@@ -8,7 +9,8 @@ class OptionCreateMarker {
 
     constructor(
         private mapInstance: MapInterface,
-        private markerFactoryInstance: MarkerFactoryInterface
+        private markerFactoryInstance: MarkerFactoryInterface,
+        private imageOverlayResize: ImageOverlayResizeInterface
 
     ) {
         this.addListener();
@@ -16,7 +18,10 @@ class OptionCreateMarker {
 
     private addListener(): void {
         this.mapInstance.addListener('click', (e) => {
-            if (e.originalEvent.target.classList.contains(this.markerCssClass)) {
+            if (
+                e.originalEvent.target.classList.contains(this.markerCssClass)
+                || this.imageOverlayResize.isDragging()
+            ) {
                 return;
             }
 

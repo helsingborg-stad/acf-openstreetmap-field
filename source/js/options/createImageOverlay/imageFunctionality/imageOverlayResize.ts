@@ -3,6 +3,7 @@ import { ImageOverlayResizeInterface } from "./imageOverlayResizeInterface";
 
 class ImageOverlayResize implements ImageOverlayResizeInterface {
     private resizeHandle: MarkerInterface|null = null;
+    private dragging: boolean = false;
     constructor(
         private mapInstance: MapInterface,
         private createMarkerInstance: CreateMarkerInterface,
@@ -26,6 +27,7 @@ class ImageOverlayResize implements ImageOverlayResizeInterface {
         this.addMarkerToMap(layerGroup);
 
         this.resizeHandle.addListener("dragstart", (event) => {
+            this.dragging = true;
             imageOverlay.setOpacity(0.5);
         });
 
@@ -56,6 +58,9 @@ class ImageOverlayResize implements ImageOverlayResizeInterface {
         });
 
         this.resizeHandle.addListener("dragend", (event) => {
+            setTimeout(() => {
+                this.dragging = false;
+            }, 100);
             imageOverlay.setOpacity(1);
         });
 
@@ -64,6 +69,11 @@ class ImageOverlayResize implements ImageOverlayResizeInterface {
 
     public addMarkerToMap(layerGroup: LayerGroupInterface|null = null): void {
         this.resizeHandle?.addTo(layerGroup ?? this.mapInstance);
+    }
+
+    public isDragging(): boolean {
+        console.log(this.dragging)
+        return this.dragging;
     }
 
     private getResizeIcon(): string {

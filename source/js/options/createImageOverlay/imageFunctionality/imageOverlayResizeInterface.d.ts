@@ -8,4 +8,5 @@ interface ImageOverlayResizeInterface {
         layerGroup?: LayerGroupInterface|null
     ): MarkerInterface;
     addMarkerToMap(layerGroup?: LayerGroupInterface|null): void;
+    isDragging(): boolean;
 }
