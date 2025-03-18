@@ -14,7 +14,16 @@
 .acf-openstreetmap__markers-and-image-overlay-container {
     display: flex;
     flex-direction: column;
+    border: 1px solid #2271b1;
+    padding: 1rem;
     gap: 1rem;
+    border-radius: .5rem;
+    flex: 1 0 18rem;
+
+    ul {
+        margin-bottom: 0;
+        margin-top: 0;
+    }
 }
 
 .acf-openstreetmap__button-add {
