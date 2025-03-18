@@ -52,8 +52,9 @@ class ImageOverlaysList implements ImageOverlaysListInterface {
         listItem.addEventListener('click', () => {
             if (imageOverlayData.getImageOverlay()) {
                 this.mapInstance.flyTo(imageOverlayData.getImageOverlay()!.getCenter());
-                imageOverlayData.editImageOverlay();
             }
+
+            imageOverlayData.editImageOverlay();
         });
     }
 
