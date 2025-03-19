@@ -6,7 +6,7 @@ class Edit implements EditInterface {
         this.setupDelete();
     }
 
-    private setupDelete() {
+    private setupDelete(): void {
         this.container.querySelector('[data-js-field-edit-delete]')?.addEventListener('click', () => {
             if (this.getActiveEditable()) {
                 this.getActiveEditable()!.delete();
@@ -14,7 +14,7 @@ class Edit implements EditInterface {
         });
     }
 
-    private setupSave() {
+    private setupSave(): void {
         this.container.querySelector('[data-js-field-edit-save]')?.addEventListener('click', () => {
             if (this.getActiveEditable()) {
                 this.getActiveEditable()!.save();
@@ -22,15 +22,19 @@ class Edit implements EditInterface {
         });
     }
 
-    private setupCancel() {
+    private setupCancel(): void {
         this.container.querySelector('[data-js-field-edit-cancel]')?.addEventListener('click', () => {
-            if (this.getActiveEditable()) {
-                this.getActiveEditable()!.cancel();
+            this.runCancel();
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                this.runCancel();
             }
         });
     }
 
-    public setActiveEditable(editable: Editable|null) {
+    public setActiveEditable(editable: Editable|null): void {
         if (this.getActiveEditable()) {
             this.getActiveEditable()!.hideFields();
         }
@@ -38,8 +42,14 @@ class Edit implements EditInterface {
         this.activeEditable = editable;
     }
 
-    public getActiveEditable() {
+    public getActiveEditable(): Editable|null {
         return this.activeEditable;
+    }
+
+    private runCancel(): void {
+        if (this.getActiveEditable()) {
+            this.getActiveEditable()!.cancel();
+        }
     }
 }
 
