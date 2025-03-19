@@ -76,7 +76,7 @@ class ImageOverlayResize implements ImageOverlayResizeInterface {
     }
 
     private getResizeIcon(): string {
-        return this.iconFactoryInstance.create('resize', '#199900', 16);
+        return this.iconFactoryInstance.create('resize', '#2271b1', 16);
     }
 }
 

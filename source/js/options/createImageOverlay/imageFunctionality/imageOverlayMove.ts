@@ -80,7 +80,7 @@ class ImageOverlayMove implements ImageOverlayMoveInterface {
     }
 
     private getMoveIcon(): string {
-        return this.iconFactoryInstance.create('move', '#199900', 16);
+        return this.iconFactoryInstance.create('move', '#2271b1', 16);
     }
 }
 
