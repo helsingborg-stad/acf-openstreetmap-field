@@ -57,10 +57,12 @@ class EditLayerGroupData implements EditLayerGroupDataInterface, Editable {
     }
 
     public delete() {
-        this.layerGroupData.deleteLayerGroup();
-        this.editInstance.setActiveEditable(null);
-        this.option.remove();
-        this.hideFields();
+        if (confirm('Are you sure you want to delete this layer group?')) {
+            this.layerGroupData.deleteLayerGroup();
+            this.editInstance.setActiveEditable(null);
+            this.option.remove();
+            this.hideFields();
+        }
     }
 
     public hideFields() {
