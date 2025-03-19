@@ -72,10 +72,6 @@ class ImageOverlayData implements ImageOverlayDataInterface {
             interactive: true
         });
 
-        overlay.addListener('click', (e) => {
-            this.mapInstance.flyTo(overlay.getCenter());
-            this.editImageOverlay();
-        });
         this.currentImageOverlay = overlay;
 
         const layerGroup = LayerGroupData.getLayerGroups()[this.getLayerGroup()]?.getLayer() as LayerGroupInterface;
