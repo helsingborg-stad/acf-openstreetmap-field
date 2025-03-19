@@ -5,6 +5,7 @@ import { MarkerDataInterface, MarkersDataStorage } from "./markerDataInterface";
 import { MarkersListInterface } from "./markersListInterface";
 import LayerGroupData from "../createLayerGroup/layerGroupData";
 import { LayerGroupsDataStorage } from "../createLayerGroup/layerGroupDataInterface";
+import { getColorFromLayerGroup, getIconFromLayerGroup } from "../../helper/layerGroupGetters";
 
 class MarkerData implements MarkerDataInterface {
     private static idCounter = 0;
@@ -138,28 +139,9 @@ class MarkerData implements MarkerDataInterface {
         return this.marker.addTo(this.mapInstance);
     }
 
-    public getColorFromLayerGroup(layerGroups: LayerGroupsDataStorage): string {
-        let color = '#E04A39';
-        if (layerGroups[this.getLayerGroup()]) {
-            color = layerGroups[this.getLayerGroup()].getColor();
-        }
-
-        return color;
-    }
-
-    public getIconFromLayerGroup(layerGroups: LayerGroupsDataStorage): string|null {
-        let icon = null;
-        if (layerGroups[this.getLayerGroup()]) {
-            icon = layerGroups[this.getLayerGroup()].getIcon();
-        }
-
-        return icon;
-    }
-
     private getMarkerMarkup(): string {
-        const layerGroups = LayerGroupData.getLayerGroups();
-        let color = this.getColorFromLayerGroup(layerGroups);
-        let icon  = this.getIconFromLayerGroup(layerGroups);
+        const color = getColorFromLayerGroup(this.getLayerGroup());
+        const icon  = getIconFromLayerGroup(this.getLayerGroup());
 
         return this.iconFactoryInstance.create(icon ? icon : 'location', color, 20);
     }
