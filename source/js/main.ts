@@ -41,6 +41,7 @@ import LayerFilter from './options/settings/layerFilter';
 import IconFactoryResolver from './icons/iconFactoryResolver';
 import ListItemHelper from './helper/createListItem';
 import Preselected from './edit/fields/preselected';
+import LayerFilterTitle from './options/settings/layerFilterTitle';
 
 
 declare const acf: any;
@@ -79,9 +80,10 @@ class Main {
         const attributionInstance  = new CreateAttribution().create();
 
         // Settings
-        const zoomInstance        = new Zoom(mapInstance, container);
-        const mapStyleInstance    = new MapStyle(tileLayerInstance, attributionInstance, tilesHelperInstance, container);
-        const layerFilterInstance = new LayerFilter(container);
+        const zoomInstance             = new Zoom(mapInstance, container);
+        const mapStyleInstance         = new MapStyle(tileLayerInstance, attributionInstance, tilesHelperInstance, container);
+        const layerFilterTitleInstance = new LayerFilterTitle(container);
+        const layerFilterInstance      = new LayerFilter(container, layerFilterTitleInstance);
 
         // General
         const createMarkerInstance       = new CreateMarker();
@@ -199,7 +201,8 @@ class Main {
             new LoadStartPosition(OptionSetStartPositionInstance),
             zoomInstance,
             mapStyleInstance,
-            layerFilterInstance
+            layerFilterInstance,
+            layerFilterTitleInstance
         );
 
         new SaveHiddenField(
@@ -210,7 +213,8 @@ class Main {
             new SaveStartPostion(OptionSetStartPositionInstance),
             zoomInstance,
             mapStyleInstance,
-            layerFilterInstance
+            layerFilterInstance,
+            layerFilterTitleInstance
         );
 
         // After data loaded

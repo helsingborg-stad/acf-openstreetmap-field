@@ -14,7 +14,8 @@ class LoadHiddenField {
         private loadStartPositionInstance: LoadOptionDataInterface,
         private zoomInstance: Setting,
         private mapStyleInstance: Setting,
-        private layerFilterInstance: Setting
+        private layerFilterInstance: Setting,
+        private layerFilterTitleInstance: Setting
     ) {
         let json = this.hiddenField.value || '{}';
         this.data = JSON.parse(json);
@@ -29,6 +30,7 @@ class LoadHiddenField {
         this.loadStartPositionInstance.load(this.data.startPosition as SavedStartPosition);
         this.zoomInstance.load(this.data.zoom);
         this.mapStyleInstance.load(this.data.mapStyle);
+        this.layerFilterTitleInstance.load(this.data.layerFilterTitle);
         this.layerFilterInstance.load(this.data.layerFilter);
     }
 }

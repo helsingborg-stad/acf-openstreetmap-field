@@ -5,10 +5,27 @@ class LayerFilter implements Setting {
     setting: HTMLInputElement|undefined|null;
 
     constructor(
-        container: HTMLElement
+        container: HTMLElement,
+        private layerFilterTitleInstance: LayerFilterTitleInterface
     ) {
         this.container = container.querySelector('[data-js-setting-layer-filter]');
         this.setting = this.container?.querySelector('input');
+
+        this.setListener();
+    }
+
+    private setListener(): void {
+        this.setting?.addEventListener('change', (e) => {
+            this.shouldShowTitleSetting();
+        });
+    }
+
+    private shouldShowTitleSetting(): void {
+        if (!this.setting) {
+            return;
+        }
+
+        this.setting.checked ? this.layerFilterTitleInstance.show() : this.layerFilterTitleInstance.hide();
     }
 
     public getValue(): "true"|"false" {    
@@ -25,6 +42,7 @@ class LayerFilter implements Setting {
         }
 
         this.setting.checked = value === "true";
+        this.shouldShowTitleSetting();
     }
 }
 

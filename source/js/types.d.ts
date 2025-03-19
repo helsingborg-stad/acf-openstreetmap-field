@@ -36,4 +36,5 @@ type SaveData = {
     zoom: string;
     mapStyle: string;
     layerFilter: "true"|"false";
+    layerFilterTitle: string;
 }
