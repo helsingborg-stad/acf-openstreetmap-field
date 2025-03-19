@@ -27,15 +27,6 @@ $color-white: var(--acf-openstreetmap-color-white, #ffffff) !default;
             color: $color-white;
         }
 
-        &.acf-openstreetmap__button--save {
-            background-color: $color-white;
-            color: $color-primary;
-            &:hover {
-                background-color: $color-primary;
-                color: $color-white;
-            }
-        }
-
         &.acf-openstreetmap__button--cancel {
             background-color: $color-white;
             color: $color-danger;
@@ -43,17 +34,6 @@ $color-white: var(--acf-openstreetmap-color-white, #ffffff) !default;
             &:hover {
                 background-color: $color-danger;
                 color: $color-white;
-            }
-        }
-
-        &.acf-openstreetmap__button--delete {
-            border: 1px solid $color-danger;
-            background-color: $color-danger;
-            color: $color-white;
-            
-            &:hover {
-                background-color: $color-white;
-                color: $color-danger;
             }
         }
     }
