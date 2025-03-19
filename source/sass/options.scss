@@ -82,6 +82,14 @@
     }
 }
 
+.acf-openstreetmap__edit-layer-group {
+    transition: .2s ease-in-out;
+
+    &:hover {
+        font-weight: bold;
+    }
+}
+
 .acf-openstreetmap__option-list-layer-group {
     margin-top: 0;
     margin-bottom: 0;
