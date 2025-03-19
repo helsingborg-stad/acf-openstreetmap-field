@@ -194,14 +194,14 @@ class Field extends \acf_field
                 
                 <div class="acf-openstreetmap__field" data-js-field-edit-image>
                     <label for="field-icon-<?php echo $id; ?>">Image</label>
-                    <div class="acf-openstreetmap__button acf-openstreetmap__button--save" data-js-field-edit-image-button role="button" id="field-icon-<?php echo $id; ?>">Set image</div>
+                    <div style="text-align: center;" class="button button-secondary" data-js-field-edit-image-button role="button" id="field-icon-<?php echo $id; ?>">Set image</div>
                     <div data-js-field-edit-image-preview></div>
                     <input style="display: none;" type="url" name="icon"></input>
                 </div>
                 <div class="acf-openstreetmap__field-edit-buttons">
-                    <div class="acf-openstreetmap__button acf-openstreetmap__button--save" data-js-field-edit-save role="button">Save</div>
-                    <div class="acf-openstreetmap__button acf-openstreetmap__button--cancel" data-js-field-edit-cancel role="button">Cancel</div>
-                    <div class="acf-openstreetmap__button acf-openstreetmap__button--delete" data-js-field-edit-delete role="button">Delete</div>
+                    <div class="acf-openstreetmap__field-edit-buttons-cancel" data-js-field-edit-cancel role="button">Cancel &#10005;</div>
+                    <div class="button button-primary button-large" data-js-field-edit-save role="button">Save</div>
+                    <div class="button button-secondary button-large" data-js-field-edit-delete role="button">Delete</div>
                 </div>
             </div>
         <?php
