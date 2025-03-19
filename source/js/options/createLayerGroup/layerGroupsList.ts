@@ -60,7 +60,8 @@ class LayerGroupsList implements LayerGroupsListInterface {
 
     public setStyleHtml(layerGroupData: LayerGroupDataInterface): void {
         if (this.styleElement) {
-            this.styleElement.innerHTML = `[${this.layerAttribute}]:not([${this.layerAttribute}="${layerGroupData.getId()}"]) { display: none; }`;
+            this.styleElement.innerHTML = `[${this.layerAttribute}]:not([${this.layerAttribute}="${layerGroupData.getId()}"]), [data-js-image-overlay-list]:has([${this.layerAttribute}]:not([${this.layerAttribute}="${layerGroupData.getId()}"])):not(:has(li:not([${this.layerAttribute}]))) { display: none; }
+             `;
         }
     }
 
