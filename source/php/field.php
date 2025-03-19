@@ -93,7 +93,7 @@ class Field extends \acf_field
     private function addSettings($id = '') 
     {
         ?>
-        <h2 style="padding: .5rem 0; font-weight: bold;">Settings</h2>
+        <h2 style="padding: .5rem 0; font-weight: bold;">General Settings</h2>
             <div class="acf-openstreetmap__settings">
                 <div class="acf-openstreetmap__setting" data-js-setting-map-style>
                     <label class="title" for="setting-map-style-<?php echo $id; ?>">Map style</label>
@@ -112,12 +112,20 @@ class Field extends \acf_field
                     <label>Add start position</label>
                     <div style="text-align: center" class="button button-primary" acf-openstreetmap-set-start-position role="button" data-js-value="set_start_position">Set position</div>
                 </div>
+            </div>
+
+            <h2 style="margin-top: 2rem; padding: .5rem 0; font-weight: bold;">Filter Settings</h2>
+            <div class="acf-openstreetmap__settings">
                 <div class="acf-openstreetmap__setting" data-js-setting-layer-filter>
                     <span class="title">Allow layer filter</span>
                     <label class="switch" for="setting-layer-filter-<?php echo $id; ?>" title="Allow layer filter">
                         <input type="checkbox" id="setting-layer-filter-<?php echo $id; ?>">
                         <span class="slider round"></span>
                     </label>
+                </div>
+                <div class="acf-openstreetmap__setting" data-js-setting-layer-filter-title style="display: none;">
+                    <label class="title" for="setting-layer-filter-title-<?php echo $id; ?>">Layer filter title</label>
+                    <input type="text" id=setting-layer-filter-title-<?php echo $id; ?>"></input>
                 </div>
             </div>
         <?php
