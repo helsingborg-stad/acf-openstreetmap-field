@@ -46,7 +46,7 @@ class OptionSetStartPosition implements OptionSetStartPositionInterface {
     }
 
     private getMarkerMarkup(): string {
-        return this.iconFactoryInstance.create('location', '#199900', 24);
+        return this.iconFactoryInstance.create('location', '#2271b1', 24);
     }
 }
 
