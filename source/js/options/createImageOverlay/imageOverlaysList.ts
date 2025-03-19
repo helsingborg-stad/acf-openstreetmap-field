@@ -16,7 +16,7 @@ class ImageOverlaysList implements ImageOverlaysListInterface {
 
     public addItem(imageOverlayData: ImageOverlayDataInterface): void {
         const listItem = this.listItemHelper.createImageOverlayListItem(this.getLayerGroupTitle(imageOverlayData));
-    
+
         if (imageOverlayData.getLayerGroup()) {
             listItem.setAttribute(this.layerAttribute, imageOverlayData.getLayerGroup());
             listItem.style.order = '2';
@@ -37,7 +37,7 @@ class ImageOverlaysList implements ImageOverlaysListInterface {
             return;
         }
 
-        this.listedImageOverlays[imageOverlayData.getId()].listItem.querySelector('span')!.textContent = this.getLayerGroupTitle(imageOverlayData);
+        this.listedImageOverlays[imageOverlayData.getId()].listItem.querySelector('[data-js-title]')!.textContent = this.getLayerGroupTitle(imageOverlayData);
 
         if (imageOverlayData.getLayerGroup()) {
             this.listedImageOverlays[imageOverlayData.getId()].listItem.setAttribute(this.layerAttribute, imageOverlayData.getLayerGroup());
