@@ -18,6 +18,4 @@ interface MarkerDataInterface {
     getUrl(): string;
     getId(): string;
     getMarker(): MarkerInterface|null;
-    getIconFromLayerGroup(layerGroups: LayerGroupsDataStorage): string|null;
-    getColorFromLayerGroup(layerGroups: LayerGroupsDataStorage): string;
 }

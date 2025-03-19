@@ -2,7 +2,7 @@ import { MapInterface } from "@helsingborg-stad/openstreetmap";
 import { MarkerDataInterface } from "./markerDataInterface";
 import { MarkersListDataStorage, MarkersListInterface } from "./markersListInterface";
 import ListItemHelper from "../../helper/createListItem";
-import LayerGroupData from "../createLayerGroup/layerGroupData";
+import { getColorFromLayerGroup } from "../../helper/layerGroupGetters";
 
 class MarkersList implements MarkersListInterface {
     markersList: HTMLElement|null;
@@ -17,7 +17,7 @@ class MarkersList implements MarkersListInterface {
     }
 
     public addItem(markerData: MarkerDataInterface): void {
-        const color = markerData.getColorFromLayerGroup(LayerGroupData.getLayerGroups());
+        const color = getColorFromLayerGroup(markerData.getLayerGroup());
 
         const listItem = this.listItemHelper.createMarkerListItem(this.getMarkerDataTitle(markerData), color);
         if (markerData.getLayerGroup()) {
@@ -40,8 +40,6 @@ class MarkersList implements MarkersListInterface {
             return;
         }
 
-        this.listedMarkers[markerData.getId()].listItem.querySelector('span')!.textContent = this.getMarkerDataTitle(markerData);
-
         if (markerData.getLayerGroup()) {
             this.listedMarkers[markerData.getId()].listItem.setAttribute(this.layerAttribute, markerData.getLayerGroup());
             this.listedMarkers[markerData.getId()].listItem.style.order = '2';
@@ -49,6 +47,8 @@ class MarkersList implements MarkersListInterface {
             this.listedMarkers[markerData.getId()].listItem.removeAttribute(this.layerAttribute);
             this.listedMarkers[markerData.getId()].listItem.style.order = '';
         }
+
+        this.listedMarkers[markerData.getId()].listItem.querySelector('[data-js-title]')!.textContent = this.getMarkerDataTitle(markerData);
     }
 
     private setClickListener(listItem: HTMLLIElement, markerData: MarkerDataInterface): void {        
