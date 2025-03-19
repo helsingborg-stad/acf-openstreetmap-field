@@ -46,5 +46,5 @@
             "@babel/plugin-proposal-class-properties"
         ]
     },
-    "version": "0.72.28"
+    "version": "0.73.4"
 }
