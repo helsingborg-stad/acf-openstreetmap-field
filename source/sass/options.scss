@@ -41,13 +41,6 @@
         display: flex;
         justify-content: space-between;
         margin: 0 -1px -1px;
-        border-radius: .5rem;
-    }
-
-    &:has(li) {
-        .acf-openstreetmap__option-image-overlay-button {
-            border-radius: 2px;
-        }
     }
 
     .acf-openstreetmap__option-list-image-overlay {
