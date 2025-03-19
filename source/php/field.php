@@ -138,6 +138,7 @@ class Field extends \acf_field
                     <div class="acf-openstreetmap__option acf-openstreetmap__option-marker">
                         <ul class="acf-openstreetmap__option-list acf-openstreetmap__option-list-marker" data-js-markers-list>
                         </ul>
+                        <span>*To add a pin: Click on the map</span>
                     </div>
                     <div class="acf-openstreetmap__option acf-openstreetmap__option-image-overlay">
                         <span class="button button-large acf-openstreetmap__option-image-overlay-button" acf-openstreetmap-option role="button" data-js-value="create_image_overlay">Add image overlay <span>[+]</span></span>
