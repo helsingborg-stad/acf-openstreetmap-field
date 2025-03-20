@@ -3,7 +3,7 @@ class ListItemHelper {
 
     public createLayerGroupListItem(title: string): HTMLLIElement {
         const li = document.createElement('li');
-        li.classList.add('button');
+        li.classList.add('button', 'button-large');
         li.innerHTML = `<span style="display: flex; justify-content: space-between; align-items: center; width: 100%;"><span data-js-title>${title}</span><span class="acf-openstreetmap__edit-layer-group" data-js-edit>edit</span></span><div class="line-horizontal arrow-right"></div>`;
         return li;
     }
