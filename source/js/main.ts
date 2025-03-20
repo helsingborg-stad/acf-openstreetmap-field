@@ -131,7 +131,8 @@ class Main {
             titleInstance,
             urlInstance,
             descriptionInstance,
-            layerInstance
+            layerInstance,
+            imageInstance
         );
 
         const markerFactoryInstance  = new MarkerFactory(

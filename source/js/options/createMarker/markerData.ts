@@ -14,6 +14,7 @@ class MarkerData implements MarkerDataInterface {
     private title: string = '';
     private content: string = '';
     private url: string = '';
+    private image: string = '';
     private layerGroup: string = '';
     private marker: MarkerInterface|null = null;
     private editor: EditMarkerDataInterface;
@@ -117,6 +118,14 @@ class MarkerData implements MarkerDataInterface {
 
     public getUrl(): string {
         return this.url;
+    }
+
+    public setImage(image: string): void {
+        this.image = image;
+    }
+
+    public getImage(): string {
+        return this.image;
     }
 
     public getId(): string {

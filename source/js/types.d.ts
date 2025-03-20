@@ -16,6 +16,7 @@ type SavedMarkerData = {
     url: string;
     position: LatLngObject;
     layerGroup: string;
+    image: string;
 }[];
 
 type SavedImageOverlayData = {

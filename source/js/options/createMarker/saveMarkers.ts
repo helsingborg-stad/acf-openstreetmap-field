@@ -17,7 +17,8 @@ class SaveMarkers implements SaveOptionDataInterface {
                 url: marker.getUrl(),
                 description: marker.getDescription(),
                 position: marker.getMarker()!.getPosition(),
-                layerGroup: marker.getLayerGroup()
+                layerGroup: marker.getLayerGroup(),
+                image: marker.getImage()
             });
         }
 

@@ -16,6 +16,8 @@ interface MarkerDataInterface {
     getLayerGroup(): string;
     setUrl(url: string): void;
     getUrl(): string;
+    setImage(image: string): void;
+    getImage(): string;
     getId(): string;
     getMarker(): MarkerInterface|null;
 }

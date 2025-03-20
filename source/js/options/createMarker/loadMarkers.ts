@@ -19,6 +19,7 @@ class LoadMarkers implements LoadOptionDataInterface {
             markerData.setDescription(savedMarker.description ?? '');
             markerData.setLayerGroup(savedMarker.layerGroup ?? '');
             markerData.createMarker(savedMarker.position);
+            markerData.setImage(savedMarker.image ?? '');
         }
     }
 }
