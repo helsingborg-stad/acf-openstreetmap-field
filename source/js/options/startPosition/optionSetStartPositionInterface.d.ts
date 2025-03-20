@@ -3,4 +3,5 @@ import { MapInterface, CreateMarkerInterface, MarkerInterface } from "@helsingbo
 interface OptionSetStartPositionInterface {
     getStartPositionMarker(): MarkerInterface|undefined;
     addMarker(latlng: LatLngObject): void;
+    isDragging(): boolean;
 }

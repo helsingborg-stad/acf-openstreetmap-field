@@ -6,6 +6,7 @@ import { Setting } from "../settings/setting";
 class OptionSetStartPosition implements OptionSetStartPositionInterface {
     private markerCssClass: string = 'marker-start-position';
     private marker: undefined|MarkerInterface;
+    private dragging: boolean = false;
 
     constructor(
         private mapInstance: MapInterface,
@@ -39,6 +40,20 @@ class OptionSetStartPosition implements OptionSetStartPositionInterface {
         });
 
         this.marker.addTo(this.mapInstance);
+
+        this.marker.addListener('dragstart', () => {
+            this.dragging = true;
+        });
+
+        this.marker.addListener('dragend', () => {
+            setTimeout(() => {
+                this.dragging = false;
+            }, 100);
+        });
+    }
+
+    public isDragging(): boolean {
+        return this.dragging;
     }
 
     public getStartPositionMarker(): MarkerInterface|undefined {

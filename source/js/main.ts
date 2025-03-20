@@ -177,13 +177,6 @@ class Main {
             imageOverlayFactoryInstance
         );
 
-        const OptionCreateMarkerInstance = new OptionCreateMarker(
-            mapInstance,
-            markerFactoryInstance,
-            imageOverlayResize,
-            imageOverlayMove
-        );
-
         const OptionSetStartPositionInstance = new OptionSetStartPosition(
             mapInstance,
             container,
@@ -191,6 +184,14 @@ class Main {
             createMarkerInstance,
             iconFactoryInstance,
             listItemHelper
+        );
+
+        const OptionCreateMarkerInstance = new OptionCreateMarker(
+            mapInstance,
+            markerFactoryInstance,
+            imageOverlayResize,
+            imageOverlayMove,
+            OptionSetStartPositionInstance
         );
 
         // Save and Load

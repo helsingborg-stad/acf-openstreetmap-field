@@ -3,6 +3,7 @@ import { MarkerFactoryInterface } from "./markerFactoryInterface";
 import LayerGroupData from "../createLayerGroup/layerGroupData";
 import { ImageOverlayResizeInterface } from "../createImageOverlay/imageFunctionality/imageOverlayResizeInterface";
 import { ImageOverlayMoveInterface } from "../createImageOverlay/imageFunctionality/imageOverlayMoveInterface";
+import { OptionSetStartPositionInterface } from "../startPosition/optionSetStartPositionInterface";
 
 class OptionCreateMarker {
     protected condition: string = 'create_marker';
@@ -12,7 +13,8 @@ class OptionCreateMarker {
         private mapInstance: MapInterface,
         private markerFactoryInstance: MarkerFactoryInterface,
         private imageOverlayResize: ImageOverlayResizeInterface,
-        private imageOverlayMove: ImageOverlayMoveInterface
+        private imageOverlayMove: ImageOverlayMoveInterface,
+        private optionSetStartPositionInstance: OptionSetStartPositionInterface
 
     ) {
         this.addListener();
@@ -23,7 +25,8 @@ class OptionCreateMarker {
             if (
                 e.originalEvent.target.classList.contains(this.markerCssClass) ||
                 this.imageOverlayResize.isDragging() ||
-                this.imageOverlayMove.isDragging()
+                this.imageOverlayMove.isDragging() ||
+                this.optionSetStartPositionInstance.isDragging()
             ) {
                 return;
             }
