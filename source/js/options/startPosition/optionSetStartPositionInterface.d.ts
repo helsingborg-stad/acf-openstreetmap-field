@@ -1,7 +1,11 @@
-import { MapInterface, CreateMarkerInterface, MarkerInterface } from "@helsingborg-stad/openstreetmap";
+import { MapInterface, CreateMarkerInterface, MarkerInterface, LatLngObject } from "@helsingborg-stad/openstreetmap";
+
+type StartPosition = {
+    latlng: LatLngObject;
+    zoom: number;
+}
 
 interface OptionSetStartPositionInterface {
-    getStartPositionMarker(): MarkerInterface|undefined;
-    addMarker(latlng: LatLngObject): void;
-    isDragging(): boolean;
+    setStartPosition(startPosition: StartPosition): void;
+    getStartPosition(): StartPosition;
 }

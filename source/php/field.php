@@ -104,13 +104,9 @@ class Field extends \acf_field
                         <option value="color">Color</option>
                     </select>
                 </div>
-                <div class="acf-openstreetmap__setting" data-js-setting-zoom>
-                    <label class="title" for="setting-zoom-<?php echo $id; ?>">Initial Zoom</label>
-                    <input type="range" step="1" min="0" max="18" id="setting-zoom-<?php echo $id; ?>" name="zoom"></input>
-                </div>
                 <div class="acf-openstreetmap__setting acf-openstreetmap__option-start-position">
-                    <label>Add start position</label>
-                    <div style="text-align: center" class="button button-primary" acf-openstreetmap-set-start-position role="button" data-js-value="set_start_position">Set position</div>
+                    <div class="acf-openstreetmap__option-start-position-label"><label for="setting-start-position-<?php echo $id; ?>">Start position</label><span role="button" data-js-map-start-position>My start</span></div>
+                    <div style="text-align: center" class="button button-primary" acf-openstreetmap-set-start-position role="button" data-js-value="set_start_position" id="setting-start-position-<?php echo $id; ?>">Set map start position</div>
                 </div>
             </div>
 
@@ -176,10 +172,6 @@ class Field extends \acf_field
                 <div class="acf-openstreetmap__field" data-js-field-edit-color>
                     <label for="field-color-<?php echo $id; ?>">Color</label>
                     <input type="color" id="field-color-<?php echo $id; ?>" name="color"></input>
-                </div>
-                <div class="acf-openstreetmap__field" data-js-field-edit-zoom>
-                    <label for="field-zoom-<?php echo $id; ?>">Zoom</label>
-                    <input type="number" min="0" max="19" id="field-zoom-<?php echo $id; ?>" name="url"></input>
                 </div>
                 <div class="acf-openstreetmap__field" data-js-field-edit-icon>
                     <label for="field-icon-<?php echo $id; ?>">Icon</label>

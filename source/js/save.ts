@@ -10,8 +10,13 @@ class SaveHiddenField {
         markers: [],
         layerGroups: [],
         imageOverlays: [],
-        startPosition: null,
-        zoom: "16",
+        startPosition: {
+            latlng: {
+                lat: 56.046467,
+                lng: 12.694512
+            },
+            zoom: 16
+        },
         mapStyle: "default",
         layerFilter: "false",
         layerFilterTitle: ""
@@ -23,7 +28,6 @@ class SaveHiddenField {
         private saveMarkers: SaveOptionDataInterface,
         private saveImageOverlays: SaveOptionDataInterface,
         private saveStartPosition: SaveOptionDataInterface,
-        private zoomInstance: Setting,
         private mapStyleInstance: Setting,
         private layerFilterInstance: Setting,
         private layerFilterTitleInstance: Setting
@@ -33,7 +37,6 @@ class SaveHiddenField {
             this.data.markers = this.saveMarkers.save() as SavedMarkerData;
             this.data.imageOverlays = this.saveImageOverlays.save() as SavedImageOverlayData;
             this.data.startPosition = this.saveStartPosition.save() as SavedStartPosition;
-            this.data.zoom = this.zoomInstance.save() as string;
             this.data.mapStyle = this.mapStyleInstance.save() as MapStyle;
             this.data.layerFilter = this.layerFilterInstance.save() as "true"|"false";
             this.data.layerFilterTitle = this.layerFilterTitleInstance.save() as string;

@@ -16,6 +16,21 @@
     }
 }
 
+.acf-openstreetmap__option-start-position-label {
+    display: flex;
+    justify-content: space-between;
+
+    span { 
+        display: none;
+        text-decoration: underline;
+        cursor: pointer;
+
+        &:hover {
+            color: #2271b1;
+        }
+    }
+}
+
 .acf-openstreetmap__setting .switch {
     position: relative;
     display: inline-block;

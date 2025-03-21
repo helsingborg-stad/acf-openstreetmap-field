@@ -7,7 +7,7 @@ class LoadStartPosition implements LoadOptionDataInterface {
 
     public load(startPosition: SavedStartPosition): void {
         if (startPosition) {
-            this.optionSetStartPositionInstance.addMarker(startPosition);
+            this.optionSetStartPositionInstance.setStartPosition(startPosition);
         }
     }
 }

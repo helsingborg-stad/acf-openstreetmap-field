@@ -13,8 +13,7 @@ class OptionCreateMarker {
         private mapInstance: MapInterface,
         private markerFactoryInstance: MarkerFactoryInterface,
         private imageOverlayResize: ImageOverlayResizeInterface,
-        private imageOverlayMove: ImageOverlayMoveInterface,
-        private optionSetStartPositionInstance: OptionSetStartPositionInterface
+        private imageOverlayMove: ImageOverlayMoveInterface
 
     ) {
         this.addListener();
@@ -25,8 +24,7 @@ class OptionCreateMarker {
             if (
                 e.originalEvent.target.classList.contains(this.markerCssClass) ||
                 this.imageOverlayResize.isDragging() ||
-                this.imageOverlayMove.isDragging() ||
-                this.optionSetStartPositionInstance.isDragging()
+                this.imageOverlayMove.isDragging()
             ) {
                 return;
             }

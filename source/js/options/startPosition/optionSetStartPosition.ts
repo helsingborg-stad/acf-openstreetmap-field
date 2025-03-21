@@ -1,67 +1,44 @@
-import { MapInterface, CreateMarkerInterface, MarkerInterface, LatLngObject } from "@helsingborg-stad/openstreetmap";
-import { OptionSetStartPositionInterface } from "./optionSetStartPositionInterface";
-import ListItemHelper from "../../helper/createListItem";
-import { Setting } from "../settings/setting";
+import { MapInterface } from "@helsingborg-stad/openstreetmap";
+import { OptionSetStartPositionInterface, StartPosition } from "./optionSetStartPositionInterface";
 
 class OptionSetStartPosition implements OptionSetStartPositionInterface {
-    private markerCssClass: string = 'marker-start-position';
-    private marker: undefined|MarkerInterface;
-    private dragging: boolean = false;
+    private startPosition: StartPosition = {} as StartPosition;
+    private startPositionElement: HTMLElement|null;
 
     constructor(
         private mapInstance: MapInterface,
         private container: HTMLElement,
-        private zoomInstance: Setting,
-        private createMarkerInstance: CreateMarkerInterface,
-        private iconFactoryInstance: IconFactoryInterface,
-        private listItemHelper: ListItemHelper
     ) {
+        this.startPositionElement = this.container.querySelector('[data-js-map-start-position]');
+
+        this.startPositionElement?.addEventListener('click', () => {
+            this.setStartPositionElementClickListener();
+        });
+
         this.container.querySelector('[acf-openstreetmap-set-start-position]')?.addEventListener('click', () => {
-            if (this.marker) {
-                this.marker.setPosition(this.mapInstance.getCenter());
-            } else {
-                this.addMarker(this.mapInstance.getCenter());
-            }
+            this.startPosition = {
+                latlng: this.mapInstance.getCenter(),
+                zoom: this.mapInstance.getZoom(),
+            };
         });
     }
 
-    public addMarker(latlng: LatLngObject): void {
-        if (this.marker) {
-            return;
+    private setStartPositionElementClickListener(): void {
+        if (this.startPosition) {
+            this.mapInstance.setView(this.startPosition.latlng, this.startPosition.zoom);
+        }
+    }
+
+    public getStartPosition(): StartPosition {
+        return this.startPosition;
+    }
+
+    public setStartPosition(startPosition: StartPosition): void {
+        if (this.startPositionElement) {
+            this.startPositionElement.style.display = 'block';
         }
 
-        this.marker = this.createMarkerInstance.create({
-            position: latlng,
-            html: this.getMarkerMarkup(),
-            draggable: true,
-            iconSize: [32, 32],
-            iconAnchor: [32, 32],
-            className: this.markerCssClass
-        });
-
-        this.marker.addTo(this.mapInstance);
-
-        this.marker.addListener('dragstart', () => {
-            this.dragging = true;
-        });
-
-        this.marker.addListener('dragend', () => {
-            setTimeout(() => {
-                this.dragging = false;
-            }, 100);
-        });
-    }
-
-    public isDragging(): boolean {
-        return this.dragging;
-    }
-
-    public getStartPositionMarker(): MarkerInterface|undefined {
-        return this.marker;
-    }
-
-    private getMarkerMarkup(): string {
-        return this.iconFactoryInstance.create('location', '#2271b1', 24);
+        this.startPosition = startPosition;
     }
 }
 

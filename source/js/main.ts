@@ -35,7 +35,6 @@ import ImageOverlayBoundsAndRatioCalculator from './options/createImageOverlay/h
 import ImageOverlayMove from './options/createImageOverlay/imageFunctionality/imageOverlayMove';
 import LoadImageOverlays from './options/createImageOverlay/loadImageOverlays';
 import SaveImageOverlays from './options/createImageOverlay/saveImageOverlays';
-import Zoom from './options/settings/zoom';
 import MapStyle from './options/settings/mapStyle';
 import LayerFilter from './options/settings/layerFilter';
 import IconFactoryResolver from './icons/iconFactoryResolver';
@@ -80,7 +79,6 @@ class Main {
         const attributionInstance  = new CreateAttribution().create();
 
         // Settings
-        const zoomInstance             = new Zoom(mapInstance, container);
         const mapStyleInstance         = new MapStyle(tileLayerInstance, attributionInstance, tilesHelperInstance, container);
         const layerFilterTitleInstance = new LayerFilterTitle(container);
         const layerFilterInstance      = new LayerFilter(container, layerFilterTitleInstance);
@@ -180,19 +178,14 @@ class Main {
 
         const OptionSetStartPositionInstance = new OptionSetStartPosition(
             mapInstance,
-            container,
-            zoomInstance,
-            createMarkerInstance,
-            iconFactoryInstance,
-            listItemHelper
+            container
         );
 
         const OptionCreateMarkerInstance = new OptionCreateMarker(
             mapInstance,
             markerFactoryInstance,
             imageOverlayResize,
-            imageOverlayMove,
-            OptionSetStartPositionInstance
+            imageOverlayMove
         );
 
         // Save and Load
@@ -202,7 +195,6 @@ class Main {
             new LoadMarkers(markerFactoryInstance),
             new LoadImageOverlays(imageOverlayFactoryInstance),
             new LoadStartPosition(OptionSetStartPositionInstance),
-            zoomInstance,
             mapStyleInstance,
             layerFilterInstance,
             layerFilterTitleInstance
@@ -214,7 +206,6 @@ class Main {
             new SaveMarkers(),
             new SaveImageOverlays(),
             new SaveStartPostion(OptionSetStartPositionInstance),
-            zoomInstance,
             mapStyleInstance,
             layerFilterInstance,
             layerFilterTitleInstance
@@ -224,7 +215,9 @@ class Main {
         const currentTiles = tilesHelperInstance.getDefaultTiles(mapStyleInstance.getValue());
         tileLayerInstance.setUrl(currentTiles.url).addTo(mapInstance);
         attributionInstance.setPrefix(currentTiles.attribution).addTo(mapInstance);
-        mapInstance.setView(OptionSetStartPositionInstance.getStartPositionMarker()?.getPosition() ?? { lat: 59.32932, lng: 18.06858 }, parseInt(zoomInstance.getValue()));
+
+        const startPosition = OptionSetStartPositionInstance.getStartPosition();
+        mapInstance.setView(startPosition.latlng ?? { lat: 59.32932, lng: 18.06858 }, startPosition.zoom ?? 16);
 
     }
 }
