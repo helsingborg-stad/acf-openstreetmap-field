@@ -17,6 +17,10 @@ class MaterialSymbolFactory implements IconFactoryInterface {
         return background ? this.withBackground(iconName, color, size) : this.withoutBackground(iconName, color, size);
     }
 
+    public format(iconName: string): string {
+        return iconName.toLowerCase().replaceAll(' ', '_');
+    }
+
     private withoutBackground(iconName: string, color: string, size: number): string {
         return `<span style="color: ${color}; font-size: ${size}px;" data-material-symbol="${iconName}" class="${this.className} material-symbols material-symbols-rounded material-symbols-sharp material-symbols-outlined material-symbols--filled">${iconName}</span>`;
     }

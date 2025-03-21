@@ -120,7 +120,8 @@ class Main {
             mapInstance,
             createLayerGroupInstance,
             editLayerGroupDataFactory,
-            layerGroupsList
+            layerGroupsList,
+            iconFactoryInstance
         );
 
         // Create marker

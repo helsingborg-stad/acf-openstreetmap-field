@@ -1,5 +1,4 @@
 import { LayerGroupFactoryInterface } from "./layerGroupFactoryInterface";
-import LayerGroupsList from "./layerGroupsList";
 import { LayerGroupsListInterface } from "./layerGroupsListInterface";
 
 class OptionCreateLayerGroup {
@@ -7,8 +6,7 @@ class OptionCreateLayerGroup {
     constructor(
         private container: HTMLElement,
         private layerGroupsList: LayerGroupsListInterface,
-        private layerGroupFactoryInstance: LayerGroupFactoryInterface
-
+        private layerGroupFactoryInstance: LayerGroupFactoryInterface,
     ) {
         this.addListener();
     }

@@ -15,7 +15,10 @@ class DashIconFactory implements IconFactoryInterface {
         const iconName = this.mapIconNameMap(icon);
 
         return background ? this.withBackground(iconName, color, size) : this.withoutBackground(iconName, color, size);
+    }
 
+    public format(iconName: string): string {
+        return iconName.toLowerCase().replaceAll(' ', '-');
     }
 
     private withoutBackground(iconName: string, color: string, size: number): string {

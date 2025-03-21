@@ -11,6 +11,7 @@ class LayerGroupFactory {
         private createLayerGroupInstance: CreateLayerGroupInterface,
         private editLayerGroupDataFactoryInstance: EditLayerGroupDataFactory,
         private layerGroupsListInstance: LayerGroupsListInterface,
+        private iconFactoryInstance: IconFactoryInterface
     ) {
 
     }
@@ -25,7 +26,8 @@ class LayerGroupFactory {
             this.mapInstance,
             this.createLayerGroupInstance,
             this.editLayerGroupDataFactoryInstance,
-            this.layerGroupsListInstance
+            this.layerGroupsListInstance,
+            this.iconFactoryInstance
         );
     }
 }

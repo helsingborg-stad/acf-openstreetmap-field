@@ -16,6 +16,10 @@ class NullIconFactory implements IconFactoryInterface {
 
         return `<span class="${this.className}" style="display: flex; justify-content: center; align-items: center; width: 24px; height: 24px; font-size: ${size}px; padding: 4px; background-color: ${color}; border-radius: 50%;">${iconName ?? '📍'}</span>`;
     }
+
+    public format(iconName: string): string {
+        return iconName;
+    }
 }
 
 export default NullIconFactory;

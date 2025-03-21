@@ -21,6 +21,7 @@ class LayerGroupData implements LayerGroupDataInterface {
         private createLayerGroupInstance: CreateLayerGroupInterface,
         private editLayerGroupDataFactoryInstance: EditLayerGroupDataFactory,
         private layerGroupsListInstance: LayerGroupsListInterface,
+        private iconFactoryInstance: IconFactoryInterface
     ) {
         this.editor = this.editLayerGroupDataFactoryInstance.create(this);
     }
@@ -77,7 +78,7 @@ class LayerGroupData implements LayerGroupDataInterface {
     }
 
     public setIcon(icon: string) {
-        this.icon = icon;
+        this.icon = this.iconFactoryInstance.format(icon);
     }
 
     public getIcon(): string {
