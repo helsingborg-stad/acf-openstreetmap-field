@@ -64,8 +64,6 @@ class Main {
             return;
         }
 
-        console.log(language);
-
         const mapInstance = new CreateMap({
             id: id
         }).create();
@@ -75,7 +73,7 @@ class Main {
 
         // Helpers
         const tilesHelperInstance = new TilesHelper();
-        const listItemHelper      = new ListItemHelper();
+        const listItemHelper      = new ListItemHelper(language ?? {});
 
         // MapTiles
         const tileLayerInstance    = new CreateTileLayer().create();
@@ -112,7 +110,8 @@ class Main {
             colorInstance,
             iconInstance,
             layerInstance,
-            preselectedInstance
+            preselectedInstance,
+            language ?? {}
         );
 
         const layerGroupsList = new LayerGroupsList(container, listItemHelper);

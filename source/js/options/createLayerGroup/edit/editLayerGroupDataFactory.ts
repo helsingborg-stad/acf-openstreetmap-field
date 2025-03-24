@@ -9,7 +9,8 @@ class EditLayerGroupDataFactory {
         private colorInstance: Field,
         private iconInstance: Field,
         private layerInstance: Field,
-        private preselectedInstance: Field
+        private preselectedInstance: Field,
+        private language: any
     ) {}
 
     public create(layerGroupData: LayerGroupDataInterface): EditLayerGroupDataInterface {
@@ -21,7 +22,8 @@ class EditLayerGroupDataFactory {
             this.colorInstance,
             this.iconInstance,
             this.layerInstance,
-            this.preselectedInstance
+            this.preselectedInstance,
+            this.language
         );
     }
 }

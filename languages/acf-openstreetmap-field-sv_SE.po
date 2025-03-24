@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Acf OpenStreetMap Field 1.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ acf-"
 "openstreetmap-field\n"
-"POT-Creation-Date: 2025-03-24 11:01+0100\n"
-"PO-Revision-Date: 2025-03-24 11:08+0100\n"
+"POT-Creation-Date: 2025-03-24 12:19+0100\n"
+"PO-Revision-Date: 2025-03-24 12:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: Svenska\n"
 "Language: sv_SE\n"
@@ -19,146 +19,165 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SearchPathExcluded-1: *.ts\n"
 
-#: source/php/field.php:214
+#: source/php/field.php:216
 msgid "Default Latitude"
 msgstr "Standard Latitud"
 
-#: source/php/field.php:215
+#: source/php/field.php:217
 msgid "Set a default latitude"
 msgstr "Sätt standard latitud"
 
-#: source/php/field.php:221
+#: source/php/field.php:223
 msgid "Default Longitude"
 msgstr "Standard Longitud"
 
-#: source/php/field.php:222
+#: source/php/field.php:224
 msgid "Set a default longitude"
 msgstr "Sätt standard longitud"
 
-#: source/php/field.php:230
+#: source/php/field.php:232
+msgid "edit"
+msgstr "redigera"
+
+#: source/php/field.php:233
+msgid "Cannot set the layer group to itself"
+msgstr "Kan inte sätta lagergruppen till sig själv"
+
+#: source/php/field.php:234
+msgid "Are you sure you want to delete this layer group"
+msgstr "Är du säker på att du vill radera denna lagergrupp"
+
+#: source/php/field.php:235
+msgid "Invalid URL"
+msgstr "Felaktig URL"
+
+#: source/php/field.php:236
+msgid "Should follow format"
+msgstr "Formatet ska följa"
+
+#: source/php/field.php:237
 msgid "Map style"
 msgstr "Kartans stil"
 
-#: source/php/field.php:231
+#: source/php/field.php:238
 msgid "General Settings"
 msgstr "Generella inställningar"
 
-#: source/php/field.php:232
+#: source/php/field.php:239
 msgid "Default"
 msgstr "Standard"
 
-#: source/php/field.php:233
+#: source/php/field.php:240
 msgid "Dark"
 msgstr "Mörk"
 
-#: source/php/field.php:234
+#: source/php/field.php:241
 msgid "Pale"
 msgstr "Blek"
 
-#: source/php/field.php:235
+#: source/php/field.php:242
 msgid "Color"
 msgstr "Färg"
 
-#: source/php/field.php:236
+#: source/php/field.php:243
 msgid "Start position"
 msgstr "Startposition"
 
-#: source/php/field.php:237
+#: source/php/field.php:244
 msgid "Set map start position"
 msgstr "Sätt kartans startposition"
 
-#: source/php/field.php:238
+#: source/php/field.php:245
 msgid "See start position"
 msgstr "Se startposition"
 
-#: source/php/field.php:239
+#: source/php/field.php:246
 msgid "Filter Settings"
 msgstr "Filterinställningar"
 
-#: source/php/field.php:240
+#: source/php/field.php:247
 msgid "Allow layer filter"
 msgstr "Tillåt lagerfiltrering"
 
-#: source/php/field.php:241
+#: source/php/field.php:248
 msgid "Layer filter title"
 msgstr "Titel för filtrering"
 
-#: source/php/field.php:242
+#: source/php/field.php:249
 msgid "Default layer"
 msgstr "Standardlager"
 
-#: source/php/field.php:243 source/php/field.php:247
+#: source/php/field.php:250 source/php/field.php:253
 msgid "Add layer"
 msgstr "Lägg till lager"
 
-#: source/php/field.php:244
+#: source/php/field.php:251
 msgid "Add image overlay"
 msgstr "Lägg till bakgrundbild"
 
-#: source/php/field.php:245
-msgid "Add marker"
-msgstr "Lägg till markör"
-
-#: source/php/field.php:246
+#: source/php/field.php:252
 msgid "Layer"
 msgstr "Lager"
 
-#: source/php/field.php:248
+#: source/php/field.php:254
 msgid "To add a pin"
 msgstr "För att lägga till markör"
 
-#: source/php/field.php:249
+#: source/php/field.php:255
 msgid "Click on the map"
 msgstr "Klicka på kartan"
 
-#: source/php/field.php:250
+#: source/php/field.php:256
 msgid "Title"
 msgstr "Titel"
 
-#: source/php/field.php:251
+#: source/php/field.php:257
 msgid "Description"
 msgstr "Beskrivning"
 
-#: source/php/field.php:252
+#: source/php/field.php:258
 msgid "URL"
 msgstr "URL"
 
-#: source/php/field.php:253
+#: source/php/field.php:259
 msgid "Icon"
 msgstr "Ikon"
 
-#: source/php/field.php:254
+#: source/php/field.php:260
 msgid "Image"
 msgstr "Bild"
 
-#: source/php/field.php:255
+#: source/php/field.php:261
 msgid "Set image"
 msgstr "Sätt bild"
 
-#: source/php/field.php:256
+#: source/php/field.php:262
 msgid "Add an icon name from your library"
 msgstr "Lägg till ett ikonnamn från ditt bibliotek"
 
-#: source/php/field.php:257
+#: source/php/field.php:263
 msgid "ex."
 msgstr "t.ex."
 
-#: source/php/field.php:258
+#: source/php/field.php:264
 msgid "on the map"
 msgstr "på kartan"
 
-#: source/php/field.php:259
+#: source/php/field.php:265
 msgid "Show as default when filtering"
 msgstr "Visa som standard vid filtrering"
 
-#: source/php/field.php:260
+#: source/php/field.php:266
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: source/php/field.php:261
+#: source/php/field.php:267
 msgid "Save"
 msgstr "Spara"
 
-#: source/php/field.php:262
+#: source/php/field.php:268
 msgid "Delete"
 msgstr "Radera"
+
+#~ msgid "Add marker"
+#~ msgstr "Lägg till markör"

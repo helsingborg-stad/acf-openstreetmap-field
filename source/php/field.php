@@ -229,6 +229,9 @@ class Field extends \acf_field
 
     private function getLang() {
         return [
+            'edit' => __('edit', 'acf-openstreetmap-field'),
+            'cannotSetTheLayerGroupToItself' => __('Cannot set the layer group to itself', 'acf-openstreetmap-field'),
+            'areYouSureYouWantToDeleteThisLayerGroup' => __('Are you sure you want to delete this layer group', 'acf-openstreetmap-field'),
             'invalidUrl' => __('Invalid URL', 'acf-openstreetmap-field'),
             'shouldFollowFormat' => __('Should follow format', 'acf-openstreetmap-field'),
             'mapStyle' => __('Map style', 'acf-openstreetmap-field'),

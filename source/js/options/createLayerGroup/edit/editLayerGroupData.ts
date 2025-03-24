@@ -10,7 +10,8 @@ class EditLayerGroupData implements EditLayerGroupDataInterface, Editable {
         private colorInstance: Field,
         private iconInstance: Field,
         private layerInstance: Field,
-        private preselectedInstance: Field
+        private preselectedInstance: Field,
+        private language: any
     ) {
         this.option = document.createElement('option');
         this.option.value = this.layerGroupData.getId();
@@ -33,7 +34,7 @@ class EditLayerGroupData implements EditLayerGroupDataInterface, Editable {
 
     public save() {
         if (this.layerGroupData.getId() === this.layerInstance.getValue()) {
-            alert('Cannot set the layer group to itself');
+            alert(`${this.language?.cannotSetTheLayerGroupToItself ?? 'Cannot set the layer group to itself'}`);
             return;
         }
 
@@ -57,7 +58,7 @@ class EditLayerGroupData implements EditLayerGroupDataInterface, Editable {
     }
 
     public delete() {
-        if (confirm('Are you sure you want to delete this layer group?')) {
+        if (confirm(`${this.language?.areYouSureYouWantToDeleteThisLayerGroup ?? 'Are you sure you want to delete this layer group'}?`)) {
             this.layerGroupData.deleteLayerGroup();
             this.editInstance.setActiveEditable(null);
             this.option.remove();
