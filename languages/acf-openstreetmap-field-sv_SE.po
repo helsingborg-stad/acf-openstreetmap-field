@@ -1,0 +1,164 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Acf OpenStreetMap Field 1.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/ acf-"
+"openstreetmap-field\n"
+"POT-Creation-Date: 2025-03-24 11:01+0100\n"
+"PO-Revision-Date: 2025-03-24 11:08+0100\n"
+"Last-Translator: \n"
+"Language-Team: Svenska\n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.2\n"
+"X-Domain: acf-openstreetmap-field\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-KeywordsList: __\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"X-Poedit-SearchPathExcluded-1: *.ts\n"
+
+#: source/php/field.php:214
+msgid "Default Latitude"
+msgstr "Standard Latitud"
+
+#: source/php/field.php:215
+msgid "Set a default latitude"
+msgstr "Sätt standard latitud"
+
+#: source/php/field.php:221
+msgid "Default Longitude"
+msgstr "Standard Longitud"
+
+#: source/php/field.php:222
+msgid "Set a default longitude"
+msgstr "Sätt standard longitud"
+
+#: source/php/field.php:230
+msgid "Map style"
+msgstr "Kartans stil"
+
+#: source/php/field.php:231
+msgid "General Settings"
+msgstr "Generella inställningar"
+
+#: source/php/field.php:232
+msgid "Default"
+msgstr "Standard"
+
+#: source/php/field.php:233
+msgid "Dark"
+msgstr "Mörk"
+
+#: source/php/field.php:234
+msgid "Pale"
+msgstr "Blek"
+
+#: source/php/field.php:235
+msgid "Color"
+msgstr "Färg"
+
+#: source/php/field.php:236
+msgid "Start position"
+msgstr "Startposition"
+
+#: source/php/field.php:237
+msgid "Set map start position"
+msgstr "Sätt kartans startposition"
+
+#: source/php/field.php:238
+msgid "See start position"
+msgstr "Se startposition"
+
+#: source/php/field.php:239
+msgid "Filter Settings"
+msgstr "Filterinställningar"
+
+#: source/php/field.php:240
+msgid "Allow layer filter"
+msgstr "Tillåt lagerfiltrering"
+
+#: source/php/field.php:241
+msgid "Layer filter title"
+msgstr "Titel för filtrering"
+
+#: source/php/field.php:242
+msgid "Default layer"
+msgstr "Standardlager"
+
+#: source/php/field.php:243 source/php/field.php:247
+msgid "Add layer"
+msgstr "Lägg till lager"
+
+#: source/php/field.php:244
+msgid "Add image overlay"
+msgstr "Lägg till bakgrundbild"
+
+#: source/php/field.php:245
+msgid "Add marker"
+msgstr "Lägg till markör"
+
+#: source/php/field.php:246
+msgid "Layer"
+msgstr "Lager"
+
+#: source/php/field.php:248
+msgid "To add a pin"
+msgstr "För att lägga till markör"
+
+#: source/php/field.php:249
+msgid "Click on the map"
+msgstr "Klicka på kartan"
+
+#: source/php/field.php:250
+msgid "Title"
+msgstr "Titel"
+
+#: source/php/field.php:251
+msgid "Description"
+msgstr "Beskrivning"
+
+#: source/php/field.php:252
+msgid "URL"
+msgstr "URL"
+
+#: source/php/field.php:253
+msgid "Icon"
+msgstr "Ikon"
+
+#: source/php/field.php:254
+msgid "Image"
+msgstr "Bild"
+
+#: source/php/field.php:255
+msgid "Set image"
+msgstr "Sätt bild"
+
+#: source/php/field.php:256
+msgid "Add an icon name from your library"
+msgstr "Lägg till ett ikonnamn från ditt bibliotek"
+
+#: source/php/field.php:257
+msgid "ex."
+msgstr "t.ex."
+
+#: source/php/field.php:258
+msgid "on the map"
+msgstr "på kartan"
+
+#: source/php/field.php:259
+msgid "Show as default when filtering"
+msgstr "Visa som standard vid filtrering"
+
+#: source/php/field.php:260
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: source/php/field.php:261
+msgid "Save"
+msgstr "Spara"
+
+#: source/php/field.php:262
+msgid "Delete"
+msgstr "Radera"
