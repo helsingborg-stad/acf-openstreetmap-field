@@ -44,6 +44,8 @@ class Field extends \acf_field
             array('acf-input', 'jquery'),
         );
 
+        wp_localize_script('js-init-map', 'language', $this->getLang());    
+
         wp_enqueue_script('js-init-map');
         wp_enqueue_style('css-main');
     }
@@ -227,6 +229,8 @@ class Field extends \acf_field
 
     private function getLang() {
         return [
+            'invalidUrl' => __('Invalid URL', 'acf-openstreetmap-field'),
+            'shouldFollowFormat' => __('Should follow format', 'acf-openstreetmap-field'),
             'mapStyle' => __('Map style', 'acf-openstreetmap-field'),
             'generalSettings' => __('General Settings', 'acf-openstreetmap-field'),
             'default' => __('Default', 'acf-openstreetmap-field'),

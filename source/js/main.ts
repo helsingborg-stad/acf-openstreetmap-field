@@ -44,6 +44,7 @@ import LayerFilterTitle from './options/settings/layerFilterTitle';
 
 
 declare const acf: any;
+declare const language: any;
 
 class Main {
     constructor(
@@ -62,6 +63,8 @@ class Main {
             console.error('Hidden field not found');
             return;
         }
+
+        console.log(language);
 
         const mapInstance = new CreateMap({
             id: id
@@ -89,7 +92,7 @@ class Main {
         const createImageOverlayInstance = new CreateImageOverlay();
 
         // Fields and Edit
-        const fieldValidatorInstance = new FieldValidator();
+        const fieldValidatorInstance = new FieldValidator(language ?? {});
         const overlayInstance        = new Overlay(container);
         const editInstance           = new Edit(container);
         const titleInstance          = new Title(overlayInstance);

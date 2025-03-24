@@ -1,15 +1,15 @@
 class FieldValidator {
+    constructor(private language: any) {}
     public validateUrl(url: string): boolean {
         if (!url) {
             return true;
         }
 
-        // TODO: Translations
         try {
             new URL(url);
             return true;
         } catch (error) {
-            alert('Invalid URL, should follow the format: https://example.com');
+            alert(`${this.language?.invalidUrl ?? 'Invalid URL'}, ${this.language?.shouldFollowFormat ?? 'should follow format'}: https://example.com`);
             return false;
         }
     }
