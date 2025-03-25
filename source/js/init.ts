@@ -33,6 +33,7 @@ const initGutenberg = () => {
 const handleSelectedBlock = (selectedBlock: any) => {
     if (selectedBlock && checkWhenSettings.includes(selectedBlock.clientId)) {
         const selectedSettings = lookForSettings(selectedBlock.clientId);
+
         if (selectedSettings && !checkedSettings.includes(selectedBlock.clientId)) {
             checkWhenSettings = checkWhenSettings.filter((clientId) => clientId !== selectedBlock.client);
             checkedSettings.push(selectedBlock.clientId);
