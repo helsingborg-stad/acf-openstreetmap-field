@@ -30,7 +30,7 @@ class Field extends \acf_field
     /**
      * Enqueue scripts and styles in the admin
      */
-    public function input_admin_enqueue_scripts() {
+    public function input_admin_head() {
         wp_register_style(
             'css-main',
             ACFOPENSTREETMAP_URL . '/dist/' .

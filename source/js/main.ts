@@ -53,7 +53,7 @@ class Main {
         map: HTMLElement
     ) {
         const hiddenField = container.querySelector('[data-js-hidden-field]') as HTMLInputElement;
-    
+
         if (!acf) {
             console.error('ACF not found');
             return;
