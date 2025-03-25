@@ -7,7 +7,6 @@ const fieldContainerSelector = '[data-js-openstreetmap-field]';
 const fieldMapSelector = '[data-js-openstreetmap-map]';
 const fieldTypeSelector = '[data-type="openstreetmap"]';
 
-let checkWhenSettings: string[] = [];
 let checkedSettings: string[] = [];
 
 const init = () => {
@@ -23,29 +22,9 @@ const initGutenberg = () => {
 
     wp.data.subscribe(() => {
         const blocks = editor.getBlocks();
-        const selectedBlock = editor.getSelectedBlock();
-
-        handleSelectedBlock(selectedBlock);
         handleAddedBlocks(blocks);
     });
 };
-
-const handleSelectedBlock = (selectedBlock: any) => {
-    if (selectedBlock && checkWhenSettings.includes(selectedBlock.clientId)) {
-        const selectedSettings = lookForSettings(selectedBlock.clientId);
-
-        if (selectedSettings && !checkedSettings.includes(selectedBlock.clientId)) {
-            checkWhenSettings = checkWhenSettings.filter((clientId) => clientId !== selectedBlock.client);
-            checkedSettings.push(selectedBlock.clientId);
-            const selectedMapFieldContainer = selectedSettings.querySelector(fieldContainerSelector);
-            const openstreetmapField = selectedSettings.querySelector(fieldTypeSelector);
-
-            if (selectedMapFieldContainer && openstreetmapField?.getAttribute('data-name')) {
-                createMapInstance(selectedMapFieldContainer as HTMLElement, { blockId: selectedBlock.clientId, fieldName: openstreetmapField.getAttribute('data-name')! });
-            }
-        }
-    }
-}
 
 const handleAddedBlocks = (blocks: any) => {
     blocks.forEach((block: any) => {
@@ -60,7 +39,6 @@ const handleAddedBlocks = (blocks: any) => {
         }
 
         if (!settings) {
-            checkWhenSettings.push(block.clientId);
             return;
         } 
 
@@ -69,7 +47,10 @@ const handleAddedBlocks = (blocks: any) => {
         const openstreetmapField = settings.querySelector(fieldTypeSelector);
 
         if (mapFieldContainer && openstreetmapField?.getAttribute('data-name')) {
-            createMapInstance(mapFieldContainer as HTMLElement, { blockId: block.clientId, fieldName: openstreetmapField.getAttribute('data-name')! });
+            createMapInstance(
+                mapFieldContainer as HTMLElement, 
+                { blockId: block.clientId, fieldName: openstreetmapField.getAttribute('data-name')! }
+            );
         }
     });
 }
