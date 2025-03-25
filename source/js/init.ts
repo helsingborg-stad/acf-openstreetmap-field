@@ -1,9 +1,11 @@
 import Main from "./main";
+import { BlockSettings } from "./types";
 
 declare const wp: any;
 
 const fieldContainerSelector = '[data-js-openstreetmap-field]';
 const fieldMapSelector = '[data-js-openstreetmap-map]';
+const fieldTypeSelector = '[data-type="openstreetmap"]';
 
 let checkWhenSettings: string[] = [];
 let checkedSettings: string[] = [];
@@ -35,9 +37,10 @@ const handleSelectedBlock = (selectedBlock: any) => {
             checkWhenSettings = checkWhenSettings.filter((clientId) => clientId !== selectedBlock.client);
             checkedSettings.push(selectedBlock.clientId);
             const selectedMapFieldContainer = selectedSettings.querySelector(fieldContainerSelector);
+            const openstreetmapField = selectedSettings.querySelector(fieldTypeSelector);
 
-            if (selectedMapFieldContainer) {
-                createMapInstance(selectedMapFieldContainer as HTMLElement, selectedBlock.clientId);
+            if (selectedMapFieldContainer && openstreetmapField?.getAttribute('data-name')) {
+                createMapInstance(selectedMapFieldContainer as HTMLElement, { blockId: selectedBlock.clientId, fieldName: openstreetmapField.getAttribute('data-name')! });
             }
         }
     }
@@ -58,13 +61,14 @@ const handleAddedBlocks = (blocks: any) => {
         if (!settings) {
             checkWhenSettings.push(block.clientId);
             return;
-        } else {
-            checkedSettings.push(block.clientId);
-            const mapFieldContainer = settings.querySelector(fieldContainerSelector);
+        } 
 
-            if (mapFieldContainer) {
-                createMapInstance(mapFieldContainer as HTMLElement, block.clientId);
-            }
+        checkedSettings.push(block.clientId);
+        const mapFieldContainer = settings.querySelector(fieldContainerSelector);
+        const openstreetmapField = settings.querySelector(fieldTypeSelector);
+
+        if (mapFieldContainer && openstreetmapField?.getAttribute('data-name')) {
+            createMapInstance(mapFieldContainer as HTMLElement, { blockId: block.clientId, fieldName: openstreetmapField.getAttribute('data-name')! });
         }
     });
 }
@@ -81,7 +85,7 @@ const initClassic = () => {
     });
 }
 
-const createMapInstance = (container: HTMLElement, blockId: string|null = null) => {
+const createMapInstance = (container: HTMLElement, blockId: BlockSettings|null = null) => {
     const map = container.querySelector(fieldMapSelector);
     const id = map?.id;
 

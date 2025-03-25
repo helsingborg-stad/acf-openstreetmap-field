@@ -1,7 +1,7 @@
 import { LoadOptionDataInterface } from "./options/optionFeature";
 import MapStyle from "./options/settings/mapStyle";
 import { Setting } from "./options/settings/setting";
-import { SaveData, SavedImageOverlayData, SavedLayerGroup, SavedMarkerData, SavedStartPosition } from "./types";
+import { BlockSettings, SaveData, SavedImageOverlayData, SavedLayerGroup, SavedMarkerData, SavedStartPosition } from "./types";
 
 declare const wp: any;
 class LoadHiddenField {
@@ -16,9 +16,9 @@ class LoadHiddenField {
         private mapStyleInstance: Setting,
         private layerFilterInstance: Setting,
         private layerFilterTitleInstance: Setting,
-        private blockId: string|null
+        private blockSettings: BlockSettings|null
     ) {
-        if (blockId) {
+        if (this.blockSettings) {
             this.loadDataFromBlock();
         }
 
@@ -39,12 +39,12 @@ class LoadHiddenField {
     }
 
     private loadDataFromBlock() {
-        const blockAttributes = wp.data.select('core/block-editor').getBlockAttributes(this.blockId);
+        const blockAttributes = wp.data.select('core/block-editor').getBlockAttributes(this.blockSettings!.blockId);
         if (!blockAttributes) {
             return;
         }
 
-        this.hiddenField.value = blockAttributes.data['interactive-map'] || '{}';
+        this.hiddenField.value = blockAttributes.data[this.blockSettings!.fieldName] || '{}';
     }
 }
 

@@ -41,6 +41,7 @@ import IconFactoryResolver from './icons/iconFactoryResolver';
 import ListItemHelper from './helper/createListItem';
 import Preselected from './edit/fields/preselected';
 import LayerFilterTitle from './options/settings/layerFilterTitle';
+import { BlockSettings } from './types';
 
 
 declare const acf: any;
@@ -51,7 +52,7 @@ class Main {
         id: string,
         container: HTMLElement,
         map: HTMLElement,
-        blockId: string|null
+        blockSettings: BlockSettings|null
     ) {
         const hiddenField = container.querySelector('[data-js-hidden-field]') as HTMLInputElement;
 
@@ -201,7 +202,7 @@ class Main {
             mapStyleInstance,
             layerFilterInstance,
             layerFilterTitleInstance,
-            blockId
+            blockSettings
         );
 
         new SaveHiddenField(
@@ -213,7 +214,7 @@ class Main {
             mapStyleInstance,
             layerFilterInstance,
             layerFilterTitleInstance,
-            blockId
+            blockSettings
         );
 
         // After data loaded
