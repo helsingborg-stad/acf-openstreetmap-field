@@ -58,9 +58,9 @@ class Field extends \acf_field
 
         ?>
         <div class="acf-openstreetmap openstreetmap" data-js-openstreetmap-field>
+            <input type="hidden" name="<?php echo esc_attr($field['name']); ?>" data-js-hidden-field value="<?php echo esc_attr($field['value']); ?>" id="acf-openstreetmap-hidden-<?php echo $id; ?>"></input>
             <?php $this->addSettings($id) ?>
             <style data-js-style></style>
-            <input type="hidden" name="<?php echo esc_attr($field['name']); ?>" data-js-hidden-field value="<?php echo esc_attr($field['value']); ?>" id="acf-openstreetmap-hidden-<?php echo $id; ?>"></input>
 
             <?php $this->addEditOverlay($id) ?>
             <?php $this->addMap($id) ?>

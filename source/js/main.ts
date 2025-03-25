@@ -50,7 +50,8 @@ class Main {
     constructor(
         id: string,
         container: HTMLElement,
-        map: HTMLElement
+        map: HTMLElement,
+        blockId: string|null
     ) {
         const hiddenField = container.querySelector('[data-js-hidden-field]') as HTMLInputElement;
 
@@ -199,7 +200,8 @@ class Main {
             new LoadStartPosition(OptionSetStartPositionInstance),
             mapStyleInstance,
             layerFilterInstance,
-            layerFilterTitleInstance
+            layerFilterTitleInstance,
+            blockId
         );
 
         new SaveHiddenField(
@@ -210,7 +212,8 @@ class Main {
             new SaveStartPostion(OptionSetStartPositionInstance),
             mapStyleInstance,
             layerFilterInstance,
-            layerFilterTitleInstance
+            layerFilterTitleInstance,
+            blockId
         );
 
         // After data loaded

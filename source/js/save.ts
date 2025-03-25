@@ -4,6 +4,7 @@ import { Setting } from "./options/settings/setting";
 import { SaveData, SavedImageOverlayData, SavedLayerGroup, SavedMarkerData, SavedStartPosition } from "./types";
 
 declare const acf: any;
+declare const wp: any;
 
 class SaveHiddenField {
     data: SaveData = {
@@ -30,7 +31,8 @@ class SaveHiddenField {
         private saveStartPosition: SaveOptionDataInterface,
         private mapStyleInstance: Setting,
         private layerFilterInstance: Setting,
-        private layerFilterTitleInstance: Setting
+        private layerFilterTitleInstance: Setting,
+        private blockId: string|null
     ) {
         acf.add_filter('validation_complete', (values: any, form: any) => {
             this.data.layerGroups = this.saveLayerGroups.save() as SavedLayerGroup;
@@ -43,8 +45,26 @@ class SaveHiddenField {
             const json = JSON.stringify(this.data);
             this.hiddenField.value = json;
 
+            if (blockId) {
+                this.saveDataToBlock(json);
+            }
+
             return values;
         });
+    }
+
+    private saveDataToBlock(json: string) {
+        const currentAttributes = wp.data.select('core/block-editor').getBlockAttributes(this.blockId);
+
+        const updatedAttributes = {
+            ...currentAttributes,
+            data: {
+                ...currentAttributes.data,
+                'interactive-map': json ?? '{}'
+            }
+        };
+
+        wp.data.dispatch('core/block-editor').updateBlockAttributes(this.blockId, updatedAttributes);
     }
 }
 

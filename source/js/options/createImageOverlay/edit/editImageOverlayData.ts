@@ -1,4 +1,5 @@
 import { ImageOverlayDataInterface } from "../imageOverlayDataInterface";
+import { hideSidebar, showSidebar } from "../../../helper/gutenbergSidebar";
 
 class EditImageOverlayData implements EditImageOverlayDataInterface, Editable {
     constructor(
@@ -48,6 +49,8 @@ class EditImageOverlayData implements EditImageOverlayDataInterface, Editable {
         this.titleInstance.showField();
         this.imageInstance.showField();
         this.overlayInstance.showOverlay();
+        hideSidebar();
+
     }
 
     public hideFields() {
@@ -55,6 +58,7 @@ class EditImageOverlayData implements EditImageOverlayDataInterface, Editable {
         this.titleInstance.hideField();
         this.imageInstance.hideField();
         this.overlayInstance.hideOverlay();
+        showSidebar();
     }
 }
 

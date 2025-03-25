@@ -1,5 +1,6 @@
 import { MarkerDataInterface } from "../markerDataInterface";
 import { EditMarkerDataInterface } from "./editMarkerDataInterface";
+import { hideSidebar, showSidebar } from "../../../helper/gutenbergSidebar";
 
 class EditMarkerData implements EditMarkerDataInterface, Editable {
     constructor(
@@ -62,6 +63,7 @@ class EditMarkerData implements EditMarkerDataInterface, Editable {
         this.descriptionInstance.hideField();
         this.imageInstance.hideField();
         this.overlayInstance.hideOverlay();
+        showSidebar();
     }
 
     public showFields() {
@@ -71,6 +73,7 @@ class EditMarkerData implements EditMarkerDataInterface, Editable {
         this.descriptionInstance.showField();
         this.imageInstance.showField();
         this.overlayInstance.showOverlay();
+        hideSidebar();
     }
 }
 

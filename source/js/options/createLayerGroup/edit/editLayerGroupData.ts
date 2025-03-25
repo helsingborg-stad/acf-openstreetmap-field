@@ -1,4 +1,5 @@
 import { LayerGroupDataInterface } from "../layerGroupDataInterface";
+import { hideSidebar, showSidebar } from "../../../helper/gutenbergSidebar";
 
 class EditLayerGroupData implements EditLayerGroupDataInterface, Editable {
     private option: HTMLOptionElement;
@@ -73,6 +74,7 @@ class EditLayerGroupData implements EditLayerGroupDataInterface, Editable {
         this.iconInstance.hideField();
         this.preselectedInstance.hideField();
         this.overlayInstance.hideOverlay();
+        showSidebar();
     }
 
     public showFields() {
@@ -82,6 +84,7 @@ class EditLayerGroupData implements EditLayerGroupDataInterface, Editable {
         this.iconInstance.showField();
         this.preselectedInstance.showField();
         this.overlayInstance.showOverlay();
+        hideSidebar();
     }
 }
 
