@@ -1,3 +1,13 @@
+.block-editor-page {
+    .acf-openstreetmap__field-edit-overlay {
+        padding: 8rem 1rem;
+
+        .acf-openstreetmap__field-edit-buttons .acf-openstreetmap__field-edit-buttons-cancel {
+            top: 6rem;
+        }
+    }
+}
+
 .acf-openstreetmap__field-edit-overlay {
     opacity: 0;
     display: flex;
@@ -12,6 +22,7 @@
     padding: 5rem 1rem;
     transition: .2s ease-in-out;
     background-color: white;
+    border-left: 1px solid rgba(0,0,0,.133);
 
     &.is-open {
         right: 0;
