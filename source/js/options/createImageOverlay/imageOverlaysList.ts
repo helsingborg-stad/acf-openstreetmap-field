@@ -9,7 +9,8 @@ class ImageOverlaysList implements ImageOverlaysListInterface {
     constructor(
         private container: HTMLElement,
         private mapInstance: MapInterface,
-        private listItemHelper: ListItemHelper
+        private listItemHelper: ListItemHelper,
+        private language: any
     ) {
         this.imageOverlaysList = this.container.querySelector('[data-js-image-overlay-list]');
     }
@@ -59,7 +60,7 @@ class ImageOverlaysList implements ImageOverlaysListInterface {
     }
 
     private getLayerGroupTitle(imageOverlayData: ImageOverlayDataInterface): string {
-        return imageOverlayData.getTitle() ? imageOverlayData.getTitle() : 'Unnamed image overlay';
+        return imageOverlayData.getTitle() ? imageOverlayData.getTitle() : this.language?.unnamedImageOverlay ?? 'Unnamed image overlay';
     }
 }
 

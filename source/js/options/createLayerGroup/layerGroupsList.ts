@@ -11,7 +11,11 @@ class LayerGroupsList implements LayerGroupsListInterface {
     layerAttribute: string = 'data-js-layer-group';
     activeClass: string = 'button-primary';
 
-    constructor(private container: HTMLElement, private listItemHelper: ListItemHelper) {
+    constructor(
+        private container: HTMLElement,
+        private listItemHelper: ListItemHelper,
+        private language: any
+    ) {
         this.styleElement = this.container.querySelector('[data-js-style]');
         this.layerGroupsList = this.container.querySelector('[data-js-layer-group-list]');
         this.defaultLayerGroup = this.container.querySelector('[default-layer-group]');
@@ -88,7 +92,7 @@ class LayerGroupsList implements LayerGroupsListInterface {
     }
 
     private getLayerGroupTitle(layerGroupData: LayerGroupDataInterface): string {
-        return layerGroupData.getTitle() ? layerGroupData.getTitle() : 'Untitled Layer';
+        return layerGroupData.getTitle() ? layerGroupData.getTitle() : this.language?.untitledLayer ?? 'Untitled Layer';
     }
 }
 

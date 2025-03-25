@@ -229,6 +229,9 @@ class Field extends \acf_field
 
     private function getLang() {
         return [
+            'unnamedImageOverlay' => __('Unnamed image overlay', 'acf-openstreetmap-field'),
+            'untitledMarker' => __('Untitled marker', 'acf-openstreetmap-field'),
+            'untitledLayer' => __('Untitled layer', 'acf-openstreetmap-field'),
             'edit' => __('edit', 'acf-openstreetmap-field'),
             'cannotSetTheLayerGroupToItself' => __('Cannot set the layer group to itself', 'acf-openstreetmap-field'),
             'areYouSureYouWantToDeleteThisLayerGroup' => __('Are you sure you want to delete this layer group', 'acf-openstreetmap-field'),

@@ -114,7 +114,7 @@ class Main {
             language ?? {}
         );
 
-        const layerGroupsList = new LayerGroupsList(container, listItemHelper);
+        const layerGroupsList = new LayerGroupsList(container, listItemHelper, language);
 
         const layerGroupFactoryInstance = new LayerGroupFactory(
             mapInstance,
@@ -140,7 +140,7 @@ class Main {
             mapInstance,
             createMarkerInstance,
             editMarkerDataFactoryInstance,
-            new MarkersList(container, mapInstance, listItemHelper),
+            new MarkersList(container, mapInstance, listItemHelper, language),
             iconFactoryInstance
         );
 
@@ -160,7 +160,7 @@ class Main {
             mapInstance,
             createImageOverlayInstance,
             editImageOverlayFactoryInstance,
-            new ImageOverlaysList(container, mapInstance, listItemHelper),
+            new ImageOverlaysList(container, mapInstance, listItemHelper, language),
             new ImageOverlayBoundsAndRatioCalculator(mapInstance),
             imageOverlayResize,
             imageOverlayMove

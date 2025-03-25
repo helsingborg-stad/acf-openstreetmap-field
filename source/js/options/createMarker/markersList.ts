@@ -11,7 +11,8 @@ class MarkersList implements MarkersListInterface {
     constructor(
         private container: HTMLElement,
         private mapInstance: MapInterface,
-        private listItemHelper: ListItemHelper
+        private listItemHelper: ListItemHelper,
+        private language: any
     ) {
         this.markersList = this.container.querySelector('[data-js-markers-list]');
     }
@@ -61,7 +62,7 @@ class MarkersList implements MarkersListInterface {
     }
 
     private getMarkerDataTitle(markerData: MarkerDataInterface): string {
-        return markerData.getTitle() ? markerData.getTitle() : 'Untitled Marker';
+        return markerData.getTitle() ? markerData.getTitle() : this.language?.untitledMarker ?? 'Untitled Marker';
     }
 }
 
