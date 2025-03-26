@@ -225,6 +225,11 @@ class Main {
         const startPosition = OptionSetStartPositionInstance.getStartPosition();
         mapInstance.setView(startPosition.latlng ?? { lat: 59.32932, lng: 18.06858 }, startPosition.zoom ?? 16);
 
+        if (blockSettings) {
+            setTimeout(() => {
+                mapInstance.invalidateSize();
+            }, 300);
+        }
     }
 }
 
