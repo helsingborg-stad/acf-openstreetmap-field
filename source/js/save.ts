@@ -1,9 +1,10 @@
 import { MapStyle } from "@helsingborg-stad/openstreetmap";
 import { SaveOptionDataInterface } from "./options/optionFeature";
 import { Setting } from "./options/settings/setting";
-import { SaveData, SavedImageOverlayData, SavedLayerGroup, SavedMarkerData, SavedStartPosition } from "./types";
+import { BlockSettings, SaveData, SavedImageOverlayData, SavedLayerGroup, SavedMarkerData, SavedStartPosition } from "./types";
 
 declare const acf: any;
+declare const wp: any;
 
 class SaveHiddenField {
     data: SaveData = {
@@ -30,7 +31,8 @@ class SaveHiddenField {
         private saveStartPosition: SaveOptionDataInterface,
         private mapStyleInstance: Setting,
         private layerFilterInstance: Setting,
-        private layerFilterTitleInstance: Setting
+        private layerFilterTitleInstance: Setting,
+        private blockSettings: BlockSettings|null
     ) {
         acf.add_filter('validation_complete', (values: any, form: any) => {
             this.data.layerGroups = this.saveLayerGroups.save() as SavedLayerGroup;
@@ -43,8 +45,26 @@ class SaveHiddenField {
             const json = JSON.stringify(this.data);
             this.hiddenField.value = json;
 
+            if (this.blockSettings) {
+                this.saveDataToBlock(json);
+            }
+
             return values;
         });
+    }
+
+    private saveDataToBlock(json: string) {
+        const currentAttributes = wp.data.select('core/block-editor').getBlockAttributes(this.blockSettings!.blockId);
+
+        const updatedAttributes = {
+            ...currentAttributes,
+            data: {
+                ...currentAttributes.data,
+                [this.blockSettings!.fieldName]: json ?? '{}'
+            }
+        };
+
+        wp.data.dispatch('core/block-editor').updateBlockAttributes(this.blockSettings!.blockId, updatedAttributes);
     }
 }
 

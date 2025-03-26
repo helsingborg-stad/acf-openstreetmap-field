@@ -41,6 +41,7 @@ import IconFactoryResolver from './icons/iconFactoryResolver';
 import ListItemHelper from './helper/createListItem';
 import Preselected from './edit/fields/preselected';
 import LayerFilterTitle from './options/settings/layerFilterTitle';
+import { BlockSettings } from './types';
 
 
 declare const acf: any;
@@ -50,10 +51,11 @@ class Main {
     constructor(
         id: string,
         container: HTMLElement,
-        map: HTMLElement
+        map: HTMLElement,
+        blockSettings: BlockSettings|null
     ) {
         const hiddenField = container.querySelector('[data-js-hidden-field]') as HTMLInputElement;
-    
+
         if (!acf) {
             console.error('ACF not found');
             return;
@@ -199,7 +201,8 @@ class Main {
             new LoadStartPosition(OptionSetStartPositionInstance),
             mapStyleInstance,
             layerFilterInstance,
-            layerFilterTitleInstance
+            layerFilterTitleInstance,
+            blockSettings
         );
 
         new SaveHiddenField(
@@ -210,7 +213,8 @@ class Main {
             new SaveStartPostion(OptionSetStartPositionInstance),
             mapStyleInstance,
             layerFilterInstance,
-            layerFilterTitleInstance
+            layerFilterTitleInstance,
+            blockSettings
         );
 
         // After data loaded

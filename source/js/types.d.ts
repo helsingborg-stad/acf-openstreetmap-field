@@ -1,6 +1,11 @@
 import { LatLngObject, LatLngBoundsObject } from "@helsingborg-stad/openstreetmap";
 import MapStyle from "./options/settings/mapStyle";
 
+type BlockSettings = {
+    blockId: string;
+    fieldName: string;
+}
+
 type SavedLayerGroup = {
     title: string;
     color: string;

@@ -1,8 +1,9 @@
 import { LoadOptionDataInterface } from "./options/optionFeature";
 import MapStyle from "./options/settings/mapStyle";
 import { Setting } from "./options/settings/setting";
-import { SaveData, SavedImageOverlayData, SavedLayerGroup, SavedMarkerData, SavedStartPosition } from "./types";
+import { BlockSettings, SaveData, SavedImageOverlayData, SavedLayerGroup, SavedMarkerData, SavedStartPosition } from "./types";
 
+declare const wp: any;
 class LoadHiddenField {
     data: SaveData;
 
@@ -14,11 +15,16 @@ class LoadHiddenField {
         private loadStartPositionInstance: LoadOptionDataInterface,
         private mapStyleInstance: Setting,
         private layerFilterInstance: Setting,
-        private layerFilterTitleInstance: Setting
+        private layerFilterTitleInstance: Setting,
+        private blockSettings: BlockSettings|null
     ) {
-        let json = this.hiddenField.value || '{}';
-        this.data = JSON.parse(json);
+        if (this.blockSettings) {
+            this.loadDataFromBlock();
+        }
 
+        let json = this.hiddenField.value || '{}';
+
+        this.data = JSON.parse(json);
         if (!json) {
             return;
         }
@@ -30,6 +36,15 @@ class LoadHiddenField {
         this.mapStyleInstance.load(this.data.mapStyle);
         this.layerFilterTitleInstance.load(this.data.layerFilterTitle);
         this.layerFilterInstance.load(this.data.layerFilter);
+    }
+
+    private loadDataFromBlock() {
+        const blockAttributes = wp.data.select('core/block-editor').getBlockAttributes(this.blockSettings!.blockId);
+        if (!blockAttributes) {
+            return;
+        }
+
+        this.hiddenField.value = blockAttributes.data[this.blockSettings!.fieldName] || '{}';
     }
 }
 

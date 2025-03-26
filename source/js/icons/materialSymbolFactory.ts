@@ -22,11 +22,11 @@ class MaterialSymbolFactory implements IconFactoryInterface {
     }
 
     private withoutBackground(iconName: string, color: string, size: number): string {
-        return `<span style="color: ${color}; font-size: ${size}px;" data-material-symbol="${iconName}" class="${this.className} material-symbols material-symbols-rounded material-symbols-sharp material-symbols-outlined material-symbols--filled">${iconName}</span>`;
+        return `<span style="color: ${color}; font-size: ${size}px;" class="${this.className} material-symbols material-symbols-rounded material-symbols-sharp material-symbols-outlined material-symbols--filled">${iconName}</span>`;
     }
 
     private withBackground(iconName: string, color: string, size: number): string {
-        return `<span style="background-color: ${color}; color: white; font-size: ${size}px; padding: 4px; border-radius: 50%;" data-material-symbol="${iconName}" class="${this.className} material-symbols material-symbols-rounded material-symbols-sharp material-symbols-outlined material-symbols--filled">${iconName}</span>`;
+        return `<span style="background-color: ${color}; color: white; font-size: ${size}px; padding: 4px; border-radius: 50%;" class="${this.className} material-symbols material-symbols-rounded material-symbols-sharp material-symbols-outlined material-symbols--filled">${iconName}</span>`;
     }
 }
 
