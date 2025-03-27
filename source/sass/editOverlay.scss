@@ -23,6 +23,7 @@
     transition: .2s ease-in-out;
     background-color: white;
     border-left: 1px solid rgba(0,0,0,.133);
+    overflow: auto;
 
     &.is-open {
         right: 0;
