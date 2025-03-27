@@ -1,4 +1,4 @@
-import { CreateMarker, CreateLayerGroup, CreateImageOverlay, CreateMap, CreateTileLayer, TilesHelper, CreateAttribution } from '@helsingborg-stad/openstreetmap';
+import { CreateMarker, CreateLayerGroup, CreateImageOverlay, CreateMap, CreateTileLayer, TilesHelper, CreateAttribution, MapInterface } from '@helsingborg-stad/openstreetmap';
 import OptionCreateMarker from './options/createMarker/optionCreateMarker';
 import OptionSetStartPosition from './options/startPosition/optionSetStartPosition';
 import MarkerFactory from './options/createMarker/markerFactory';
@@ -48,6 +48,8 @@ declare const acf: any;
 declare const language: any;
 
 class Main {
+    private mapInstance!: MapInterface;
+
     constructor(
         id: string,
         container: HTMLElement,
@@ -66,7 +68,7 @@ class Main {
             return;
         }
 
-        const mapInstance = new CreateMap({
+        this.mapInstance = new CreateMap({
             id: id
         }).create();
 
@@ -119,7 +121,7 @@ class Main {
         const layerGroupsList = new LayerGroupsList(container, listItemHelper, language);
 
         const layerGroupFactoryInstance = new LayerGroupFactory(
-            mapInstance,
+            this.mapInstance,
             createLayerGroupInstance,
             editLayerGroupDataFactory,
             layerGroupsList,
@@ -139,10 +141,10 @@ class Main {
         );
 
         const markerFactoryInstance  = new MarkerFactory(
-            mapInstance,
+            this.mapInstance,
             createMarkerInstance,
             editMarkerDataFactoryInstance,
-            new MarkersList(container, mapInstance, listItemHelper, language),
+            new MarkersList(container, this.mapInstance, listItemHelper, language),
             iconFactoryInstance
         );
 
@@ -155,15 +157,15 @@ class Main {
             imageInstance
         );
 
-        const imageOverlayResize = new ImageOverlayResize(mapInstance, createMarkerInstance, iconFactoryInstance);
-        const imageOverlayMove = new ImageOverlayMove(mapInstance, createMarkerInstance, iconFactoryInstance);
+        const imageOverlayResize = new ImageOverlayResize(this.mapInstance, createMarkerInstance, iconFactoryInstance);
+        const imageOverlayMove = new ImageOverlayMove(this.mapInstance, createMarkerInstance, iconFactoryInstance);
 
         const imageOverlayFactoryInstance = new ImageOverlayFactory(
-            mapInstance,
+            this.mapInstance,
             createImageOverlayInstance,
             editImageOverlayFactoryInstance,
-            new ImageOverlaysList(container, mapInstance, listItemHelper, language),
-            new ImageOverlayBoundsAndRatioCalculator(mapInstance),
+            new ImageOverlaysList(container, this.mapInstance, listItemHelper, language),
+            new ImageOverlayBoundsAndRatioCalculator(this.mapInstance),
             imageOverlayResize,
             imageOverlayMove
         );
@@ -181,12 +183,12 @@ class Main {
         );
 
         const OptionSetStartPositionInstance = new OptionSetStartPosition(
-            mapInstance,
+            this.mapInstance,
             container
         );
 
         const OptionCreateMarkerInstance = new OptionCreateMarker(
-            mapInstance,
+            this.mapInstance,
             markerFactoryInstance,
             imageOverlayResize,
             imageOverlayMove
@@ -219,17 +221,21 @@ class Main {
 
         // After data loaded
         const currentTiles = tilesHelperInstance.getDefaultTiles(mapStyleInstance.getValue());
-        tileLayerInstance.setUrl(currentTiles.url).addTo(mapInstance);
-        attributionInstance.setPrefix(currentTiles.attribution).addTo(mapInstance);
+        tileLayerInstance.setUrl(currentTiles.url).addTo(this.mapInstance);
+        attributionInstance.setPrefix(currentTiles.attribution).addTo(this.mapInstance);
 
         const startPosition = OptionSetStartPositionInstance.getStartPosition();
-        mapInstance.setView(startPosition.latlng ?? { lat: 59.32932, lng: 18.06858 }, startPosition.zoom ?? 16);
+        this.mapInstance.setView(startPosition.latlng ?? { lat: 59.32932, lng: 18.06858 }, startPosition.zoom ?? 16);
 
         if (blockSettings) {
-            setTimeout(() => {
-                mapInstance.invalidateSize();
-            }, 300);
+            this.invalidateSize();
         }
+    }
+
+    public invalidateSize() {
+        setTimeout(() => {
+            this.mapInstance.invalidateSize();
+        }, 300);
     }
 }
 
