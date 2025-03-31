@@ -56,6 +56,10 @@ class SaveHiddenField {
     private saveDataToBlock(json: string) {
         const currentAttributes = wp.data.select('core/block-editor').getBlockAttributes(this.blockSettings!.blockId);
 
+        if (!currentAttributes || !currentAttributes.data) {
+            return;
+        }
+
         const updatedAttributes = {
             ...currentAttributes,
             data: {
