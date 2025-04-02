@@ -40,7 +40,9 @@ class LoadHiddenField {
 
     private loadDataFromBlock() {
         const blockAttributes = wp.data.select('core/block-editor').getBlockAttributes(this.blockSettings!.blockId);
-        if (!blockAttributes) {
+
+        if (!blockAttributes || !blockAttributes.data) {
+            this.hiddenField.value = '{}';
             return;
         }
 
