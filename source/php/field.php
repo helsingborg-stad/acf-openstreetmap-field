@@ -24,13 +24,16 @@ class Field extends \acf_field
             'dir' => plugin_dir_url(__FILE__),
         );
 
+        add_action('admin_enqueue_scripts', array($this, 'loadScriptsAndStyle'), 10);
+        add_action('enqueue_block_editor_assets', array($this, 'loadScriptsAndStyle'), 10);
+
         parent::__construct();
     }
 
     /**
      * Enqueue scripts and styles in the admin
      */
-    public function input_admin_head() {
+    public function loadScriptsAndStyle() {
         wp_register_style(
             'css-main',
             ACFOPENSTREETMAP_URL . '/dist/' .
