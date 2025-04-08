@@ -92,8 +92,15 @@ class Field extends \acf_field
             <div class="acf-openstreetmap__settings">
                 <div class="acf-openstreetmap__setting" data-js-setting-layer-filter>
                     <span class="title"><?php echo $this->lang['allowLayerFilter'] ?></span>
-                    <label class="switch" for="setting-layer-filter-<?php echo $id; ?>" title="Allow layer filter">
+                    <label class="switch" for="setting-layer-filter-<?php echo $id; ?>" title="<?php echo $this->lang['allowLayerFilter'] ?>">
                         <input type="checkbox" id="setting-layer-filter-<?php echo $id; ?>">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="acf-openstreetmap__setting" data-js-setting-layer-filter-default-open>
+                    <span class="title"><?php echo $this->lang['layerFilterOpenAsDefault'] ?></span>
+                    <label class="switch" for="setting-layer-filter-default-open-<?php echo $id; ?>" title="<?php echo $this->lang['layerFilterOpenAsDefault'] ?>">
+                        <input type="checkbox" id="setting-layer-filter-default-open-<?php echo $id; ?>">
                         <span class="slider round"></span>
                     </label>
                 </div>

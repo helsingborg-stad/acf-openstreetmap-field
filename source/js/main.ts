@@ -41,6 +41,7 @@ import IconFactoryResolver from './icons/iconFactoryResolver';
 import ListItemHelper from './helper/createListItem';
 import Preselected from './edit/fields/preselected';
 import LayerFilterTitle from './options/settings/layerFilterTitle';
+import LayerFilterDefaultOpen from './options/settings/layerFilterDefaultOpen';
 import { BlockSettings } from './types';
 
 
@@ -86,7 +87,8 @@ class Main {
         // Settings
         const mapStyleInstance         = new MapStyle(tileLayerInstance, attributionInstance, tilesHelperInstance, container);
         const layerFilterTitleInstance = new LayerFilterTitle(container);
-        const layerFilterInstance      = new LayerFilter(container, layerFilterTitleInstance);
+        const layerFilterDefaultOpen   = new LayerFilterDefaultOpen(container);
+        const layerFilterInstance      = new LayerFilter(container, layerFilterTitleInstance, layerFilterDefaultOpen);
 
         // General
         const createMarkerInstance       = new CreateMarker();
@@ -204,6 +206,7 @@ class Main {
             mapStyleInstance,
             layerFilterInstance,
             layerFilterTitleInstance,
+            layerFilterDefaultOpen,
             blockSettings
         );
 
@@ -216,6 +219,7 @@ class Main {
             mapStyleInstance,
             layerFilterInstance,
             layerFilterTitleInstance,
+            layerFilterDefaultOpen,
             blockSettings
         );
 

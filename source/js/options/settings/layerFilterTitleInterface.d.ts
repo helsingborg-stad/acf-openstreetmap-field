@@ -1,4 +1,4 @@
-interface LayerFilterTitleInterface extends Setting {
+interface LayerFilterSetting extends Setting {
     hide(): void;
     show(): void;
 }
