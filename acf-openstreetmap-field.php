@@ -7,6 +7,8 @@ Version:        1.0
 Author:         Niclas Norin
 */
 
+use AcfOpenStreetMap\CacheBust;
+
 if (! defined('WPINC')) {
     die;
 }
@@ -26,11 +28,47 @@ add_action('init', function () {
     load_textdomain($domain, $mofile);
 });
 
-add_action( 'acf/include_field_types', 'addAcfOpenStreetMapField' );
+add_action( 'acf/include_field_types', 'addAcfOpenStreetMapField');
 
+add_action('admin_enqueue_scripts', 'loadScriptsAndStyle', 10);
+add_action('enqueue_block_editor_assets', 'loadScriptsAndStyle', 10);
+
+function getCacheBust() {
+    static $cacheBust = null;
+
+    if ($cacheBust === null) {
+        $cacheBust = new CacheBust();
+    }
+
+    return $cacheBust;
+}
 
 function addAcfOpenStreetMapField() {
     require_once ACFOPENSTREETMAP_PATH . 'source/php/field.php';
+}
+
+/**
+ * Enqueue scripts and styles in the admin
+ */
+function loadScriptsAndStyle() {
+
+    wp_register_style(
+        'css-main',
+        ACFOPENSTREETMAP_URL . '/dist/' .
+        getCacheBust()->name('css/main-map.css')
+    );
+
+    wp_register_script(
+        'js-init-map',
+        ACFOPENSTREETMAP_URL . '/dist/' .
+        getCacheBust()->name('js/init-map.js'),
+        array('acf-input', 'jquery'),
+    );
+
+    wp_localize_script('js-init-map', 'language', \AcfOpenStreetMap\Lang::getLang());    
+
+    wp_enqueue_script('js-init-map');
+    wp_enqueue_style('css-main');
 }
 
 ?>
