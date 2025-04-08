@@ -20,7 +20,8 @@ class SaveHiddenField {
         },
         mapStyle: "default",
         layerFilter: "false",
-        layerFilterTitle: ""
+        layerFilterTitle: "",
+        layerFilterDefaultOpen: "false"
     };
 
     constructor(
@@ -32,6 +33,7 @@ class SaveHiddenField {
         private mapStyleInstance: Setting,
         private layerFilterInstance: Setting,
         private layerFilterTitleInstance: Setting,
+        private layerFilterDefaultOpenInstance: Setting,
         private blockSettings: BlockSettings|null
     ) {
         acf.add_filter('validation_complete', (values: any, form: any) => {
@@ -42,6 +44,7 @@ class SaveHiddenField {
             this.data.mapStyle = this.mapStyleInstance.save() as MapStyle;
             this.data.layerFilter = this.layerFilterInstance.save() as "true"|"false";
             this.data.layerFilterTitle = this.layerFilterTitleInstance.save() as string;
+            this.data.layerFilterDefaultOpen = this.layerFilterDefaultOpenInstance.save() as "true"|"false";
             const json = JSON.stringify(this.data);
             this.hiddenField.value = json;
 

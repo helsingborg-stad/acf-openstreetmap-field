@@ -44,5 +44,6 @@ type SaveData = {
     startPosition: SavedStartPosition;
     mapStyle: string;
     layerFilter: "true"|"false";
+    layerFilterDefaultOpen: "true"|"false";
     layerFilterTitle: string;
 }

@@ -16,6 +16,7 @@ class LoadHiddenField {
         private mapStyleInstance: Setting,
         private layerFilterInstance: Setting,
         private layerFilterTitleInstance: Setting,
+        private layerFilterDefaultOpenInstance: Setting,
         private blockSettings: BlockSettings|null
     ) {
         if (this.blockSettings) {
@@ -35,6 +36,7 @@ class LoadHiddenField {
         this.loadStartPositionInstance.load(this.data.startPosition as SavedStartPosition);
         this.mapStyleInstance.load(this.data.mapStyle);
         this.layerFilterTitleInstance.load(this.data.layerFilterTitle);
+        this.layerFilterDefaultOpenInstance.load(this.data.layerFilterDefaultOpen);
         this.layerFilterInstance.load(this.data.layerFilter);
     }
 

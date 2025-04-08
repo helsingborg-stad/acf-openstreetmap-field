@@ -6,7 +6,8 @@ class LayerFilter implements Setting {
 
     constructor(
         container: HTMLElement,
-        private layerFilterTitleInstance: LayerFilterTitleInterface
+        private layerFilterTitleInstance: LayerFilterSetting,
+        private layerFilterDefaultOpenInstance: LayerFilterSetting
     ) {
         this.container = container.querySelector('[data-js-setting-layer-filter]');
         this.setting = this.container?.querySelector('input');
@@ -25,7 +26,13 @@ class LayerFilter implements Setting {
             return;
         }
 
-        this.setting.checked ? this.layerFilterTitleInstance.show() : this.layerFilterTitleInstance.hide();
+        this.setting.checked ?
+        this.layerFilterTitleInstance.show() :
+        this.layerFilterTitleInstance.hide();
+
+        this.setting.checked ?
+            this.layerFilterDefaultOpenInstance.show() :
+            this.layerFilterDefaultOpenInstance.hide();
     }
 
     public getValue(): "true"|"false" {    

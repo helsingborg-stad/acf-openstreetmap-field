@@ -46,6 +46,7 @@ class Lang {
             'cancel' => __('Cancel', 'acf-openstreetmap-field'),
             'save' => __('Save', 'acf-openstreetmap-field'),
             'delete' => __('Delete', 'acf-openstreetmap-field'),
+            'layerFilterOpenAsDefault' => __('Layer filter open as default', 'acf-openstreetmap-field'),
         ];
     }
 }
