@@ -36,27 +36,34 @@ class SaveHiddenField {
         private layerFilterDefaultOpenInstance: Setting,
         private blockSettings: BlockSettings|null
     ) {
-        acf.add_filter('validation_complete', (values: any, form: any) => {
-            this.data.layerGroups = this.saveLayerGroups.save() as SavedLayerGroup;
-            this.data.markers = this.saveMarkers.save() as SavedMarkerData;
-            this.data.imageOverlays = this.saveImageOverlays.save() as SavedImageOverlayData;
-            this.data.startPosition = this.saveStartPosition.save() as SavedStartPosition;
-            this.data.mapStyle = this.mapStyleInstance.save() as MapStyle;
-            this.data.layerFilter = this.layerFilterInstance.save() as "true"|"false";
-            this.data.layerFilterTitle = this.layerFilterTitleInstance.save() as string;
-            this.data.layerFilterDefaultOpen = this.layerFilterDefaultOpenInstance.save() as "true"|"false";
-            const json = JSON.stringify(this.data);
-            this.hiddenField.value = json;
-
-            if (this.blockSettings) {
-                this.saveDataToBlock(json);
-            }
-
-            return values;
-        });
+        if (blockSettings) {
+            document.querySelector('.editor-post-publish-button')?.addEventListener('click', () => {
+                this.saveDataToBlock();
+            });
+        } else {
+             acf.add_filter('validation_complete', (values: any, form: any) => {
+                this.setAndGetData();
+                return values;
+            });
+        }
     }
 
-    private saveDataToBlock(json: string) {
+    private setAndGetData(): string {
+        this.data.layerGroups = this.saveLayerGroups.save() as SavedLayerGroup;
+        this.data.markers = this.saveMarkers.save() as SavedMarkerData;
+        this.data.imageOverlays = this.saveImageOverlays.save() as SavedImageOverlayData;
+        this.data.startPosition = this.saveStartPosition.save() as SavedStartPosition;
+        this.data.mapStyle = this.mapStyleInstance.save() as MapStyle;
+        this.data.layerFilter = this.layerFilterInstance.save() as "true"|"false";
+        this.data.layerFilterTitle = this.layerFilterTitleInstance.save() as string;
+        this.data.layerFilterDefaultOpen = this.layerFilterDefaultOpenInstance.save() as "true"|"false";
+        const json = JSON.stringify(this.data);
+        this.hiddenField.value = json;
+
+        return json;
+    }
+
+    private saveDataToBlock() {
         const currentAttributes = wp.data.select('core/block-editor').getBlockAttributes(this.blockSettings!.blockId);
 
         if (!currentAttributes || !currentAttributes.data) {
@@ -68,11 +75,12 @@ class SaveHiddenField {
             ...currentAttributes,
             data: {
                 ...currentAttributes.data,
-                [this.blockSettings!.fieldName]: json ?? '{}'
+                [this.blockSettings!.fieldName]: this.setAndGetData() ?? '{}'
             }
         };
 
         wp.data.dispatch('core/block-editor').updateBlockAttributes(this.blockSettings!.blockId, updatedAttributes);
     }
 }
+
 export default SaveHiddenField;
