@@ -60,6 +60,7 @@ class SaveHiddenField {
         const currentAttributes = wp.data.select('core/block-editor').getBlockAttributes(this.blockSettings!.blockId);
 
         if (!currentAttributes || !currentAttributes.data) {
+            console.log('No block attributes found or no data attribute present.');
             return;
         }
 
@@ -74,5 +75,4 @@ class SaveHiddenField {
         wp.data.dispatch('core/block-editor').updateBlockAttributes(this.blockSettings!.blockId, updatedAttributes);
     }
 }
-
 export default SaveHiddenField;
