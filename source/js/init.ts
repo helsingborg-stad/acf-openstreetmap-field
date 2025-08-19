@@ -35,9 +35,17 @@ const initGutenberg = () => {
         }
     });
 
+    let handleAddedBlocksDebounced: NodeJS.Timeout | null = null;
+
     wp.data.subscribe(() => {
-        const blocks = editor.getBlocks();
-        handleAddedBlocks(blocks);
+        const lastAction = wp.data.select('core/block-editor').getLastAction?.();
+        console.log(lastAction);
+        if (handleAddedBlocksDebounced) clearTimeout(handleAddedBlocksDebounced);
+        handleAddedBlocksDebounced = setTimeout(() => {
+            const blocks = editor.getBlocks();
+            const newBlocks = blocks.filter((block: any) => !checkedSettings.includes(block.clientId));
+            handleAddedBlocks(newBlocks);
+        }, 500);
     });
 };
 
