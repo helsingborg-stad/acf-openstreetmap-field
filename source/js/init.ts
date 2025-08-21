@@ -68,6 +68,13 @@ const handleAddedBlocks = (blocks: any) => {
         const openstreetmapField = settings.querySelector(fieldTypeSelector);
 
         if (mapFieldContainer && openstreetmapField?.getAttribute('data-name')) {
+            const wpBlock = openstreetmapField.closest('.wp-block') as HTMLElement;
+
+            // Cancel dragable for the block (dragging is not supported due to the map)
+            if (wpBlock) {
+                wpBlock.setAttribute('draggable', 'false');
+            }
+
             const mapInstance = createMapInstance(
                 mapFieldContainer as HTMLElement, 
                 { blockId: block.clientId, fieldName: openstreetmapField.getAttribute('data-name')! }
