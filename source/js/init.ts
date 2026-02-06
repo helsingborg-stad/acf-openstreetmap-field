@@ -35,14 +35,17 @@ const initGutenberg = () => {
         }
     });
 
-    let handleAddedBlocksDebounced: NodeJS.Timeout | null = null;
+    let handleAddedBlocksDebounced: ReturnType<typeof setTimeout> | null = null;
 
     wp.data.subscribe(() => {
         if (handleAddedBlocksDebounced) clearTimeout(handleAddedBlocksDebounced);
         handleAddedBlocksDebounced = setTimeout(() => {
-            const blocks = editor.getBlocks();
-            const newBlocks = blocks.filter((block: any) => !checkedSettings.includes(block.clientId));
-            handleAddedBlocks(newBlocks);
+            const blockIds = editor.getBlockOrder();
+            const newBlockIds = blockIds.filter((id: string) => !checkedSettings.includes(id));
+            if (newBlockIds.length <= 0) return;
+            checkedSettings.push(...newBlockIds);
+            const blocks = editor.getBlocksByClientId(newBlockIds ?? [])
+            handleAddedBlocks(blocks ?? []);
         }, 500);
     });
 };
@@ -55,15 +58,10 @@ const handleAddedBlocks = (blocks: any) => {
 
         const settings = lookForSettings(block.clientId);
 
-        if (checkedSettings.includes(block.clientId)) {
+        if (!settings) {
             return;
         }
 
-        if (!settings) {
-            return;
-        } 
-
-        checkedSettings.push(block.clientId);
         const mapFieldContainer = settings.querySelector(fieldContainerSelector);
         const openstreetmapField = settings.querySelector(fieldTypeSelector);
 
