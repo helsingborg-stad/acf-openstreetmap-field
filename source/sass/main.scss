@@ -1,11 +1,8 @@
-$color-primary: var(--acf-openstreetmap-color-primary, #2271b1) !default;
-$color-danger: var(--acf-openstreetmap-color-danger, #790000) !default;
-$color-white: var(--acf-openstreetmap-color-white, #ffffff) !default;
-
-@import "~@helsingborg-stad/openstreetmap/dist/main.css";
-@import "./options.scss";
-@import "./editOverlay.scss";
-@import "./setting.scss";
+@use "./colors.scss" as colors;
+@use "./options.scss";
+@use "./editOverlay.scss";
+@use "./setting.scss";
+@use "@helsingborg-stad/openstreetmap/dist/main.css";
 
 .acf-openstreetmap {
     position: relative;
@@ -13,9 +10,9 @@ $color-white: var(--acf-openstreetmap-color-white, #ffffff) !default;
     .acf-openstreetmap__button {
         cursor: pointer;
         padding: .5rem 1rem;
-        background-color: $color-white;
-        border: 1px solid $color-primary;
-        color: $color-primary;
+        background-color: colors.$color-white;
+        border: 1px solid colors.$color-primary;
+        color: colors.$color-primary;
         border-radius: 2px;
         transition: .2s ease-in-out;
         display: flex;
@@ -23,17 +20,17 @@ $color-white: var(--acf-openstreetmap-color-white, #ffffff) !default;
 
         &.selected,
         &:hover {
-            background-color: $color-primary;
-            color: $color-white;
+            background-color: colors.$color-primary;
+            color: colors.$color-white;
         }
 
         &.acf-openstreetmap__button--cancel {
-            background-color: $color-white;
-            color: $color-danger;
-            border: 1px solid $color-danger;
+            background-color: colors.$color-white;
+            color: colors.$color-danger;
+            border: 1px solid colors.$color-danger;
             &:hover {
-                background-color: $color-danger;
-                color: $color-white;
+                background-color: colors.$color-danger;
+                color: colors.$color-white;
             }
         }
     }
