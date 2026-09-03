@@ -56,5 +56,5 @@ function loadScriptsAndStyle(WpUtilService $wpUtils, string $hook) {
         ->add('css/main.css')
         ->add('js/init.js', ['acf-input', 'jquery'])
         ->with()
-        ->translation('abcdef', $array);
+        ->translation('language', $array);
 }
