@@ -7,14 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInitac9793f2566825634f7b9eaf0bff3fab
 {
     public static $prefixLengthsPsr4 = array (
-        'A' => 
+        'A' =>
         array (
             'AcfOpenStreetMap\\' => 17,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'AcfOpenStreetMap\\' => 
+        'AcfOpenStreetMap\\' =>
         array (
             0 => __DIR__ . '/../..' . '/source/php',
         ),
