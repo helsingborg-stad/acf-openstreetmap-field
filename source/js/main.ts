@@ -57,6 +57,7 @@ class Main {
         map: HTMLElement,
         blockSettings: BlockSettings|null
     ) {
+        console.log(container);
         const hiddenField = container.querySelector('[data-js-hidden-field]') as HTMLInputElement;
 
         if (!acf) {
