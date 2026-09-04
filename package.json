@@ -29,5 +29,5 @@
             "@babel/plugin-proposal-class-properties"
         ]
     },
-    "version": "0.79.15"
+    "version": "0.79.17"
 }
