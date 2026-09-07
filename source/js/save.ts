@@ -4,7 +4,6 @@ import { Setting } from "./options/settings/setting";
 import { BlockSettings, SaveData, SavedImageOverlayData, SavedLayerGroup, SavedMarkerData, SavedStartPosition } from "./types";
 
 declare const acf: any;
-declare const wp: any;
 
 export const createDefaultSaveData = (): SaveData => ({
     markers: [],
@@ -141,11 +140,7 @@ class SaveHiddenField {
             });
         }
 
-        if (blockSettings) {
-            document.querySelector('.editor-post-publish-button')?.addEventListener('click', () => {
-                this.saveDataToBlock();
-            });
-        } else {
+        if (!blockSettings) {
              acf.add_filter('validation_complete', (values: any, form: any) => {
                 this.setAndGetData();
                 return values;
@@ -171,29 +166,6 @@ class SaveHiddenField {
         this.hiddenField.value = json;
 
         return json;
-    }
-
-    private saveDataToBlock() {
-        const currentAttributes = wp.data.select('core/block-editor').getBlockAttributes(this.blockSettings!.blockId);
-
-        if (!currentAttributes || !currentAttributes.data) {
-            console.log('No block attributes found or no data attribute present.');
-            return;
-        }
-
-        const blockValue = currentAttributes.data[this.blockSettings!.fieldName];
-        const storedData = StaticBlockDataStore.getOrCreate(this.blockSettings!.blockId, this.hiddenField, blockValue);
-        const jsonValue = storedData ? JSON.stringify(storedData) : '{}';
-
-        const updatedAttributes = {
-            ...currentAttributes,
-            data: {
-                ...currentAttributes.data,
-                [this.blockSettings!.fieldName]: jsonValue
-            }
-        };
-
-        wp.data.dispatch('core/block-editor').updateBlockAttributes(this.blockSettings!.blockId, updatedAttributes);
     }
 }
 
