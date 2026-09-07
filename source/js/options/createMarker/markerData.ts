@@ -1,4 +1,5 @@
 import { MapInterface, MarkerInterface, LatLngObject, CreateMarkerInterface, LayerGroupInterface } from "@helsingborg-stad/openstreetmap";
+import { StaticBlockDataStore } from "../../save";
 import EditMarkerDataFactory from "./edit/editMarkerDataFactory";
 import { EditMarkerDataInterface } from "./edit/editMarkerDataInterface";
 import { MarkerDataInterface, MarkersDataStorage } from "./markerDataInterface";
@@ -52,6 +53,7 @@ class MarkerData implements MarkerDataInterface {
 
         MarkerData.markers[this.getId()] = this;
         this.markersListInstance.addItem(this);
+        StaticBlockDataStore.syncActiveBlock();
 
         return this.marker;
     }
@@ -63,14 +65,20 @@ class MarkerData implements MarkerDataInterface {
 
         this.getMarker()?.removeMarker();
         this.markersListInstance.removeItem(this);
+        StaticBlockDataStore.syncActiveBlock();
     }
 
     public updateMarker(): void {
         this.markersListInstance.updateItem(this);
+        StaticBlockDataStore.syncActiveBlock();
     }
 
     public static getMarkers(): MarkersDataStorage {
         return MarkerData.markers;
+    }
+
+    public static clearMarkers(): void {
+        MarkerData.markers = {};
     }
 
     public editMarker(): void {
@@ -106,6 +114,7 @@ class MarkerData implements MarkerDataInterface {
         });
 
         this.addMarkerToMap();
+        StaticBlockDataStore.syncActiveBlock();
     }
 
     public getLayerGroup(): string {

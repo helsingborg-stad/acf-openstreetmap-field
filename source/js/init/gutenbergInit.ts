@@ -1,4 +1,5 @@
 import Main from "../main";
+import { StaticBlockDataStore } from "../save";
 import { BlockSettings } from "../types";
 
 class GutenbergInit {
@@ -16,6 +17,8 @@ class GutenbergInit {
     public init(): void {
         document.addEventListener('click', () => {
             const selectedBlock = this.wp.data.select('core/block-editor').getSelectedBlock();
+            const selectedBlockId = selectedBlock?.clientId ?? null;
+            StaticBlockDataStore.setActiveBlockId(selectedBlockId);
 
             if (selectedBlock && selectedBlock.clientId && this.initiatedBlocksWithField[selectedBlock.clientId]) {
                 if (selectedBlock.attributes.align !== this.initiatedBlocksWithField[selectedBlock.clientId].align) {

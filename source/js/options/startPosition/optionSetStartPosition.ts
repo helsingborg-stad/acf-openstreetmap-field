@@ -1,4 +1,5 @@
 import { MapInterface } from "@helsingborg-stad/openstreetmap";
+import { StaticBlockDataStore } from "../../save";
 import { OptionSetStartPositionInterface, StartPosition } from "./optionSetStartPositionInterface";
 
 class OptionSetStartPosition implements OptionSetStartPositionInterface {
@@ -20,6 +21,7 @@ class OptionSetStartPosition implements OptionSetStartPositionInterface {
                 latlng: this.mapInstance.getCenter(),
                 zoom: this.mapInstance.getZoom(),
             };
+            StaticBlockDataStore.syncActiveBlock();
         });
     }
 
@@ -39,6 +41,7 @@ class OptionSetStartPosition implements OptionSetStartPositionInterface {
         }
 
         this.startPosition = startPosition;
+        StaticBlockDataStore.syncActiveBlock();
     }
 }
 

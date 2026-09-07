@@ -6,23 +6,97 @@ import { BlockSettings, SaveData, SavedImageOverlayData, SavedLayerGroup, SavedM
 declare const acf: any;
 declare const wp: any;
 
-class SaveHiddenField {
-    data: SaveData = {
-        markers: [],
-        layerGroups: [],
-        imageOverlays: [],
-        startPosition: {
-            latlng: {
-                lat: 56.046467,
-                lng: 12.694512
-            },
-            zoom: 16
+export const createDefaultSaveData = (): SaveData => ({
+    markers: [],
+    layerGroups: [],
+    imageOverlays: [],
+    startPosition: {
+        latlng: {
+            lat: 56.046467,
+            lng: 12.694512
         },
-        mapStyle: "default",
-        layerFilter: "false",
-        layerFilterTitle: "",
-        layerFilterDefaultOpen: "false"
-    };
+        zoom: 16
+    },
+    mapStyle: "default",
+    layerFilter: "false",
+    layerFilterTitle: "",
+    layerFilterDefaultOpen: "false"
+});
+
+export class StaticBlockDataStore {
+    private static readonly store: Record<string, SaveData> = {};
+    private static activeBlockId: string | null = null;
+
+    public static setActiveBlockId(blockId: string | null): void {
+        this.activeBlockId = blockId;
+    }
+
+    public static getActiveBlockId(): string | null {
+        return this.activeBlockId;
+    }
+
+    public static set(blockId: string, value: SaveData): void {
+        this.store[blockId] = value;
+    }
+
+    public static get(blockId: string): SaveData | null {
+        const data = this.store[blockId];
+        return data ?? null;
+    }
+
+    public static getOrCreate(blockId: string | null | undefined, hiddenField: HTMLInputElement, fallbackValue?: string | null): SaveData | null {
+        if (blockId && this.store[blockId]) {
+            return this.store[blockId];
+        }
+
+        const hiddenValue = (hiddenField.value ?? '').trim();
+        if (hiddenValue && hiddenValue !== '{}') {
+            const parsed = this.parseJson(hiddenValue);
+            if (parsed && blockId) {
+                this.store[blockId] = parsed;
+            }
+            return parsed;
+        }
+
+        const fallbackJson = (fallbackValue ?? '').trim();
+        if (fallbackJson && fallbackJson !== '{}') {
+            const parsed = this.parseJson(fallbackJson);
+            if (parsed && blockId) {
+                this.store[blockId] = parsed;
+            }
+            return parsed;
+        }
+
+        return null;
+    }
+
+    public static syncActiveBlock(blockId?: string | null): void {
+        if (typeof window === 'undefined') {
+            return;
+        }
+
+        const targetBlockId = blockId ?? this.activeBlockId;
+        if (!targetBlockId) {
+            return;
+        }
+
+        window.dispatchEvent(new CustomEvent('acf-openstreetmap:state-change', {
+            detail: { blockId: targetBlockId }
+        }));
+    }
+
+    private static parseJson(json: string): SaveData | null {
+        try {
+            return JSON.parse(json) as SaveData;
+        } catch (error) {
+            console.warn('[OpenStreetMap] Could not parse stored block data', { json, error });
+            return null;
+        }
+    }
+}
+
+class SaveHiddenField {
+    data: SaveData = createDefaultSaveData();
 
     constructor(
         private hiddenField: HTMLInputElement,
@@ -36,9 +110,26 @@ class SaveHiddenField {
         private layerFilterDefaultOpenInstance: Setting,
         private blockSettings: BlockSettings|null
     ) {
+        if (typeof window !== 'undefined') {
+            window.addEventListener('acf-openstreetmap:state-change', (event: Event) => {
+                const customEvent = event as CustomEvent<{ blockId?: string }>; 
+                const targetBlockId = customEvent.detail?.blockId;
+
+                if (this.blockSettings && targetBlockId && this.blockSettings.blockId !== targetBlockId) {
+                    return;
+                }
+
+                if (!this.blockSettings && targetBlockId) {
+                    return;
+                }
+
+                this.setAndGetData();
+            });
+        }
+
         if (blockSettings) {
             document.querySelector('.editor-post-publish-button')?.addEventListener('click', () => {
-                this.saveDataToBlock();
+                // this.saveDataToBlock();
             });
         } else {
              acf.add_filter('validation_complete', (values: any, form: any) => {
@@ -57,6 +148,11 @@ class SaveHiddenField {
         this.data.layerFilter = this.layerFilterInstance.save() as "true"|"false";
         this.data.layerFilterTitle = this.layerFilterTitleInstance.save() as string;
         this.data.layerFilterDefaultOpen = this.layerFilterDefaultOpenInstance.save() as "true"|"false";
+
+        if (this.blockSettings?.blockId) {
+            StaticBlockDataStore.set(this.blockSettings.blockId, this.data);
+        }
+
         const json = JSON.stringify(this.data);
         this.hiddenField.value = json;
 
@@ -71,11 +167,15 @@ class SaveHiddenField {
             return;
         }
 
+        const blockValue = currentAttributes.data[this.blockSettings!.fieldName];
+        const storedData = StaticBlockDataStore.getOrCreate(this.blockSettings!.blockId, this.hiddenField, blockValue);
+        const jsonValue = storedData ? JSON.stringify(storedData) : '{}';
+
         const updatedAttributes = {
             ...currentAttributes,
             data: {
                 ...currentAttributes.data,
-                [this.blockSettings!.fieldName]: this.setAndGetData() ?? '{}'
+                [this.blockSettings!.fieldName]: jsonValue
             }
         };
 

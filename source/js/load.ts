@@ -1,6 +1,9 @@
 import { LoadOptionDataInterface } from "./options/optionFeature";
+import MarkerData from "./options/createMarker/markerData";
+import LayerGroupData from "./options/createLayerGroup/layerGroupData";
 import MapStyle from "./options/settings/mapStyle";
 import { Setting } from "./options/settings/setting";
+import { StaticBlockDataStore, createDefaultSaveData } from "./save";
 import { BlockSettings, SaveData, SavedImageOverlayData, SavedLayerGroup, SavedMarkerData, SavedStartPosition } from "./types";
 
 declare const wp: any;
@@ -17,19 +20,19 @@ class LoadHiddenField {
         private layerFilterInstance: Setting,
         private layerFilterTitleInstance: Setting,
         private layerFilterDefaultOpenInstance: Setting,
-        private blockSettings: BlockSettings|null
+        private blockSettings: BlockSettings | null
     ) {
-        if (this.blockSettings) {
-            this.loadDataFromBlock();
-        }
+        MarkerData.clearMarkers();
+        LayerGroupData.clearLayerGroups();
 
-        let json = this.hiddenField.value || '{}';
-
-        this.data = JSON.parse(json);
-        if (!json) {
+        const storedData = this.resolveStoredData();
+        if (!storedData) {
+            this.data = createDefaultSaveData();
             return;
         }
-        
+
+        this.data = storedData;
+
         this.loadLayerGroupsInstance.load(this.data.layerGroups as SavedLayerGroup);
         this.loadMarkersInstance.load(this.data.markers as SavedMarkerData);
         this.loadImageOverlaysInstance.load(this.data.imageOverlays as SavedImageOverlayData);
@@ -40,15 +43,36 @@ class LoadHiddenField {
         this.layerFilterInstance.load(this.data.layerFilter);
     }
 
-    private loadDataFromBlock() {
-        const blockAttributes = wp.data.select('core/block-editor').getBlockAttributes(this.blockSettings!.blockId);
+    private resolveStoredData(): SaveData | null {
+        if (this.blockSettings) {
+            console.log(this.blockSettings);
+            const blockAttributes = wp.data.select('core/block-editor').getBlockAttributes(this.blockSettings.blockId);
+            const blockFieldValue = typeof blockAttributes?.data?.[this.blockSettings.fieldName] === 'string'
+                ? blockAttributes.data[this.blockSettings.fieldName]
+                : null;
 
-        if (!blockAttributes || !blockAttributes.data) {
-            this.hiddenField.value = '{}';
-            return;
+            const fromStore = StaticBlockDataStore.getOrCreate(this.blockSettings.blockId, this.hiddenField, blockFieldValue);
+            if (fromStore) {
+                this.hiddenField.value = JSON.stringify(fromStore);
+                return fromStore;
+            }
         }
 
-        this.hiddenField.value = blockAttributes.data[this.blockSettings!.fieldName] || '{}';
+        const hiddenValue = (this.hiddenField.value ?? '').trim();
+        if (!hiddenValue || hiddenValue === '{}') {
+            return null;
+        }
+
+        try {
+            return JSON.parse(hiddenValue) as SaveData;
+        } catch (error) {
+            console.warn('[OpenStreetMap] load() could not parse saved JSON, resetting to empty state', {
+                hiddenFieldId: this.hiddenField.id,
+                hiddenValue,
+                error,
+            });
+            return null;
+        }
     }
 }
 

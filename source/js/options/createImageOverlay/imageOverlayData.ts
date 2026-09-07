@@ -1,4 +1,5 @@
 import { CreateImageOverlayInterface, ImageOverlayInterface, MapInterface, MarkerInterface, LatLngBoundsObject, LayerGroupInterface } from "@helsingborg-stad/openstreetmap";
+import { StaticBlockDataStore } from "../../save";
 import EditImageOverlayFactory from "./edit/editImageOverlayDataFactory";
 import { ImageOverlayBoundsAndRatioCalculatorInterface } from "./helper/imageOverlayBoundsAndRatioCalculatorInterface";
 import { ImageOverlayMoveInterface } from "./imageFunctionality/imageOverlayMoveInterface";
@@ -97,6 +98,7 @@ class ImageOverlayData implements ImageOverlayDataInterface {
 
     public setTitle(title: string): void {
         this.title = title;
+        StaticBlockDataStore.syncActiveBlock();
     }
 
     public getTitle(): string {
@@ -113,6 +115,7 @@ class ImageOverlayData implements ImageOverlayDataInterface {
         this.imageOverlayResizeInstance.addMarkerToMap(layerGroup);
         this.imageOverlayMoveInstance.addMarkerToMap(layerGroup);
         this.addImageOverlayToMap(layerGroup);
+        StaticBlockDataStore.syncActiveBlock();
     }
 
     public getLayerGroup(): string {
@@ -132,6 +135,8 @@ class ImageOverlayData implements ImageOverlayDataInterface {
             this.removePlacedImageOverlay();
             this.updatePlacedImageOverlay(bounds);
         }
+
+        StaticBlockDataStore.syncActiveBlock();
     }
 
     public getImage(): string {
@@ -140,11 +145,13 @@ class ImageOverlayData implements ImageOverlayDataInterface {
 
     public updateImageOverlay(): void {
         this.imageOverlaysListInstance.updateItem(this);
+        StaticBlockDataStore.syncActiveBlock();
     }
 
     public deleteImageOverlay(): void {
         this.imageOverlaysListInstance.removeItem(this);
         this.removePlacedImageOverlay();
+        StaticBlockDataStore.syncActiveBlock();
     }
 
     public getImageOverlay(): ImageOverlayInterface|null {
