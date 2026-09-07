@@ -24,6 +24,8 @@ class SaveHiddenField {
         layerFilterDefaultOpen: "false"
     };
 
+    private previousSelectedBlockId: string | null = null;
+
     constructor(
         private hiddenField: HTMLInputElement,
         private saveLayerGroups: SaveOptionDataInterface,
@@ -39,6 +41,20 @@ class SaveHiddenField {
         if (blockSettings) {
             document.querySelector('.editor-post-publish-button')?.addEventListener('click', () => {
                 this.saveDataToBlock();
+            });
+
+            this.previousSelectedBlockId = this.blockSettings.blockId;
+            wp.data.subscribe(() => {
+                const selectedBlockId = wp.data.select('core/block-editor').getSelectedBlockClientId();
+
+                if (
+                    this.previousSelectedBlockId === this.blockSettings!.blockId
+                    && selectedBlockId !== this.blockSettings!.blockId
+                ) {
+                    this.saveDataToBlock();
+                }
+
+                this.previousSelectedBlockId = selectedBlockId;
             });
         } else {
              acf.add_filter('validation_complete', (values: any, form: any) => {
@@ -66,15 +82,14 @@ class SaveHiddenField {
     private saveDataToBlock() {
         const currentAttributes = wp.data.select('core/block-editor').getBlockAttributes(this.blockSettings!.blockId);
 
-        if (!currentAttributes || !currentAttributes.data) {
-            console.log('No block attributes found or no data attribute present.');
+        if (!currentAttributes) {
             return;
         }
 
         const updatedAttributes = {
             ...currentAttributes,
             data: {
-                ...currentAttributes.data,
+                ...(currentAttributes.data ?? {}),
                 [this.blockSettings!.fieldName]: this.setAndGetData() ?? '{}'
             }
         };

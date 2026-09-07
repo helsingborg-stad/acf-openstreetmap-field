@@ -44,11 +44,15 @@ class LoadHiddenField {
         const blockAttributes = wp.data.select('core/block-editor').getBlockAttributes(this.blockSettings!.blockId);
 
         if (!blockAttributes || !blockAttributes.data) {
-            this.hiddenField.value = '{}';
             return;
         }
 
-        this.hiddenField.value = blockAttributes.data[this.blockSettings!.fieldName] || '{}';
+        const blockFieldValue = blockAttributes.data[this.blockSettings!.fieldName];
+        if (!blockFieldValue) {
+            return;
+        }
+
+        this.hiddenField.value = blockFieldValue;
     }
 }
 
