@@ -26,6 +26,7 @@ export const createDefaultSaveData = (): SaveData => ({
 export class StaticBlockDataStore {
     private static readonly store: Record<string, SaveData> = {};
     private static activeBlockId: string | null = null;
+    private static suppressSyncEvents = false;
 
     public static setActiveBlockId(blockId: string | null): void {
         this.activeBlockId = blockId;
@@ -33,6 +34,14 @@ export class StaticBlockDataStore {
 
     public static getActiveBlockId(): string | null {
         return this.activeBlockId;
+    }
+
+    public static beginHydration(): void {
+        this.suppressSyncEvents = true;
+    }
+
+    public static endHydration(): void {
+        this.suppressSyncEvents = false;
     }
 
     public static set(blockId: string, value: SaveData): void {
@@ -52,6 +61,7 @@ export class StaticBlockDataStore {
         const hiddenValue = (hiddenField.value ?? '').trim();
         if (hiddenValue && hiddenValue !== '{}') {
             const parsed = this.parseJson(hiddenValue);
+
             if (parsed && blockId) {
                 this.store[blockId] = parsed;
             }
@@ -72,6 +82,10 @@ export class StaticBlockDataStore {
 
     public static syncActiveBlock(blockId?: string | null): void {
         if (typeof window === 'undefined') {
+            return;
+        }
+
+        if (this.suppressSyncEvents) {
             return;
         }
 
@@ -129,7 +143,7 @@ class SaveHiddenField {
 
         if (blockSettings) {
             document.querySelector('.editor-post-publish-button')?.addEventListener('click', () => {
-                // this.saveDataToBlock();
+                this.saveDataToBlock();
             });
         } else {
              acf.add_filter('validation_complete', (values: any, form: any) => {

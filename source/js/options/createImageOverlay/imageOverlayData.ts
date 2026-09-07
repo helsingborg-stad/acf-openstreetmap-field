@@ -173,6 +173,14 @@ class ImageOverlayData implements ImageOverlayDataInterface {
     public static getImageOverlays(): ImageOverlaysDataStorage {
         return ImageOverlayData.imageOverlays;
     }
+
+    public static clearImageOverlays(): void {
+        for (let imageOverlay of Object.values(ImageOverlayData.imageOverlays)) {
+            imageOverlay.removePlacedImageOverlay();
+        }
+
+        ImageOverlayData.imageOverlays = {};
+    }
 }
 
 export default ImageOverlayData;
