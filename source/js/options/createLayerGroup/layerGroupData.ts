@@ -1,4 +1,5 @@
 import { MapInterface, LayerGroupInterface, CreateLayerGroupInterface, LayerGroup } from "@helsingborg-stad/openstreetmap";
+import { StaticBlockDataStore } from "../../save";
 import EditLayerGroupDataFactory from "./edit/editLayerGroupDataFactory";
 import { LayerGroupDataInterface, LayerGroupsDataStorage } from "./layerGroupDataInterface";
 import { LayerGroupsListInterface } from "./layerGroupsListInterface";
@@ -35,6 +36,7 @@ class LayerGroupData implements LayerGroupDataInterface {
         this.layer.addTo(this.mapInstance);
         LayerGroupData.layerGroups[this.getId()] = this;
         this.layerGroupsListInstance.addItem(this);
+        StaticBlockDataStore.syncActiveBlock();
 
         return this.layer;
     }
@@ -54,15 +56,18 @@ class LayerGroupData implements LayerGroupDataInterface {
 
         this.layer?.removeLayerGroup();
         this.layerGroupsListInstance.removeItem(this);
+        StaticBlockDataStore.syncActiveBlock();
     }
 
     public updateLayerGroup(): void {
         this.layerGroupsListInstance.updateItem(this);
+        StaticBlockDataStore.syncActiveBlock();
     }
 
     public setTitle(title: string) {
         this.title = title;
         this.editor.setOptionTitle(title);
+        StaticBlockDataStore.syncActiveBlock();
     }
 
     public getTitle() {
@@ -71,6 +76,7 @@ class LayerGroupData implements LayerGroupDataInterface {
 
     public setLayerGroup(layerGroup: string) {
         this.layerGroup = layerGroup;
+        StaticBlockDataStore.syncActiveBlock();
     }
 
     public getLayerGroup(): string {
@@ -79,6 +85,7 @@ class LayerGroupData implements LayerGroupDataInterface {
 
     public setIcon(icon: string) {
         this.icon = this.iconFactoryInstance.format(icon);
+        StaticBlockDataStore.syncActiveBlock();
     }
 
     public getIcon(): string {
@@ -87,6 +94,7 @@ class LayerGroupData implements LayerGroupDataInterface {
 
     public setColor(color: string) {
         this.color = color;
+        StaticBlockDataStore.syncActiveBlock();
     }
 
     public getColor() {
@@ -99,6 +107,7 @@ class LayerGroupData implements LayerGroupDataInterface {
 
     public setPreselected(preselected: boolean) {
         this.preselected = preselected;
+        StaticBlockDataStore.syncActiveBlock();
     }
 
     public getPreselected(): boolean {
@@ -148,6 +157,11 @@ class LayerGroupData implements LayerGroupDataInterface {
 
     public static getActiveLayerGroup(): LayerGroupDataInterface|null {
         return LayerGroupData.activeLayerGroup;
+    }
+
+    public static clearLayerGroups(): void {
+        LayerGroupData.layerGroups = {};
+        LayerGroupData.activeLayerGroup = null;
     }
 
     public static getLayerGroups() {

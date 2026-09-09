@@ -1,21 +1,24 @@
 import Main from "../main";
+import { StaticBlockDataStore } from "../save";
 import { BlockSettings } from "../types";
 
 class GutenbergInit {
     private readonly fieldContainerSelector = '[data-js-openstreetmap-field]';
     private readonly fieldMapSelector = '[data-js-openstreetmap-map]';
     private readonly fieldTypeSelector = '[data-type="openstreetmap"]';
+    private readonly blockIdAttribute = 'data-block-id';
 
-    private checkedSettings: string[] = [];
     private initiatedBlocksWithField: Record<string, { align: string | undefined; main: Main }> = {};
+    private initializedContainers = new WeakSet<HTMLElement>();
+    private domObserver: MutationObserver | null = null;
 
     constructor(private wp: any) {}
 
     public init(): void {
-        const editor = this.wp.data.select('core/block-editor');
-
         document.addEventListener('click', () => {
             const selectedBlock = this.wp.data.select('core/block-editor').getSelectedBlock();
+            const selectedBlockId = selectedBlock?.clientId ?? null;
+            StaticBlockDataStore.setActiveBlockId(selectedBlockId);
 
             if (selectedBlock && selectedBlock.clientId && this.initiatedBlocksWithField[selectedBlock.clientId]) {
                 if (selectedBlock.attributes.align !== this.initiatedBlocksWithField[selectedBlock.clientId].align) {
@@ -25,77 +28,110 @@ class GutenbergInit {
             }
         });
 
-        const observer = new MutationObserver(() => {
-            const blocks = editor.getBlocks();
-            const newBlocks = blocks.filter((block: any) => !this.checkedSettings.includes(block.clientId));
+        this.domObserver = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && mutation.target instanceof HTMLElement) {
+                    this.scanNodeForFieldContainers(mutation.target);
+                }
 
-            if (newBlocks.length > 0) {
-                this.handleAddedBlocks(newBlocks);
-            }
+                mutation.addedNodes.forEach((addedNode) => {
+                    this.scanNodeForFieldContainers(addedNode);
+                });
+            });
         });
 
-        observer.observe(document.body, {
+        this.domObserver.observe(document.body, {
             childList: true,
             subtree: true,
             attributes: true,
-            attributeFilter: ['data-block-id', 'data-type', 'style'],
+            attributeFilter: [this.blockIdAttribute, 'data-type'],
         });
 
-        this.scanExistingBlocks();
+        this.scanNodeForFieldContainers(document.body);
     }
 
-    private scanExistingBlocks(): void {
-        const editor = this.wp.data.select('core/block-editor');
-        const blocks = editor.getBlocks();
+    private scanNodeForFieldContainers(node: Node): void {
+        if (!(node instanceof HTMLElement)) {
+            return;
+        }
 
-        if (blocks.length > 0) {
-            this.handleAddedBlocks(blocks);
+        if (node.matches(this.fieldContainerSelector)) {
+            this.initializeFieldContainer(node);
+        }
+
+        node.querySelectorAll(this.fieldContainerSelector).forEach((containerNode) => {
+            if (containerNode instanceof HTMLElement) {
+                this.initializeFieldContainer(containerNode);
+            }
+        });
+    }
+
+    private initializeFieldContainer(container: HTMLElement): void {
+        if (this.initializedContainers.has(container)) {
+            return;
+        }
+
+        const wpBlock = container.closest('.wp-block');
+        if (wpBlock instanceof HTMLElement) {
+            wpBlock.setAttribute('draggable', 'false');
+        }
+
+        const blockContext = this.getBlockContextFromContainer(container);
+        const mapInstance = this.createMapInstance(container, blockContext);
+
+        if (!mapInstance) {
+            return;
+        }
+
+        this.initializedContainers.add(container);
+
+        if (blockContext) {
+            this.initiatedBlocksWithField[blockContext.blockId] = {
+                align: this.getBlockAlign(blockContext.blockId),
+                main: mapInstance,
+            };
         }
     }
 
-    private handleAddedBlocks(blocks: any[]): void {
-        blocks.forEach((block: any) => {
-            if (!block.clientId || this.checkedSettings.includes(block.clientId)) {
-                return;
-            }
+    private getBlockContextFromContainer(container: HTMLElement): BlockSettings | null {
+        const settingsElement = container.closest(`[${this.blockIdAttribute}]`);
 
-            const settings = this.lookForSettings(block.clientId);
+        if (!(settingsElement instanceof HTMLElement)) {
+            return null;
+        }
 
-            if (!settings) {
-                return;
-            }
+        const blockIdAttribute = settingsElement.getAttribute(this.blockIdAttribute);
+        const blockId = this.normalizeBlockId(blockIdAttribute);
+        const openstreetmapField = settingsElement.querySelector(this.fieldTypeSelector);
+        const fieldName = openstreetmapField?.getAttribute('data-name');
 
-            this.checkedSettings.push(block.clientId);
-            const mapFieldContainer = settings.querySelector(this.fieldContainerSelector);
-            const openstreetmapField = settings.querySelector(this.fieldTypeSelector);
+        if (!blockId || !fieldName) {
+            return null;
+        }
 
-            if (mapFieldContainer && openstreetmapField?.getAttribute('data-name')) {
-                const wpBlock = openstreetmapField.closest('.wp-block') as HTMLElement | null;
-
-                if (wpBlock) {
-                    wpBlock.setAttribute('draggable', 'false');
-                }
-
-                const mapInstance = this.createMapInstance(
-                    mapFieldContainer as HTMLElement,
-                    {
-                        blockId: block.clientId,
-                        fieldName: openstreetmapField.getAttribute('data-name')!,
-                    },
-                );
-
-                if (mapInstance) {
-                    this.initiatedBlocksWithField[block.clientId] = {
-                        align: block.attributes.align,
-                        main: mapInstance,
-                    };
-                }
-            }
-        });
+        return {
+            blockId,
+            fieldName,
+        };
     }
 
-    private lookForSettings(clientId: string): Element | null {
-        return document.querySelector(`[data-block-id="block_${clientId}"]`);
+    private normalizeBlockId(rawBlockId: string | null): string | null {
+        if (!rawBlockId) {
+            return null;
+        }
+
+        if (rawBlockId.startsWith('block_')) {
+            return rawBlockId.slice(6);
+        }
+
+        return rawBlockId;
+    }
+
+    private getBlockAlign(blockId: string): string | undefined {
+        const editor = this.wp.data.select('core/block-editor');
+        const block = editor?.getBlock?.(blockId);
+
+        return block?.attributes?.align;
     }
 
     private createMapInstance(container: HTMLElement, blockId: BlockSettings | null = null): Main | null {
