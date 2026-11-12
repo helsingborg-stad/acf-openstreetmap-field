@@ -47,5 +47,7 @@ The ACF OpenStreetMap Field plugin provides a custom field type for Advanced Cus
 
 ## Meta  
 
+- **Requirements:** wpservice 3.x; the locked 3.0.0 release requires PHP 8.2–8.5.
+- **Integration check:** After `composer install`, run `php tests/wpservice-integration.php` from a WordPress `wp-content/plugins` directory. The check uses WordPress function stubs.
 - **Author:** Helsingborg Stad  
 - **Initial Release Date:** [03, 2025]
